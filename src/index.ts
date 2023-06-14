@@ -1,12 +1,11 @@
 // import app from "@utils/config/slack-config";
+// import { greet_new_team_member } from "./Events/greetings";
 
 import dotenv from "dotenv";
 import pkg from "@slack/bolt";
 dotenv.config();
 
 const { App } = pkg;
-
-// const { App } = require("@slack/bolt");
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -18,10 +17,38 @@ const app = new App({
   port: Number(process.env.PORT) || 3000,
 });
 
-// Listens to incoming messages that contain "hello"
-app.message("hello", async ({ message, say }: { message: any; say: any }) => {
-  // say() sends a message to the channel where the event was triggered
-  await say(`Hey there <@${message.user}>!`);
+app.event("team_join", async ({ event, client, logger }) => {
+  try {
+    // Call chat.postMessage with the built-in client
+
+    const userId = event.user.id;
+    const message = "Welcome to the team!";
+
+    // Open a direct message channel with the user
+    const channel = await client.conversations.open({
+      users: userId,
+    });
+
+    // Send the private message
+    await client.chat.postMessage({
+      channel: channel.channel?.id || "",
+      text: message,
+      mrkdwn: true,
+    });
+  } catch (error) {
+    logger.error(error);
+  }
+});
+
+app.event("channel_rename", async ({ event, client }) => {
+  const channel_id = event.channel.id;
+  const message = "Channel was renamed!";
+
+  await client.chat.postMessage({
+    channel: channel_id,
+    text: message,
+    mrkdwn: true,
+  });
 });
 
 (async () => {
