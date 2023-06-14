@@ -25,6 +25,7 @@
     "noUncheckedIndexedAccess": true /* Add 'undefined' to a type when accessed using an index. */,
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "allowImportingTsExtensions": true
   }
 }
