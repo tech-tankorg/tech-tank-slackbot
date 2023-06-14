@@ -1,17 +1,24 @@
-import App from "@utils/config/slack-config";
+import app from "@utils/config/slack-config";
+import { generate_welcome_message } from "@utils/helpers/generate_message";
 
 export const greet_new_team_member = () => {
-  App.event("team_join", async ({ event, client, logger }) => {
+  app.event("team_join", async ({ event, client, logger }) => {
     try {
       // Call chat.postMessage with the built-in client
 
       const userId = event.user.id;
-      const message = "Welcome to the team!";
+      const userInfo = await client.users.info({
+        user: userId,
+      });
+
+      console.log(userInfo.user?.real_name);
 
       // Open a direct message channel with the user
       const channel = await client.conversations.open({
         users: userId,
       });
+
+      const message = generate_welcome_message(userInfo.user?.real_name || "");
 
       // Send the private message
       await client.chat.postMessage({
