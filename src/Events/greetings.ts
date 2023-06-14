@@ -1,5 +1,8 @@
-import app from "@utils/config/slack-config";
-import { generate_welcome_message } from "@utils/helpers/generate_message";
+// import app from "@utils/config/slack-config";
+// import { generate_welcome_message } from "@utils/helpers/generate_message";
+
+import app from "../../utils/config/slack-config.ts";
+import { generate_welcome_message } from "../../utils/helpers/generate_message.ts";
 
 export const greet_new_team_member = () => {
   app.event("team_join", async ({ event, client, logger }) => {
