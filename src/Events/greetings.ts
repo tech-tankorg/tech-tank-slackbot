@@ -14,8 +14,6 @@ export const greet_new_team_member = () => {
         user: userId,
       });
 
-      console.log(userInfo.user?.real_name);
-
       // Open a direct message channel with the user
       const channel = await client.conversations.open({
         users: userId,

@@ -1,0 +1,44 @@
+{
+  "display_information": {
+    "name": "Hey"
+  },
+  "features": {
+    "bot_user": {
+      "display_name": "Hey",
+      "always_online": false
+    }
+  },
+  "oauth_config": {
+    "scopes": {
+      "bot": [
+        "channels:history",
+        "channels:read",
+        "chat:write",
+        "groups:history",
+        "im:history",
+        "mpim:history",
+        "users:read",
+        "users.profile:read"
+      ]
+    }
+  },
+  "settings": {
+    "event_subscriptions": {
+      "bot_events": [
+        "channel_rename",
+        "message.channels",
+        "message.groups",
+        "message.im",
+        "message.mpim",
+        "team_join",
+        "user_status_changed"
+      ]
+    },
+    "interactivity": {
+      "is_enabled": true
+    },
+    "org_deploy_enabled": false,
+    "socket_mode_enabled": true,
+    "token_rotation_enabled": false
+  }
+}
