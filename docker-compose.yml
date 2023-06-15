@@ -1,0 +1,8 @@
+# Use root/example as user/password credentials
+version: "3.9"
+
+services:
+  db:
+    build: .
+    ports:
+      - ${DB_PORT}:5001
