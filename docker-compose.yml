@@ -6,3 +6,9 @@ services:
     build: .
     ports:
       - ${DB_PORT}:5001
+
+    environment:
+      SLACK_SIGNING_SECRET: ${SLACK_SIGNING_SECRET}
+      SLACK_BOT_TOKEN: ${SLACK_BOT_TOKEN}
+      SLACK_APP_TOKEN: ${SLACK_APP_TOKEN}
+      PORT: ${PORT}
