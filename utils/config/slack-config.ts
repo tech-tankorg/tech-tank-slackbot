@@ -10,7 +10,7 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
   socketMode: true,
   appToken: process.env.SLACK_APP_TOKEN,
-  port: Number(process.env.PORT) || 5001,
+  port: Number(process.env.DB_PORT) || 5001,
 });
 
 export default app;
