@@ -1,7 +1,7 @@
 {
   "name": "tech-tank",
   "version": "1.0.0",
-  "description": "",
+  "description": "Slack bot for Tech Tank",
   "main": "./src/index.ts",
   "type": "module",
   "scripts": {
@@ -10,9 +10,13 @@
     "build": "tsup ./src/index.ts --format esm --dts",
     "start": "node ./dist/index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "slack bots",
+    "Tech Tank",
+    "Automation"
+  ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.3.1",
     "ts-node": "^10.9.1",
