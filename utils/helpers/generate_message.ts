@@ -27,7 +27,7 @@ Afterwards, you can check out some of our other channels. Here's a list of our c
 • <#${channels.resources}>: post any notes/cool resources you come across!
 
 And of course, if you don't see an appropriate place to post, you can always just post in #general! If you have any questions or concerns at any time, please don't hesitate to contact 
-<@${admins.chris}>, <@${admins.johann}>, <@${admins.eric}> or <@${admins.sammy}> your friendly admins:party_blob:
+<@${admins.chris}>, <@${admins.johann}>, <@${admins.eric}>, <@${admins.sammy}> or <@${admins.nonso}> your friendly admins:party_blob:
 
 Thanks for reading, and we hope you have a good swim :fish:
 `;
