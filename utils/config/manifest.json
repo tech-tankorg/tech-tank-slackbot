@@ -1,37 +1,50 @@
 {
   "display_information": {
-    "name": "Hey"
+    "name": "Nemo",
+    "description": "Your friendly neighbourhood fishy",
+    "background_color": "#6477b0"
   },
   "features": {
+    "app_home": {
+      "home_tab_enabled": true,
+      "messages_tab_enabled": false,
+      "messages_tab_read_only_enabled": true
+    },
     "bot_user": {
-      "display_name": "Hey",
-      "always_online": false
-    }
+      "display_name": "Nemo",
+      "always_online": true
+    },
+    "slash_commands": [
+      {
+        "command": "/random",
+        "description": "Selects random member",
+        "should_escape": false
+      }
+    ]
   },
   "oauth_config": {
     "scopes": {
       "bot": [
-        "channels:history",
-        "channels:read",
-        "chat:write",
         "groups:history",
         "im:history",
-        "mpim:history",
-        "users:read",
-        "users.profile:read"
+        "channels:history",
+        "chat:write",
+        "app_mentions:read",
+        "channels:read",
+        "im:write",
+        "commands",
+        "users:read"
       ]
     }
   },
   "settings": {
     "event_subscriptions": {
       "bot_events": [
-        "channel_rename",
-        "message.channels",
-        "message.groups",
-        "message.im",
-        "message.mpim",
+        "app_home_opened",
         "team_join",
-        "user_status_changed"
+        "message.channels",
+        "message.im",
+        "message.groups"
       ]
     },
     "interactivity": {

@@ -2,9 +2,6 @@ import { admins, channels } from "../config/channel-config.ts";
 
 export const generate_welcome_message = (user_name: string) => {
   const greeting = `
-
-Hey! @${user_name}
-
 Welcome to the Tank (aka Tech Tank :tech-tank:)! We're so happy you're here:blue_heart:
 
 This is a space for all techies (devs, designers, PMs and beyond) from newbies/juniors to senior level, and we hope you can make some meaningful connections here.
