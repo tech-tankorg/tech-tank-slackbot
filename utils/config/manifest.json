@@ -2,12 +2,13 @@
   "display_information": {
     "name": "Nemo",
     "description": "Your friendly neighbourhood fishy",
-    "background_color": "#6477b0"
+    "background_color": "#6477b0",
+    "long_description": "Nemo is your friendly neighbourhood fishy that is here to assist wherever possible! From welcome messages to some hidden gems, look for Nemo in your favourite channels! Have any feature requests for Nemo? Awesome! You can leave a GitHub issue in the repo and feel free to contribute as well!"
   },
   "features": {
     "app_home": {
-      "home_tab_enabled": true,
-      "messages_tab_enabled": false,
+      "home_tab_enabled": false,
+      "messages_tab_enabled": true,
       "messages_tab_read_only_enabled": true
     },
     "bot_user": {
@@ -33,7 +34,8 @@
         "channels:read",
         "im:write",
         "commands",
-        "users:read"
+        "users:read",
+        "incoming-webhook"
       ]
     }
   },
