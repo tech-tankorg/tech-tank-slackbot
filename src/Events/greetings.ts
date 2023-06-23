@@ -3,6 +3,7 @@
 
 import app from "../../utils/config/slack-config.ts";
 import { generate_welcome_message } from "../../utils/helpers/generate_message.ts";
+import Axiom from "../../utils/config/axiom-config.ts";
 
 export const greet_new_team_member = () => {
   app.event("team_join", async ({ event, client, logger }) => {
@@ -22,10 +23,15 @@ export const greet_new_team_member = () => {
       const message = generate_welcome_message(userInfo.user?.real_name || "");
 
       // Send the private message
-      await client.chat.postMessage({
+      const welcome_message_sent = await client.chat.postMessage({
         channel: channel.channel?.id || "",
         text: message,
       });
+
+      await Axiom.ingestEvents("slack-bot", [
+        { message: welcome_message_sent },
+        { user_info: userInfo },
+      ]);
     } catch (error) {
       logger.error(error);
     }
