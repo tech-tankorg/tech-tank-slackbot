@@ -10,7 +10,7 @@ While write access to this repository is restricted, we have made sure that you 
 
 ## Developmennt
 
-After you've forked and cloned the repo on to your local machine, go to the project directory and install dependencies:
+After you've forked and cloned the repo on to your local machine, go to the project directory and install the dependencies.
 
 ```bash
 cd tech-tank-slackbot && npm install
@@ -18,7 +18,7 @@ cd tech-tank-slackbot && npm install
 
 Add your `SLACK CREDENTIALS` to a `.env` file -- use the `.env.example` to reference which environment variables you need to add.
 
-To start the local server:
+To start the local server on the port specified in the `.env`:
 
 ```bash
 npm run dev
@@ -32,7 +32,7 @@ docker-compose up
 
 ## Usage/Examples
 
-The following is an example demonstrating how to add new event listerners to the slack app.
+The following is an example demonstrating how to add new event listeners to the slack app.
 
 ```typescript
 // "./Events/newEvent.ts"
@@ -65,3 +65,15 @@ newEvent();
   console.log("⚡️ Bolt app is running!");
 })();
 ```
+
+## Contributing
+
+---
+
+Contributions are always welcome!
+
+See `contributing.md` for ways to get started.
+
+## License
+
+[MIT](/LICENSE)
