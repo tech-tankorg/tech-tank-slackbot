@@ -23,4 +23,4 @@ Regarding PRs into development, please make all PRs into the development branch 
 
 ### What to call your newly created branch
 
-Create a new branch with the keyword of what you are planning to do. For example if you are planning a new feature, then the branch name may look like`feat-awesome-feature--octokat`. Moreover, if you're adding a new test then name the branch `test-awesome-test--octokat`.
+Create a new branch with the keyword of what you are planning to do. For example, if you're planning a new feature then the branch name may look like `feat-awesome-feature--octokat`. However, if you're adding a new test then the branch name may look like `test-awesome-tests--octokat`.
