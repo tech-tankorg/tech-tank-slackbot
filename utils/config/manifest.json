@@ -20,6 +20,12 @@
         "command": "/random",
         "description": "Selects random member",
         "should_escape": false
+      },
+      {
+        "command": "/jokes",
+        "description": "Tell me a joke - choose",
+        "usage_hint": "[Programming | Pun | Spooky]",
+        "should_escape": false
       }
     ]
   },
