@@ -29,11 +29,14 @@ export const greet_new_team_member = () => {
       });
 
       await Axiom.ingestEvents("slack-bot", [
-        { message: welcome_message_sent },
+        { greeting_message: welcome_message_sent },
         { user_info: userInfo },
       ]);
     } catch (error) {
       logger.error(error);
+      await Axiom.ingestEvents("slack-bot", [
+        { greeting_message_error: error },
+      ]);
     }
   });
 };
