@@ -15,6 +15,5 @@ export const channels = {
   random: process.env.MAIN_CHANNEL_ID_RANDOM ?? "",
   ugh: process.env.MAIN_CHANNEL_ID_UGH ?? "",
   resources: process.env.MAIN_CHANNEL_ID_RESOURCES ?? "",
-  project_proposals:
-    process.env.MAIN_CHANNEL_ID_MAIN_CHANNEL_ID_PROJECT_PROPOSAL ?? "",
+  project_proposals: process.env.MAIN_CHANNEL_ID_PROJECT_PROPOSAL ?? "",
 } as const;
