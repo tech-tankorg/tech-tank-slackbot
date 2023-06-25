@@ -22,7 +22,7 @@ export const greet_new_team_member = () => {
         users: userId,
       });
 
-      const message = generate_welcome_message(userInfo.user?.real_name || "");
+      const message = generate_welcome_message();
 
       // Send the private message
       const welcome_message_sent = await client.chat.postMessage({
