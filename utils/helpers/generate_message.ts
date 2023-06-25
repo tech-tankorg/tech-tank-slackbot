@@ -1,6 +1,6 @@
 import { admins, channels } from "../config/channel-config.ts";
 
-export const generate_welcome_message = (user_name: string) => {
+export const generate_welcome_message = () => {
   const greeting = `
 Welcome to the Tank (aka Tech Tank :tech-tank:)! We're so happy you're here:blue_heart:
 
@@ -22,6 +22,8 @@ Afterwards, you can check out some of our other channels. Here's a list of our c
 • <#${channels.ugh}>: a space to rant or complain about anything and everything:purple_heart:
 
 • <#${channels.resources}>: post any notes/cool resources you come across!
+
+• <#${channels.project_proposals}>: Do you have a cool project idea and need some team members? Do you want to join a project? If yes, then this is the place that allows you to share, create, and join projects!
 
 And of course, if you don't see an appropriate place to post, you can always just post in #general! If you have any questions or concerns at any time, please don't hesitate to contact 
 <@${admins.chris}>, <@${admins.johann}>, <@${admins.eric}>, <@${admins.sammy}> or <@${admins.nonso}> your friendly admins:party_blob:
