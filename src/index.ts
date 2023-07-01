@@ -4,6 +4,7 @@ import client from "../utils/config/axiom-config.ts";
 import { greet_new_team_member } from "./Events/greetings.ts";
 import { sayHello } from "./Events/sayHello.ts";
 import { Jokes } from "./Slash-commands/jokes.ts";
+import { schedule_message } from "./Events/schedule-message.ts";
 
 import { AXIOM_DATA_SET } from "../utils/constants/consts.ts";
 
@@ -11,6 +12,7 @@ import { AXIOM_DATA_SET } from "../utils/constants/consts.ts";
 sayHello();
 greet_new_team_member();
 Jokes();
+schedule_message();
 
 (async () => {
   // Start your app
