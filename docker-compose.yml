@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  slackBot:
+  slackbot:
     build: .
     ports:
       - ${DB_PORT}:5001
@@ -11,3 +11,6 @@ services:
       SLACK_BOT_TOKEN: ${SLACK_BOT_TOKEN}
       SLACK_APP_TOKEN: ${SLACK_APP_TOKEN}
       PORT: ${DB_PORT}
+      AXIOM_NEMO_SLACKBOT_API_TOKEN: ${AXIOM_NEMO_SLACKBOT_API_TOKEN}
+      AXIOM_PERSONAL_TOKEN: ${AXIOM_PERSONAL_TOKEN}
+      AXIOM_ORG_ID: ${AXIOM_ORG_ID}
