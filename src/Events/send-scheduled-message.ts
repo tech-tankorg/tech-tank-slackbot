@@ -1,12 +1,10 @@
 import app from "../../utils/config/slack-config.ts";
 
 import { generate_scheduled_messages } from "../../utils/helpers/generate-scheduled-messages.ts";
+import { prep_final_scheduled_message } from "../../utils/helpers/prep-final-scheduled-message.ts";
+
 import Axiom from "../../utils/config/axiom-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
-
-import { flatten_all_scheduled_messages_reponse } from "../../utils/helpers/flatten-object.ts";
-
-import { check_if_message_is_scheduled } from "../../utils/helpers/check-if-message-scheduled.ts";
 
 export const send_scheduled_message = async (
   lst_msgs: string[],
@@ -23,16 +21,9 @@ export const send_scheduled_message = async (
     const all_scheduled_messages =
       await app.client.chat.scheduledMessages.list();
 
-    const scheduled_message_array = all_scheduled_messages.scheduled_messages
-      ? all_scheduled_messages.scheduled_messages
-      : [];
-
-    const flattened_all_schedule_messages =
-      flatten_all_scheduled_messages_reponse(scheduled_message_array);
-
-    const final_messages_to_schedule = check_if_message_is_scheduled(
-      generated_messages,
-      flattened_all_schedule_messages
+    const final_messages_to_schedule = prep_final_scheduled_message(
+      all_scheduled_messages,
+      generated_messages
     );
 
     const scheduled_messages = await Promise.all(

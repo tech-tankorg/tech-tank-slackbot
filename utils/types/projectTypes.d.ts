@@ -1,3 +1,4 @@
+import app from "../config/slack-config.ts";
 export type Channel = Record<string, string>;
 
 export type JokeType = "single" | "twopart";
@@ -38,3 +39,7 @@ export interface ScheduledMessageResponse {
 export type singleJoke = Omit<Joke, "setup" | "delivery">;
 export type twoPartJoke = Omit<Joke, "joke">;
 export type response_type = "in_channel" | "ephemeral" | undefined;
+
+export type ChatScheduledMessagesListResponse = Awaited<
+  ReturnType<typeof app.client.chat.scheduledMessages.list>
+>;
