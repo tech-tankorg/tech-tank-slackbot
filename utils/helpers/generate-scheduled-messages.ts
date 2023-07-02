@@ -7,15 +7,19 @@ const convert_epoch_date_to_iso_date = (epoch_date: number) => {
 };
 
 export const generate_scheduled_messages = (
-  lst_words: string[],
+  lst_messages: string[],
   channel: string,
   start_date: Date
 ) => {
   // Given a start date let's calculate next thursday
   // do this iteratively for the length of the list of words
-  const new_array: { channel: string; post_at: number; text: string }[] = [];
+  const new_array: {
+    channel: string;
+    post_at: number;
+    text: string;
+  }[] = [];
 
-  lst_words.forEach((word) => {
+  lst_messages.forEach((message) => {
     const begin_date = nextThursday(start_date);
 
     const following_thrus = convert_epoch_date_to_iso_date(
@@ -24,7 +28,7 @@ export const generate_scheduled_messages = (
 
     new_array.push({
       channel,
-      text: `What's your opinion: ${word} Start a convo :thread:`,
+      text: `Let's start a convo thread with the following message ${message} :thread:`,
       post_at: nextThursday(following_thrus).getTime() / 1000,
     });
   });

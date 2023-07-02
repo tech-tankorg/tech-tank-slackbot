@@ -4,18 +4,16 @@ import { generate_scheduled_messages } from "../../utils/helpers/generate-schedu
 import Axiom from "../../utils/config/axiom-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
-export const schedule_message = async () => {
+export const send_scheduled_message = async (
+  lst_msgs: string[],
+  channel: string,
+  date: string
+) => {
   const message = generate_scheduled_messages(
-    [
-      "Q:hello there",
-      "Q:how is your day going?",
-      "Does pineapple go on Pizza?",
-    ],
-    "C05BYP98MTR",
-    new Date("July 12, 2023 00:00:00 UTC")
+    lst_msgs,
+    channel,
+    new Date(date)
   );
-
-  console.log(message);
 
   try {
     const scheduled_messages = await Promise.all(

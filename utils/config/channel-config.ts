@@ -16,4 +16,5 @@ export const channels = {
   ugh: "C052W5AU9BM",
   resources: "C04U5MWEXP1",
   project_proposals: "C05DVA1HX9U",
+  general: "C04DCQ64VB3",
 } as const;
