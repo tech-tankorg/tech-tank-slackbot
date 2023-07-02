@@ -22,6 +22,19 @@ export interface Joke {
   lang: string;
 }
 
+export interface ScheduleMessage {
+  channel: string;
+  post_at: number;
+  text: string;
+}
+export interface ScheduledMessageResponse {
+  id?: string;
+  channel_id?: string;
+  post_at?: number;
+  date_created?: number;
+  text?: string;
+}
+
 export type singleJoke = Omit<Joke, "setup" | "delivery">;
 export type twoPartJoke = Omit<Joke, "joke">;
 export type response_type = "in_channel" | "ephemeral" | undefined;
