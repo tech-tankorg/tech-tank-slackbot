@@ -6,12 +6,14 @@ import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
 import { flatten_all_scheduled_messages_reponse } from "../../utils/helpers/flatten-object.ts";
 
+import { check_if_message_is_scheduled } from "../../utils/helpers/check-if-message-scheduled.ts";
+
 export const send_scheduled_message = async (
   lst_msgs: string[],
   channel: string,
   date: string
 ) => {
-  const message = generate_scheduled_messages(
+  const generated_messages = generate_scheduled_messages(
     lst_msgs,
     channel,
     new Date(date)
@@ -28,10 +30,14 @@ export const send_scheduled_message = async (
     const flattened_all_schedule_messages =
       flatten_all_scheduled_messages_reponse(scheduled_message_array);
 
+    const final_messages_to_schedule = check_if_message_is_scheduled(
+      generated_messages,
+      flattened_all_schedule_messages
+    );
+
     const scheduled_messages = await Promise.all(
-      message.map(async (item) => {
-        if (!flattened_all_schedule_messages.includes(item.text))
-          return app.client.chat.scheduleMessage(item);
+      final_messages_to_schedule.map(async (item) => {
+        return app.client.chat.scheduleMessage(item);
       })
     );
 

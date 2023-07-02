@@ -22,7 +22,12 @@ export interface Joke {
   lang: string;
 }
 
-export interface ScheduledMessage {
+export interface ScheduleMessage {
+  channel: string;
+  post_at: number;
+  text: string;
+}
+export interface ScheduledMessageResponse {
   id?: string;
   channel_id?: string;
   post_at?: number;
