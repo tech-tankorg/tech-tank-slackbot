@@ -1,4 +1,5 @@
 import { nextThursday } from "date-fns";
+import { generate_thoughtful_thursdays_post } from "../helpers/generate_message.ts";
 
 const convert_epoch_date_to_iso_date = (epoch_date: number) => {
   const string_date = new Date(epoch_date * 1000).toISOString();
@@ -26,9 +27,11 @@ export const generate_scheduled_messages = (
       new_array[new_array.length - 1]?.post_at ?? begin_date.getTime() / 1000
     );
 
+    const post_of_the_week = generate_thoughtful_thursdays_post(message);
+
     new_array.push({
       channel,
-      text: `Let's start a convo thread with the following message ${message} :thread:`,
+      text: post_of_the_week,
       post_at: nextThursday(following_thrus).getTime() / 1000,
     });
   });
