@@ -1,7 +1,6 @@
 import { nextThursday } from "date-fns";
 import { generate_thoughtful_thursdays_post } from "../helpers/generate_message.ts";
 
-import { getRandomNumber } from "./generate-random-number.ts";
 const convert_epoch_date_to_iso_date = (epoch_date: number) => {
   const string_date = new Date(epoch_date * 1000).toISOString();
 
@@ -28,12 +27,7 @@ export const generate_scheduled_messages = (
       new_array[new_array.length - 1]?.post_at ?? begin_date.getTime() / 1000
     );
 
-    const message_template = getRandomNumber(1, 4, true);
-
-    const post_of_the_week = generate_thoughtful_thursdays_post(
-      message,
-      message_template
-    );
+    const post_of_the_week = generate_thoughtful_thursdays_post(message, 1);
 
     new_array.push({
       channel,
