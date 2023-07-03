@@ -32,3 +32,13 @@ Thanks for reading, and we hope you have a good swim :fish:
 `;
   return greeting;
 };
+
+export const generate_thoughtful_thursdays_post = (
+  question_of_the_week: string
+) => {
+  return `:tropical_fish: Hey there, it's your favourite neighbourhood fishy, Nemo, swimming your way! :ocean::tropical_fish:
+
+You know, I've always been a curious little fish, and this week, I've got a burning question that's been tickling my fins. :thinking_face::sparkles: So, without further ado, let's dive into a lively thread and uncover the juicy thoughts swimming around Tech Tank!
+
+:speech_balloon: Here's the question/post of the week: *${question_of_the_week}?* :thinking_face:`;
+};
