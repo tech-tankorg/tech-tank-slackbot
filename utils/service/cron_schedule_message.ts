@@ -21,15 +21,10 @@ cron.schedule(CRON_FOR_SCHEDULE_MESSAGE, () => {
 
   const offset_date = getOffsetDay(start_date, now);
 
-  console.log(offset_date);
-
-  if (offset_date % 119) {
+  if (offset_date % 119)
     send_scheduled_message(
       PREPPED_QUESTIONS,
       channels.general,
       GENERAL_QUESTIONS_START_DATE
     );
-
-    console.log("this block of code ran");
-  }
 });
