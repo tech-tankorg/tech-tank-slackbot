@@ -8,7 +8,7 @@ But that's not all! The Tech Tank Slack Bot is open to limitless possibilities. 
 
 While write access to this repository is restricted, we have made sure that you have read access, allowing you to explore the code, fork the repository, work on your own enhancements, and contribute by creating a pull request. This collaborative approach ensures that our bot continually evolves, driven by the collective creativity and expertise of our members.
 
-## Developmennt
+## Development
 
 After you've forked and cloned the repo on to your local machine, go to the project directory and install the dependencies.
 
