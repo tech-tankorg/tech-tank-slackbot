@@ -30,6 +30,21 @@ We've added a docker file to this project so that you can spin up a production r
 docker-compose up
 ```
 
+## Setup a test slack app/bot
+
+1. Create a test slack workspace
+2. Navigate over to [slack's api](https://api.slack.com/apps)
+3. Create a new App
+4. Choose create from an app manifest
+5. Select the workspace you want to install the new app
+6. Copy the App manifest from the `manifest.json` into the JSON editor
+7. Create the App
+8. Install the bot to the workspace
+9. Copy the following keys:
+   - Client Secret
+   - Signing Secret
+   - App token (only copy this if you are using socket mode)
+
 ## Usage/Examples
 
 The following is an example demonstrating how to add new event listeners to the slack app.
