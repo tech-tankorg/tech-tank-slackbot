@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node --esm ./src/index.ts",
-    "build": "tsup ./src/index.ts --format esm --dts",
+    "build": "tsup ./src/index.ts --format esm --dts utils/types/projectTypes.ts",
     "start": "node ./dist/index.js",
     "test:typecheck": "tsc",
     "randomize-questions": "ts-node --esm ./utils/helpers/randomize-list.ts",
