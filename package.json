@@ -7,8 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node --esm ./src/index.ts",
-    "build": "tsup ./src/index.ts --format esm --dts utils/types/projectTypes.ts",
-    "start": "node ./dist/index.js",
+    "build": "tsup ./src/index.ts ./utils/service/cron_schedule_message.ts --format esm --dts utils/types/projectTypes.ts",
+    "start": "node ./dist/src/index.js && node ./dist/utils/service/con_schedule_message.js",
     "test:typecheck": "tsc",
     "randomize-questions": "ts-node --esm ./utils/helpers/randomize-list.ts",
     "scheduled-messages": "ts-node --esm ./utils/helpers/list-all-scheduled-messages.ts",

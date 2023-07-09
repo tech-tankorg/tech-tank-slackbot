@@ -11,13 +11,13 @@ export const wonder_wednesday_schedule_message = async (
   lst_msgs: string[],
   channel: string,
   date: string,
-  day: day
+  repeat_day: day
 ) => {
   const generated_messages = generate_scheduled_messages(
     lst_msgs,
     channel,
     new Date(date),
-    day
+    repeat_day
   );
 
   try {

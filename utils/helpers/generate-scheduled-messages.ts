@@ -12,7 +12,7 @@ export const generate_scheduled_messages = (
   lst_messages: string[],
   channel: string,
   start_date: Date,
-  day: day
+  repeat_day: day
 ) => {
   // Given a start date let's calculate next thursday
   // do this iteratively for the length of the list of words
@@ -23,7 +23,7 @@ export const generate_scheduled_messages = (
     text: string;
   }[] = [];
 
-  const next_day_function = determine_next_day_function(day);
+  const next_day_function = determine_next_day_function(repeat_day);
 
   lst_messages.forEach((message) => {
     const begin_date = next_day_function(start_date);
@@ -33,7 +33,7 @@ export const generate_scheduled_messages = (
     );
 
     const post_of_the_week =
-      day === "wednesday"
+      repeat_day === "wednesday"
         ? generate_thoughtful_thursdays_post(message, 3)
         : generate_thoughtful_thursdays_post(message, 1);
 
