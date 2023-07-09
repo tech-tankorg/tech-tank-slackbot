@@ -32,7 +32,10 @@ export const generate_scheduled_messages = (
       new_array[new_array.length - 1]?.post_at ?? begin_date.getTime() / 1000
     );
 
-    const post_of_the_week = generate_thoughtful_thursdays_post(message, 1);
+    const post_of_the_week =
+      day === "wednesday"
+        ? generate_thoughtful_thursdays_post(message, 3)
+        : generate_thoughtful_thursdays_post(message, 1);
 
     new_array.push({
       channel,

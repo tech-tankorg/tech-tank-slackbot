@@ -42,22 +42,22 @@ export const generate_thoughtful_thursdays_post = (
 
 You know, I've always been a curious little fish, and this week, I've got a burning question that's been tickling my fins. :thinking_face::sparkles: So, without further ado, let's dive into a lively thread and uncover the juicy thoughts swimming around Tech Tank!
 
-:speech_balloon: Here's the question/post of the week: *${question_of_the_week}?* :thinking_face:`;
+:speech_balloon: Here's the question/post of the week: *${question_of_the_week}* :thinking_face:`;
 
   if (random_number === 2)
     return `:ocean::tropical_fish: Well, well, well... Look who's making a splash in your feeds! It's Nemo, your friendly underwater explorer, swimming in with a question that's been bobbling around my bubbly brain. Care to join me in a lively discussion this week? Let's dive right in and make some waves in the Tech Tank community! :speech_balloon::sparkles:
     
-    :speech_balloon: Here's the question/post of the week: *${question_of_the_week}?* :thinking_face:`;
+    :speech_balloon: Here's the question/post of the week: *${question_of_the_week}* :thinking_face:`;
 
   if (random_number === 3)
     return `:ocean::tropical_fish: Ahoy, Tech Tankers! Nemo, your trusty underwater companion, has surfaced with a question that's sure to make a splash. Let's cast our nets of discussion wide and reel in some fascinating insights from our brilliant members!:speech_balloon::sparkles:
     
-     :speech_balloon: Here's the question/post of the week: *${question_of_the_week}?* :thinking_face:`;
+     :speech_balloon: Here's the question/post of the week: *${question_of_the_week}* :thinking_face:`;
 
   if (random_number === 4)
     return `:ocean::tropical_fish: Hold on to your sea shells, Tech Tankers! It's Nemo, your favourite neighbourhood fishy, swimming your way with a question that will make your synapses sizzle. Are you prepared for the deep dive into the uncharted waters of this weeks question? Let's unravel the mysteries, share our most dazzling insights, and make some waves together! :thinking_face::speech_balloon:
   
-  :speech_balloon: Here's the question/post of the week: *${question_of_the_week}?* :thinking_face:
+  :speech_balloon: Here's the question/post of the week: *${question_of_the_week}* :thinking_face:
   `;
 
   return `Start a thread with the following: *${question_of_the_week}* :thread:`;
