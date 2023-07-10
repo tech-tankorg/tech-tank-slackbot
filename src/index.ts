@@ -19,14 +19,19 @@ import { flatten_object } from "../utils/helpers/flatten-object.ts";
 import questions from "../utils/constants/general-questions.json" assert { type: "json" };
 import wonder_wednesday_questions from "../utils/constants/wonder-wednesday-questions.json" assert { type: "json" };
 
+import {
+  suggestion_social,
+  suggestion_other,
+  suggestion_study,
+} from "./Slash-commands/suggestions.ts";
+
 const PREPPED_QUESTIONS = flatten_object(questions);
 const test_channel = "C05BYP98MTR";
 const test_channel_two = "C05C6KVHWAJ";
 
-// This command is for testing purposes. Leave here in case we want to test in the future.
+// Events
 sayHello();
 greet_new_team_member();
-Jokes();
 send_scheduled_message(
   PREPPED_QUESTIONS,
   channels.general,
@@ -40,6 +45,12 @@ wonder_wednesday_schedule_message(
   WONDER_WEDNESDAY_QUESTIONS_START_DATE,
   "wednesday"
 );
+
+// Slash commands
+Jokes();
+suggestion_social();
+suggestion_study();
+suggestion_other();
 
 (async () => {
   // Start your app

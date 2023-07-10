@@ -62,3 +62,38 @@ You know, I've always been a curious little fish, and this week, I've got a burn
 
   return `Start a thread with the following: *${question_of_the_week}* :thread:`;
 };
+
+export const generate_notification_message = (
+  user_name: string,
+  suggestion: string,
+  tag: string
+) => {
+  return {
+    mrkdwn: true,
+    text: `New suggestion has been submitted \n\n ${user_name} submitted a suggestion with the tag of ${tag}\n\n *Suggestion*: ${suggestion}`,
+    blocks: [
+      {
+        type: "header",
+        text: {
+          type: "plain_text",
+          text: "New suggestion has been submitted",
+          emoji: true,
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `${user_name} submitted a suggestion with the tag of ${tag}`,
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `*Suggestion*: ${suggestion}`,
+        },
+      },
+    ],
+  };
+};

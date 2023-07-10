@@ -17,4 +17,5 @@ export const channels = {
   resources: "C04U5MWEXP1",
   project_proposals: "C05DVA1HX9U",
   general: "C04DCQ64VB3",
+  notification: process.env.SLACK_NOTIFICATION_CHANNEL ?? "",
 } as const;
