@@ -6,7 +6,7 @@ import { prep_final_scheduled_message } from "../../utils/helpers/prep-final-sch
 import Axiom from "../../utils/config/axiom-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
-export const send_scheduled_message = async (
+export const thoughtful_thursday_send_scheduled_message = async (
   lst_msgs: string[],
   channel: string,
   date: string,

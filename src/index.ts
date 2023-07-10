@@ -4,8 +4,8 @@ import client from "../utils/config/axiom-config.ts";
 import { greet_new_team_member } from "./Events/greetings.ts";
 import { sayHello } from "./Events/sayHello.ts";
 import { Jokes } from "./Slash-commands/jokes.ts";
-import { send_scheduled_message } from "./Events/send-scheduled-message.ts";
-import { wonder_wednesday_schedule_message } from "./Events/wonder-wednesday-schedule-message.ts";
+import { thoughtful_thursday_send_scheduled_message } from "./Events/send-scheduled-message.ts";
+import { wonder_wednesday_send_schedule_message } from "./Events/wonder-wednesday-schedule-message.ts";
 
 import {
   GENERAL_QUESTIONS_START_DATE,
@@ -32,14 +32,14 @@ const test_channel_two = "C05C6KVHWAJ";
 // Events
 sayHello();
 greet_new_team_member();
-send_scheduled_message(
+thoughtful_thursday_send_scheduled_message(
   PREPPED_QUESTIONS,
   channels.general,
   GENERAL_QUESTIONS_START_DATE,
   "thursday"
 );
 
-wonder_wednesday_schedule_message(
+wonder_wednesday_send_schedule_message(
   wonder_wednesday_questions,
   channels.study,
   WONDER_WEDNESDAY_QUESTIONS_START_DATE,
