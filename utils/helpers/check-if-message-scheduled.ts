@@ -1,4 +1,4 @@
-import type { ScheduleMessage } from "../types/projectTypes.js";
+import type { ScheduleMessage } from "../types/projectTypes.ts";
 export const check_if_message_is_scheduled = (
   msgs_to_be_scheduled: ScheduleMessage[],
   scheduled_messages: (string | undefined)[]

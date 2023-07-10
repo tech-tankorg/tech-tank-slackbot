@@ -1,4 +1,4 @@
-import type { ScheduleMessage } from "../types/projectTypes.js";
+import type { ScheduleMessage } from "../types/projectTypes.ts";
 import { addDays } from "date-fns";
 
 export const remove_messages_schedule_for_past = (
