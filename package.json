@@ -7,8 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node --esm ./src/index.ts",
-    "build": "tsup ./src/index.ts --format esm --dts utils/types/projectTypes.ts",
-    "start": "node ./dist/index.js",
+    "build": "tsup ./src/index.ts ./utils/service/cron_schedule_message.ts --format esm --dts utils/types/projectTypes.ts",
+    "start": "node ./dist/src/index.js && node ./dist/utils/service/cron_schedule_message.js",
     "test:typecheck": "tsc",
     "randomize-questions": "ts-node --esm ./utils/helpers/randomize-list.ts",
     "scheduled-messages": "ts-node --esm ./utils/helpers/list-all-scheduled-messages.ts",
@@ -34,6 +34,7 @@
     "axios": "^1.4.0",
     "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",
+    "firebase": "^10.0.0",
     "node-cron": "^3.0.2",
     "zod": "^3.21.4"
   }
