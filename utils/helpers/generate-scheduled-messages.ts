@@ -1,6 +1,7 @@
 import type { day } from "../types/projectTypes.ts";
 import { generate_thoughtful_thursdays_post } from "../helpers/generate_message.ts";
 import { determine_next_day_function } from "./determine-next-day-function.ts";
+import { getRandomNumber } from "../../utils/helpers/generate-random-number.ts";
 
 const convert_epoch_date_to_iso_date = (epoch_date: number) => {
   const string_date = new Date(epoch_date * 1000).toISOString();
@@ -32,10 +33,13 @@ export const generate_scheduled_messages = (
       new_array[new_array.length - 1]?.post_at ?? begin_date.getTime() / 1000
     );
 
+    const random_number_wednesday = getRandomNumber(1, 4, true);
+    const random_number_thursday = getRandomNumber(1, 4, true);
+
     const post_of_the_week =
       repeat_day === "wednesday"
-        ? generate_thoughtful_thursdays_post(message, 3)
-        : generate_thoughtful_thursdays_post(message, 1);
+        ? generate_thoughtful_thursdays_post(message, random_number_wednesday)
+        : generate_thoughtful_thursdays_post(message, random_number_thursday);
 
     new_array.push({
       channel,

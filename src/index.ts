@@ -29,14 +29,14 @@ sayHello();
 greet_new_team_member();
 thoughtful_thursday_send_scheduled_message(
   PREPPED_QUESTIONS,
-  channels.general,
+  test_channel,
   GENERAL_QUESTIONS_START_DATE,
   "thursday"
 );
 
 wonder_wednesday_send_schedule_message(
   wonder_wednesday_questions,
-  channels.study,
+  test_channel_two,
   WONDER_WEDNESDAY_QUESTIONS_START_DATE,
   "wednesday"
 );
