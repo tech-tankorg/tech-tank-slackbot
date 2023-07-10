@@ -7,7 +7,7 @@ import { prep_final_scheduled_message } from "../../utils/helpers/prep-final-sch
 import Axiom from "../../utils/config/axiom-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
-export const wonder_wednesday_schedule_message = async (
+export const wonder_wednesday_send_schedule_message = async (
   lst_msgs: string[],
   channel: string,
   date: string,
@@ -40,7 +40,7 @@ export const wonder_wednesday_schedule_message = async (
     ]);
   } catch (error) {
     await Axiom.ingestEvents(AXIOM_DATA_SET, [
-      { error_scheduled_message: error },
+      { error_scheduled_messages_wonder_wednesday: error },
     ]);
   }
 };
