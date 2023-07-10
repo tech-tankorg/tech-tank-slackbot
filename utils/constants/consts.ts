@@ -8,3 +8,5 @@ export const CRON_FOR_SCHEDULE_MESSAGE = "0 0 * * * *";
 
 export const MATCH_GREETING_MESSAGE =
   ":speech_balloon: Here's the question/post of the week:";
+
+export const SUGGESTION_REGEX = /\/suggestion-(social|study|other)/i;
