@@ -26,7 +26,7 @@ Afterwards, you can check out some of our other channels. Here's a list of our c
 • <#${channels.project_proposals}>: Do you have a cool project idea and need some team members? Do you want to join a project? If yes, then this is the place that allows you to share, create, and join projects!
 
 And of course, if you don't see an appropriate place to post, you can always just post in #general! If you have any questions or concerns at any time, please don't hesitate to contact 
-<@${admins.chris}>, <@${admins.johann}>, <@${admins.eric}>, <@${admins.sammy}> or <@${admins.nonso}> your friendly admins:party_blob:
+<@${admins.chris}>, <@${admins.eric}>, <@${admins.sammy}> or <@${admins.nonso}> your friendly admins:party_blob:
 
 Thanks for reading, and we hope you have a good swim :fish:
 `;
