@@ -2,7 +2,6 @@ export const admins = {
   chris: "U04DDM4LQAD",
   sammy: "U04SKSY6K1C",
   eric: "U053Y4S16TE",
-  johann: "U04D05DDPJ6",
   nonso: "U0586TY9NP2",
 } as const;
 
