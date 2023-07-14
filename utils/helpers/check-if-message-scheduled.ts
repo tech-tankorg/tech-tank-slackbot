@@ -14,7 +14,7 @@ export const check_if_message_is_scheduled = (
     for (const scheduledMsg of scheduled_messages) {
       if (!scheduledMsg) break;
 
-      const matches = scheduledMsg.split(MATCH_GREETING_MESSAGE);
+      const matches = msg.text.split(MATCH_GREETING_MESSAGE);
 
       if (scheduledMsg.includes(matches[1] ?? "")) {
         isScheduled = true;
