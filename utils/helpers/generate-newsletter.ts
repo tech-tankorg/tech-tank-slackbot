@@ -2,6 +2,8 @@ import { format, startOfMonth, endOfMonth } from "date-fns";
 import axios from "axios";
 import { filter_dates_range } from "./custom-date-fns.ts";
 
+import { sanity_letter_info } from "../types/projectTypes.ts";
+
 const generate_sanity_newsletter = async (date: string) => {
   const encodedURI = encodeURIComponent(
     `*[_type=="letter" && scheduled_post_date=="${date}"]{letter_info[]->{title,description},letter_fyi[]->{title,description},letter_title,letter_description,scheduled_post_date}`
@@ -38,7 +40,7 @@ const getUpcomingEvents = async () => {
   return filtered_upcoming_events;
 };
 
-const transform_to_block = (section: any[]) => {
+const transform_to_block = (section: sanity_letter_info) => {
   return section.map((sec: any) => ({
     type: "section",
     text: {
@@ -53,10 +55,12 @@ const transform_to_block_upcoming_events = (section: any[]) => {
     type: "section",
     text: {
       type: "mrkdwn",
-      text: `${format(new Date(sec.start.dateTime), "MMM do")} - ${format(
+      text: `:calendar: *${format(
         new Date(sec.start.dateTime),
-        "hh:mm a..aa"
-      )} *${sec.summary}* \n\n${sec.description} \n\n Location/Event Link: ${
+        "MMM do"
+      )} - ${format(new Date(sec.start.dateTime), "hh:mm aa")} | ${
+        sec.summary
+      }* :calendar:\n\n${sec.description} \n\n Location/Event Link: ${
         sec.location
       }`,
     },
@@ -73,6 +77,8 @@ export const generate_newsletter = async () => {
     generate_sanity_newsletter(request_format_date),
     getUpcomingEvents(),
   ]);
+
+  console.info(response[1]);
 
   const transform_block_fyi = transform_to_block(response[0].letter_fyi);
   const transform_block_info = transform_to_block(response[0].letter_info);
