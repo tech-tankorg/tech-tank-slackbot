@@ -4,6 +4,8 @@ import { filter_dates_range } from "./custom-date-fns.ts";
 
 import { sanity_letter_info } from "../types/projectTypes.ts";
 
+import { generic_sort_array } from "./sort-array.ts";
+
 const generate_sanity_newsletter = async (date: string) => {
   const encodedURI = encodeURIComponent(
     `*[_type=="letter" && scheduled_post_date=="${date}"]{letter_info[]->{title,description},letter_fyi[]->{title,description},letter_title,letter_description,scheduled_post_date}`
@@ -60,9 +62,9 @@ const transform_to_block_upcoming_events = (section: any[]) => {
         "MMM do"
       )} - ${format(new Date(sec.start.dateTime), "hh:mm aa")} | ${
         sec.summary
-      }* :calendar:\n\n${sec.description} \n\n Location/Event Link: ${
-        sec.location
-      }`,
+      }* :calendar:\n\n${
+        sec.description && sec.description
+      } \n\n Location/Event Link: ${sec.location}`,
     },
   }));
 };
@@ -78,10 +80,11 @@ export const generate_newsletter = async () => {
     getUpcomingEvents(),
   ]);
 
-  console.info(response[1]);
-
   const transform_block_fyi = transform_to_block(response[0].letter_fyi);
   const transform_block_info = transform_to_block(response[0].letter_info);
+
+  generic_sort_array(response[1]);
+
   const transform_block_upcoming_events = transform_to_block_upcoming_events(
     response[1]
   );
@@ -145,21 +148,11 @@ export const generate_newsletter = async () => {
         type: "divider",
       },
       {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: "Please join me in welcoming our 3 *new hires* to the Paper Company family! \n\n *Robert California*, CEO \n\n *Ryan Howard*, Temp \n\n *Erin Hannon*, Receptionist ",
-        },
-      },
-      {
-        type: "divider",
-      },
-      {
         type: "context",
         elements: [
           {
             type: "mrkdwn",
-            text: ":pushpin: Do you have something to include in the newsletter? Here's *how to submit content*.",
+            text: ":pushpin: Your monthly newsletter brought to you by *Nemo* from *Tech Tank*.",
           },
         ],
       },
