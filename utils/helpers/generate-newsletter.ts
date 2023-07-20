@@ -24,24 +24,16 @@ const transform_to_block_upcoming_events = (section: google_cal_event[]) => {
   return section.map((sec) => ({
     type: "section",
     text: {
-      text: "---",
       type: "mrkdwn",
+
+      text: `---\n\n:calendar: *${format(
+        new Date(sec.start.dateTime),
+
+        "MMM do"
+      )} - ${format(new Date(sec.start.dateTime), "hh:mm aa")} | ${
+        sec.summary
+      }* \n\n Location/Event Link: ${sec.location} \n \n ${sec.description}`,
     },
-    fields: [
-      {
-        type: "mrkdwn",
-        text: `:calendar: *${format(
-          new Date(sec.start.dateTime),
-          "MMM do"
-        )} - ${format(new Date(sec.start.dateTime), "hh:mm aa")} | ${
-          sec.summary
-        }* \n\n Location/Event Link: ${sec.location} \n \n`,
-      },
-      {
-        type: "mrkdwn",
-        text: `${sec.description}`,
-      },
-    ],
   }));
 };
 

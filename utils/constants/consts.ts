@@ -6,6 +6,7 @@ export const WONDER_WEDNESDAY_QUESTIONS_START_DATE =
   "July 12, 2023 14:00:00 UTC";
 
 export const CRON_FOR_SCHEDULE_MESSAGE = "0 0 * * * *";
+export const CRON_FOR_NEWSLETTER = "0 10 1-7 * 1-5";
 
 export const MATCH_GREETING_MESSAGE =
   ":speech_balloon: Here's the question/post of the week:";

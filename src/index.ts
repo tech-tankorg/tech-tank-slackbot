@@ -7,7 +7,6 @@ import { greet_new_team_member } from "./Events/greetings.ts";
 import { sayHello } from "./Events/sayHello.ts";
 import { thoughtful_thursday_send_scheduled_message } from "./Events/send-scheduled-message.ts";
 import { wonder_wednesday_send_schedule_message } from "./Events/wonder-wednesday-schedule-message.ts";
-import { post_newsletter } from "./Events/post-newsletter.ts";
 import { app_home_opened } from "./Events/app_home.ts";
 
 import { Jokes } from "./Slash-commands/jokes.ts";
@@ -43,7 +42,6 @@ wonder_wednesday_send_schedule_message(
   "wednesday"
 );
 
-post_newsletter();
 app_home_opened();
 
 // Slash commands

@@ -1,6 +1,7 @@
 import cron from "node-cron";
 import {
   CRON_FOR_SCHEDULE_MESSAGE,
+  CRON_FOR_NEWSLETTER,
   GENERAL_QUESTIONS_START_DATE,
   WONDER_WEDNESDAY_QUESTIONS_START_DATE,
 } from "../constants/consts.ts";
@@ -15,6 +16,8 @@ import { channels } from "../config/channel-config.ts";
 
 import { thoughtful_thursday_send_scheduled_message } from "../../src/Events/send-scheduled-message.ts";
 import { wonder_wednesday_send_schedule_message } from "../../src/Events/wonder-wednesday-schedule-message.ts";
+
+import { post_newsletter } from "../../src/Events/post_newsletter.ts";
 
 const PREPPED_QUESTIONS = flatten_object(questions);
 
@@ -52,4 +55,8 @@ cron.schedule(CRON_FOR_SCHEDULE_MESSAGE, () => {
       WONDER_WEDNESDAY_QUESTIONS_START_DATE,
       "wednesday"
     );
+});
+
+cron.schedule(CRON_FOR_NEWSLETTER, () => {
+  post_newsletter();
 });
