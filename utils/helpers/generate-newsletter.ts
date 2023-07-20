@@ -1,46 +1,7 @@
-import { format, startOfMonth, endOfMonth } from "date-fns";
-import axios from "axios";
-import { filter_dates_range } from "./custom-date-fns.ts";
-
+import { format, startOfMonth } from "date-fns";
 import { sanity_letter_info } from "../types/projectTypes.ts";
-
-import { generic_sort_array } from "./sort-array.ts";
-
-const generate_sanity_newsletter = async (date: string) => {
-  const encodedURI = encodeURIComponent(
-    `*[_type=="letter" && scheduled_post_date=="${date}"]{letter_info[]->{title,description},letter_fyi[]->{title,description},letter_title,letter_description,scheduled_post_date}`
-  );
-  const API_REQ = `https://${process.env.SANITY_PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/production?query=${encodedURI}`;
-  const req = await axios.get(API_REQ);
-
-  return req.data.result[0];
-};
-
-const getUpcomingEvents = async () => {
-  const API_REQ = `https://www.googleapis.com/calendar/v3/calendars/${process.env.GOOGLE_CALENDAR_ID}/events?key=${process.env.GOOGLE_CALENDAR_API_KEY}`;
-
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "https://www.googleapis.com/auth/calendar.events",
-    },
-  };
-
-  const result = await axios.get(API_REQ, options);
-
-  const events = result.data.items as any[];
-
-  const start_of_month = startOfMonth(new Date());
-  const end_of_month = endOfMonth(new Date());
-
-  const filtered_upcoming_events = events.filter((event) => {
-    const event_date_start = new Date(event.start.dateTime);
-
-    return filter_dates_range(event_date_start, start_of_month, end_of_month);
-  });
-
-  return filtered_upcoming_events;
-};
+import { getUpcomingEvents } from "../service/google-calendar.ts";
+import { generate_sanity_newsletter } from "../service/sanity-client.ts";
 
 const transform_to_block = (section: sanity_letter_info) => {
   return section.map((sec: any) => ({
@@ -82,8 +43,6 @@ export const generate_newsletter = async () => {
 
   const transform_block_fyi = transform_to_block(response[0].letter_fyi);
   const transform_block_info = transform_to_block(response[0].letter_info);
-
-  generic_sort_array(response[1]);
 
   const transform_block_upcoming_events = transform_to_block_upcoming_events(
     response[1]
