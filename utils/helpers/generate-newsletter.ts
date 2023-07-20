@@ -8,9 +8,15 @@ const transform_to_block = (section: sanity_letter_info) => {
   return section.map((sec) => ({
     type: "section",
     text: {
+      text: "---",
       type: "mrkdwn",
-      text: `${sec.title}\n\n ${sec.description} \n \n`,
     },
+    fields: [
+      {
+        type: "mrkdwn",
+        text: `${sec.title}\n\n ${sec.description} \n \n`,
+      },
+    ],
   }));
 };
 
@@ -18,16 +24,24 @@ const transform_to_block_upcoming_events = (section: google_cal_event[]) => {
   return section.map((sec) => ({
     type: "section",
     text: {
+      text: "---",
       type: "mrkdwn",
-      text: `:calendar: *${format(
-        new Date(sec.start.dateTime),
-        "MMM do"
-      )} - ${format(new Date(sec.start.dateTime), "hh:mm aa")} | ${
-        sec.summary
-      }* :calendar:\n\n${
-        sec.description && sec.description
-      } \n\n Location/Event Link: ${sec.location} \n \n`,
     },
+    fields: [
+      {
+        type: "mrkdwn",
+        text: `:calendar: *${format(
+          new Date(sec.start.dateTime),
+          "MMM do"
+        )} - ${format(new Date(sec.start.dateTime), "hh:mm aa")} | ${
+          sec.summary
+        }* \n\n Location/Event Link: ${sec.location} \n \n`,
+      },
+      {
+        type: "mrkdwn",
+        text: `${sec.description}`,
+      },
+    ],
   }));
 };
 
