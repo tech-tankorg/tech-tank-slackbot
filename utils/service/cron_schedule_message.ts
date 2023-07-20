@@ -5,7 +5,7 @@ import {
   WONDER_WEDNESDAY_QUESTIONS_START_DATE,
 } from "../constants/consts.ts";
 
-import { getOffsetDay } from "../helpers/generate-offset-date.ts";
+import { getOffsetDay } from "../helpers/custom-date-fns.ts";
 
 import { flatten_object } from "../helpers/flatten-object.ts";
 import questions from "../constants/general-questions.json" assert { type: "json" };

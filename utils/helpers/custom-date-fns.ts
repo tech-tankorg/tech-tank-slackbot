@@ -1,4 +1,15 @@
-import { isBefore, isAfter, format } from "date-fns";
+import {
+  isBefore,
+  isAfter,
+  nextMonday,
+  nextTuesday,
+  nextWednesday,
+  nextThursday,
+  nextFriday,
+  nextSaturday,
+  nextSunday,
+} from "date-fns";
+import type { day } from "../types/projectTypes.ts";
 
 export const filter_dates_range = (
   date: Date,
@@ -15,4 +26,16 @@ export const getOffsetDay = (start_date: Date, curr_date: Date): number => {
   const convertToDaysNumber = Math.abs(Math.floor(offSet / toDaysConverter));
 
   return convertToDaysNumber;
+};
+
+export const determine_next_day_function = (repeat_day: day) => {
+  if (repeat_day === "monday") return nextMonday;
+  if (repeat_day === "tuesday") return nextTuesday;
+  if (repeat_day === "wednesday") return nextWednesday;
+  if (repeat_day === "thursday") return nextThursday;
+  if (repeat_day === "friday") return nextFriday;
+  if (repeat_day === "saturday") return nextSaturday;
+  if (repeat_day === "sunday") return nextSunday;
+
+  return nextMonday;
 };
