@@ -1,6 +1,7 @@
 import { startOfMonth, endOfMonth } from "date-fns";
 import { generic_sort_array } from "../helpers/sort-array.ts";
 import { filter_dates_range } from "../helpers/custom-date-fns.ts";
+import type { google_cal_event } from "../types/projectTypes.ts";
 
 import axios from "axios";
 
@@ -29,5 +30,5 @@ export const getUpcomingEvents = async () => {
 
   generic_sort_array(filtered_upcoming_events);
 
-  return filtered_upcoming_events;
+  return filtered_upcoming_events as google_cal_event[];
 };

@@ -2,19 +2,20 @@ import { format, startOfMonth } from "date-fns";
 import { sanity_letter_info } from "../types/projectTypes.ts";
 import { getUpcomingEvents } from "../service/google-calendar.ts";
 import { generate_sanity_newsletter } from "../service/sanity-client.ts";
+import type { google_cal_event } from "../types/projectTypes.ts";
 
 const transform_to_block = (section: sanity_letter_info) => {
-  return section.map((sec: any) => ({
+  return section.map((sec) => ({
     type: "section",
     text: {
       type: "mrkdwn",
-      text: `${sec.title}\n ${sec.description}`,
+      text: `${sec.title}\n\n ${sec.description} \n \n`,
     },
   }));
 };
 
-const transform_to_block_upcoming_events = (section: any[]) => {
-  return section.map((sec: any) => ({
+const transform_to_block_upcoming_events = (section: google_cal_event[]) => {
+  return section.map((sec) => ({
     type: "section",
     text: {
       type: "mrkdwn",
@@ -25,7 +26,7 @@ const transform_to_block_upcoming_events = (section: any[]) => {
         sec.summary
       }* :calendar:\n\n${
         sec.description && sec.description
-      } \n\n Location/Event Link: ${sec.location}`,
+      } \n\n Location/Event Link: ${sec.location} \n \n`,
     },
   }));
 };
