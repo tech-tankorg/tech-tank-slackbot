@@ -3,6 +3,8 @@ export const admins = {
   sammy: "U04SKSY6K1C",
   eric: "U053Y4S16TE",
   nonso: "U0586TY9NP2",
+  niya: "U0555M9GTJS",
+  riaz: "U0550E9JAUX",
 } as const;
 
 export const channels = {
@@ -16,5 +18,6 @@ export const channels = {
   resources: "C04U5MWEXP1",
   project_proposals: "C05DVA1HX9U",
   general: "C04DCQ64VB3",
+  coffee_chat: "C05G1S5HB4Z",
   notification: process.env.SLACK_NOTIFICATION_CHANNEL ?? "",
 } as const;
