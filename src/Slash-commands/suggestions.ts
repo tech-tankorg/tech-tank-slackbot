@@ -17,7 +17,6 @@ export const suggestion = () => {
     try {
       const tag = body.command.split("/")[1] ?? "";
       const suggestion = body.text;
-      const createdAt = new Date().toUTCString();
       const user_id = body.user_id;
       const user_name = body.user_name;
 
@@ -26,7 +25,7 @@ export const suggestion = () => {
 
       const message = generate_notification_message(user_name, suggestion, tag);
 
-      create_suggestion(tag, suggestion, createdAt, user_id, user_name);
+      create_suggestion(tag, suggestion, user_id, user_name);
 
       await Promise.all([
         client.chat.postMessage({
@@ -43,7 +42,6 @@ export const suggestion = () => {
             suggestion: {
               tag,
               suggestion,
-              createdAt,
               user_id,
               user_name,
             },
