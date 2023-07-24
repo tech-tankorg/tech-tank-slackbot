@@ -5,7 +5,7 @@ import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 import { generate_newsletter } from "../../utils/helpers/generate-newsletter.ts";
 
 export const app_home_opened = () => {
-  app.event("app_home_opened", async ({ payload, client }) => {
+  app.event("app_home_opened", async ({ payload, client, body }) => {
     const userId = payload.user;
 
     try {

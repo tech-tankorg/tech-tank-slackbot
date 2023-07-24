@@ -77,6 +77,21 @@ export const generate_newsletter = async () => {
           ],
         },
         {
+          type: "actions",
+          elements: [
+            {
+              type: "button",
+              text: {
+                type: "plain_text",
+                text: "Open COC",
+                emoji: true,
+              },
+              value: "open_COC",
+              action_id: "open_coc_modal",
+            },
+          ],
+        },
+        {
           type: "divider",
         },
         {
