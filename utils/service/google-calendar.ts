@@ -5,8 +5,11 @@ import type { google_cal_event } from "../types/projectTypes.ts";
 
 import axios from "axios";
 
-export const getUpcomingEvents = async () => {
-  const API_REQ = `https://www.googleapis.com/calendar/v3/calendars/${process.env.GOOGLE_CALENDAR_ID}/events?key=${process.env.GOOGLE_CALENDAR_API_KEY}`;
+export const getUpcomingEvents = async (
+  google_calendar_id: string,
+  google_api_key: string
+) => {
+  const API_REQ = `https://www.googleapis.com/calendar/v3/calendars/${google_calendar_id}/events?key=${google_api_key}`;
 
   const options = {
     headers: {
