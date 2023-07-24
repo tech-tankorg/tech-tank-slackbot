@@ -57,6 +57,8 @@ cron.schedule(CRON_FOR_SCHEDULE_MESSAGE, () => {
     );
 });
 
-cron.schedule(CRON_FOR_NEWSLETTER, () => {
-  post_newsletter();
-});
+//Turn on once newsletter is finished
+
+// cron.schedule(CRON_FOR_NEWSLETTER, () => {
+//   post_newsletter();
+// });
