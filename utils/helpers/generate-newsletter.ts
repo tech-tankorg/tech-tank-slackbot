@@ -1,6 +1,6 @@
 import { format, startOfMonth } from "date-fns";
 import { sanity_letter_info } from "../types/projectTypes.ts";
-import { getUpcomingEvents } from "../service/google-calendar.ts";
+import { getUpcomingEvents_for_the_month } from "../service/google-calendar.ts";
 import { generate_sanity_newsletter } from "../service/sanity-client.ts";
 import type { google_cal_event } from "../types/projectTypes.ts";
 
@@ -48,7 +48,7 @@ export const generate_newsletter = async () => {
   try {
     const response = await Promise.all([
       generate_sanity_newsletter(request_format_date),
-      getUpcomingEvents(GOOGLE_CALENDAR_ID, GOOGLE_API_KEY),
+      getUpcomingEvents_for_the_month(GOOGLE_CALENDAR_ID, GOOGLE_API_KEY),
     ]);
 
     const transform_block_fyi = transform_to_block(response[0].letter_fyi);
