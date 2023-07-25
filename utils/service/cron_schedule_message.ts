@@ -17,7 +17,7 @@ import { channels } from "../config/channel-config.ts";
 import { thoughtful_thursday_send_scheduled_message } from "../../src/Events/send-scheduled-message.ts";
 import { wonder_wednesday_send_schedule_message } from "../../src/Events/wonder-wednesday-schedule-message.ts";
 
-import { post_newsletter } from "../../src/Events/post_newsletter.ts";
+// import { post_newsletter } from "../../src/Events/post_newsletter.ts";
 
 const PREPPED_QUESTIONS = flatten_object(questions);
 
@@ -45,7 +45,8 @@ cron.schedule(CRON_FOR_SCHEDULE_MESSAGE, () => {
       PREPPED_QUESTIONS,
       channels.general,
       GENERAL_QUESTIONS_START_DATE,
-      "thursday"
+      "thursday",
+      1
     );
 
   if (offset_date_wonder_wednesdays % 119)
@@ -53,7 +54,8 @@ cron.schedule(CRON_FOR_SCHEDULE_MESSAGE, () => {
       wonder_wednesday_questions,
       channels.study,
       WONDER_WEDNESDAY_QUESTIONS_START_DATE,
-      "wednesday"
+      "wednesday",
+      2
     );
 });
 
