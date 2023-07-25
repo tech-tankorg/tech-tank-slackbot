@@ -4,18 +4,16 @@ import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
 import { generate_newsletter } from "../../utils/helpers/generate-newsletter.ts";
 
-import { admins } from "../../utils/config/channel-config.ts";
-
 import type { app_home_view_response } from "../../utils/types/projectTypes.ts";
+import { is_admin } from "../../utils/helpers/feat-flag.ts";
 
 export const app_home_opened = () => {
   app.event("app_home_opened", async ({ payload, client }) => {
     let published_view: app_home_view_response;
     const userId = payload.user;
-    const admins_id = Object.values(admins) as string[];
 
     try {
-      if (admins_id.includes(userId)) {
+      if (is_admin(userId)) {
         const newsletter = (await generate_newsletter()).blocks;
         published_view = await client.views.publish({
           user_id: userId,
