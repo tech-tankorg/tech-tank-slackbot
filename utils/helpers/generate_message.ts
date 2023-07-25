@@ -30,6 +30,7 @@ Afterwards, you can check out some of our other channels. Here's a list of our c
 And of course, if you don't see an appropriate place to post, you can always just post in #general! If you have any questions or concerns at any time, please don't hesitate to contact 
 <@${admins.chris}>, <@${admins.eric}>, <@${admins.sammy}>, <@${admins.nonso}>, <@${admins.niya}>, <@${admins.riaz}>, or <@${admins.neal}> your friendly admins:party_blob:
 
+
 Thanks for reading, and we hope you have a good swim :fish:
 `;
   return greeting;
