@@ -1,11 +1,12 @@
 import cron from "node-cron";
 import {
   CRON_FOR_SCHEDULE_MESSAGE,
+  CRON_FOR_NEWSLETTER,
   GENERAL_QUESTIONS_START_DATE,
   WONDER_WEDNESDAY_QUESTIONS_START_DATE,
 } from "../constants/consts.ts";
 
-import { getOffsetDay } from "../helpers/generate-offset-date.ts";
+import { getOffsetDay } from "../helpers/custom-date-fns.ts";
 
 import { flatten_object } from "../helpers/flatten-object.ts";
 import questions from "../constants/general-questions.json" assert { type: "json" };
@@ -15,6 +16,8 @@ import { channels } from "../config/channel-config.ts";
 
 import { thoughtful_thursday_send_scheduled_message } from "../../src/Events/send-scheduled-message.ts";
 import { wonder_wednesday_send_schedule_message } from "../../src/Events/wonder-wednesday-schedule-message.ts";
+
+import { post_newsletter } from "../../src/Events/post_newsletter.ts";
 
 const PREPPED_QUESTIONS = flatten_object(questions);
 
@@ -53,3 +56,9 @@ cron.schedule(CRON_FOR_SCHEDULE_MESSAGE, () => {
       "wednesday"
     );
 });
+
+//Turn on once newsletter is finished
+
+// cron.schedule(CRON_FOR_NEWSLETTER, () => {
+//   post_newsletter();
+// });

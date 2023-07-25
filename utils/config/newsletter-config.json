@@ -1,0 +1,108 @@
+{
+  "blocks": [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": ":newspaper: Nemo's Monthly Newsletter  :newspaper:"
+      }
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "text": "*July 2023*",
+          "type": "mrkdwn"
+        }
+      ]
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": " :loud_sound: *IN CASE YOU MISSED IT* :loud_sound:"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": ":tada: *Feature Release: Introducing Thoughtful Thursdays!* :tropical_fish::spiral_calendar_pad: \nEvery Thursday at 10:00 AM EST, Nemo will pose thought-provoking questions in the general Slack channel to spark fun conversations."
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": ":tada: *Feature Release: Introducing Shuffl, our Social Mixer Bot!* :robot_face::game_die: Every other week (Mondays at 10 AM), Shuffl will shuffle participants into groups of three via direct messages, creating opportunities for warm introductions and captivating story-sharing through Shuffl Bios and Intros. Join the #coffee-chats channel to participate in the action!"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": ":mega: *Feature Release: Introducing the Suggestion Box Feature!* :package::sparkles: \nA platform for community members to share their ideas and ensure that everyone's voice is heard. By using simple slash commands such as `/suggestion-study`, `/suggestion-social`, or `/suggestion-other`, you can submit your suggestions, which will be reviewed by the dedicated team of admins."
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": ":calendar: |   *UPCOMING EVENTS*  | :calendar: "
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "`12/06/23` *Snow Valley* "
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*FOR YOUR INFORMATION* :reminder_ribbon:"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": ":printer: *Sabre Printers* are no longer catching on fire! The newest version of our printers are safe to use. Make sure to tell your customers today.",
+        "verbatim": false
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "Please join me in welcoming our 3 *new hires* to the Paper Company family! \n\n *Robert California*, CEO \n\n *Ryan Howard*, Temp \n\n *Erin Hannon*, Receptionist "
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": ":pushpin: Do you have something to include in the newsletter? Here's *how to submit content*."
+        }
+      ]
+    }
+  ]
+}
