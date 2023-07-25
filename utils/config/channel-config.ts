@@ -5,6 +5,7 @@ export const admins = {
   nonso: "U0586TY9NP2",
   niya: "U0555M9GTJS",
   riaz: "U0550E9JAUX",
+  neal: "U0556267TN2",
 } as const;
 
 export const channels = {

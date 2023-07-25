@@ -93,3 +93,7 @@ export interface google_cal_event {
   sequence: number;
   eventType: string;
 }
+
+export type app_home_view_response = Awaited<
+  ReturnType<typeof app.client.views.publish>
+>;

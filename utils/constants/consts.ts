@@ -160,3 +160,5 @@ export const coc_view_modal = {
     },
   ],
 };
+export const GOOGLE_CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID ?? "";
+export const GOOGLE_API_KEY = process.env.GOOGLE_CALENDAR_API_KEY ?? "";
