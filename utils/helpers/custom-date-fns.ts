@@ -39,3 +39,23 @@ export const determine_next_day_function = (repeat_day: day) => {
 
   return nextMonday;
 };
+
+export const determine_next_execute_date_freq = (
+  date: Date,
+  repeat_day: day,
+  frequency: number
+): Date => {
+  // This is a recursive function that schedules the day at the appropriate frequency for
+
+  if (frequency === 0) {
+    return date;
+  }
+
+  const nextDate = determine_next_day_function(repeat_day);
+
+  return determine_next_execute_date_freq(
+    nextDate(date),
+    repeat_day,
+    frequency - 1
+  );
+};

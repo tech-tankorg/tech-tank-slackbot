@@ -32,14 +32,16 @@ thoughtful_thursday_send_scheduled_message(
   PREPPED_QUESTIONS,
   test_channel,
   GENERAL_QUESTIONS_START_DATE,
-  "thursday"
+  "thursday",
+  1
 );
 
 wonder_wednesday_send_schedule_message(
   wonder_wednesday_questions,
   test_channel_two,
   WONDER_WEDNESDAY_QUESTIONS_START_DATE,
-  "wednesday"
+  "wednesday",
+  2
 );
 
 app_home_opened();
