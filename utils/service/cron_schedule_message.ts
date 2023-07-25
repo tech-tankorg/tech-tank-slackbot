@@ -45,7 +45,8 @@ cron.schedule(CRON_FOR_SCHEDULE_MESSAGE, () => {
       PREPPED_QUESTIONS,
       channels.general,
       GENERAL_QUESTIONS_START_DATE,
-      "thursday"
+      "thursday",
+      1
     );
 
   if (offset_date_wonder_wednesdays % 119)
@@ -53,7 +54,8 @@ cron.schedule(CRON_FOR_SCHEDULE_MESSAGE, () => {
       wonder_wednesday_questions,
       channels.study,
       WONDER_WEDNESDAY_QUESTIONS_START_DATE,
-      "wednesday"
+      "wednesday",
+      2
     );
 });
 
