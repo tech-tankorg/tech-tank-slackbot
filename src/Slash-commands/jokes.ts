@@ -11,7 +11,7 @@ export const Jokes = () => {
   app.command("/jokes", async ({ ack, body, respond }) => {
     await ack();
     try {
-      const pre_category = body.text;
+      const pre_category = body.text.toLowerCase();
 
       const category = joke_category.parse(pre_category);
 
