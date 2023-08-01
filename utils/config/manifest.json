@@ -23,8 +23,23 @@
       },
       {
         "command": "/jokes",
-        "description": "Tell me a joke - choose",
-        "usage_hint": "[Programming | Pun | Spooky]",
+        "description": "Select a category",
+        "usage_hint": "(Programming, Pun, Spooky)",
+        "should_escape": false
+      },
+      {
+        "command": "/suggestion-other",
+        "description": "What's your general suggestion",
+        "should_escape": false
+      },
+      {
+        "command": "/suggestion-social",
+        "description": "Suggestions for social event",
+        "should_escape": false
+      },
+      {
+        "command": "/suggestion-study",
+        "description": "Suggestions for study sessions",
         "should_escape": false
       }
     ]
