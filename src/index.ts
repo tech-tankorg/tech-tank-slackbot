@@ -13,9 +13,9 @@ import { Jokes } from "./Slash-commands/jokes.ts";
 import { suggestion } from "./Slash-commands/suggestions.ts";
 
 import {
-    GENERAL_QUESTIONS_START_DATE,
-    WONDER_WEDNESDAY_QUESTIONS_START_DATE,
-    AXIOM_DATA_SET,
+  GENERAL_QUESTIONS_START_DATE,
+  WONDER_WEDNESDAY_QUESTIONS_START_DATE,
+  AXIOM_DATA_SET,
 } from "../utils/constants/consts.ts";
 import { flatten_object } from "../utils/helpers/flatten-object.ts";
 import questions from "../utils/constants/general-questions.json" assert { type: "json" };
@@ -29,19 +29,19 @@ const PREPPED_QUESTIONS = flatten_object(questions);
 sayHello();
 greet_new_team_member();
 await thoughtful_thursday_send_scheduled_message(
-    PREPPED_QUESTIONS,
-    channels.general,
-    GENERAL_QUESTIONS_START_DATE,
-    "thursday",
-    1
+  PREPPED_QUESTIONS,
+  channels.general,
+  GENERAL_QUESTIONS_START_DATE,
+  "thursday",
+  1
 );
 
 await wonder_wednesday_send_schedule_message(
-    wonder_wednesday_questions,
-    channels.study,
-    WONDER_WEDNESDAY_QUESTIONS_START_DATE,
-    "wednesday",
-    2
+  wonder_wednesday_questions,
+  channels.study,
+  WONDER_WEDNESDAY_QUESTIONS_START_DATE,
+  "wednesday",
+  2
 );
 
 app_home_opened();
@@ -51,10 +51,10 @@ Jokes();
 suggestion();
 
 await (async () => {
-    // Start your app
-    await app.start();
+  // Start your app
+  await app.start();
 
-    await client.ingestEvents(AXIOM_DATA_SET, [{ start: "App has started" }]);
+  await client.ingestEvents(AXIOM_DATA_SET, [{ start: "App has started" }]);
 
-    console.log("⚡️ Bolt app is running!");
+  console.log("⚡️ Bolt app is running!");
 })();
