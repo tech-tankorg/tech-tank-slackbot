@@ -8,7 +8,7 @@ export const sortArray = (msgRes: ScheduledMessageResponse[]) => {
     const firstValue = a.post_at;
     const secondValue = b.post_at;
 
-    if (!firstValue || !secondValue) return -1;
+    if (firstValue === undefined || secondValue === undefined) return -1;
 
     if (firstValue > secondValue) return -1;
     return 1;

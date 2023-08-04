@@ -1,6 +1,6 @@
-import app from "../config/slack-config.ts";
-import { z } from "zod";
-import { sanity_letter_section } from "./zod-types.ts";
+import type app from "../config/slack-config.ts";
+import type { z } from "zod";
+import type { sanity_letter_section } from "./zod-types.ts";
 export type Channel = Record<string, string>;
 
 export type JokeType = "single" | "twopart";
@@ -54,9 +54,9 @@ export type day =
   | "saturday"
   | "sunday";
 
-export type sanity_letter_section = z.infer<typeof sanity_letter_section>;
+export type sanity_letter_sections = z.infer<typeof sanity_letter_section>;
 
-export type sanity_letter_info = sanity_letter_section["letter_info"];
+export type sanity_letter_info = sanity_letter_sections["letter_info"];
 
 export interface google_cal_event {
   kind: string;

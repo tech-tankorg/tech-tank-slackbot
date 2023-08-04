@@ -32,7 +32,7 @@ export const thoughtful_thursday_send_scheduled_message = async (
 
     const scheduled_messages = await Promise.all(
       final_messages_to_schedule.map(async (item) => {
-        return app.client.chat.scheduleMessage(item);
+        return await app.client.chat.scheduleMessage(item);
       })
     );
 

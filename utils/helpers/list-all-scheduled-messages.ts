@@ -2,7 +2,7 @@ import app from "../config/slack-config.ts";
 
 import { sortArray } from "./sort-array.ts";
 
-(async () => {
+await (async () => {
   try {
     const scheduled_messages = await app.client.chat.scheduledMessages.list();
 

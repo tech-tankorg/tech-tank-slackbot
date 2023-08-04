@@ -1,7 +1,6 @@
 import cron from "node-cron";
 import {
   CRON_FOR_SCHEDULE_MESSAGE,
-  CRON_FOR_NEWSLETTER,
   GENERAL_QUESTIONS_START_DATE,
   WONDER_WEDNESDAY_QUESTIONS_START_DATE,
 } from "../constants/consts.ts";
@@ -40,8 +39,8 @@ cron.schedule(CRON_FOR_SCHEDULE_MESSAGE, () => {
     now
   );
 
-  if (offset_date_thoughtful_thursdays % 119)
-    thoughtful_thursday_send_scheduled_message(
+  if (offset_date_thoughtful_thursdays % 119 === 0)
+    void thoughtful_thursday_send_scheduled_message(
       PREPPED_QUESTIONS,
       channels.general,
       GENERAL_QUESTIONS_START_DATE,
@@ -49,8 +48,8 @@ cron.schedule(CRON_FOR_SCHEDULE_MESSAGE, () => {
       1
     );
 
-  if (offset_date_wonder_wednesdays % 119)
-    wonder_wednesday_send_schedule_message(
+  if (offset_date_wonder_wednesdays % 119 === 0)
+    void wonder_wednesday_send_schedule_message(
       wonder_wednesday_questions,
       channels.study,
       WONDER_WEDNESDAY_QUESTIONS_START_DATE,
@@ -59,7 +58,7 @@ cron.schedule(CRON_FOR_SCHEDULE_MESSAGE, () => {
     );
 });
 
-//Turn on once newsletter is finished
+// Turn on once newsletter is finished
 
 // cron.schedule(CRON_FOR_NEWSLETTER, () => {
 //   post_newsletter();

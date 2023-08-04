@@ -1,0 +1,29 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+
+# misc
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+.env
+
+# typescript
+*.tsbuildinfo
+
+# build
+/dist
+
+**/*.json
+
+LICENSE
+CONTRIBUTING.md
+README.md
+package.json
+package-lock.json
+docker-compose.yml
+dockerfile

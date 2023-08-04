@@ -1,8 +1,10 @@
 import { format, startOfMonth } from "date-fns";
-import { sanity_letter_info } from "../types/projectTypes.ts";
+import type {
+  sanity_letter_info,
+  google_cal_event,
+} from "../types/projectTypes.ts";
 import { getUpcomingEvents_for_the_month } from "../service/google-calendar.ts";
 import { generate_sanity_newsletter } from "../service/sanity-client.ts";
-import type { google_cal_event } from "../types/projectTypes.ts";
 
 import { GOOGLE_CALENDAR_ID, GOOGLE_API_KEY } from "../constants/consts.ts";
 
