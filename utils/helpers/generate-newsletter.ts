@@ -3,7 +3,7 @@ import type {
   sanity_letter_info,
   google_cal_event,
 } from "../types/projectTypes.ts";
-import { getUpcomingEvents_for_the_month } from "../service/google-calendar.ts";
+import { get_upcoming_events_for_the_month } from "../service/google-calendar.ts";
 import { generate_sanity_newsletter } from "../service/sanity-client.ts";
 
 import { GOOGLE_CALENDAR_ID, GOOGLE_API_KEY } from "../constants/consts.ts";
@@ -50,7 +50,7 @@ export const generate_newsletter = async () => {
   try {
     const response = await Promise.all([
       generate_sanity_newsletter(request_format_date),
-      getUpcomingEvents_for_the_month(GOOGLE_CALENDAR_ID, GOOGLE_API_KEY),
+      get_upcoming_events_for_the_month(GOOGLE_CALENDAR_ID, GOOGLE_API_KEY),
     ]);
 
     const transform_block_fyi = transform_to_block(response[0].letter_fyi);
