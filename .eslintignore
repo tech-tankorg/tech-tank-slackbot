@@ -19,11 +19,8 @@
 /dist
 
 **/*.json
+**/*.md
+**/*.yml
 
 LICENSE
-CONTRIBUTING.md
-README.md
-package.json
-package-lock.json
-docker-compose.yml
 dockerfile
