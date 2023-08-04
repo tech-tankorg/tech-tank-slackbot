@@ -23,7 +23,7 @@ export const Jokes = () => {
 
       const formatted_joke = format_response_jokes(joke.type, joke);
 
-      respond({ ...formatted_joke });
+      await respond({ ...formatted_joke });
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         { jokes_slash_command: { formatted_joke, body } },
@@ -32,7 +32,7 @@ export const Jokes = () => {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         { jokes_slash_command_error: { error, body } },
       ]);
-      respond({
+      await respond({
         response_type: "ephemeral",
         mrkdwn: true,
         text: `oh no! Looks like something went wrong! Try again later and make sure you are only entering the available categories. \n Programming | Pun | Spooky`,

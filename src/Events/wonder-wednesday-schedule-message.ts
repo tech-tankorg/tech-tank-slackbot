@@ -33,7 +33,7 @@ export const wonder_wednesday_send_schedule_message = async (
 
     const scheduled_messages_wonder_wednesday = await Promise.all(
       final_messages_to_schedule.map(async (item) => {
-        return app.client.chat.scheduleMessage(item);
+        return await app.client.chat.scheduleMessage(item);
       })
     );
 

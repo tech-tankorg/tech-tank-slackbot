@@ -10,6 +10,6 @@ export const sayHello = () => {
       await client.ingestEvents("slack-bot", [{ say_hello_error: e }]);
     }
 
-    say("hello there");
+    await say("hello there");
   });
 };

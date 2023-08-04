@@ -25,11 +25,11 @@ export const generate_scheduled_messages = (
   // Given a start date let's calculate next thursday
   // do this iteratively for the length of the list of words
 
-  const new_array: {
+  const new_array: Array<{
     channel: string;
     post_at: number;
     text: string;
-  }[] = [];
+  }> = [];
 
   const next_day_function = determine_next_day_function(repeat_day);
 

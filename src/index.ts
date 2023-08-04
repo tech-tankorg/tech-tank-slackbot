@@ -15,30 +15,30 @@ import { suggestion } from "./Slash-commands/suggestions.ts";
 import {
   GENERAL_QUESTIONS_START_DATE,
   WONDER_WEDNESDAY_QUESTIONS_START_DATE,
+  AXIOM_DATA_SET,
 } from "../utils/constants/consts.ts";
-import { AXIOM_DATA_SET } from "../utils/constants/consts.ts";
 import { flatten_object } from "../utils/helpers/flatten-object.ts";
 import questions from "../utils/constants/general-questions.json" assert { type: "json" };
 import wonder_wednesday_questions from "../utils/constants/wonder-wednesday-questions.json" assert { type: "json" };
 
 const PREPPED_QUESTIONS = flatten_object(questions);
-const test_channel = "C05BYP98MTR";
-const test_channel_two = "C05C6KVHWAJ";
+// const test_channel = "C05BYP98MTR";
+// const test_channel_two = "C05C6KVHWAJ";
 
 // Events
 sayHello();
 greet_new_team_member();
-thoughtful_thursday_send_scheduled_message(
+await thoughtful_thursday_send_scheduled_message(
   PREPPED_QUESTIONS,
-  test_channel,
+  channels.general,
   GENERAL_QUESTIONS_START_DATE,
   "thursday",
   1
 );
 
-wonder_wednesday_send_schedule_message(
+await wonder_wednesday_send_schedule_message(
   wonder_wednesday_questions,
-  test_channel_two,
+  channels.study,
   WONDER_WEDNESDAY_QUESTIONS_START_DATE,
   "wednesday",
   2
@@ -50,7 +50,7 @@ app_home_opened();
 Jokes();
 suggestion();
 
-(async () => {
+await (async () => {
   // Start your app
   await app.start();
 
