@@ -17,7 +17,7 @@ export const format_response_jokes = (
           type: "section",
           text: {
             type: "mrkdwn",
-            text: Joke.setup as string,
+            text: Joke.setup,
           },
         },
         {
@@ -27,7 +27,7 @@ export const format_response_jokes = (
           type: "section",
           text: {
             type: "mrkdwn",
-            text: Joke.delivery as string,
+            text: Joke.delivery,
           },
         },
       ],
@@ -35,7 +35,7 @@ export const format_response_jokes = (
   } else if (type === "single" && "joke" in Joke) {
     return {
       response_type: "in_channel" as response_type,
-      text: Joke.joke as string,
+      text: Joke.joke,
     };
   }
 };
