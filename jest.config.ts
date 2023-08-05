@@ -16,6 +16,7 @@ const jestConfig: JestConfigWithTsJest = {
       },
     ],
   },
+  setupFilesAfterEnv: ["./jest-extended-matchers.ts"],
 };
 
 export default jestConfig;
