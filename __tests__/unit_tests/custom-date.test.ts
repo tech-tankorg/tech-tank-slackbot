@@ -19,7 +19,7 @@ describe("test date functions", () => {
     const is_valid_day = next_week_func(today);
 
     expect(is_valid_day).toBeAfterOrEqualTo(
-      new Date("2023-08-07T04:00:00.000Z")
+      new Date("2023-08-07T00:00:00.000Z")
     );
   });
 
@@ -35,6 +35,6 @@ describe("test date functions", () => {
   it("should return a date three week from now when given a frequency of 3", () => {
     const next_date = determine_next_execute_date_freq(today, "wednesday", 3);
 
-    expect(next_date).toBeAfterOrEqualTo(new Date("2023-08-23T04:00:00.000Z"));
+    expect(next_date).toBeAfterOrEqualTo(new Date("2023-08-23T00:00:00.000Z"));
   });
 });
