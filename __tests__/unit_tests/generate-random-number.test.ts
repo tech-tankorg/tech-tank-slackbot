@@ -1,7 +1,7 @@
 import { getRandomNumber } from "../../utils/helpers/generate-random-number.ts";
 
 describe("getRandomNumber function", () => {
-  test("should generate random numbers within the specified exclusive range", () => {
+  it("should generate random numbers within the specified exclusive range", () => {
     const min = 1;
     const max = 10;
     const numberOfTests = 1000;
@@ -14,7 +14,7 @@ describe("getRandomNumber function", () => {
     }
   });
 
-  test("should generate random numbers within the specified inclusive range", () => {
+  it("should generate random numbers within the specified inclusive range", () => {
     const min = 1;
     const max = 10;
     const numberOfTests = 1000;
