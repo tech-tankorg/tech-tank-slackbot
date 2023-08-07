@@ -8,9 +8,11 @@ import {
   generate_mentor_message,
 } from "../../utils/helpers/generate_message.ts";
 import Axiom from "../../utils/config/axiom-config.ts";
-import { admins, channels } from "../../utils/config/channel-config.ts";
+import { channels } from "../../utils/config/channel-config.ts";
 
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
+
+import { dm_lst_of_people } from "../../utils/helpers/send-message.ts";
 
 export const greet_new_team_member = () => {
   app.event("team_join", async ({ event, client, logger }) => {
@@ -61,31 +63,18 @@ export const mentor_checkup = async () => {
     const today = new Date();
 
     if (today.getDate() === 15) {
-      for (const mentee of mentee_channel.members ?? []) {
-        const channel = await app.client.conversations.open({
-          users: mentee,
-        });
-        const mentee_message = await app.client.chat.postMessage({
-          channel: channel.channel?.id ?? "",
-          text: generate_mentee_message(),
-        });
-        await Axiom.ingestEvents(AXIOM_DATA_SET, [
-          { mentee_message: mentee_message },
-        ]);
-      }
+      const mentees_messaged = await dm_lst_of_people(
+        mentee_channel?.members ?? [],
+        generate_mentee_message()
+      );
+      const mentors_messaged = await dm_lst_of_people(
+        mentor_channel?.members ?? [],
+        generate_mentor_message()
+      );
 
-      for (const mentor of mentor_channel.members ?? []) {
-        const channel = await app.client.conversations.open({
-          users: mentor,
-        });
-        const mentor_message = await app.client.chat.postMessage({
-          channel: channel.channel?.id ?? "",
-          text: generate_mentor_message(),
-        });
-        await Axiom.ingestEvents(AXIOM_DATA_SET, [
-          { mentor_message: mentor_message },
-        ]);
-      }
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        { mentees_messaged, mentors_messaged },
+      ]);
     }
   } catch (error) {
     await Axiom.ingestEvents(AXIOM_DATA_SET, [{ error_message_mentee: error }]);
