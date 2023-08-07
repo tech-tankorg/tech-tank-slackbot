@@ -20,5 +20,7 @@ export const channels = {
   project_proposals: "C05DVA1HX9U",
   general: "C04DCQ64VB3",
   coffee_chat: "C05G1S5HB4Z",
+  mentee: "C05H6HJDEQM",
+  mentor: "C05H67NDYQ4",
   notification: process.env.SLACK_NOTIFICATION_CHANNEL ?? "",
 } as const;
