@@ -7,7 +7,7 @@ import Axiom from "../../utils/config/axiom-config.ts";
 
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
-export const Jokes = () => {
+export const jokes = () => {
   app.command("/jokes", async ({ ack, body, respond }) => {
     await ack();
     try {

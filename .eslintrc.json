@@ -19,7 +19,7 @@
       "error",
       {
         "selector": "variableLike",
-        "format": ["snake_case", "camelCase", "PascalCase", "UPPER_CASE"]
+        "format": ["snake_case", "camelCase", "UPPER_CASE"]
       }
     ],
     "@typescript-eslint/explicit-function-return-type": "off",

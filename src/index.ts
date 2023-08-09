@@ -9,7 +9,7 @@ import { thoughtful_thursday_send_scheduled_message } from "./Events/send-schedu
 import { wonder_wednesday_send_schedule_message } from "./Events/wonder-wednesday-schedule-message.ts";
 import { app_home_opened } from "./Events/app_home.ts";
 
-import { Jokes } from "./Slash-commands/jokes.ts";
+import { jokes } from "./Slash-commands/jokes.ts";
 import { suggestion } from "./Slash-commands/suggestions.ts";
 
 import {
@@ -47,7 +47,7 @@ await wonder_wednesday_send_schedule_message(
 app_home_opened();
 
 // Slash commands
-Jokes();
+jokes();
 suggestion();
 
 await (async () => {
