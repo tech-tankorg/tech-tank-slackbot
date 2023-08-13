@@ -6,15 +6,14 @@ import type { ChatScheduledMessagesListResponse } from "../types/projectTypes.d.
 
 export const prep_final_scheduled_message = (
   msg_lst: ChatScheduledMessagesListResponse,
-  generated_messages: {
+  generated_messages: Array<{
     channel: string;
     post_at: number;
     text: string;
-  }[]
+  }>
 ) => {
-  const scheduled_message_array = msg_lst.scheduled_messages
-    ? msg_lst.scheduled_messages
-    : [];
+  const scheduled_message_array =
+    msg_lst.scheduled_messages !== undefined ? msg_lst.scheduled_messages : [];
 
   const flattened_all_schedule_messages =
     flatten_all_scheduled_messages_reponse(scheduled_message_array);

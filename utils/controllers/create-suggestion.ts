@@ -1,7 +1,7 @@
 import { app } from "../config/firebase-config.ts";
 import { getDatabase, ref, push, serverTimestamp } from "firebase/database";
 
-export const create_suggestion = (
+export const create_suggestion = async (
   tag: string,
   suggestion: string,
   user_id: string,
@@ -17,5 +17,5 @@ export const create_suggestion = (
 
   const db = getDatabase(app);
   const dbRef = ref(db);
-  push(dbRef, user_suggestion);
+  await push(dbRef, user_suggestion);
 };

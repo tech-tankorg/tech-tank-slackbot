@@ -1,14 +1,15 @@
 import app from "../../utils/config/slack-config.ts";
 import Axiom from "../../utils/config/axiom-config.ts";
 
-import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
+import {
+  AXIOM_DATA_SET,
+  SUGGESTION_REGEX,
+} from "../../utils/constants/consts.ts";
 
 import { create_suggestion } from "../../utils/controllers/create-suggestion.ts";
 import { generate_notification_message } from "../../utils/helpers/generate_message.ts";
 
 import { channels } from "../../utils/config/channel-config.ts";
-
-import { SUGGESTION_REGEX } from "../../utils/constants/consts.ts";
 
 export const suggestion = () => {
   app.command(SUGGESTION_REGEX, async ({ ack, body, respond, client }) => {
@@ -25,7 +26,7 @@ export const suggestion = () => {
 
       const message = generate_notification_message(user_name, suggestion, tag);
 
-      create_suggestion(tag, suggestion, user_id, user_name);
+      await create_suggestion(tag, suggestion, user_id, user_name);
 
       await Promise.all([
         client.chat.postMessage({

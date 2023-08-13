@@ -5,7 +5,7 @@ import type { google_cal_event } from "../types/projectTypes.ts";
 
 import axios from "axios";
 
-export const getUpcomingEvents_for_the_month = async (
+export const get_upcoming_events_for_the_month = async (
   google_calendar_id: string,
   google_api_key: string
 ) => {
@@ -40,7 +40,7 @@ export const getUpcomingEvents_for_the_month = async (
   return filtered_upcoming_events;
 };
 
-export const getUpcomingEvents_upper_range = async (
+export const get_upcoming_events_upper_range = async (
   google_calendar_id: string,
   google_api_key: string,
   day_from_now: number

@@ -11,13 +11,15 @@ export const wonder_wednesday_send_schedule_message = async (
   lst_msgs: string[],
   channel: string,
   date: string,
-  repeat_day: day
+  repeat_day: day,
+  frequency: number
 ) => {
   const generated_messages = generate_scheduled_messages(
     lst_msgs,
     channel,
     new Date(date),
-    repeat_day
+    repeat_day,
+    frequency
   );
 
   try {
@@ -31,7 +33,7 @@ export const wonder_wednesday_send_schedule_message = async (
 
     const scheduled_messages_wonder_wednesday = await Promise.all(
       final_messages_to_schedule.map(async (item) => {
-        return app.client.chat.scheduleMessage(item);
+        return await app.client.chat.scheduleMessage(item);
       })
     );
 

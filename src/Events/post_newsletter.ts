@@ -6,7 +6,7 @@ import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
 import { channels } from "../../utils/config/channel-config.ts";
 
-export const post_newsletter = async () => {
+export const post_newsletter = async (): Promise<void> => {
   try {
     const newsletter = (await generate_newsletter()).blocks;
     const message = await app.client.chat.postMessage({

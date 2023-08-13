@@ -7,9 +7,9 @@ import type {
 
 export const format_response_jokes = (
   type: JokeType,
-  Joke: singleJoke | twoPartJoke
+  joke: singleJoke | twoPartJoke
 ) => {
-  if (type === "twopart" && "setup" in Joke) {
+  if (type === "twopart" && "setup" in joke) {
     return {
       response_type: "in_channel" as response_type,
       blocks: [
@@ -17,7 +17,7 @@ export const format_response_jokes = (
           type: "section",
           text: {
             type: "mrkdwn",
-            text: Joke.setup as string,
+            text: joke.setup,
           },
         },
         {
@@ -27,15 +27,15 @@ export const format_response_jokes = (
           type: "section",
           text: {
             type: "mrkdwn",
-            text: Joke.delivery as string,
+            text: joke.delivery,
           },
         },
       ],
     };
-  } else if (type === "single" && "joke" in Joke) {
+  } else if (type === "single" && "joke" in joke) {
     return {
       response_type: "in_channel" as response_type,
-      text: Joke.joke as string,
+      text: joke.joke,
     };
   }
 };

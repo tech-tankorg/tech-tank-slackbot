@@ -26,7 +26,7 @@ export const greet_new_team_member = () => {
 
       // Send the private message
       const welcome_message_sent = await client.chat.postMessage({
-        channel: channel.channel?.id || "",
+        channel: channel.channel?.id ?? "",
         text: message,
       });
 
