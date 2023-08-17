@@ -30,15 +30,13 @@ export const greet_new_team_member = () => {
         text: message,
       });
 
-      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+      Axiom.ingest(AXIOM_DATA_SET, [
         { greeting_message: welcome_message_sent },
         { user_info: userInfo },
       ]);
     } catch (error) {
       logger.error(error);
-      await Axiom.ingestEvents(AXIOM_DATA_SET, [
-        { greeting_message_error: error },
-      ]);
+      Axiom.ingest(AXIOM_DATA_SET, [{ greeting_message_error: error }]);
     }
   });
 };

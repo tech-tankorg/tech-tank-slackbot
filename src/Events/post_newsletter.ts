@@ -14,12 +14,8 @@ export const post_newsletter = async (): Promise<void> => {
       blocks: newsletter,
     });
 
-    await Axiom.ingestEvents(AXIOM_DATA_SET, [
-      { newsletter_general_channel: message },
-    ]);
+    Axiom.ingest(AXIOM_DATA_SET, [{ newsletter_general_channel: message }]);
   } catch (error) {
-    await Axiom.ingestEvents(AXIOM_DATA_SET, [
-      { error_newsletter_general_channel: error },
-    ]);
+    Axiom.ingest(AXIOM_DATA_SET, [{ error_newsletter_general_channel: error }]);
   }
 };

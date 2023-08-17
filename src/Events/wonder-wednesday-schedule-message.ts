@@ -37,11 +37,9 @@ export const wonder_wednesday_send_schedule_message = async (
       })
     );
 
-    await Axiom.ingestEvents(AXIOM_DATA_SET, [
-      { scheduled_messages_wonder_wednesday },
-    ]);
+    Axiom.ingest(AXIOM_DATA_SET, [{ scheduled_messages_wonder_wednesday }]);
   } catch (error) {
-    await Axiom.ingestEvents(AXIOM_DATA_SET, [
+    Axiom.ingest(AXIOM_DATA_SET, [
       { error_scheduled_messages_wonder_wednesday: error },
     ]);
   }

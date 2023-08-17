@@ -25,11 +25,11 @@ export const jokes = () => {
 
       await respond({ ...formatted_joke });
 
-      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+      Axiom.ingest(AXIOM_DATA_SET, [
         { jokes_slash_command: { formatted_joke, body } },
       ]);
     } catch (error) {
-      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+      Axiom.ingest(AXIOM_DATA_SET, [
         { jokes_slash_command_error: { error, body } },
       ]);
       await respond({

@@ -38,26 +38,26 @@ export const suggestion = () => {
           mrkdwn: true,
           text: `Your suggestion has successfully been submitted!`,
         }),
-        Axiom.ingestEvents(AXIOM_DATA_SET, [
-          {
-            suggestion: {
-              tag,
-              suggestion,
-              user_id,
-              user_name,
-            },
+      ]);
+
+      Axiom.ingest(AXIOM_DATA_SET, [
+        {
+          suggestion: {
+            tag,
+            suggestion,
+            user_id,
+            user_name,
           },
-        ]),
+        },
       ]);
     } catch (err) {
-      await Promise.all([
-        respond({
-          response_type: "ephemeral",
-          mrkdwn: true,
-          text: `Oh no! Something went wrong! \nTry again later.`,
-        }),
-        Axiom.ingestEvents(AXIOM_DATA_SET, [{ suggestion_error: err }]),
-      ]);
+      await respond({
+        response_type: "ephemeral",
+        mrkdwn: true,
+        text: `Oh no! Something went wrong! \nTry again later.`,
+      });
+
+      Axiom.ingest(AXIOM_DATA_SET, [{ suggestion_error: err }]);
     }
   });
 };
