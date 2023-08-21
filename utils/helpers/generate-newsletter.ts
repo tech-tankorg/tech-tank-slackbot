@@ -116,6 +116,11 @@ export const generate_newsletter = async () => {
       response[1]
     );
 
+    const community_highlight_member_name = response[0].letter_member_highlight
+      .community_member_name as string;
+    const community_highlight_member_description = response[0]
+      .letter_member_highlight.community_member_description as string;
+
     return {
       mrkdwn: true,
       text: "say hello",
@@ -160,6 +165,30 @@ export const generate_newsletter = async () => {
           },
         },
         ...transform_block_upcoming_events,
+        {
+          type: "divider",
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: "Community Member Highlight",
+          },
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `This months community member highlight goes to *${community_highlight_member_name}*!! :tada::tada:`,
+          },
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: community_highlight_member_description,
+          },
+        },
         {
           type: "divider",
         },
