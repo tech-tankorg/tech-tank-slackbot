@@ -110,6 +110,9 @@ export const generate_newsletter = async () => {
     ]);
 
     const transform_block_fyi = transform_to_block_fyi(response[0].letter_fyi);
+    const transform_block_tech_insights = transform_to_block_fyi(
+      response[0].letter_tech_insights
+    );
     const transform_block_info = transform_to_block(response[0].letter_info);
 
     const transform_block_upcoming_events = transform_to_block_upcoming_events(
@@ -172,7 +175,7 @@ export const generate_newsletter = async () => {
           type: "section",
           text: {
             type: "mrkdwn",
-            text: "Community Member Highlight",
+            text: "*COMMUNITY MEMBER HIGHLIGHTS* :star2:\n ---",
           },
         },
         {
@@ -189,6 +192,17 @@ export const generate_newsletter = async () => {
             text: community_highlight_member_description,
           },
         },
+        {
+          type: "divider",
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: "*TECH INSIGHTS* :newspaper:",
+          },
+        },
+        ...transform_block_tech_insights,
         {
           type: "divider",
         },
