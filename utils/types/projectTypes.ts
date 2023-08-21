@@ -57,6 +57,7 @@ export type day =
 export type sanity_letter_sections = z.infer<typeof sanity_letter_section>;
 
 export type sanity_letter_info = sanity_letter_sections["letter_info"];
+export type sanity_fyi_block = Omit<sanity_letter_info[0], "images">;
 
 export interface google_cal_event {
   kind: string;

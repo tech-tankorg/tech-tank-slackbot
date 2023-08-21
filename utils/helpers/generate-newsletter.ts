@@ -1,6 +1,7 @@
 import { format, startOfMonth } from "date-fns";
 import type {
   sanity_letter_info,
+  sanity_fyi_block,
   google_cal_event,
 } from "../types/projectTypes.ts";
 import { get_upcoming_events_for_the_month } from "../service/google-calendar.ts";
@@ -8,20 +9,75 @@ import { generate_sanity_newsletter } from "../service/sanity-client.ts";
 
 import { GOOGLE_CALENDAR_ID, GOOGLE_API_KEY } from "../constants/consts.ts";
 
+import { generate_sanity_img_url } from "../config/sanity-config.ts";
+
 const transform_to_block = (section: sanity_letter_info) => {
-  return section.map((sec) => ({
-    type: "section",
-    text: {
-      text: "---",
-      type: "mrkdwn",
-    },
-    fields: [
+  return section.map((sec) => {
+    if (sec.images === null) {
+      return {
+        type: "section",
+        text: {
+          text: "---",
+          type: "mrkdwn",
+        },
+        fields: [
+          {
+            type: "mrkdwn",
+            text: `${sec.title}\n\n ${sec.description} \n \n`,
+          },
+        ],
+      };
+    }
+
+    const img_caption = sec.images.caption;
+
+    const img_url = generate_sanity_img_url(sec.images);
+    // console.log(img_url);
+
+    return [
       {
-        type: "mrkdwn",
-        text: `${sec.title}\n\n ${sec.description} \n \n`,
+        type: "section",
+        text: {
+          text: "---",
+          type: "mrkdwn",
+        },
+        fields: [
+          {
+            type: "mrkdwn",
+            text: `${sec.title}\n\n ${sec.description} \n \n`,
+          },
+        ],
       },
-    ],
-  }));
+      {
+        type: "image",
+        title: {
+          type: "plain_text",
+          text: img_caption,
+          emoji: true,
+        },
+        image_url: img_url,
+        alt_text: img_caption,
+      },
+    ];
+  });
+};
+
+const transform_to_block_fyi = (section: sanity_fyi_block[]) => {
+  return section.map((sec) => {
+    return {
+      type: "section",
+      text: {
+        text: "---",
+        type: "mrkdwn",
+      },
+      fields: [
+        {
+          type: "mrkdwn",
+          text: `${sec.title}\n\n ${sec.description} \n \n`,
+        },
+      ],
+    };
+  });
 };
 
 const transform_to_block_upcoming_events = (section: google_cal_event[]) => {
@@ -53,8 +109,21 @@ export const generate_newsletter = async () => {
       get_upcoming_events_for_the_month(GOOGLE_CALENDAR_ID, GOOGLE_API_KEY),
     ]);
 
-    const transform_block_fyi = transform_to_block(response[0].letter_fyi);
+    const transform_block_fyi = transform_to_block_fyi(response[0].letter_fyi);
     const transform_block_info = transform_to_block(response[0].letter_info);
+
+    const temp_arr: any[] = [];
+
+    transform_block_info.forEach((item) => {
+      if (Array.isArray(item)) {
+        temp_arr.push(item[0]);
+        temp_arr.push(item[1]);
+      } else {
+        temp_arr.push(item);
+      }
+    });
+
+    // const final_block = prep_final_block
 
     const transform_block_upcoming_events = transform_to_block_upcoming_events(
       response[1]
@@ -91,7 +160,7 @@ export const generate_newsletter = async () => {
           },
         },
 
-        ...transform_block_info,
+        ...temp_arr,
 
         {
           type: "divider",
