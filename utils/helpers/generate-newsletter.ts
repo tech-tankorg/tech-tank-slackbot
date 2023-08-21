@@ -3,6 +3,8 @@ import type {
   sanity_letter_info,
   sanity_fyi_block,
   google_cal_event,
+  transform_block_type,
+  transform_Block_img_type,
 } from "../types/projectTypes.ts";
 import { get_upcoming_events_for_the_month } from "../service/google-calendar.ts";
 import { generate_sanity_newsletter } from "../service/sanity-client.ts";
@@ -12,9 +14,10 @@ import { GOOGLE_CALENDAR_ID, GOOGLE_API_KEY } from "../constants/consts.ts";
 import { generate_sanity_img_url } from "../config/sanity-config.ts";
 
 const transform_to_block = (section: sanity_letter_info) => {
-  return section.map((sec) => {
-    if (sec.images === null) {
-      return {
+  const temp_array: Array<transform_block_type | transform_Block_img_type> = [];
+  for (const item of section) {
+    if (item.images === null) {
+      temp_array.push({
         type: "section",
         text: {
           text: "---",
@@ -23,19 +26,14 @@ const transform_to_block = (section: sanity_letter_info) => {
         fields: [
           {
             type: "mrkdwn",
-            text: `${sec.title}\n\n ${sec.description} \n \n`,
+            text: `${item.title}\n\n ${item.description} \n \n`,
           },
         ],
-      };
-    }
-
-    const img_caption = sec.images.caption;
-
-    const img_url = generate_sanity_img_url(sec.images);
-    // console.log(img_url);
-
-    return [
-      {
+      });
+    } else {
+      const img_caption = item.images.caption ?? "";
+      const img_url = generate_sanity_img_url(item.images);
+      temp_array.push({
         type: "section",
         text: {
           text: "---",
@@ -44,11 +42,12 @@ const transform_to_block = (section: sanity_letter_info) => {
         fields: [
           {
             type: "mrkdwn",
-            text: `${sec.title}\n\n ${sec.description} \n \n`,
+            text: `${item.title}\n\n ${item.description} \n \n`,
           },
         ],
-      },
-      {
+      });
+
+      temp_array.push({
         type: "image",
         title: {
           type: "plain_text",
@@ -57,9 +56,10 @@ const transform_to_block = (section: sanity_letter_info) => {
         },
         image_url: img_url,
         alt_text: img_caption,
-      },
-    ];
-  });
+      });
+    }
+  }
+  return temp_array;
 };
 
 const transform_to_block_fyi = (section: sanity_fyi_block[]) => {
@@ -112,19 +112,6 @@ export const generate_newsletter = async () => {
     const transform_block_fyi = transform_to_block_fyi(response[0].letter_fyi);
     const transform_block_info = transform_to_block(response[0].letter_info);
 
-    const temp_arr: any[] = [];
-
-    transform_block_info.forEach((item) => {
-      if (Array.isArray(item)) {
-        temp_arr.push(item[0]);
-        temp_arr.push(item[1]);
-      } else {
-        temp_arr.push(item);
-      }
-    });
-
-    // const final_block = prep_final_block
-
     const transform_block_upcoming_events = transform_to_block_upcoming_events(
       response[1]
     );
@@ -160,7 +147,7 @@ export const generate_newsletter = async () => {
           },
         },
 
-        ...temp_arr,
+        ...transform_block_info,
 
         {
           type: "divider",
