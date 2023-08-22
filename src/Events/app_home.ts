@@ -32,9 +32,13 @@ export const app_home_opened = () => {
         },
       });
 
-      Axiom.ingest(AXIOM_DATA_SET, [{ app_home_opened: published_view }]);
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        { app_home_opened: published_view },
+      ]);
     } catch (error) {
-      Axiom.ingest(AXIOM_DATA_SET, [{ app_home_opened_error: error }]);
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        { app_home_opened_error: error },
+      ]);
     }
   });
 };

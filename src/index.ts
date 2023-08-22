@@ -57,7 +57,7 @@ await (async () => {
   // Start your app
   await app.start();
 
-  client.ingest(AXIOM_DATA_SET, [{ start: "App has started" }]);
+  await client.ingestEvents(AXIOM_DATA_SET, [{ start: "App has started" }]);
 
   console.log("⚡️ Bolt app is running!");
 })();

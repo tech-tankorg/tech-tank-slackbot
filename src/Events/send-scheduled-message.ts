@@ -36,8 +36,10 @@ export const thoughtful_thursday_send_scheduled_message = async (
       })
     );
 
-    Axiom.ingest(AXIOM_DATA_SET, [{ scheduled_messages }]);
+    await Axiom.ingestEvents(AXIOM_DATA_SET, [{ scheduled_messages }]);
   } catch (error) {
-    Axiom.ingest(AXIOM_DATA_SET, [{ error_scheduled_message: error }]);
+    await Axiom.ingestEvents(AXIOM_DATA_SET, [
+      { error_scheduled_message: error },
+    ]);
   }
 };

@@ -40,7 +40,7 @@ export const suggestion = () => {
         }),
       ]);
 
-      Axiom.ingest(AXIOM_DATA_SET, [
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
           suggestion: {
             tag,
@@ -57,7 +57,7 @@ export const suggestion = () => {
         text: `Oh no! Something went wrong! \nTry again later.`,
       });
 
-      Axiom.ingest(AXIOM_DATA_SET, [{ suggestion_error: err }]);
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [{ suggestion_error: err }]);
     }
   });
 };
