@@ -2,6 +2,8 @@ import { config } from "dotenv";
 import pkg from "@slack/bolt";
 
 config();
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const { App } = pkg;
 
 // Initializes your app with your bot token and signing secret

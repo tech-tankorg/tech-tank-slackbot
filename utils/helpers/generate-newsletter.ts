@@ -1,27 +1,83 @@
 import { format, startOfMonth } from "date-fns";
 import type {
   sanity_letter_info,
+  sanity_fyi_block,
   google_cal_event,
+  transform_block_type,
+  transform_Block_img_type,
 } from "../types/projectTypes.ts";
 import { get_upcoming_events_for_the_month } from "../service/google-calendar.ts";
 import { generate_sanity_newsletter } from "../service/sanity-client.ts";
 
 import { GOOGLE_CALENDAR_ID, GOOGLE_API_KEY } from "../constants/consts.ts";
 
+import { generate_sanity_img_url } from "../config/sanity-config.ts";
+
 const transform_to_block = (section: sanity_letter_info) => {
-  return section.map((sec) => ({
-    type: "section",
-    text: {
-      text: "---",
-      type: "mrkdwn",
-    },
-    fields: [
-      {
+  const temp_array: Array<transform_block_type | transform_Block_img_type> = [];
+  for (const item of section) {
+    if (item.images === null) {
+      temp_array.push({
+        type: "section",
+        text: {
+          text: "---",
+          type: "mrkdwn",
+        },
+        fields: [
+          {
+            type: "mrkdwn",
+            text: `${item.title}\n\n ${item.description} \n \n`,
+          },
+        ],
+      });
+    } else {
+      const img_caption = item.images.caption ?? "";
+      const img_url = generate_sanity_img_url(item.images);
+      temp_array.push({
+        type: "section",
+        text: {
+          text: "---",
+          type: "mrkdwn",
+        },
+        fields: [
+          {
+            type: "mrkdwn",
+            text: `${item.title}\n\n ${item.description} \n \n`,
+          },
+        ],
+      });
+
+      temp_array.push({
+        type: "image",
+        title: {
+          type: "plain_text",
+          text: img_caption,
+          emoji: true,
+        },
+        image_url: img_url,
+        alt_text: img_caption,
+      });
+    }
+  }
+  return temp_array;
+};
+
+const transform_to_block_fyi = (section: sanity_fyi_block[]) => {
+  return section.map((sec) => {
+    return {
+      type: "section",
+      text: {
+        text: "---",
         type: "mrkdwn",
-        text: `${sec.title}\n\n ${sec.description} \n \n`,
       },
-    ],
-  }));
+      fields: [
+        {
+          type: "mrkdwn",
+          text: `${sec.title}\n\n ${sec.description} \n \n`,
+        },
+      ],
+    };
+  });
 };
 
 const transform_to_block_upcoming_events = (section: google_cal_event[]) => {
@@ -53,12 +109,20 @@ export const generate_newsletter = async () => {
       get_upcoming_events_for_the_month(GOOGLE_CALENDAR_ID, GOOGLE_API_KEY),
     ]);
 
-    const transform_block_fyi = transform_to_block(response[0].letter_fyi);
+    const transform_block_fyi = transform_to_block_fyi(response[0].letter_fyi);
+    const transform_block_tech_insights = transform_to_block_fyi(
+      response[0].letter_tech_insights
+    );
     const transform_block_info = transform_to_block(response[0].letter_info);
 
     const transform_block_upcoming_events = transform_to_block_upcoming_events(
       response[1]
     );
+
+    const community_highlight_member_name = response[0].letter_member_highlight
+      .community_member_name as string;
+    const community_highlight_member_description = response[0]
+      .letter_member_highlight.community_member_description as string;
 
     return {
       mrkdwn: true,
@@ -104,6 +168,41 @@ export const generate_newsletter = async () => {
           },
         },
         ...transform_block_upcoming_events,
+        {
+          type: "divider",
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: "*COMMUNITY MEMBER HIGHLIGHTS* :star2:\n ---",
+          },
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `This months community member highlight goes to *${community_highlight_member_name}*!! :tada::tada:`,
+          },
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: community_highlight_member_description,
+          },
+        },
+        {
+          type: "divider",
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: "*TECH INSIGHTS* :newspaper:",
+          },
+        },
+        ...transform_block_tech_insights,
         {
           type: "divider",
         },
