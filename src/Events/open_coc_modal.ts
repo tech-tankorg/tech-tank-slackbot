@@ -1,11 +1,13 @@
 import app from "../../utils/config/slack-config.ts";
-import { coc_view_modal } from "../../utils/constants/consts.ts";
+import { coc_view_modal } from "../../utils/constants/coc-view-modal.ts";
 import { channels } from "../../utils/config/channel-config.ts";
+
+import type { InteractiveMessage } from "@slack/bolt";
 
 export const open_coc_modal = () => {
   app.action("open_coc_modal", async ({ ack, body, client }) => {
     await ack();
-    const pre_body = body as any;
+    const pre_body = body as InteractiveMessage;
 
     await client.views.open({
       trigger_id: pre_body.trigger_id,
