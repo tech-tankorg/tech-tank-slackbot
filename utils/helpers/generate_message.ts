@@ -27,8 +27,9 @@ Afterwards, you can check out some of our other channels. Here's a list of our c
 
 • <#${channels.coffee_chat}>: This is where you go to join in on the social mixer for our Slack community!! Every other week (Mondays at 10 AM EST), Shuffl -- the master of pairs and groups --  works its magic to shuffle you into fresh groups of three via direct messages! 
 
-And of course, if you don't see an appropriate place to post, you can always just post in #general! If you have any questions or concerns at any time, please don't hesitate to contact 
-<@${admins.chris}>, <@${admins.eric}>, <@${admins.sammy}>, <@${admins.nonso}>, <@${admins.niya}>, <@${admins.riaz}>, or <@${admins.neal}> your friendly admins:party_blob:
+And of course, if you don't see an appropriate place to post, you can always just post in #general! Lastly, if you want to stay updated with all our events, feel free to subscribe to our public calendar using one of the following links <https://calendar.google.com/calendar/embed?src=cfda7c6ac8ce0fc9eaf3acb92419608d7c3cc9bcf3ed49b5f7c7d8a1058f697c%40group.calendar.google.com&ctz=America%2FToronto.|generic calendar link> or <https://calendar.google.com/calendar/ical/cfda7c6ac8ce0fc9eaf3acb92419608d7c3cc9bcf3ed49b5f7c7d8a1058f697c%40group.calendar.google.com/public/basic.ics|generic calendar link for ical format>. We also want to provide you a link to our code of conduct which you can find <https://www.techtankto.com/code-of-conduct|here>.
+
+If you have any questions or concerns at any time, please don't hesitate to contact <@${admins.chris}>, <@${admins.eric}>, <@${admins.sammy}>, <@${admins.nonso}>, <@${admins.niya}>, <@${admins.riaz}>, or <@${admins.neal}> your friendly admins:party_blob:
 
 Thanks for reading, and we hope you have a good swim :fish:
 `;
