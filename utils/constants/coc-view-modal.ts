@@ -28,7 +28,7 @@ export const coc_view_modal = {
       type: "section",
       text: {
         type: "mrkdwn",
-        text: "nstances of abuse, harassment or any unacceptable behavior can be reported to the workspace admins (Chris K., Sammy, Nonso, Niya, Riaz, Neal or Erik O.). We will take corrective action in response to any behavior deemed inappropriate, threatening, offensive or harmful. We have a right to protect this space and individuals within. \n1. Notice of Correction → We will contact said individual to correct their behavior via slack \n2. Temporary Ban → banned from the community for weeks. This includes interaction in community spaces, external channels and direct messages on and off the community. \n3. Permanent Ban",
+        text: "Instances of abuse, harassment or any unacceptable behavior can be reported to the workspace admins (Chris K., Sammy, Nonso, Niya, Riaz, Neal or Erik O.). We will take corrective action in response to any behavior deemed inappropriate, threatening, offensive or harmful. We have a right to protect this space and individuals within. \n1. Notice of Correction → We will contact said individual to correct their behavior via slack \n2. Temporary Ban → banned from the community for weeks. This includes interaction in community spaces, external channels and direct messages on and off the community. \n3. Permanent Ban",
       },
     },
     {
