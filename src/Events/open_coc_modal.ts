@@ -13,6 +13,13 @@ import {
   has_user_ack_coc,
 } from "../../utils/controllers/users.ts";
 
+import Sentry from "../../utils/config/sentry.config.ts";
+
+const transaction = Sentry.startTransaction({
+  op: "test-open-coc",
+  name: "Transaction for COC",
+});
+
 let view_id: string | undefined = "";
 export const open_coc_modal = () => {
   app.action("open_coc_modal", async ({ ack, body, client }) => {
@@ -41,6 +48,10 @@ export const open_coc_modal = () => {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         { coc_opened_error: { user: body.user.id, error: e } },
       ]);
+
+      Sentry.captureException(e);
+    } finally {
+      transaction.finish();
     }
   });
   return view_id;

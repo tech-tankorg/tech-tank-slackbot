@@ -7,13 +7,14 @@
   "scripts": {
     "test": "jest",
     "dev": "ts-node --esm ./src/index.ts",
-    "build": "tsup ./src/index.ts ./utils/service/cron_schedule_message.ts --format esm --dts utils/types/projectTypes.ts",
+    "build": "tsup ./src/index.ts ./utils/service/cron_schedule_message.ts --format esm --dts utils/types/projectTypes.ts && npm run sentry:sourcemaps",
     "start": "NODE_ENV=production node ./dist/src/index.js && node ./dist/utils/service/cron_schedule_message.js",
     "test:typecheck": "tsc",
     "lint": "npx eslint \"./**\"",
     "randomize-questions": "ts-node --esm ./utils/helpers/randomize-list.ts",
     "scheduled-messages": "ts-node --esm ./utils/helpers/list-all-scheduled-messages.ts",
-    "delete-scheduled-messages": "ts-node --esm ./utils/helpers/delete-all-scheduled-messages.ts"
+    "delete-scheduled-messages": "ts-node --esm ./utils/helpers/delete-all-scheduled-messages.ts",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org tech-tank-7dab5f9be --project node ./dist && sentry-cli sourcemaps upload --org tech-tank-7dab5f9be --project node ./dist"
   },
   "keywords": [
     "slack bots",
@@ -47,6 +48,7 @@
     "@axiomhq/axiom-node": "^0.12.0",
     "@sanity/client": "^6.4.9",
     "@sanity/image-url": "^1.0.2",
+    "@sentry/node": "^7.64.0",
     "@slack/bolt": "^3.13.3",
     "@upstash/redis": "^1.22.0",
     "axios": "^1.4.0",
