@@ -27,6 +27,8 @@ export const add_user_to_db = async (
 
   const redis_user_id_exists = (await redis.get(user_id)) as string | undefined;
 
+  // first check the redis cache for the user id and value, if found then delete the record
+  // set a new record
   if (redis_user_id_exists !== undefined) {
     await redis.del(user_id);
   }
@@ -37,6 +39,7 @@ export const add_user_to_db = async (
 export const has_user_ack_coc = async (user_id: string) => {
   const user_coc_ack_redis = (await redis.get(user_id)) as string | undefined;
 
+  // first check the redis cache for the user id and value, if not found the query the db
   if (user_coc_ack_redis === undefined) {
     const col_ref = await get_collection_reference("users");
     const querys = query(

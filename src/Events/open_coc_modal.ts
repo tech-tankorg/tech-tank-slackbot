@@ -32,8 +32,15 @@ export const open_coc_modal = () => {
       });
 
       view_id = view.view?.id;
+
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        { coc_opened: { user: body.user.id, view } },
+      ]);
     } catch (e) {
       view_id = "";
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        { coc_opened_error: { user: body.user.id, error: e } },
+      ]);
     }
   });
   return view_id;
