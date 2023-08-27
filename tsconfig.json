@@ -14,6 +14,10 @@
 
     "outDir": "./dist" /* Specify an output folder for all emitted files. */,
 
+    "sourceMap": true,
+    "inlineSources": true,
+    "sourceRoot": "/",
+
     "noEmit": true /* Disable emitting files from a compilation. */,
 
     "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
