@@ -28,36 +28,35 @@ export const suggestion = () => {
 
       await create_suggestion(tag, suggestion, user_id, user_name);
 
-      await Promise.all([
-        client.chat.postMessage({
-          channel: channels.notification,
-          ...message,
-        }),
-        respond({
-          response_type: "ephemeral",
-          mrkdwn: true,
-          text: `Your suggestion has successfully been submitted!`,
-        }),
-        Axiom.ingestEvents(AXIOM_DATA_SET, [
-          {
-            suggestion: {
-              tag,
-              suggestion,
-              user_id,
-              user_name,
-            },
+      await client.chat.postMessage({
+        channel: channels.notification,
+        ...message,
+      });
+
+      await respond({
+        response_type: "ephemeral",
+        mrkdwn: true,
+        text: `Your suggestion has successfully been submitted!`,
+      });
+
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        {
+          suggestion: {
+            tag,
+            suggestion,
+            user_id,
+            user_name,
           },
-        ]),
+        },
       ]);
     } catch (err) {
-      await Promise.all([
-        respond({
-          response_type: "ephemeral",
-          mrkdwn: true,
-          text: `Oh no! Something went wrong! \nTry again later.`,
-        }),
-        Axiom.ingestEvents(AXIOM_DATA_SET, [{ suggestion_error: err }]),
-      ]);
+      await respond({
+        response_type: "ephemeral",
+        mrkdwn: true,
+        text: `Oh no! Something went wrong! \nTry again later.`,
+      });
+
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [{ suggestion_error: err }]);
     }
   });
 };

@@ -21,6 +21,12 @@ import { flatten_object } from "../utils/helpers/flatten-object.ts";
 import questions from "../utils/constants/general-questions.json" assert { type: "json" };
 import wonder_wednesday_questions from "../utils/constants/wonder-wednesday-questions.json" assert { type: "json" };
 
+import {
+  open_coc_modal,
+  accept_coc,
+  deny_coc,
+} from "./Events/open_coc_modal.ts";
+
 const PREPPED_QUESTIONS = flatten_object(questions);
 // const test_channel = "C05BYP98MTR";
 // const test_channel_two = "C05C6KVHWAJ";
@@ -49,6 +55,11 @@ app_home_opened();
 // Slash commands
 jokes();
 suggestion();
+open_coc_modal();
+
+// actions
+accept_coc();
+deny_coc();
 
 await (async () => {
   // Start your app
