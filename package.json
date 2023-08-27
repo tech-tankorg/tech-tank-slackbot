@@ -7,14 +7,13 @@
   "scripts": {
     "test": "jest",
     "dev": "ts-node --esm ./src/index.ts",
-    "build": "tsup ./src/index.ts ./utils/service/cron_schedule_message.ts --format esm --dts utils/types/projectTypes.ts && npm run sentry:sourcemaps",
+    "build": "tsup ./src/index.ts ./utils/service/cron_schedule_message.ts --format esm --dts utils/types/projectTypes.ts",
     "start": "NODE_ENV=production node ./dist/src/index.js && node ./dist/utils/service/cron_schedule_message.js",
     "test:typecheck": "tsc",
     "lint": "npx eslint \"./**\"",
     "randomize-questions": "ts-node --esm ./utils/helpers/randomize-list.ts",
     "scheduled-messages": "ts-node --esm ./utils/helpers/list-all-scheduled-messages.ts",
-    "delete-scheduled-messages": "ts-node --esm ./utils/helpers/delete-all-scheduled-messages.ts",
-    "sentry:sourcemaps": "npx sentry-cli sourcemaps inject --org tech-tank-7dab5f9be --project node ./dist/src/index.js && npx sentry-cli sourcemaps upload --org tech-tank-7dab5f9be --project node ./dist/src/index.js"
+    "delete-scheduled-messages": "ts-node --esm ./utils/helpers/delete-all-scheduled-messages.ts"
   },
   "keywords": [
     "slack bots",
