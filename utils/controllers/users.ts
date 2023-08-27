@@ -24,6 +24,13 @@ export const add_user_to_db = async (
 
   const col_ref = await get_collection_reference("users");
   await addDoc(col_ref, user);
+
+  const redis_user_id_exists = (await redis.get(user_id)) as string | undefined;
+
+  if (redis_user_id_exists !== undefined) {
+    await redis.del(user_id);
+  }
+
   await redis.set(user_id, coc_ack);
 };
 
