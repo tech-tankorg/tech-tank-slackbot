@@ -1,4 +1,5 @@
 import { get_collection_reference } from "../config/firebase-config.ts";
+import { redis } from "../config/upstash-config.ts";
 
 import {
   addDoc,
@@ -23,20 +24,26 @@ export const add_user_to_db = async (
 
   const col_ref = await get_collection_reference("users");
   await addDoc(col_ref, user);
+  await redis.set(user_id, coc_ack);
 };
 
 export const has_user_ack_coc = async (user_id: string) => {
-  const col_ref = await get_collection_reference("users");
+  const user_coc_ack_redis = (await redis.get(user_id)) as string | undefined;
 
-  const querys = query(
-    col_ref,
-    where("user_id", "==", user_id),
-    orderBy("timestamp", "desc")
-  );
+  if (user_coc_ack_redis === undefined) {
+    const col_ref = await get_collection_reference("users");
+    const querys = query(
+      col_ref,
+      where("user_id", "==", user_id),
+      orderBy("timestamp", "desc")
+    );
 
-  const docs = await getDocs(querys);
+    const docs = await getDocs(querys);
 
-  const user = docs.docs[0]?.data();
+    const user = docs.docs[0]?.data();
 
-  return user?.coc === "accepted";
+    return user?.coc === "accepted";
+  }
+
+  return user_coc_ack_redis === "accepted";
 };
