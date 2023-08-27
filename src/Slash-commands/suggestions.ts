@@ -28,17 +28,16 @@ export const suggestion = () => {
 
       await create_suggestion(tag, suggestion, user_id, user_name);
 
-      await Promise.all([
-        client.chat.postMessage({
-          channel: channels.notification,
-          ...message,
-        }),
-        respond({
-          response_type: "ephemeral",
-          mrkdwn: true,
-          text: `Your suggestion has successfully been submitted!`,
-        }),
-      ]);
+      await client.chat.postMessage({
+        channel: channels.notification,
+        ...message,
+      });
+
+      await respond({
+        response_type: "ephemeral",
+        mrkdwn: true,
+        text: `Your suggestion has successfully been submitted!`,
+      });
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
