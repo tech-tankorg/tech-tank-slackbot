@@ -14,7 +14,7 @@
     "randomize-questions": "ts-node --esm ./utils/helpers/randomize-list.ts",
     "scheduled-messages": "ts-node --esm ./utils/helpers/list-all-scheduled-messages.ts",
     "delete-scheduled-messages": "ts-node --esm ./utils/helpers/delete-all-scheduled-messages.ts",
-    "sentry:sourcemaps": "npx sentry-cli sourcemaps inject --org tech-tank-7dab5f9be --project node ./dist && npx sentry-cli sourcemaps upload --org tech-tank-7dab5f9be --project node ./dist"
+    "sentry:sourcemaps": "npx sentry-cli sourcemaps inject --org tech-tank-7dab5f9be --project node ./dist/src/index.js && npx sentry-cli sourcemaps upload --org tech-tank-7dab5f9be --project node ./dist/src/index.js"
   },
   "keywords": [
     "slack bots",
