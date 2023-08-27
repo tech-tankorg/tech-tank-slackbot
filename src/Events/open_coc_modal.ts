@@ -13,6 +13,7 @@ import {
   has_user_ack_coc,
 } from "../../utils/controllers/users.ts";
 
+let view_id: string | undefined = "";
 export const open_coc_modal = () => {
   app.action("open_coc_modal", async ({ ack, body, client }) => {
     await ack();
@@ -25,14 +26,17 @@ export const open_coc_modal = () => {
         ? coc_view_modal_without_ack_btns
         : coc_view_modal_with_ack_btns;
 
-      await client.views.open({
+      const view = await client.views.open({
         trigger_id: pre_body.trigger_id,
         view: display_coc_view,
       });
+
+      view_id = view.view?.id;
     } catch (e) {
-      console.log(e);
+      view_id = "";
     }
   });
+  return view_id;
 };
 
 export const accept_coc = () => {
@@ -49,6 +53,11 @@ export const accept_coc = () => {
         body.user.id,
         "accepted"
       );
+
+      await client.views.update({
+        view_id,
+        view: coc_view_modal_without_ack_btns,
+      });
     } catch (e) {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [{ error_accept_coc: e }]);
     }
@@ -74,6 +83,11 @@ export const deny_coc = () => {
       await client.chat.postMessage({
         channel: channels.notification,
         text: `Hey <@channel>, <@${userID}> has declined the Tech Tank CoC. Let's connect with them to see how a resolution can be reached.`,
+      });
+
+      await client.views.update({
+        view_id,
+        view: coc_view_modal_without_ack_btns,
       });
     } catch (e) {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [{ error_deny_coc: e }]);
