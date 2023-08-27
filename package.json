@@ -26,6 +26,7 @@
     "@types/jest": "^29.5.3",
     "@types/node": "^20.3.3",
     "@types/node-cron": "^3.0.8",
+    "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^8.10.0",
@@ -47,11 +48,13 @@
     "@sanity/client": "^6.4.9",
     "@sanity/image-url": "^1.0.2",
     "@slack/bolt": "^3.13.3",
+    "@upstash/redis": "^1.22.0",
     "axios": "^1.4.0",
     "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",
-    "firebase": "^10.1.0",
+    "firebase": "^10.2.0",
     "node-cron": "^3.0.2",
-    "zod": "^3.21.4"
+    "uuid": "^9.0.0",
+    "zod": "^3.22.1"
   }
 }

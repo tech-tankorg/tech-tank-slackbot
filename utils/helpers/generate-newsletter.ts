@@ -86,13 +86,13 @@ const transform_to_block_upcoming_events = (section: google_cal_event[]) => {
     text: {
       type: "mrkdwn",
 
-      text: `---\n\n:calendar: *${format(
+      text: `\n*${format(
         new Date(sec.start.dateTime),
 
         "MMM do"
       )} - ${format(new Date(sec.start.dateTime), "hh:mm aa")} | ${
         sec.summary
-      }* \n\n Location/Event Link: ${sec.location} \n \n ${sec.description}`,
+      }* @ ${sec.location}`,
     },
   }));
 };
@@ -145,6 +145,21 @@ export const generate_newsletter = async () => {
           ],
         },
         {
+          type: "actions",
+          elements: [
+            {
+              type: "button",
+              text: {
+                type: "plain_text",
+                text: "Open COC",
+                emoji: true,
+              },
+              value: "open_COC",
+              action_id: "open_coc_modal",
+            },
+          ],
+        },
+        {
           type: "divider",
         },
         {
@@ -164,7 +179,7 @@ export const generate_newsletter = async () => {
           type: "section",
           text: {
             type: "mrkdwn",
-            text: ":calendar: |   *UPCOMING EVENTS*  | :calendar: ",
+            text: ":spiral_calendar_pad: |   *UPCOMING EVENTS*  | :spiral_calendar_pad: ",
           },
         },
         ...transform_block_upcoming_events,

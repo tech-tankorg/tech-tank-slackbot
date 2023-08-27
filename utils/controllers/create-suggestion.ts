@@ -1,5 +1,6 @@
-import { app } from "../config/firebase-config.ts";
-import { getDatabase, ref, push, serverTimestamp } from "firebase/database";
+import { get_collection_reference } from "../config/firebase-config.ts";
+
+import { addDoc, serverTimestamp } from "firebase/firestore";
 
 export const create_suggestion = async (
   tag: string,
@@ -15,7 +16,7 @@ export const create_suggestion = async (
     user_name,
   };
 
-  const db = getDatabase(app);
-  const dbRef = ref(db);
-  await push(dbRef, user_suggestion);
+  const col_ref = await get_collection_reference("suggestion-bot");
+
+  await addDoc(col_ref, user_suggestion);
 };
