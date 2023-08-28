@@ -56,7 +56,15 @@ export const suggestion = () => {
         text: `Oh no! Something went wrong! \nTry again later.`,
       });
 
-      await Axiom.ingestEvents(AXIOM_DATA_SET, [{ suggestion_error: err }]);
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        {
+          suggestion_error: {
+            err,
+            user_id: body.user_id,
+            user_name: body.user_name,
+          },
+        },
+      ]);
     }
   });
 };
