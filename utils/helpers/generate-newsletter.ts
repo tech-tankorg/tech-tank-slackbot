@@ -145,19 +145,32 @@ export const generate_newsletter = async () => {
           ],
         },
         {
-          type: "actions",
-          elements: [
-            {
-              type: "button",
-              text: {
-                type: "plain_text",
-                text: "Open COC",
-                emoji: true,
-              },
-              value: "open_COC",
-              action_id: "open_coc_modal",
+          type: "divider",
+        },
+        {
+          type: "header",
+          text: {
+            type: "plain_text",
+            text: ":page_facing_up: Tech Tank Code of Conduct",
+            emoji: true,
+          },
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: "*Please read and acknowledge*",
+          },
+          accessory: {
+            type: "button",
+            text: {
+              type: "plain_text",
+              text: ":page_facing_up: Open COC",
+              emoji: true,
             },
-          ],
+            value: "open_COC",
+            action_id: "open_coc_modal",
+          },
         },
         {
           type: "divider",
