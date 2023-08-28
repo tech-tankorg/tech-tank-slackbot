@@ -13,6 +13,8 @@ import { GOOGLE_CALENDAR_ID, GOOGLE_API_KEY } from "../constants/consts.ts";
 
 import { generate_sanity_img_url } from "../config/sanity-config.ts";
 
+import { find_web_address } from "./find-web-address.ts";
+
 const transform_to_block = (section: sanity_letter_info) => {
   const temp_array: Array<transform_block_type | transform_Block_img_type> = [];
   for (const item of section) {
@@ -81,20 +83,20 @@ const transform_to_block_fyi = (section: sanity_fyi_block[]) => {
 };
 
 const transform_to_block_upcoming_events = (section: google_cal_event[]) => {
-  return section.map((sec) => ({
-    type: "section",
-    text: {
-      type: "mrkdwn",
+  return section.map((sec) => {
+    const web_address = find_web_address(sec.description) ?? "#";
 
-      text: `\n*${format(
-        new Date(sec.start.dateTime),
-
-        "MMM do"
-      )} - ${format(new Date(sec.start.dateTime), "hh:mm aa")} | ${
-        sec.summary
-      }* @ ${sec.location}`,
-    },
-  }));
+    return {
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: `\n*${format(new Date(sec.start.dateTime), "MMM do")} - ${format(
+          new Date(sec.start.dateTime),
+          "p"
+        )} | <${web_address}|${sec.summary}>* @ ${sec.location}`,
+      },
+    };
+  });
 };
 
 export const generate_newsletter = async () => {
