@@ -28,7 +28,7 @@ const transform_to_block = (section: sanity_letter_info) => {
         fields: [
           {
             type: "mrkdwn",
-            text: `${item.title}\n\n ${item.description} \n \n`,
+            text: `*${item.title}*\n\n ${item.description} \n \n`,
           },
         ],
       });
@@ -44,7 +44,7 @@ const transform_to_block = (section: sanity_letter_info) => {
         fields: [
           {
             type: "mrkdwn",
-            text: `${item.title}\n\n ${item.description} \n \n`,
+            text: `*${item.title}*\n\n ${item.description} \n \n`,
           },
         ],
       });
@@ -75,7 +75,7 @@ const transform_to_block_fyi = (section: sanity_fyi_block[]) => {
       fields: [
         {
           type: "mrkdwn",
-          text: `${sec.title}\n\n ${sec.description} \n \n`,
+          text: `*${sec.title}*\n\n ${sec.description} \n \n`,
         },
       ],
     };
@@ -113,7 +113,7 @@ export const generate_newsletter = async () => {
 
     const transform_block_fyi = transform_to_block_fyi(response[0].letter_fyi);
     const transform_block_tech_insights = transform_to_block_fyi(
-      response[0].letter_tech_insights
+      response[0].letter_tech_insights ?? { title: "", description: "" }
     );
     const transform_block_info = transform_to_block(response[0].letter_info);
 
