@@ -22,15 +22,9 @@ const transform_to_block = (section: sanity_letter_info) => {
       temp_array.push({
         type: "section",
         text: {
-          text: "---",
+          text: `--- \n\n*${item.title}*\n\n${item.description} \n \n`,
           type: "mrkdwn",
         },
-        fields: [
-          {
-            type: "mrkdwn",
-            text: `*${item.title}*\n\n ${item.description} \n \n`,
-          },
-        ],
       });
     } else {
       const img_caption = item.images.caption ?? "";
@@ -38,15 +32,9 @@ const transform_to_block = (section: sanity_letter_info) => {
       temp_array.push({
         type: "section",
         text: {
-          text: "---",
+          text: `--- \n\n*${item.title}*\n\n${item.description} \n \n`,
           type: "mrkdwn",
         },
-        fields: [
-          {
-            type: "mrkdwn",
-            text: `*${item.title}*\n\n ${item.description} \n \n`,
-          },
-        ],
       });
 
       temp_array.push({
@@ -69,15 +57,9 @@ const transform_to_block_fyi = (section: sanity_fyi_block[]) => {
     return {
       type: "section",
       text: {
-        text: "---",
+        text: `--- \n\n*${sec.title}*\n\n${sec.description} \n \n`,
         type: "mrkdwn",
       },
-      fields: [
-        {
-          type: "mrkdwn",
-          text: `*${sec.title}*\n\n ${sec.description} \n \n`,
-        },
-      ],
     };
   });
 };
@@ -181,6 +163,30 @@ export const generate_newsletter = async () => {
           type: "section",
           text: {
             type: "mrkdwn",
+            text: "*COMMUNITY MEMBER HIGHLIGHTS* :star2:",
+          },
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `*This months community member highlight goes to ${community_highlight_member_name}*!! :tada::tada:`,
+          },
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `${community_highlight_member_description} \n\n`,
+          },
+        },
+        {
+          type: "divider",
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
             text: " :loud_sound: *IN CASE YOU MISSED IT* :loud_sound:",
           },
         },
@@ -198,30 +204,6 @@ export const generate_newsletter = async () => {
           },
         },
         ...transform_block_upcoming_events,
-        {
-          type: "divider",
-        },
-        {
-          type: "section",
-          text: {
-            type: "mrkdwn",
-            text: "*COMMUNITY MEMBER HIGHLIGHTS* :star2:\n ---",
-          },
-        },
-        {
-          type: "section",
-          text: {
-            type: "mrkdwn",
-            text: `This months community member highlight goes to *${community_highlight_member_name}*!! :tada::tada:`,
-          },
-        },
-        {
-          type: "section",
-          text: {
-            type: "mrkdwn",
-            text: community_highlight_member_description,
-          },
-        },
         {
           type: "divider",
         },
@@ -278,6 +260,34 @@ export const generate_newsletter = async () => {
               type: "mrkdwn",
             },
           ],
+        },
+        {
+          type: "divider",
+        },
+        {
+          type: "header",
+          text: {
+            type: "plain_text",
+            text: ":page_facing_up: Tech Tank Code of Conduct",
+            emoji: true,
+          },
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: "*Please read and acknowledge*",
+          },
+          accessory: {
+            type: "button",
+            text: {
+              type: "plain_text",
+              text: ":page_facing_up: Open COC",
+              emoji: true,
+            },
+            value: "open_COC",
+            action_id: "open_coc_modal",
+          },
         },
         {
           type: "divider",
