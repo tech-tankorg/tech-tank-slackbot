@@ -22,7 +22,7 @@ const transform_to_block = (section: sanity_letter_info) => {
       temp_array.push({
         type: "section",
         text: {
-          text: `--- \n\n *${item.title}*\n\n ${item.description} \n \n`,
+          text: `--- \n\n*${item.title}*\n\n${item.description} \n \n`,
           type: "mrkdwn",
         },
       });
@@ -32,7 +32,7 @@ const transform_to_block = (section: sanity_letter_info) => {
       temp_array.push({
         type: "section",
         text: {
-          text: `--- \n\n *${item.title}*\n\n ${item.description} \n \n`,
+          text: `--- \n\n*${item.title}*\n\n${item.description} \n \n`,
           type: "mrkdwn",
         },
       });
@@ -57,7 +57,7 @@ const transform_to_block_fyi = (section: sanity_fyi_block[]) => {
     return {
       type: "section",
       text: {
-        text: `--- \n\n *${sec.title}*\n\n ${sec.description} \n \n`,
+        text: `--- \n\n*${sec.title}*\n\n${sec.description} \n \n`,
         type: "mrkdwn",
       },
     };
