@@ -1,4 +1,5 @@
 import { format, startOfMonth } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 import type {
   sanity_letter_info,
   sanity_fyi_block,
@@ -67,15 +68,18 @@ const transform_to_block_fyi = (section: sanity_fyi_block[]) => {
 const transform_to_block_upcoming_events = (section: google_cal_event[]) => {
   return section.map((sec) => {
     const web_address = find_web_address(sec.description) ?? "#";
+    const time_zone = "America/New_York";
+    const start_date_time = new Date(sec.start.dateTime);
+    const start_date = formatInTimeZone(start_date_time, time_zone, "MMM do");
+    const start_time = formatInTimeZone(start_date_time, time_zone, "p");
 
     return {
       type: "section",
       text: {
         type: "mrkdwn",
-        text: `\n*${format(new Date(sec.start.dateTime), "MMM do")} - ${format(
-          new Date(sec.start.dateTime),
-          "p"
-        )} | <${web_address}|${sec.summary}>* @ ${sec.location}`,
+        text: `\n* ${start_date as string} - ${
+          start_time as string
+        }| <${web_address}|${sec.summary}>* @ ${sec.location}`,
       },
     };
   });
