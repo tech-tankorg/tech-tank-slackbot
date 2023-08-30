@@ -77,9 +77,7 @@ const transform_to_block_upcoming_events = (section: google_cal_event[]) => {
       type: "section",
       text: {
         type: "mrkdwn",
-        text: `\n* ${start_date as string} - ${
-          start_time as string
-        }| <${web_address}|${sec.summary}>* @ ${sec.location}`,
+        text: `\n* ${start_date} - ${start_time}| <${web_address}|${sec.summary}>* @ ${sec.location}`,
       },
     };
   });
