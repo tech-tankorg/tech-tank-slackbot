@@ -65,12 +65,6 @@ export interface transform_block_type {
     text: string;
     type: string;
   };
-  fields: [
-    {
-      type: string;
-      text: string;
-    }
-  ];
 }
 
 export interface transform_Block_img_type {

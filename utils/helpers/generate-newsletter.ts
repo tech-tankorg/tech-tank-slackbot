@@ -22,15 +22,9 @@ const transform_to_block = (section: sanity_letter_info) => {
       temp_array.push({
         type: "section",
         text: {
-          text: "---",
+          text: `--- \n\n *${item.title}*\n\n ${item.description} \n \n`,
           type: "mrkdwn",
         },
-        fields: [
-          {
-            type: "mrkdwn",
-            text: `*${item.title}*\n\n ${item.description} \n \n`,
-          },
-        ],
       });
     } else {
       const img_caption = item.images.caption ?? "";
@@ -38,15 +32,9 @@ const transform_to_block = (section: sanity_letter_info) => {
       temp_array.push({
         type: "section",
         text: {
-          text: "---",
+          text: `--- \n\n *${item.title}*\n\n ${item.description} \n \n`,
           type: "mrkdwn",
         },
-        fields: [
-          {
-            type: "mrkdwn",
-            text: `*${item.title}*\n\n ${item.description} \n \n`,
-          },
-        ],
       });
 
       temp_array.push({
@@ -69,15 +57,9 @@ const transform_to_block_fyi = (section: sanity_fyi_block[]) => {
     return {
       type: "section",
       text: {
-        text: "---",
+        text: `--- \n\n *${sec.title}*\n\n ${sec.description} \n \n`,
         type: "mrkdwn",
       },
-      fields: [
-        {
-          type: "mrkdwn",
-          text: `*${sec.title}*\n\n ${sec.description} \n \n`,
-        },
-      ],
     };
   });
 };
