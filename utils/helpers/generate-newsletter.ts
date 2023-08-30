@@ -181,6 +181,30 @@ export const generate_newsletter = async () => {
           type: "section",
           text: {
             type: "mrkdwn",
+            text: "*COMMUNITY MEMBER HIGHLIGHTS* :star2:",
+          },
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `*This months community member highlight goes to ${community_highlight_member_name}*!! :tada::tada:`,
+          },
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `${community_highlight_member_description} \n\n`,
+          },
+        },
+        {
+          type: "divider",
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
             text: " :loud_sound: *IN CASE YOU MISSED IT* :loud_sound:",
           },
         },
@@ -198,30 +222,6 @@ export const generate_newsletter = async () => {
           },
         },
         ...transform_block_upcoming_events,
-        {
-          type: "divider",
-        },
-        {
-          type: "section",
-          text: {
-            type: "mrkdwn",
-            text: "*COMMUNITY MEMBER HIGHLIGHTS* :star2:\n ---",
-          },
-        },
-        {
-          type: "section",
-          text: {
-            type: "mrkdwn",
-            text: `This months community member highlight goes to *${community_highlight_member_name}*!! :tada::tada:`,
-          },
-        },
-        {
-          type: "section",
-          text: {
-            type: "mrkdwn",
-            text: community_highlight_member_description,
-          },
-        },
         {
           type: "divider",
         },
