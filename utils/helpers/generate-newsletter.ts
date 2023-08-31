@@ -68,16 +68,19 @@ const transform_to_block_fyi = (section: sanity_fyi_block[]) => {
 const transform_to_block_upcoming_events = (section: google_cal_event[]) => {
   return section.map((sec) => {
     const web_address = find_web_address(sec.description) ?? "#";
-    const time_zone = "America/New_York";
+    const time_zone = "America/Toronto";
     const start_date_time = new Date(sec.start.dateTime);
-    const start_date = formatInTimeZone(start_date_time, time_zone, "MMM do");
-    const start_time = formatInTimeZone(start_date_time, time_zone, "p");
+    const start_date_time_formatted = formatInTimeZone(
+      start_date_time,
+      time_zone,
+      "MMM do - p"
+    );
 
     return {
       type: "section",
       text: {
         type: "mrkdwn",
-        text: `\n* ${start_date} - ${start_time}| <${web_address}|${sec.summary}>* @ ${sec.location}`,
+        text: `\n* ${start_date_time_formatted} | <${web_address}|${sec.summary}>* @ ${sec.location}`,
       },
     };
   });
