@@ -1,4 +1,4 @@
-import { format, startOfMonth } from "date-fns";
+import { startOfMonth } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import type {
   sanity_letter_info,
@@ -10,7 +10,11 @@ import type {
 import { get_upcoming_events_for_the_month } from "../service/google-calendar.ts";
 import { generate_sanity_newsletter } from "../service/sanity-client.ts";
 
-import { GOOGLE_CALENDAR_ID, GOOGLE_API_KEY } from "../constants/consts.ts";
+import {
+  GOOGLE_CALENDAR_ID,
+  GOOGLE_API_KEY,
+  TORONTO_TIME_ZONE_IDENTIFIER,
+} from "../constants/consts.ts";
 
 import { generate_sanity_img_url } from "../config/sanity-config.ts";
 
@@ -68,11 +72,11 @@ const transform_to_block_fyi = (section: sanity_fyi_block[]) => {
 const transform_to_block_upcoming_events = (section: google_cal_event[]) => {
   return section.map((sec) => {
     const web_address = find_web_address(sec.description) ?? "#";
-    const time_zone = "America/Toronto";
+
     const start_date_time = new Date(sec.start.dateTime);
     const start_date_time_formatted = formatInTimeZone(
       start_date_time,
-      time_zone,
+      TORONTO_TIME_ZONE_IDENTIFIER,
       "MMM do - p"
     );
 
@@ -88,9 +92,18 @@ const transform_to_block_upcoming_events = (section: google_cal_event[]) => {
 
 export const generate_newsletter = async () => {
   const start_of_month = startOfMonth(new Date());
-  const formatted_date = format(start_of_month, "MMMM yyyy");
 
-  const request_format_date = format(start_of_month, "yyyy-MM-dd");
+  const formatted_date = formatInTimeZone(
+    start_of_month,
+    TORONTO_TIME_ZONE_IDENTIFIER,
+    "MMMM yyyy"
+  );
+
+  const request_format_date = formatInTimeZone(
+    start_of_month,
+    TORONTO_TIME_ZONE_IDENTIFIER,
+    "yyyy-MM-dd"
+  );
 
   try {
     const response = await Promise.all([
