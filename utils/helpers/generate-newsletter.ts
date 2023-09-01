@@ -1,4 +1,4 @@
-import { startOfMonth } from "date-fns";
+import { addHours, startOfMonth } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import type {
   sanity_letter_info,
@@ -92,15 +92,16 @@ const transform_to_block_upcoming_events = (section: google_cal_event[]) => {
 
 export const generate_newsletter = async () => {
   const start_of_month = startOfMonth(new Date());
+  const start_of_month_adjusted_time = addHours(start_of_month, 4);
 
   const formatted_date = formatInTimeZone(
-    start_of_month,
+    start_of_month_adjusted_time,
     TORONTO_TIME_ZONE_IDENTIFIER,
     "MMMM yyyy"
   );
 
   const request_format_date = formatInTimeZone(
-    start_of_month,
+    start_of_month_adjusted_time,
     TORONTO_TIME_ZONE_IDENTIFIER,
     "yyyy-MM-dd"
   );
