@@ -8,7 +8,7 @@
     "test": "jest",
     "dev": "ts-node --esm ./src/index.ts",
     "build": "tsup ./src/index.ts ./utils/service/cron_schedule_message.ts --format esm --dts utils/types/projectTypes.ts",
-    "start": "NODE_ENV=production node ./dist/src/index.js && node ./dist/utils/service/cron_schedule_message.js",
+    "start": "NODE_ENV=production node ./dist/src/index.js & node ./dist/utils/service/cron_schedule_message.js",
     "test:typecheck": "tsc",
     "lint": "npx eslint \"./**\"",
     "randomize-questions": "ts-node --esm ./utils/helpers/randomize-list.ts",
