@@ -20,6 +20,8 @@ import { wonder_wednesday_send_schedule_message } from "../../src/Events/wonder-
 
 import { post_newsletter } from "../../src/Events/post_newsletter.ts";
 
+import { mentor_checkup } from "src/Events/mentor_checkup.ts";
+
 const PREPPED_QUESTIONS = flatten_object(questions);
 
 const job_1 = new CronJob(
@@ -60,6 +62,8 @@ const job_1 = new CronJob(
         "wednesday",
         2
       );
+
+    void mentor_checkup();
   },
   null,
   false,
@@ -80,3 +84,5 @@ const job_2 = new CronJob(
 
 job_1.start();
 job_2.start();
+
+console.log(job_1.running, job_2.running);
