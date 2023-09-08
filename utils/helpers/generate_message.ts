@@ -130,3 +130,13 @@ export const generate_notification_message = (
     ],
   };
 };
+
+export const generate_mentor_message = () => {
+  const mentor_message = `Hey, how is your mentee/s doing? How are the meetings and progress?`;
+  return mentor_message;
+};
+
+export const generate_mentee_message = () => {
+  const mentee_message = `Hey, how is your mentorship going? How are the meetings and progress?`;
+  return mentee_message;
+};

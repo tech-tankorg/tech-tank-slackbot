@@ -8,7 +8,7 @@
     "test": "jest",
     "dev": "ts-node --esm ./src/index.ts",
     "build": "tsup ./src/index.ts ./utils/service/cron_schedule_message.ts --format esm --dts utils/types/projectTypes.ts",
-    "start": "NODE_ENV=production node ./dist/src/index.js && node ./dist/utils/service/cron_schedule_message.js",
+    "start": "NODE_ENV=production node ./dist/src/index.js & node ./dist/utils/service/cron_schedule_message.js",
     "test:typecheck": "tsc",
     "lint": "npx eslint \"./**\"",
     "randomize-questions": "ts-node --esm ./utils/helpers/randomize-list.ts",
@@ -54,11 +54,11 @@
     "@slack/bolt": "^3.13.3",
     "@upstash/redis": "^1.22.0",
     "axios": "^1.4.0",
+    "cron": "^2.4.3",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
     "dotenv": "^16.3.1",
     "firebase": "^10.2.0",
-    "node-cron": "^3.0.2",
     "uuid": "^9.0.0",
     "zod": "^3.22.1"
   }
