@@ -19,7 +19,8 @@ export const suggestion = () => {
       const tag = body.command.split("/")[1] ?? "";
       const suggestion = body.text;
       const user_id = body.user_id;
-      const user_name = body.user_name;
+      const user_profile = await client.users.profile.get({ user: user_id });
+      const user_name = user_profile.profile?.display_name_normalized ?? "";
 
       if (suggestion === "")
         throw new Error("Suggestion cannot be empty. Try again!");
