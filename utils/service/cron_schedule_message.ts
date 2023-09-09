@@ -4,6 +4,7 @@ import {
   GENERAL_QUESTIONS_START_DATE,
   WONDER_WEDNESDAY_QUESTIONS_START_DATE,
   CRON_FOR_NEWSLETTER,
+  CRON_FOR_MENTOR_CHECKUP,
   TORONTO_TIME_ZONE_IDENTIFIER,
 } from "../constants/consts.ts";
 
@@ -62,8 +63,6 @@ const job_1 = new CronJob(
         "wednesday",
         2
       );
-
-    void mentor_checkup();
   },
   null,
   false,
@@ -82,7 +81,18 @@ const job_2 = new CronJob(
   TORONTO_TIME_ZONE_IDENTIFIER
 );
 
+const job_3 = new CronJob(
+  CRON_FOR_MENTOR_CHECKUP,
+  () => {
+    void mentor_checkup();
+  },
+  null,
+  false,
+  TORONTO_TIME_ZONE_IDENTIFIER
+);
+
 job_1.start();
 job_2.start();
+job_3.start();
 
-console.log(job_1.running, job_2.running);
+console.log(job_1.running, job_2.running, job_3.running);
