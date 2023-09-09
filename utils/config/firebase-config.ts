@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection } from "firebase/firestore";
+import { getFirestore, collection, doc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -17,3 +17,6 @@ export const db = getFirestore(app);
 
 export const get_collection_reference = async (col: string) =>
   collection(db, col);
+
+export const get_document_reference = async (col: string, doc_id: string) =>
+  doc(db, col, doc_id);
