@@ -7,6 +7,8 @@ import Axiom from "../../utils/config/axiom-config.ts";
 
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
+import { add_team_joined_user_db } from "../../utils/controllers/users.ts";
+
 export const greet_new_team_member = () => {
   app.event("team_join", async ({ event, client, logger }) => {
     try {
@@ -16,6 +18,8 @@ export const greet_new_team_member = () => {
       const userInfo = await client.users.info({
         user: userId,
       });
+
+      const user_name = userInfo.user?.real_name ?? "";
 
       // Open a direct message channel with the user
       const channel = await client.conversations.open({
@@ -29,6 +33,8 @@ export const greet_new_team_member = () => {
         channel: channel.channel?.id ?? "",
         text: message,
       });
+
+      await add_team_joined_user_db(userId, user_name);
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         { greeting_message: welcome_message_sent },
