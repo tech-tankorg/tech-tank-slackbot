@@ -8,6 +8,7 @@ import Axiom from "../../utils/config/axiom-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
 import { add_team_joined_user_db } from "../../utils/controllers/users.ts";
+import { append_user_to_welcome_lst } from "../../utils/controllers/welcomes.ts";
 
 export const greet_new_team_member = () => {
   app.event("team_join", async ({ event, client, logger }) => {
@@ -34,7 +35,10 @@ export const greet_new_team_member = () => {
         text: message,
       });
 
-      await add_team_joined_user_db(userId, user_name);
+      await Promise.all([
+        add_team_joined_user_db(userId, user_name),
+        append_user_to_welcome_lst(userId),
+      ]);
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         { greeting_message: welcome_message_sent },

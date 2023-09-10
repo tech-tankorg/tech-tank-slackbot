@@ -25,3 +25,8 @@ export const sanity_letter_section = z.object({
   letter_description: z.string(),
   scheduled_post_date: z.string(),
 });
+
+export const welcomes_type = z.object({
+  users: z.array(z.string()),
+  time_stamp: z.string(),
+});
