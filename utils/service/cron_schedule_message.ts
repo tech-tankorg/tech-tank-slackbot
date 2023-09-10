@@ -1,10 +1,11 @@
 import { CronJob } from "cron";
 import {
   CRON_FOR_SCHEDULE_MESSAGE,
+  CRON_FOR_NEWSLETTER,
+  CRON_EVERY_MONDAY_AT_10,
+  CRON_FOR_MENTOR_CHECKUP,
   GENERAL_QUESTIONS_START_DATE,
   WONDER_WEDNESDAY_QUESTIONS_START_DATE,
-  CRON_FOR_NEWSLETTER,
-  CRON_FOR_MENTOR_CHECKUP,
   TORONTO_TIME_ZONE_IDENTIFIER,
 } from "../constants/consts.ts";
 
@@ -22,6 +23,8 @@ import { wonder_wednesday_send_schedule_message } from "../../src/Events/wonder-
 import { post_newsletter } from "../../src/Events/post_newsletter.ts";
 
 import { mentor_checkup } from "src/Events/mentor_checkup.ts";
+
+import { send_weekly_welcome_message } from "../../src/Events/weekly_welcome_message.ts";
 
 const PREPPED_QUESTIONS = flatten_object(questions);
 
@@ -91,8 +94,19 @@ const job_3 = new CronJob(
   TORONTO_TIME_ZONE_IDENTIFIER
 );
 
+const job_4 = new CronJob(
+  CRON_EVERY_MONDAY_AT_10,
+  () => {
+    void send_weekly_welcome_message();
+  },
+  null,
+  false,
+  TORONTO_TIME_ZONE_IDENTIFIER
+);
+
 job_1.start();
 job_2.start();
 job_3.start();
+job_4.start();
 
-console.log(job_1.running, job_2.running, job_3.running);
+console.log(job_1.running, job_2.running, job_3.running, job_4.running);

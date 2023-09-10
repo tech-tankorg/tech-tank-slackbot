@@ -28,5 +28,5 @@ export const sanity_letter_section = z.object({
 
 export const welcomes_type = z.object({
   users: z.array(z.string()),
-  time_stamp: z.string(),
+  time_stamp: z.object({ seconds: z.number(), nanoseconds: z.number() }),
 });
