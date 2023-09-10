@@ -1,13 +1,17 @@
-import { get_collection_reference } from "../config/firebase-config.ts";
+import {
+  get_collection_reference,
+  get_document_reference,
+} from "../config/firebase-config.ts";
 import { redis } from "../config/upstash-config.ts";
 
 import {
-  addDoc,
   serverTimestamp,
   query,
   where,
   getDocs,
+  getDoc,
   orderBy,
+  setDoc,
 } from "firebase/firestore";
 
 export const add_user_to_db = async (
@@ -19,11 +23,24 @@ export const add_user_to_db = async (
     user_name,
     user_id,
     coc: coc_ack,
-    timestamp: serverTimestamp(),
+    coc_ack_timestamp: serverTimestamp(),
   };
 
-  const col_ref = await get_collection_reference("users");
-  await addDoc(col_ref, user);
+  const doc_ref = await get_document_reference("users", user_id);
+  const doc = await getDoc(doc_ref);
+
+  if (doc.exists()) {
+    await setDoc(
+      doc_ref,
+      {
+        coc: coc_ack,
+        coc_ack_timestamp: serverTimestamp(),
+      },
+      { merge: true }
+    );
+  } else {
+    await setDoc(doc_ref, user);
+  }
 
   const redis_user_id_exists = (await redis.get(user_id)) as string | undefined;
 
@@ -56,4 +73,22 @@ export const has_user_ack_coc = async (user_id: string) => {
   }
 
   return user_coc_ack_redis === "accepted";
+};
+
+export const add_team_joined_user_db = async (
+  user_id: string,
+  user_name: string
+) => {
+  const user = {
+    user_id,
+    user_name,
+    time_joined: serverTimestamp(),
+  };
+
+  try {
+    const doc_ref = await get_document_reference("users", user_id);
+    await setDoc(doc_ref, user);
+  } catch {
+    throw new Error("Failed to add to db");
+  }
 };
