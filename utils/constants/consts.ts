@@ -14,6 +14,7 @@ export const MATCH_GREETING_MESSAGE =
   ":speech_balloon: Here's the question/post of the week:";
 
 export const SUGGESTION_REGEX = /\/suggestion-(social|study|other)/i;
+export const THANKS_CHANNEL_REGEX = /!(thanks|shoutout|yay|celebrate)/;
 
 export const GOOGLE_CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID ?? "";
 export const GOOGLE_API_KEY = process.env.GOOGLE_CALENDAR_API_KEY ?? "";
