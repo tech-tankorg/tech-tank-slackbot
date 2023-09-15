@@ -24,3 +24,7 @@ export const channels = {
   mentor: "C05H67NDYQ4",
   notification: process.env.SLACK_NOTIFICATION_CHANNEL ?? "",
 } as const;
+
+export const bots = {
+  nemo: "U054MF49HGU",
+};
