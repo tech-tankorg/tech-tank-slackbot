@@ -23,12 +23,16 @@ export const mentor_checkup = async () => {
 
     const filtered_mentor_channel =
       mentor_channel.members !== undefined
-        ? mentor_channel.members.filter((item) => item !== admins.sammy)
+        ? mentor_channel.members.filter(
+            (item) => item !== admins.sammy && item !== admins.nemo
+          )
         : [];
 
     const filtered_mentee_channel =
       mentee_channel.members !== undefined
-        ? mentee_channel.members.filter((item) => item !== admins.sammy)
+        ? mentee_channel.members.filter(
+            (item) => item !== admins.sammy && item !== admins.nemo
+          )
         : [];
 
     const today = new Date();
