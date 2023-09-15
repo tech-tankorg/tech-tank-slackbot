@@ -1,27 +1,57 @@
 import app from "../../utils/config/slack-config.ts";
-import { THANKS_CHANNEL_REGEX } from "../../utils/constants/consts.ts";
+import {
+  THANKS_CHANNEL_REGEX,
+  THANKS_CHANNEL_MESSAGE_SEPARATOR,
+} from "../../utils/constants/consts.ts";
 
 import {
   shoutout_message_user_text_validation,
   shoutout_message_channel_validation,
 } from "../../utils/types/zod-types.ts";
 
+import {
+  get_recipients,
+  remove_chars,
+} from "../../utils/helpers/thanks-helpers.ts";
+
+import { create_thanks } from "../../utils/controllers/thanks-controller.ts";
+
 export const thanks = async () => {
   app.message(THANKS_CHANNEL_REGEX, async ({ client, message }) => {
     const msg = message as any;
-    const user_text = msg.text as string;
     const user_id_sender = msg.user as string;
-    const channel_msg_sentin = msg.channel as string;
 
     try {
       // we can only send this message in the thanks channel so first check that
-      const parsed_channel =
-        shoutout_message_channel_validation.parse(channel_msg_sentin);
+      shoutout_message_channel_validation.parse(msg.channel);
 
-      const parsed_user_text =
-        shoutout_message_user_text_validation.parse(user_text);
+      const parsed_user_text = shoutout_message_user_text_validation.parse(
+        msg.text
+      );
 
-      console.log(parsed_channel, parsed_user_text);
+      const recipients_tags = get_recipients(parsed_user_text);
+      const msg_text = remove_chars(
+        parsed_user_text,
+        THANKS_CHANNEL_MESSAGE_SEPARATOR
+      );
+      const recipients = remove_chars(
+        recipients_tags[0] ?? "",
+        THANKS_CHANNEL_REGEX
+      );
+
+      const user_id_receiver_array = recipients
+        .split(/[\s,]/)
+        .filter((item) => item !== "")
+        .map((item) => {
+          const formated_item = remove_chars(item, /(<|@|>)/g);
+          return formated_item;
+        });
+
+      await Promise.all(
+        user_id_receiver_array.map(async (user_id_receiver) => {
+          void create_thanks(user_id_receiver, user_id_sender, msg_text);
+        })
+      );
     } catch {
       await client.chat.postEphemeral({
         channel: msg.channel as string,
