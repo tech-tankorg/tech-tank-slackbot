@@ -6,7 +6,6 @@ export const admins = {
   niya: "U0555M9GTJS",
   riaz: "U0550E9JAUX",
   neal: "U0556267TN2",
-  nemo: "U054MF49HGU",
 } as const;
 
 export const channels = {
@@ -25,3 +24,7 @@ export const channels = {
   mentor: "C05H67NDYQ4",
   notification: process.env.SLACK_NOTIFICATION_CHANNEL ?? "",
 } as const;
+
+export const bots = {
+  nemo: "U054MF49HGU",
+};
