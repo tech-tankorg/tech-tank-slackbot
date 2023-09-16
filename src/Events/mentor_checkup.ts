@@ -4,7 +4,7 @@ import {
   generate_mentor_message,
 } from "../../utils/helpers/generate_message.ts";
 import Axiom from "../../utils/config/axiom-config.ts";
-import { channels, admins } from "../../utils/config/channel-config.ts";
+import { channels, admins, bots } from "../../utils/config/channel-config.ts";
 
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
@@ -23,12 +23,16 @@ export const mentor_checkup = async () => {
 
     const filtered_mentor_channel =
       mentor_channel.members !== undefined
-        ? mentor_channel.members.filter((item) => item !== admins.sammy)
+        ? mentor_channel.members.filter(
+            (item) => item !== admins.sammy && item !== bots.nemo
+          )
         : [];
 
     const filtered_mentee_channel =
       mentee_channel.members !== undefined
-        ? mentee_channel.members.filter((item) => item !== admins.sammy)
+        ? mentee_channel.members.filter(
+            (item) => item !== admins.sammy && item !== bots.nemo
+          )
         : [];
 
     const today = new Date();
