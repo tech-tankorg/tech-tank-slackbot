@@ -47,3 +47,10 @@ export const shoutout_message_user_text_validation = z
 export const shoutout_message_channel_validation = z
   .string()
   .includes(channels.thanks);
+
+export const db_thanks_type = z.object({
+  user_id_sender: z.string(),
+  message: z.string(),
+  user_id_receiver: z.string(),
+  date_created: z.object({ seconds: z.number(), nanoseconds: z.number() }),
+});

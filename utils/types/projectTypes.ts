@@ -1,6 +1,6 @@
 import type app from "../config/slack-config.ts";
 import type { z } from "zod";
-import type { sanity_letter_section } from "./zod-types.ts";
+import type { sanity_letter_section, db_thanks_type } from "./zod-types.ts";
 export type Channel = Record<string, string>;
 
 export type JokeType = "single" | "twopart";
@@ -117,3 +117,12 @@ export interface google_cal_event {
 export type app_home_view_response = Awaited<
   ReturnType<typeof app.client.views.publish>
 >;
+
+export interface thanks {
+  user_id_sender: string;
+  message: string;
+  date_created: { seconds: number; nanoseconds: number };
+}
+
+export type db_thanks = z.infer<typeof db_thanks_type>;
+export type db_thanks_no_reciever = Omit<db_thanks, "user_id_receiver">;

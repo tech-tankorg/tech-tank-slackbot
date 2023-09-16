@@ -14,7 +14,12 @@ import {
   remove_chars,
 } from "../../utils/helpers/thanks-helpers.ts";
 
-import { create_thanks } from "../../utils/controllers/thanks-controller.ts";
+import { generate_thanks_message } from "../../utils/helpers/generate_message.ts";
+
+import {
+  create_thanks,
+  get_thanks,
+} from "../../utils/controllers/thanks-controller.ts";
 
 export const thanks = async () => {
   app.message(THANKS_CHANNEL_REGEX, async ({ client, message }) => {
@@ -60,4 +65,33 @@ export const thanks = async () => {
       });
     }
   });
+};
+
+export const post_thanks_message = async () => {
+  try {
+    const thanks = await get_thanks();
+
+    const user_ids = Object.keys(thanks);
+
+    await Promise.all(
+      user_ids.map(async (user) => {
+        // Open a direct message channel with the user
+        const channel = await app.client.conversations.open({
+          users: user,
+        });
+
+        const message = generate_thanks_message(thanks[user] ?? [], user);
+
+        // Send the private message
+        const thanks_message_sent = await app.client.chat.postMessage({
+          channel: channel.channel?.id ?? "",
+          text: message,
+        });
+
+        return thanks_message_sent;
+      })
+    );
+  } catch (e) {
+    console.error(e);
+  }
 };
