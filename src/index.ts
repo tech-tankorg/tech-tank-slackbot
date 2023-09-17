@@ -8,6 +8,12 @@ import { sayHello } from "./Events/sayHello.ts";
 import { thoughtful_thursday_send_scheduled_message } from "./Events/send-scheduled-message.ts";
 import { wonder_wednesday_send_schedule_message } from "./Events/wonder-wednesday-schedule-message.ts";
 import { app_home_opened } from "./Events/app_home.ts";
+import {
+  open_coc_modal,
+  accept_coc,
+  deny_coc,
+} from "./Events/open_coc_modal.ts";
+import { thanks } from "../src/Events/thanks.ts";
 
 import { jokes } from "./Slash-commands/jokes.ts";
 import { suggestion } from "./Slash-commands/suggestions.ts";
@@ -21,12 +27,6 @@ import { flatten_object } from "../utils/helpers/flatten-object.ts";
 import questions from "../utils/constants/general-questions.json" assert { type: "json" };
 import wonder_wednesday_questions from "../utils/constants/wonder-wednesday-questions.json" assert { type: "json" };
 
-import {
-  open_coc_modal,
-  accept_coc,
-  deny_coc,
-} from "./Events/open_coc_modal.ts";
-
 const PREPPED_QUESTIONS = flatten_object(questions);
 // const test_channel = "C05BYP98MTR";
 // const test_channel_two = "C05C6KVHWAJ";
@@ -34,7 +34,7 @@ const PREPPED_QUESTIONS = flatten_object(questions);
 // Events
 sayHello();
 greet_new_team_member();
-await thoughtful_thursday_send_scheduled_message(
+void thoughtful_thursday_send_scheduled_message(
   PREPPED_QUESTIONS,
   channels.general,
   GENERAL_QUESTIONS_START_DATE,
@@ -42,7 +42,7 @@ await thoughtful_thursday_send_scheduled_message(
   1
 );
 
-await wonder_wednesday_send_schedule_message(
+void wonder_wednesday_send_schedule_message(
   wonder_wednesday_questions,
   channels.study,
   WONDER_WEDNESDAY_QUESTIONS_START_DATE,
@@ -60,6 +60,8 @@ open_coc_modal();
 // actions
 accept_coc();
 deny_coc();
+
+void thanks();
 
 await (async () => {
   // Start your app
