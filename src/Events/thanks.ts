@@ -1,7 +1,7 @@
 import app from "../../utils/config/slack-config.ts";
 import {
   THANKS_CHANNEL_REGEX,
-  THANKS_CHANNEL_MESSAGE_SEPARATOR,
+  THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX,
 } from "../../utils/constants/consts.ts";
 
 import { shoutout_message_user_text_validation } from "../../utils/types/zod-types.ts";
@@ -31,7 +31,7 @@ export const thanks = async () => {
       const recipients_tags = get_recipients(parsed_user_text);
       const msg_text = remove_chars(
         parsed_user_text,
-        THANKS_CHANNEL_MESSAGE_SEPARATOR
+        THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX
       );
       const recipients = remove_chars(
         recipients_tags[0] ?? "",

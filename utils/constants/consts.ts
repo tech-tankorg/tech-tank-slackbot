@@ -18,8 +18,10 @@ export const THANKS_CHANNEL_REGEX = /!(thanks|shoutout|yay|celebrate)/;
 export const THANKS_CHANNEL_MESSAGE_VALIDATION_REGEX =
   /^(?=.*(!thanks|!shoutout))(?!(.*(!thanks|!shoutout)){2,}).*$/;
 
-export const THANKS_CHANNEL_MESSAGE_SEPARATOR =
+export const THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX =
   /!(thanks|shoutout)\s(<@[^>]+>,?\s*)+/g;
+
+export const USER_ID_REGEX = /U\d{10}/;
 
 export const GOOGLE_CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID ?? "";
 export const GOOGLE_API_KEY = process.env.GOOGLE_CALENDAR_API_KEY ?? "";

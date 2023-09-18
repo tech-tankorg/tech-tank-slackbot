@@ -1,11 +1,11 @@
-import { THANKS_CHANNEL_MESSAGE_SEPARATOR } from "../constants/consts.ts";
+import { THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX } from "../constants/consts.ts";
 
 import type {
   db_thanks,
   db_thanks_no_reciever,
 } from "../types/projectTypes.ts";
 export const get_recipients = (message: string) => {
-  const mentions = message.match(THANKS_CHANNEL_MESSAGE_SEPARATOR);
+  const mentions = message.match(THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX);
 
   if (mentions !== null) {
     return mentions.map((mention) => mention.trim());

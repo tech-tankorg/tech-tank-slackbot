@@ -9,7 +9,10 @@ import {
 
 import { subDays } from "date-fns";
 
-import { db_thanks_type } from "../types/zod-types.ts";
+import {
+  db_thanks_type,
+  create_thanks_usr_name_validation,
+} from "../types/zod-types.ts";
 
 import { format_thanks_reponse } from "../helpers/thanks-helpers.ts";
 
@@ -20,43 +23,16 @@ export const create_thanks = async (
 ) => {
   const col_ref = await get_collection_reference("thanks-channel");
 
-  // ____________
-  // This is commented out for testing purposes. May come in hand for a revision
-  // const now = new Date();
-  // const doc_ref = await get_document_reference(
-  //   "thanks-channel",
-  //   user_id_receiver
-  // );
+  const parsed_user_id_receiver =
+    create_thanks_usr_name_validation.parse(user_id_receiver);
 
-  // const doc_snapshot = await getDoc(doc_ref);
-
-  // if (doc_snapshot.exists()) {
-  //   await updateDoc(doc_ref, {
-  //     thank_you: arrayUnion({
-  //       data_created: now,
-  //       user_id_sender,
-  //       message,
-  //     }),
-  //   });
-  // } else {
-  //   await setDoc(doc_ref, {
-  //     user_id_receiver,
-  //     thank_you: [
-  //       {
-  //         data_created: now,
-  //         user_id_sender,
-  //         message,
-  //       },
-  //     ],
-  //   });
-  // }
-
-  // ____
+  const parsed_user_id_sender =
+    create_thanks_usr_name_validation.parse(user_id_sender);
 
   await addDoc(col_ref, {
     date_created: serverTimestamp(),
-    user_id_sender,
-    user_id_receiver,
+    user_id_sender: parsed_user_id_sender,
+    user_id_receiver: parsed_user_id_receiver,
     message,
   });
 };

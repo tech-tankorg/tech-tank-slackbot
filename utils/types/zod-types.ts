@@ -1,5 +1,8 @@
 import { z } from "zod";
-import { THANKS_CHANNEL_MESSAGE_VALIDATION_REGEX } from "../constants/consts.ts";
+import {
+  THANKS_CHANNEL_MESSAGE_VALIDATION_REGEX,
+  USER_ID_REGEX,
+} from "../constants/consts.ts";
 
 export const joke_category = z.union([
   z.literal("programming"),
@@ -49,3 +52,7 @@ export const db_thanks_type = z.object({
   user_id_receiver: z.string(),
   date_created: z.object({ seconds: z.number(), nanoseconds: z.number() }),
 });
+
+export const create_thanks_usr_name_validation = z
+  .string()
+  .regex(USER_ID_REGEX, { message: "Must match SLACK user id: UXXXXXXXXX" });
