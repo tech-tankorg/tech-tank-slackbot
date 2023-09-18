@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { channels } from "../config/channel-config.ts";
 import { THANKS_CHANNEL_MESSAGE_VALIDATION_REGEX } from "../constants/consts.ts";
 
 export const joke_category = z.union([
@@ -43,10 +42,6 @@ export const shoutout_message_user_text_validation = z
       .startsWith("!shoutout")
       .regex(THANKS_CHANNEL_MESSAGE_VALIDATION_REGEX)
   );
-
-export const shoutout_message_channel_validation = z
-  .string()
-  .includes(channels.thanks);
 
 export const db_thanks_type = z.object({
   user_id_sender: z.string(),

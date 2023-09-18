@@ -4,10 +4,7 @@ import {
   THANKS_CHANNEL_MESSAGE_SEPARATOR,
 } from "../../utils/constants/consts.ts";
 
-import {
-  shoutout_message_user_text_validation,
-  shoutout_message_channel_validation,
-} from "../../utils/types/zod-types.ts";
+import { shoutout_message_user_text_validation } from "../../utils/types/zod-types.ts";
 
 import {
   get_recipients,
@@ -27,9 +24,6 @@ export const thanks = async () => {
     const user_id_sender = msg.user as string;
 
     try {
-      // we can only send this message in the thanks channel so first check that
-      shoutout_message_channel_validation.parse(msg.channel);
-
       const parsed_user_text = shoutout_message_user_text_validation.parse(
         msg.text
       );
