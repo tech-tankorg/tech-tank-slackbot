@@ -2,7 +2,9 @@ import app from "../../utils/config/slack-config.ts";
 import {
   THANKS_CHANNEL_REGEX,
   THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX,
+  AXIOM_DATA_SET,
 } from "../../utils/constants/consts.ts";
+import Axiom from "../../utils/config/axiom-config.ts";
 
 import { shoutout_message_user_text_validation } from "../../utils/types/zod-types.ts";
 
@@ -51,12 +53,14 @@ export const thanks = async () => {
           void create_thanks(user_id_receiver, user_id_sender, msg_text);
         })
       );
-    } catch {
+    } catch (e) {
       await client.chat.postEphemeral({
         channel: msg.channel as string,
         text: "The message needs to meet the following criteria: 1). It need to start with !thanks or !shoutout. 2). The message cannot contain multiple !thanks/!shoutouts",
         user: user_id_sender,
       });
+
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [{ generate_thanks: e }]);
     }
   });
 };
@@ -67,7 +71,7 @@ export const post_thanks_message = async () => {
 
     const user_ids = Object.keys(thanks);
 
-    await Promise.all(
+    const sent_message_array = await Promise.all(
       user_ids.map(async (user) => {
         // Open a direct message channel with the user
         const channel = await app.client.conversations.open({
@@ -85,7 +89,12 @@ export const post_thanks_message = async () => {
         return thanks_message_sent;
       })
     );
+    await Axiom.ingestEvents(AXIOM_DATA_SET, [
+      { post_thanks_message: sent_message_array },
+    ]);
   } catch (e) {
-    console.error(e);
+    await Axiom.ingestEvents(AXIOM_DATA_SET, [
+      { error_post_thanks_message: e },
+    ]);
   }
 };
