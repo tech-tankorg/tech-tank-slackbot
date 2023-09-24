@@ -1,4 +1,8 @@
 import { z } from "zod";
+import {
+  THANKS_CHANNEL_MESSAGE_VALIDATION_REGEX,
+  USER_ID_REGEX,
+} from "../constants/consts.ts";
 
 export const joke_category = z.union([
   z.literal("programming"),
@@ -30,3 +34,25 @@ export const welcomes_type = z.object({
   users: z.array(z.string()),
   time_stamp: z.object({ seconds: z.number(), nanoseconds: z.number() }),
 });
+
+export const shoutout_message_user_text_validation = z
+  .string()
+  .startsWith("!thanks")
+  .regex(THANKS_CHANNEL_MESSAGE_VALIDATION_REGEX)
+  .or(
+    z
+      .string()
+      .startsWith("!shoutout")
+      .regex(THANKS_CHANNEL_MESSAGE_VALIDATION_REGEX)
+  );
+
+export const db_thanks_type = z.object({
+  user_id_sender: z.string(),
+  message: z.string(),
+  user_id_receiver: z.string(),
+  date_created: z.object({ seconds: z.number(), nanoseconds: z.number() }),
+});
+
+export const create_thanks_usr_name_validation = z
+  .string()
+  .regex(USER_ID_REGEX, { message: "Must match SLACK user id: UXXXXXXXXX" });

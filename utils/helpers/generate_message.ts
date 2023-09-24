@@ -1,4 +1,5 @@
 import { admins, channels } from "../config/channel-config.ts";
+import type { db_thanks_no_reciever } from "../types/projectTypes.ts";
 
 export const generate_welcome_message = () => {
   const greeting = `
@@ -139,4 +140,17 @@ export const generate_mentor_message = () => {
 export const generate_mentee_message = () => {
   const mentee_message = `Hey, how is your mentorship going? How are the meetings and progress?`;
   return mentee_message;
+};
+
+export const generate_thanks_message = (
+  msg: db_thanks_no_reciever[],
+  user: string
+) => {
+  const part_two_msg = msg.map((item) => {
+    return `<@${item.user_id_sender}>: ${item.message}`;
+  });
+
+  return `Hey <@${user}>! Thank you for being awesome! Here's what community members had to say: \n\n${part_two_msg.join(
+    "\n"
+  )}`;
 };

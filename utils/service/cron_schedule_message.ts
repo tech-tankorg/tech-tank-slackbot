@@ -25,6 +25,7 @@ import { post_newsletter } from "../../src/Events/post_newsletter.ts";
 import { mentor_checkup } from "src/Events/mentor_checkup.ts";
 
 import { send_weekly_welcome_message } from "../../src/Events/weekly_welcome_message.ts";
+import { post_thanks_message } from "../../src/Events/thanks.ts";
 
 const PREPPED_QUESTIONS = flatten_object(questions);
 
@@ -98,6 +99,7 @@ const job_4 = new CronJob(
   CRON_EVERY_MONDAY_AT_10,
   () => {
     void send_weekly_welcome_message();
+    void post_thanks_message();
   },
   null,
   false,

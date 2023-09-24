@@ -7,9 +7,10 @@ export const dm_lst_of_people = async (
 ) => {
   return await Promise.allSettled(
     lst_of_user_id.map(async (id) => {
-      const add_person = additional_person ?? "";
+      const users =
+        additional_person !== null ? `${id},${additional_person}` : `${id}`;
       const channel = await app.client.conversations.open({
-        users: `${id},${add_person}`,
+        users,
       });
 
       const sent_message = await app.client.chat.postMessage({
