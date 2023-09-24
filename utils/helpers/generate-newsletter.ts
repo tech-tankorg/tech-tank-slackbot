@@ -14,6 +14,7 @@ import {
   GOOGLE_CALENDAR_ID,
   GOOGLE_API_KEY,
   TORONTO_TIME_ZONE_IDENTIFIER,
+  TECHTANK_EVENT_TAG,
 } from "../constants/consts.ts";
 
 import { generate_sanity_img_url } from "../config/sanity-config.ts";
@@ -70,7 +71,38 @@ const transform_to_block_fyi = (section: sanity_fyi_block[]) => {
 };
 
 const transform_to_block_upcoming_events = (section: google_cal_event[]) => {
-  return section.map((sec) => {
+  const tech_tank_events = section.filter(
+    (event) => !event.description.includes(TECHTANK_EVENT_TAG)
+  );
+
+  return tech_tank_events.map((sec) => {
+    const web_address = find_web_address(sec.description) ?? "#";
+
+    const start_date_time = new Date(sec.start.dateTime);
+    const start_date_time_formatted = formatInTimeZone(
+      start_date_time,
+      TORONTO_TIME_ZONE_IDENTIFIER,
+      "MMM do - p"
+    );
+
+    return {
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: `\n* ${start_date_time_formatted} | <${web_address}|${sec.summary}>* @ ${sec.location}`,
+      },
+    };
+  });
+};
+
+const transform_to_block_upcoming_events_techtank = (
+  section: google_cal_event[]
+) => {
+  const tech_tank_events = section.filter((event) =>
+    event.description.includes(TECHTANK_EVENT_TAG)
+  );
+
+  return tech_tank_events.map((sec) => {
     const web_address = find_web_address(sec.description) ?? "#";
 
     const start_date_time = new Date(sec.start.dateTime);
@@ -121,6 +153,9 @@ export const generate_newsletter = async () => {
     const transform_block_upcoming_events = transform_to_block_upcoming_events(
       response[1]
     );
+
+    const transform_block_upcoming_events_techtank =
+      transform_to_block_upcoming_events_techtank(response[1]);
 
     const community_highlight_member_name = response[0].letter_member_highlight
       .community_member_name as string;
@@ -212,6 +247,17 @@ export const generate_newsletter = async () => {
 
         ...transform_block_info,
 
+        {
+          type: "divider",
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: ":spiral_calendar_pad: |   *UPCOMING TechTank EVENTS*  | :spiral_calendar_pad: ",
+          },
+        },
+        ...transform_block_upcoming_events_techtank,
         {
           type: "divider",
         },
