@@ -27,11 +27,11 @@ export const send_weekly_welcome_message = async () => {
     const formatted_users_array = format_users_array(doc.users);
 
     if (doc.users.length >= 1) {
-      const message = `Hey everyone, please join us in welcoming ${formatted_users_array.join(
+      const message = `Hey everyone! Please join us in welcoming our newest members ${formatted_users_array.join(
         ", "
-      )} to the tank!`;
+      )} to the tank!:tech_tank: :tech_tank: `;
       await app.client.chat.postMessage({
-        channel: channels.general,
+        channel: channels.intro,
         text: message,
       });
 
