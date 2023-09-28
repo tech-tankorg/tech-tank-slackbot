@@ -53,6 +53,12 @@ export const thanks = async () => {
           void create_thanks(user_id_receiver, user_id_sender, msg_text);
         })
       );
+
+      await client.chat.postEphemeral({
+        channel: msg.channel as string,
+        text: "We've saved your message!",
+        user: user_id_sender,
+      });
     } catch (e) {
       await client.chat.postEphemeral({
         channel: msg.channel as string,
