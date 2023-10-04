@@ -7,11 +7,9 @@ import type {
 export const get_recipients = (message: string) => {
   const mentions = message.match(THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX);
 
-  if (mentions !== null) {
-    return mentions.map((mention) => mention.trim());
-  } else {
-    return [];
-  }
+  if (mentions === null) return [];
+
+  return mentions.map((mention) => mention.trim());
 };
 
 export const remove_chars = (message: string, reg_exp: RegExp) => {
