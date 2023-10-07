@@ -10,7 +10,8 @@ export const get_upcoming_events_for_the_month = async (
   google_calendar_id: string,
   google_api_key: string
 ) => {
-  const API_REQ = `https://www.googleapis.com/calendar/v3/calendars/${google_calendar_id}/events?key=${google_api_key}`;
+  const start_of_month = startOfMonth(new Date());
+  const API_REQ = `https://www.googleapis.com/calendar/v3/calendars/${google_calendar_id}/events?key=${google_api_key}&timeMin=${start_of_month.toISOString()}`;
 
   const options = {
     headers: {
@@ -24,7 +25,6 @@ export const get_upcoming_events_for_the_month = async (
 
     const events = gcal_event.parse(result.data.items);
 
-    const start_of_month = startOfMonth(new Date());
     const end_of_month = endOfMonth(new Date());
 
     const filtered_upcoming_events = events.filter((event) => {
