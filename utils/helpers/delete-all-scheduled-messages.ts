@@ -5,10 +5,7 @@ await (async () => {
   try {
     const scheduled_messages = await app.client.chat.scheduledMessages.list();
 
-    const scheduled_message_array =
-      scheduled_messages.scheduled_messages !== undefined
-        ? scheduled_messages.scheduled_messages
-        : [];
+    const scheduled_message_array = scheduled_messages.scheduled_messages ?? [];
 
     const delete_id_channel_lst =
       flatten_all_scheduled_messages_reponse_for_delete(
