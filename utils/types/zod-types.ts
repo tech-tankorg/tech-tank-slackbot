@@ -56,3 +56,25 @@ export const db_thanks_type = z.object({
 export const create_thanks_usr_name_validation = z
   .string()
   .regex(USER_ID_REGEX, { message: "Must match SLACK user id: UXXXXXXXXX" });
+
+export const gcal_event = z.array(
+  z.object({
+    kind: z.string(),
+    etag: z.string(),
+    id: z.string(),
+    status: z.string(),
+    htmlLink: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    summary: z.string(),
+    description: z.string(),
+    location: z.string(),
+    creator: z.object({ email: z.string(), self: z.boolean() }),
+    organizer: z.object({ email: z.string(), self: z.boolean() }),
+    start: z.object({ dateTime: z.string(), timeZone: z.string() }),
+    end: z.object({ dateTime: z.string(), timeZone: z.string() }),
+    iCalUID: z.string(),
+    sequence: z.number(),
+    eventType: z.string(),
+  })
+);
