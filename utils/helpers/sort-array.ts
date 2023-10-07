@@ -15,7 +15,7 @@ export const sortArray = (msgRes: ScheduledMessageResponse[]) => {
   });
 };
 
-export const generic_sort_array = <T extends google_cal_event>(arr: T[]) => {
+export const generic_sort_array = <T extends google_cal_event>(arr: T) => {
   arr.sort((a, b) => {
     const firstValue = a.start.dateTime;
     const secondValue = b.start.dateTime;

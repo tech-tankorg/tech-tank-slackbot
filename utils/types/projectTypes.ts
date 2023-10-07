@@ -1,6 +1,10 @@
 import type app from "../config/slack-config.ts";
 import type { z } from "zod";
-import type { sanity_letter_section, db_thanks_type } from "./zod-types.ts";
+import type {
+  sanity_letter_section,
+  db_thanks_type,
+  gcal_event,
+} from "./zod-types.ts";
 export type Channel = Record<string, string>;
 
 export type JokeType = "single" | "twopart";
@@ -78,41 +82,7 @@ export interface transform_Block_img_type {
   alt_text: string;
 }
 
-export interface google_cal_event {
-  kind: string;
-  etag: string;
-  id: string;
-  status: string;
-  htmlLink: string;
-  created: string;
-  updated: string;
-  summary: string;
-  description: string;
-  location: string;
-
-  creator: {
-    email: string;
-    self: boolean;
-  };
-
-  organizer: {
-    email: string;
-    self: boolean;
-  };
-
-  start: {
-    dateTime: string;
-    timeZone: string;
-  };
-  end: {
-    dateTime: string;
-    timeZone: string;
-  };
-
-  iCalUID: string;
-  sequence: number;
-  eventType: string;
-}
+export type google_cal_event = z.infer<typeof gcal_event>;
 
 export type app_home_view_response = Awaited<
   ReturnType<typeof app.client.views.publish>
