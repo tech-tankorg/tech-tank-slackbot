@@ -10,27 +10,32 @@ This is a space for all techies (devs, designers, PMs and beyond) from newbies/j
 When you've had a moment to settle in, don't forget to head over to the <#${channels.intro}> channel to introduce yourself!
 
 Afterwards, you can check out some of our other channels. Here's a list of our currently active channels you should consider joining:
+
 • <#${channels.networking}>: this is where we post all in-person and virtual networking/job-related events! We also have in-house virtual workshops that cover most job-search topics!
 
 • <#${channels.social}>: we hang out a lot. We go climbing, play boardgames, for drinks/food, and many more! (Most of us are in Toronto - sorry if you're elsewhere :sob:)
 
 • <#${channels.study}>: this is where we post information about study sessions (biweekly on Tuesdays) and you can ask any questions about code/study material/projects you're stuck on or need help debugging!
 
-• <#${channels.jobs}>: this is where we post jobs that we come across. Feel free to ask any job-related questions here, too!
+• <#${channels.job_posting}>: this is where we post jobs that we come across. For any job-search/job-prep related questions, we have a channel for that too... right below :)
+
+• <#${channels.job_prep}>: A space that supports job-preppers through: resume/portfolio feedback, interview prep (including technical assessments), and mock interviews sessions!
 
 • <#${channels.random}>: just random stuff. no further explanation needed :stuck_out_tongue_winking_eye:
 
-• <#${channels.ugh}>: a space to rant or complain about anything and everything:purple_heart:
+• <#${channels.rant_tank}>: a space to rant or complain about anything and everything:purple_heart:
 
 • <#${channels.resources}>: post any notes/cool resources you come across!
 
 • <#${channels.project_proposals}>: Do you have a cool project idea and need some team members? Do you want to join a project? If yes, then this is the place that allows you to share, create, and join projects!
 
-• <#${channels.coffee_chat}>: This is where you go to join in on the social mixer for our Slack community!! Every other week (Mondays at 10 AM EST), Shuffl -- the master of pairs and groups --  works its magic to shuffle you into fresh groups of three via direct messages! 
+• <#${channels.coffee_chat}>: This is where you go to join in on the social mixer for our Slack community!! Every other week (Mondays at 10 AM EST), Shuffl -- the master of pairs and groups -- works its magic to shuffle you into fresh groups of three via direct messages!
 
-And of course, if you don't see an appropriate place to post, you can always just post in #general! Lastly, if you want to stay updated with all our events, feel free to subscribe to our public calendar using one of the following links <https://calendar.google.com/calendar/embed?src=cfda7c6ac8ce0fc9eaf3acb92419608d7c3cc9bcf3ed49b5f7c7d8a1058f697c%40group.calendar.google.com&ctz=America%2FToronto.|generic calendar link> or <https://calendar.google.com/calendar/ical/cfda7c6ac8ce0fc9eaf3acb92419608d7c3cc9bcf3ed49b5f7c7d8a1058f697c%40group.calendar.google.com/public/basic.ics|generic calendar link for ical format>. We also want to provide you a link to our code of conduct which you can find <https://www.techtankto.com/code-of-conduct|here>.
+And of course, if you don't see an appropriate place to post, you can always just post in #general! We would also love to hear your ideas! So at anytime, feel free to use the "/suggestion" command to send your idea's directly to the admin team. 
 
-If you have any questions or concerns at any time, please don't hesitate to contact <@${admins.chris}>, <@${admins.eric}>, <@${admins.sammy}>, <@${admins.nonso}>, <@${admins.niya}>, <@${admins.riaz}>, or <@${admins.neal}> your friendly admins:party_blob:
+If you want to stay updated with all our events, feel free to subscribe to our public calendar using one of the following links <https://calendar.google.com/calendar/embed?src=cfda7c6ac8ce0fc9eaf3acb92419608d7c3cc9bcf3ed49b5f7c7d8a1058f697c%40group.calendar.google.com&ctz=America%2FToronto|generic calendar link> or <https://calendar.google.com/calendar/ical/cfda7c6ac8ce0fc9eaf3acb92419608d7c3cc9bcf3ed49b5f7c7d8a1058f697c%40group.calendar.google.com/public/basic.ics|calendar link for apple devices>. Lastly, we wanted to provide you a link to our code of conduct which you can find <https://www.techtankto.com/code-of-conduct|here>.
+
+If you have any questions or concerns at any time, please don't hesitate to contact <@${admins.chris}>, <@${admins.sammy}>, <@${admins.nonso}>, <@${admins.niya}>, <@${admins.riaz}>, <@${admins.neal}>, or <@${admins.eric}> your friendly admins:party_blob:
 
 Thanks for reading, and we hope you have a good swim :fish:
 `;
