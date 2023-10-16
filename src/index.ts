@@ -15,6 +15,7 @@ import { thanks } from "../src/Events/thanks.ts";
 
 import { jokes } from "./Slash-commands/jokes.ts";
 import { suggestion } from "./Slash-commands/suggestions.ts";
+import { notify_admins } from "./Slash-commands/notify-admins.ts";
 
 import { AXIOM_DATA_SET } from "../utils/constants/consts.ts";
 
@@ -49,6 +50,7 @@ app_home_opened();
 jokes();
 suggestion();
 open_coc_modal();
+notify_admins();
 
 // actions
 accept_coc();
