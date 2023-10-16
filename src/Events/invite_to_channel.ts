@@ -25,7 +25,7 @@ export const invite_to_channel = async () => {
     });
 
     await Axiom.ingestEvents(AXIOM_DATA_SET, [
-      { error_invite_channel: invite_complete },
+      { invite_channel: invite_complete },
     ]);
   } catch (error) {
     await Axiom.ingestEvents(AXIOM_DATA_SET, [{ error_invite_channel: error }]);
