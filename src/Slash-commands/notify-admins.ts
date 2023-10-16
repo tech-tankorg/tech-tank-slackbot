@@ -1,37 +1,32 @@
 import app from "../../utils/config/slack-config.ts";
 import Axiom from "../../utils/config/axiom-config.ts";
 
-import {
-  AXIOM_DATA_SET,
-  SUGGESTION_REGEX,
-} from "../../utils/constants/consts.ts";
+import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
-import { create_suggestion } from "../../utils/controllers/create-suggestion.ts";
-import { generate_suggestion_notification_message } from "../../utils/helpers/generate_message.ts";
+import { create_admin_notification } from "../../utils/controllers/admin-notifications.ts";
+import { generate_admin_notification_message } from "../../utils/helpers/generate_message.ts";
 
 import { channels } from "../../utils/config/channel-config.ts";
 
-export const suggestion = () => {
-  app.command(SUGGESTION_REGEX, async ({ ack, body, respond, client }) => {
+export const notify_admins = () => {
+  app.command("/notify-admins", async ({ ack, body, respond, client }) => {
     await ack();
 
     try {
-      const tag = body.command.split("/")[1] ?? "";
-      const suggestion = body.text;
+      const user_message = body.text;
       const user_id = body.user_id;
       const user_profile = await client.users.profile.get({ user: user_id });
       const user_name = user_profile.profile?.display_name_normalized ?? "";
 
-      if (suggestion === "")
-        throw new Error("Suggestion cannot be empty. Try again!");
+      if (user_message === "")
+        throw new Error("message cannot be empty. Try again!");
 
-      const message = generate_suggestion_notification_message(
+      const message = generate_admin_notification_message(
         user_name,
-        suggestion,
-        tag
+        user_message
       );
 
-      await create_suggestion(tag, suggestion, user_id, user_name);
+      await create_admin_notification(user_message, user_id, user_name);
 
       await client.chat.postMessage({
         channel: channels.notification,
@@ -41,14 +36,13 @@ export const suggestion = () => {
       await respond({
         response_type: "ephemeral",
         mrkdwn: true,
-        text: `Your suggestion has successfully been submitted!`,
+        text: `Your message has successfully been submitted!`,
       });
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
-          suggestion: {
-            tag,
-            suggestion,
+          user_admin_notification_system: {
+            user_message,
             user_id,
             user_name,
           },
@@ -63,7 +57,7 @@ export const suggestion = () => {
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
-          suggestion_error: {
+          error_user_admin_notification_system: {
             err,
             user_id: body.user_id,
             user_name: body.user_name,

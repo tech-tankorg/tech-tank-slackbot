@@ -102,7 +102,7 @@ You know, I've always been a curious little fish, and this week, I've got a burn
   return `Start a thread!! I wonder: *${question_of_the_week}* :thread:`;
 };
 
-export const generate_notification_message = (
+export const generate_suggestion_notification_message = (
   user_name: string,
   suggestion: string,
   tag: string
@@ -131,6 +131,33 @@ export const generate_notification_message = (
         text: {
           type: "mrkdwn",
           text: `*Suggestion*: ${suggestion}`,
+        },
+      },
+    ],
+  };
+};
+
+export const generate_admin_notification_message = (
+  user_name: string,
+  message: string
+) => {
+  return {
+    mrkdwn: true,
+    text: `A new message using the *"/notify-admins"* command has been submitted by ${user_name}. \n\n*Message*: ${message}`,
+    blocks: [
+      {
+        type: "header",
+        text: {
+          type: "plain_text",
+          text: `A new message using the *"/notify-admins"* command has been submitted by ${user_name}.`,
+          emoji: true,
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `*Message*: ${message}`,
         },
       },
     ],
