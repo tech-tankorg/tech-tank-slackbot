@@ -9,6 +9,7 @@ export const admins = {
 } as const;
 
 export const channels = {
+  announcements: "",
   intro: "C052KD3ELTH",
   networking: "C057LAEN8DP",
   social: "C04UA2H8ARG",
