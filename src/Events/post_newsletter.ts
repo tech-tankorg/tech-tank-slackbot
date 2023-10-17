@@ -15,7 +15,14 @@ export const post_newsletter = async (): Promise<void> => {
     });
 
     await Axiom.ingestEvents(AXIOM_DATA_SET, [
-      { newsletter_general_channel: message },
+      {
+        newsletter_general_channel: {
+          app_id: message.app_id,
+          channel_id: message.channel,
+          channel_ok: message.ok,
+          text: message.text,
+        },
+      },
     ]);
   } catch (error) {
     await Axiom.ingestEvents(AXIOM_DATA_SET, [

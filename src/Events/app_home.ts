@@ -21,7 +21,14 @@ export const app_home_opened = () => {
       });
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
-        { app_home_opened: { userId, published_view } },
+        {
+          app_home_opened: {
+            userId,
+            published_view_view: published_view.ok,
+            published_view_app_id: published_view.view?.app_id,
+            published_view_bot_id: published_view.view?.bot_id,
+          },
+        },
       ]);
     } catch (error) {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
