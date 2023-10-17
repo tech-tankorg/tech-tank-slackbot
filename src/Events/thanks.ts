@@ -66,7 +66,7 @@ export const thanks = async () => {
         user: user_id_sender,
       });
 
-      await Axiom.ingestEvents(AXIOM_DATA_SET, [{ generate_thanks: e }]);
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [{ error_generate_thanks: e }]);
     }
   });
 };

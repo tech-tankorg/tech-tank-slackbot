@@ -35,11 +35,24 @@ export const greet_new_team_member = () => {
       await append_user_to_welcome_lst(userId);
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
-        { greeting_message: welcome_message_sent },
-        { user_info: userInfo },
+        {
+          welcome_user: {
+            id: userInfo.user?.id,
+            name: userInfo.user?.name,
+            f_name: userInfo.user?.profile?.first_name,
+            l_name: userInfo.user?.profile?.last_name,
+            normalize_name: userInfo.user?.profile?.real_name_normalized,
+            time_zone: userInfo.user?.tz,
+            time_zone_label: userInfo.user?.tz_label,
+            greeting_message_channel: welcome_message_sent.channel,
+            greeting_message_user: welcome_message_sent.message?.user,
+            greeting_message_bot_id: welcome_message_sent.message?.bot_id,
+            greeting_message_message: welcome_message_sent.message?.text,
+            greeting_message_ok: welcome_message_sent.ok,
+          },
+        },
       ]);
     } catch (error) {
-      logger.error(error);
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         { greeting_message_error: error },
       ]);
