@@ -8,6 +8,13 @@ import { generate_admin_notification_message } from "../../utils/helpers/generat
 
 import { channels } from "../../utils/config/channel-config.ts";
 
+import Sentry from "../../utils/config/sentry.config.ts";
+
+const transaction = Sentry.startTransaction({
+  op: "admin-notification-system",
+  name: "Admin notification system",
+});
+
 export const notify_admins = () => {
   app.command("/notify-admins", async ({ ack, body, respond, client }) => {
     await ack();
@@ -41,7 +48,7 @@ export const notify_admins = () => {
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
-          user_admin_notification_system: {
+          notify_admins: {
             user_message,
             user_id,
             user_name,
@@ -57,13 +64,16 @@ export const notify_admins = () => {
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
-          error_user_admin_notification_system: {
+          error_notify_admins: {
             err,
             user_id: body.user_id,
             user_name: body.user_name,
           },
         },
       ]);
+      Sentry.captureException(err);
+    } finally {
+      transaction.finish();
     }
   });
 };
