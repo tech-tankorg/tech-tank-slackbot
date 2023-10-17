@@ -29,7 +29,7 @@ export const notify_admins = () => {
         throw new Error("message cannot be empty. Try again!");
 
       const message = generate_admin_notification_message(
-        user_name,
+        user_id,
         user_message
       );
 

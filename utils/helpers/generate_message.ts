@@ -138,18 +138,18 @@ export const generate_suggestion_notification_message = (
 };
 
 export const generate_admin_notification_message = (
-  user_name: string,
+  user_id: string,
   message: string
 ) => {
   return {
     mrkdwn: true,
-    text: `A new message using the *"/notify-admins"* command has been submitted by ${user_name}. \n\n*Message*: ${message}`,
+    text: `A new message using the /notify-admins command has been submitted by <@${user_id}>. \n\n*Message*: ${message}`,
     blocks: [
       {
         type: "header",
         text: {
           type: "plain_text",
-          text: `A new message using the *"/notify-admins"* command has been submitted by ${user_name}.`,
+          text: `A new message using the /notify-admins command has been submitted by <@${user_id}>.`,
           emoji: true,
         },
       },
