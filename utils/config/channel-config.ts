@@ -9,7 +9,7 @@ export const admins = {
 } as const;
 
 export const channels = {
-  announcements: "",
+  announcements: "C04DCQ64VB3",
   intro: "C052KD3ELTH",
   networking: "C057LAEN8DP",
   social: "C04UA2H8ARG",
@@ -20,7 +20,7 @@ export const channels = {
   rant_tank: "C052W5AU9BM",
   resources: "C04U5MWEXP1",
   project_proposals: "C05DVA1HX9U",
-  general: "C04DCQ64VB3",
+  general: "C061Q8D7VC6",
   coffee_chat: "C05G1S5HB4Z",
   mentee: "C05H6HJDEQM",
   mentor: "C05H67NDYQ4",

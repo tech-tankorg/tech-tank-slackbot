@@ -11,6 +11,8 @@ When you've had a moment to settle in, don't forget to head over to the <#${chan
 
 Afterwards, you can check out some of our other channels. Here's a list of our currently active channels you should consider joining:
 
+• <#${channels.announcements}>: this is where we post all our important announcements for you to stay updated!
+
 • <#${channels.networking}>: this is where we post all in-person and virtual networking/job-related events! We also have in-house virtual workshops that cover most job-search topics!
 
 • <#${channels.social}>: we hang out a lot. We go climbing, play boardgames, for drinks/food, and many more! (Most of us are in Toronto - sorry if you're elsewhere :sob:)
