@@ -105,19 +105,18 @@ You know, I've always been a curious little fish, and this week, I've got a burn
 };
 
 export const generate_suggestion_notification_message = (
-  user_name: string,
-  suggestion: string,
-  tag: string
+  user_id: string,
+  suggestion: string
 ) => {
   return {
     mrkdwn: true,
-    text: `New suggestion has been submitted \n\n ${user_name} submitted a suggestion with the tag of ${tag}\n\n *Suggestion*: ${suggestion}`,
+    text: `A new suggestion has been submitted by <@${user_id}>! *Suggestion*: ${suggestion}`,
     blocks: [
       {
         type: "header",
         text: {
           type: "plain_text",
-          text: "New suggestion has been submitted",
+          text: `A new suggestion has been submitted`,
           emoji: true,
         },
       },
@@ -125,7 +124,7 @@ export const generate_suggestion_notification_message = (
         type: "section",
         text: {
           type: "mrkdwn",
-          text: `${user_name} submitted a suggestion with the tag of ${tag}`,
+          text: `*Community member*: <@${user_id}>`,
         },
       },
       {
@@ -151,8 +150,15 @@ export const generate_admin_notification_message = (
         type: "header",
         text: {
           type: "plain_text",
-          text: `A new message using the /notify-admins command has been submitted by <@${user_id}>.`,
+          text: `A new message using the /notify-admins command has been submitted!`,
           emoji: true,
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `*Community member*: <@${user_id}>`,
         },
       },
       {

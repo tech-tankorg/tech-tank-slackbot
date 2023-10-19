@@ -3,13 +3,11 @@ import { get_collection_reference } from "../config/firebase-config.ts";
 import { addDoc, serverTimestamp } from "firebase/firestore";
 
 export const create_suggestion = async (
-  tag: string,
   suggestion: string,
   user_id: string,
   user_name: string
 ) => {
   const user_suggestion = {
-    tag,
     suggestion,
     createdAt: serverTimestamp(),
     user_id,
