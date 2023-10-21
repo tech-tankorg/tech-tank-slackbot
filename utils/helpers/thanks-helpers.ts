@@ -44,7 +44,7 @@ export const format_thanks_reponse = (thanks_array: db_thanks[]) => {
 };
 
 export const sanitize_msg = (msg: string) => {
-  const regex = /!(thanks|shoutout)[^\n.\r]*[\r\n]?/;
+  const regex = /!(thanks|shoutout)[^\n\r.!?;,:]*[\n\r.!?;,:]?/;
 
   const match = regex.exec(msg);
 
