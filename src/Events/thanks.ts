@@ -11,6 +11,7 @@ import { shoutout_message_user_text_validation } from "../../utils/types/zod-typ
 import {
   get_recipients,
   remove_chars,
+  sanitize_msg,
 } from "../../utils/helpers/thanks-helpers.ts";
 
 import { generate_thanks_message } from "../../utils/helpers/generate_message.ts";
@@ -30,9 +31,11 @@ export const thanks = async () => {
         msg.text
       );
 
-      const recipients_tags = get_recipients(parsed_user_text);
+      const sanitized_msg = sanitize_msg(parsed_user_text);
+
+      const recipients_tags = get_recipients(sanitized_msg);
       const msg_text = remove_chars(
-        parsed_user_text,
+        sanitized_msg,
         THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX
       );
       const recipients = remove_chars(
