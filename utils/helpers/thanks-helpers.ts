@@ -63,7 +63,7 @@ export const sanitize_msg_lst = (msg: string) => {
 
   if (match === null) return [];
 
-  return match;
+  return match.map((match) => match.trim());
 };
 
 export const generate_user_id_receiver_array = (msg: string) => {
