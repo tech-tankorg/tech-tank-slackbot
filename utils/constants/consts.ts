@@ -16,7 +16,7 @@ export const MATCH_GREETING_MESSAGE =
 export const SUGGESTION_REGEX = /\/suggestion-(social|study|other)/i;
 export const THANKS_CHANNEL_REGEX = /!(thanks|shoutout|yay|celebrate)/;
 export const THANKS_CHANNEL_MESSAGE_VALIDATION_REGEX =
-  /^(?=.*(!thanks|!shoutout))(?!(.*(!thanks|!shoutout)){2,}).*$/;
+  /(?=.*(!thanks|!shoutout))(?!(.*(!thanks|!shoutout)){2,}).*$/;
 
 export const THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX =
   /!(thanks|shoutout)\s(<@[^>]+>,?\s*)+/g;
