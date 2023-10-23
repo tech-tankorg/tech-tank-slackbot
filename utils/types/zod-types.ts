@@ -36,15 +36,10 @@ export const welcomes_type = z.object({
 });
 
 export const shoutout_message_user_text_validation = z
-  .string()
-  .startsWith("!thanks")
-  .regex(THANKS_CHANNEL_MESSAGE_VALIDATION_REGEX)
-  .or(
-    z
-      .string()
-      .startsWith("!shoutout")
-      .regex(THANKS_CHANNEL_MESSAGE_VALIDATION_REGEX)
-  );
+  .string({ required_error: "" })
+  .regex(THANKS_CHANNEL_MESSAGE_VALIDATION_REGEX, {
+    message: "The message must only contain one keyword",
+  });
 
 export const db_thanks_type = z.object({
   user_id_sender: z.string(),
