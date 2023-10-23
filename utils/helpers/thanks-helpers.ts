@@ -1,4 +1,7 @@
-import { THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX } from "../constants/consts.ts";
+import {
+  THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX,
+  THANKS_CHANNEL_REGEX,
+} from "../constants/consts.ts";
 
 import type {
   db_thanks,
@@ -50,5 +53,34 @@ export const sanitize_msg = (msg: string) => {
 
   if (match === null) return "";
 
-  return match[0];
+  return match[0].trim();
+};
+
+export const sanitize_msg_lst = (msg: string) => {
+  const regex = /!(thanks|shoutout)[^\n\r.!?;,]*(?:[\n\r.!?;,]|$)/g;
+
+  const match = msg.match(regex);
+
+  if (match === null) return [];
+
+  return match;
+};
+
+export const generate_user_id_receiver_array = (msg: string) => {
+  const recipients_tags = get_recipients(msg);
+  const msg_text = remove_chars(msg, THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX);
+  const recipients = remove_chars(
+    recipients_tags[0] ?? "",
+    THANKS_CHANNEL_REGEX
+  );
+
+  const user_id_receiver_array = recipients
+    .split(/[\s,]/)
+    .filter((item) => item !== "")
+    .map((item) => {
+      const formated_item = remove_chars(item, /(<|@|>)/g);
+      return formated_item;
+    });
+
+  return { msg_text, user_id_receiver_array };
 };

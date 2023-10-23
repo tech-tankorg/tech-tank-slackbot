@@ -1,7 +1,6 @@
 import app from "../../utils/config/slack-config.ts";
 import {
   THANKS_CHANNEL_REGEX,
-  THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX,
   AXIOM_DATA_SET,
 } from "../../utils/constants/consts.ts";
 import Axiom from "../../utils/config/axiom-config.ts";
@@ -9,9 +8,8 @@ import Axiom from "../../utils/config/axiom-config.ts";
 import { shoutout_message_user_text_validation } from "../../utils/types/zod-types.ts";
 
 import {
-  get_recipients,
-  remove_chars,
   sanitize_msg,
+  generate_user_id_receiver_array,
 } from "../../utils/helpers/thanks-helpers.ts";
 
 import { generate_thanks_message } from "../../utils/helpers/generate_message.ts";
@@ -32,28 +30,15 @@ export const thanks = async () => {
       );
 
       const sanitized_msg = sanitize_msg(parsed_user_text);
-
-      const recipients_tags = get_recipients(sanitized_msg);
-      const msg_text = remove_chars(
-        sanitized_msg,
-        THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX
-      );
-      const recipients = remove_chars(
-        recipients_tags[0] ?? "",
-        THANKS_CHANNEL_REGEX
-      );
-
-      const user_id_receiver_array = recipients
-        .split(/[\s,]/)
-        .filter((item) => item !== "")
-        .map((item) => {
-          const formated_item = remove_chars(item, /(<|@|>)/g);
-          return formated_item;
-        });
+      const final_message = generate_user_id_receiver_array(sanitized_msg);
 
       await Promise.all(
-        user_id_receiver_array.map(async (user_id_receiver) => {
-          void create_thanks(user_id_receiver, user_id_sender, msg_text);
+        final_message.user_id_receiver_array.map(async (user_id_receiver) => {
+          void create_thanks(
+            user_id_receiver,
+            user_id_sender,
+            final_message.msg_text
+          );
         })
       );
 

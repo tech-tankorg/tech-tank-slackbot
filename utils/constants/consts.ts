@@ -19,7 +19,7 @@ export const THANKS_CHANNEL_MESSAGE_VALIDATION_REGEX =
   /(?=.*(!thanks|!shoutout))(?!(.*(!thanks|!shoutout)){2,}).*$/;
 
 export const THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX =
-  /.*!(thanks|shoutout)\s(<@[^>]+>,?\s*)+/g;
+  /!(thanks|shoutout)\s(<@[^>]+>,?\s*)+/g;
 
 export const USER_ID_REGEX = /^U[A-Z0-9]{10}$/;
 
