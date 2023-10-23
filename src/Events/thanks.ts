@@ -5,11 +5,9 @@ import {
 } from "../../utils/constants/consts.ts";
 import Axiom from "../../utils/config/axiom-config.ts";
 
-import { shoutout_message_user_text_validation } from "../../utils/types/zod-types.ts";
-
 import {
-  sanitize_msg,
   generate_user_id_receiver_array,
+  sanitize_msg_lst,
 } from "../../utils/helpers/thanks-helpers.ts";
 
 import { generate_thanks_message } from "../../utils/helpers/generate_message.ts";
@@ -25,20 +23,17 @@ export const thanks = async () => {
     const user_id_sender = msg.user as string;
 
     try {
-      const parsed_user_text = shoutout_message_user_text_validation.parse(
-        msg.text
+      const final_lst = sanitize_msg_lst(msg.text);
+
+      const final_messages_lst = final_lst.map((item) =>
+        generate_user_id_receiver_array(item)
       );
 
-      const sanitized_msg = sanitize_msg(parsed_user_text);
-      const final_message = generate_user_id_receiver_array(sanitized_msg);
-
       await Promise.all(
-        final_message.user_id_receiver_array.map(async (user_id_receiver) => {
-          void create_thanks(
-            user_id_receiver,
-            user_id_sender,
-            final_message.msg_text
-          );
+        final_messages_lst.map(async (user_sender) => {
+          user_sender.user_id_receiver_array.forEach((item) => {
+            void create_thanks(item, user_id_sender, user_sender.msg_text);
+          });
         })
       );
 
@@ -50,7 +45,7 @@ export const thanks = async () => {
     } catch (e) {
       await client.chat.postEphemeral({
         channel: msg.channel as string,
-        text: "The message needs to meet the following criteria: 1). It need to start with !thanks or !shoutout. 2). The message cannot contain multiple !thanks/!shoutouts",
+        text: "An error has occurred. Please try again later! ",
         user: user_id_sender,
       });
 
