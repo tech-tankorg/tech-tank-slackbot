@@ -4,6 +4,7 @@ import {
   AXIOM_DATA_SET,
 } from "../../utils/constants/consts.ts";
 import { getRandomNumber } from "../../utils/helpers/generate-random-number.ts";
+import { generate_inclusive_message } from "../../utils/helpers/isThread.ts";
 import Axiom from "../../utils/config/axiom-config.ts";
 
 export const check_non_inclusive_words = () => {
@@ -17,21 +18,25 @@ export const check_non_inclusive_words = () => {
       "Have you considered 'y'all', or 'folks'? Let's make sure we create an inclusive community for everyone :blue_heart:";
 
     if (random_number >= 3) {
-      const message_response = await client.chat.postEphemeral({
-        channel: msg.channel as string,
-        text: respond_type_1,
-        user: user_id_sender,
-      });
+      const obs = generate_inclusive_message(
+        msg,
+        respond_type_1,
+        user_id_sender
+      );
+
+      const message_response = await client.chat.postEphemeral(obs);
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         { inclusive_bot_message: { ok: message_response.ok } },
       ]);
     } else {
-      const message_response = await client.chat.postEphemeral({
-        channel: msg.channel as string,
-        text: respond_type_2,
-        user: user_id_sender,
-      });
+      const obs = generate_inclusive_message(
+        msg,
+        respond_type_2,
+        user_id_sender
+      );
+
+      const message_response = await client.chat.postEphemeral(obs);
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         { inclusive_bot_message: { ok: message_response.ok } },
