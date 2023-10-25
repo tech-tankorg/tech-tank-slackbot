@@ -25,6 +25,7 @@ export const USER_ID_REGEX = /^U[A-Z0-9]{10}$/;
 
 export const GOOGLE_CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID ?? "";
 export const GOOGLE_API_KEY = process.env.GOOGLE_CALENDAR_API_KEY ?? "";
+export const NON_INCLUSIVE_WORDS = /guys/i;
 
 export const TORONTO_TIME_ZONE_IDENTIFIER = "America/Toronto";
 
