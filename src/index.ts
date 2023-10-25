@@ -16,6 +16,7 @@ import { thanks } from "../src/Events/thanks.ts";
 import { jokes } from "./Slash-commands/jokes.ts";
 import { suggestion } from "./Slash-commands/suggestions.ts";
 import { notify_admins } from "./Slash-commands/notify-admins.ts";
+import { check_non_inclusive_words } from "./Events/inclusive.ts";
 
 import { AXIOM_DATA_SET } from "../utils/constants/consts.ts";
 
@@ -45,6 +46,7 @@ greet_new_team_member();
 // );
 
 app_home_opened();
+check_non_inclusive_words();
 
 // Slash commands
 jokes();
