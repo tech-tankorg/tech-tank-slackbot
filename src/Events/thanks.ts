@@ -5,6 +5,8 @@ import {
 } from "../../utils/constants/consts.ts";
 import Axiom from "../../utils/config/axiom-config.ts";
 
+import { is_msg_in_thread } from "../../utils/helpers/isThread.ts";
+
 import {
   generate_user_id_receiver_array,
   sanitize_msg_lst,
@@ -21,6 +23,7 @@ export const thanks = async () => {
   app.message(THANKS_CHANNEL_REGEX, async ({ client, message }) => {
     const msg = message as any;
     const user_id_sender = msg.user as string;
+    const in_thread = is_msg_in_thread(msg);
 
     try {
       const final_lst = sanitize_msg_lst(msg.text);
@@ -37,17 +40,35 @@ export const thanks = async () => {
         })
       );
 
-      await client.chat.postEphemeral({
-        channel: msg.channel as string,
-        text: "We've saved your message!",
-        user: user_id_sender,
-      });
+      if (in_thread) {
+        await client.chat.postEphemeral({
+          channel: msg.channel as string,
+          text: "We've saved your message!",
+          user: user_id_sender,
+          thread_ts: msg.thread_ts,
+        });
+      } else {
+        await client.chat.postEphemeral({
+          channel: msg.channel as string,
+          text: "We've saved your message!",
+          user: user_id_sender,
+        });
+      }
     } catch (e) {
-      await client.chat.postEphemeral({
-        channel: msg.channel as string,
-        text: "An error has occurred. Please try again later! ",
-        user: user_id_sender,
-      });
+      if (in_thread) {
+        await client.chat.postEphemeral({
+          channel: msg.channel as string,
+          text: "An error has occurred. Please try again later! ",
+          user: user_id_sender,
+          thread_ts: msg.thread_ts,
+        });
+      } else {
+        await client.chat.postEphemeral({
+          channel: msg.channel as string,
+          text: "An error has occurred. Please try again later! ",
+          user: user_id_sender,
+        });
+      }
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [{ error_generate_thanks: e }]);
     }
