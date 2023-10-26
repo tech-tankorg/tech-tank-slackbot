@@ -10,7 +10,7 @@ export const post_newsletter = async (): Promise<void> => {
   try {
     const newsletter = (await generate_newsletter()).blocks;
     const message = await app.client.chat.postMessage({
-      channel: channels.general,
+      channel: channels.announcements,
       blocks: newsletter,
     });
 
