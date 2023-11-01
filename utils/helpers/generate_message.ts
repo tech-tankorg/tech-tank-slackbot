@@ -17,13 +17,13 @@ Afterwards, you can check out some of our other channels. Here's a list of our c
 
 • <#${channels.social}>: we hang out a lot. We go climbing, play boardgames, for drinks/food, and many more! (Most of us are in Toronto - sorry if you're elsewhere :sob:)
 
+• <#${channels.code_diversity}>: This channel is dedicated to celebrating women and non-binary folx in the tech space to promote inclusivity and diversity in our workspace and beyond! We've started this channel as a place for us to better collect and share resources, especially to support our monthly Women and Non-Binary Folk in-person meetings. This channel is public and is intended to remain public to promote inclusivity and mindful conversations.
+
 • <#${channels.study}>: this is where we post information about study sessions (biweekly on Tuesdays) and you can ask any questions about code/study material/projects you're stuck on or need help debugging!
 
 • <#${channels.job_posting}>: this is where we post jobs that we come across. For any job-search/job-prep related questions, we have a channel for that too... right below :)
 
 • <#${channels.job_prep}>: A space that supports job-preppers through: resume/portfolio feedback, interview prep (including technical assessments), and mock interviews sessions!
-
-• <#${channels.code_diversity}>: This channel is dedicated to celebrating women and non-binary folx in the tech space to promote inclusivity and diversity in our workspace and beyond! We've started this channel as a place for us to better collect and share resources, especially to support our monthly Women and Non-Binary Folk in-person meetings. This channel is public and is intended to remain public to promote inclusivity and mindful conversations.
 
 • <#${channels.random}>: just random stuff. no further explanation needed :stuck_out_tongue_winking_eye:
 
