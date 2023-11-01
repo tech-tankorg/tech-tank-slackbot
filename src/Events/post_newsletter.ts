@@ -8,9 +8,9 @@ import { channels } from "../../utils/config/channel-config.ts";
 
 export const post_newsletter = async (): Promise<void> => {
   try {
-    const newsletter = (await generate_newsletter()).blocks;
+    const newsletter = await generate_newsletter();
     const message = await app.client.chat.postMessage({
-      channel: channels.announcements,
+      channel: channels.general,
       blocks: newsletter,
     });
 
