@@ -24,6 +24,7 @@ export const channels = {
   coffee_chat: "C05G1S5HB4Z",
   mentee: "C05H6HJDEQM",
   mentor: "C05H67NDYQ4",
+  code_diversity: "C063EFTU5F1",
   notification: process.env.SLACK_NOTIFICATION_CHANNEL ?? "",
 } as const;
 

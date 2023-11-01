@@ -23,6 +23,8 @@ Afterwards, you can check out some of our other channels. Here's a list of our c
 
 • <#${channels.job_prep}>: A space that supports job-preppers through: resume/portfolio feedback, interview prep (including technical assessments), and mock interviews sessions!
 
+• <#${channels.code_diversity}>: This channel is dedicated to celebrating women and non-binary folx in the tech space to promote inclusivity and diversity in our workspace and beyond! We've started this channel as a place for us to better collect and share resources, especially to support our monthly Women and Non-Binary Folk in-person meetings. This channel is public and is intended to remain public to promote inclusivity and mindful conversations.
+
 • <#${channels.random}>: just random stuff. no further explanation needed :stuck_out_tongue_winking_eye:
 
 • <#${channels.rant_tank}>: a space to rant or complain about anything and everything:purple_heart:
