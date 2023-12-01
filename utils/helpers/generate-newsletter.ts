@@ -1,4 +1,4 @@
-import { addHours, startOfMonth } from "date-fns";
+import { startOfMonth, format } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import type {
   sanity_letter_info,
@@ -124,19 +124,10 @@ const transform_to_block_upcoming_events_techtank = (
 
 export const generate_newsletter = async () => {
   const start_of_month = startOfMonth(new Date());
-  const start_of_month_adjusted_time = addHours(start_of_month, 4);
 
-  const formatted_date = formatInTimeZone(
-    start_of_month_adjusted_time,
-    TORONTO_TIME_ZONE_IDENTIFIER,
-    "MMMM yyyy"
-  );
+  const formatted_date = format(start_of_month, "MMMM yyyy");
 
-  const request_format_date = formatInTimeZone(
-    start_of_month_adjusted_time,
-    TORONTO_TIME_ZONE_IDENTIFIER,
-    "yyyy-MM-dd"
-  );
+  const request_format_date = format(start_of_month, "yyyy-MM-dd");
 
   try {
     const response = await Promise.all([
