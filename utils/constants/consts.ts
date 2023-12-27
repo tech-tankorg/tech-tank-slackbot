@@ -29,4 +29,4 @@ export const NON_INCLUSIVE_WORDS = /guys/i;
 
 export const TORONTO_TIME_ZONE_IDENTIFIER = "America/Toronto";
 
-export const TECHTANK_EVENT_TAG = "TECHTANK_EVENT";
+export const TECHTANK_EVENT_TAG = "[TechTank Event]";
