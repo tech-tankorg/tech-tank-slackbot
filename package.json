@@ -14,7 +14,7 @@
     "randomize-questions": "ts-node --esm ./utils/helpers/randomize-list.ts",
     "scheduled-messages": "ts-node --esm ./utils/helpers/list-all-scheduled-messages.ts",
     "delete-scheduled-messages": "ts-node --esm ./utils/helpers/delete-all-scheduled-messages.ts",
-    "biome:lint": "npx @biomejs/biome lint ./src"
+    "biome:lint": "npx @biomejs/biome lint ./"
   },
   "keywords": [
     "slack bots",

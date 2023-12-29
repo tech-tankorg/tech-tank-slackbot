@@ -7,7 +7,19 @@
     "indentWidth": 2,
     "lineWidth": 80,
     "lineEnding": "lf",
-    "ignore": []
+    "ignore": [
+      "./node_modules",
+      ".dockerignore",
+      ".gitignore",
+      ".DS_Store",
+      ".env*.local",
+      ".env",
+      "./dist",
+      "**/*.md",
+      "**/*.yml",
+      "LICENSE",
+      "**/*.json"
+    ]
   },
   "javascript": {
     "formatter": {

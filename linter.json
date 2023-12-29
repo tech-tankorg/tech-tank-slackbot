@@ -5,6 +5,18 @@
     "rules": {
       "recommended": true
     },
-    "ignore": []
+    "ignore": [
+      "./node_modules",
+      ".dockerignore",
+      ".gitignore",
+      ".DS_Store",
+      ".env*.local",
+      ".env",
+      "./dist",
+      "**/*.md",
+      "**/*.yml",
+      "LICENSE",
+      "**/*.json"
+    ]
   }
 }
