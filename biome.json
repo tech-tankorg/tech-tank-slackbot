@@ -3,5 +3,20 @@
   "extends": ["./formatter.json", "./linter.json"],
   "organizeImports": {
     "enabled": true
+  },
+  "files": {
+    "ignore": [
+      "./node_modules",
+      ".dockerignore",
+      ".gitignore",
+      ".DS_Store",
+      ".env*.local",
+      ".env",
+      "./dist",
+      "**/*.md",
+      "**/*.yml",
+      "LICENSE",
+      "**/*.json"
+    ]
   }
 }
