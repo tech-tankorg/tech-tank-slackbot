@@ -1,9 +1,9 @@
+import Axiom from "../../utils/config/axiom-config.ts";
 import app from "../../utils/config/slack-config.ts";
 import {
-  THANKS_CHANNEL_REGEX,
   AXIOM_DATA_SET,
+  THANKS_CHANNEL_REGEX,
 } from "../../utils/constants/consts.ts";
-import Axiom from "../../utils/config/axiom-config.ts";
 
 import { is_msg_in_thread } from "../../utils/helpers/isThread.ts";
 
@@ -21,6 +21,7 @@ import {
 
 export const thanks = async () => {
   app.message(THANKS_CHANNEL_REGEX, async ({ client, message }) => {
+    // biome-ignore lint: incorrect typescript types therefore any has to be enforced
     const msg = message as any;
     const user_id_sender = msg.user as string;
     const in_thread = is_msg_in_thread(msg);
@@ -34,9 +35,9 @@ export const thanks = async () => {
 
       await Promise.all(
         final_messages_lst.map(async (user_sender) => {
-          user_sender.user_id_receiver_array.forEach((item) => {
+          for (const item of user_sender.user_id_receiver_array) {
             void create_thanks(item, user_id_sender, user_sender.msg_text);
-          });
+          }
         })
       );
 

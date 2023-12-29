@@ -1,5 +1,5 @@
-import app from "../../utils/config/slack-config.ts";
 import client from "../../utils/config/axiom-config.ts";
+import app from "../../utils/config/slack-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
 export const sayHello = () => {

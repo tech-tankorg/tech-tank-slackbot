@@ -13,7 +13,8 @@
     "lint": "npx eslint \"./**\"",
     "randomize-questions": "ts-node --esm ./utils/helpers/randomize-list.ts",
     "scheduled-messages": "ts-node --esm ./utils/helpers/list-all-scheduled-messages.ts",
-    "delete-scheduled-messages": "ts-node --esm ./utils/helpers/delete-all-scheduled-messages.ts"
+    "delete-scheduled-messages": "ts-node --esm ./utils/helpers/delete-all-scheduled-messages.ts",
+    "biome:lint": "npx @biomejs/biome lint ./src"
   },
   "keywords": [
     "slack bots",
@@ -26,6 +27,7 @@
   "author": "TechTank, Nonso O.",
   "license": "MIT",
   "devDependencies": {
+    "@biomejs/biome": "1.4.1",
     "@types/jest": "^29.5.5",
     "@types/node": "^20.8.3",
     "@types/node-cron": "^3.0.9",
