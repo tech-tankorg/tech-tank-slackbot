@@ -32,9 +32,9 @@ jobs:
 
       - name: Lint & Test
         run: |
-          npm run lint
+          npm run biome:lint
           npm run test
-          npm run test:typecheck
+          npm run typecheck
 
   messageSlack:
     runs-on: ubuntu-latest
