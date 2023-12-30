@@ -118,7 +118,7 @@ export const generate_suggestion_notification_message = (
         type: "header",
         text: {
           type: "plain_text",
-          text: `A new suggestion has been submitted`,
+          text: "A new suggestion has been submitted",
           emoji: true,
         },
       },
@@ -152,7 +152,7 @@ export const generate_admin_notification_message = (
         type: "header",
         text: {
           type: "plain_text",
-          text: `A new message using the /notify-admins command has been submitted!`,
+          text: "A new message using the /notify-admins command has been submitted!",
           emoji: true,
         },
       },
@@ -175,12 +175,14 @@ export const generate_admin_notification_message = (
 };
 
 export const generate_mentor_message = () => {
-  const mentor_message = `Hey, how is your mentee/s doing? How are the meetings and progress?`;
+  const mentor_message =
+    "Hey, how is your mentee/s doing? How are the meetings and progress?";
   return mentor_message;
 };
 
 export const generate_mentee_message = () => {
-  const mentee_message = `Hey, how is your mentorship going? How are the meetings and progress?`;
+  const mentee_message =
+    "Hey, how is your mentorship going? How are the meetings and progress?";
   return mentee_message;
 };
 

@@ -1,8 +1,8 @@
 export const coc_view_modal_with_ack_btns = {
-  type: "modal" as "modal",
+  type: "modal" as const,
   callback_id: "coc-modal",
   title: {
-    type: "plain_text" as "plain_text",
+    type: "plain_text" as const,
     text: "Tech Tank COC",
     emoji: true,
   },
@@ -147,10 +147,10 @@ export const coc_view_modal_with_ack_btns = {
 };
 
 export const coc_view_modal_without_ack_btns = {
-  type: "modal" as "modal",
+  type: "modal" as const,
   callback_id: "coc-modal",
   title: {
-    type: "plain_text" as "plain_text",
+    type: "plain_text" as const,
     text: "Tech Tank COC",
     emoji: true,
   },

@@ -33,7 +33,7 @@ export const generate_scheduled_messages = (
 
   const next_day_function = determine_next_day_function(repeat_day);
 
-  lst_messages.forEach((message) => {
+  for (const message of lst_messages) {
     const begin_date = next_day_function(start_date);
 
     const following_day = convert_epoch_date_to_iso_date(
@@ -58,7 +58,7 @@ export const generate_scheduled_messages = (
       text: post_of_the_week,
       post_at: next_execute_date.getTime() / 1000,
     });
-  });
+  }
 
   return new_array;
 };

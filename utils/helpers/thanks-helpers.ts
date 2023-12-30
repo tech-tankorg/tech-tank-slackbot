@@ -23,7 +23,7 @@ export const remove_chars = (message: string, reg_exp: RegExp) => {
 export const format_thanks_reponse = (thanks_array: db_thanks[]) => {
   const obj: Record<string, db_thanks_no_reciever[]> = {};
 
-  thanks_array.forEach((item) => {
+  for (const item of thanks_array) {
     const keys = Object.keys(obj);
 
     if (keys.includes(item.user_id_receiver)) {
@@ -41,7 +41,7 @@ export const format_thanks_reponse = (thanks_array: db_thanks[]) => {
         },
       ];
     }
-  });
+  }
 
   return obj;
 };
