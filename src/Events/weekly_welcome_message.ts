@@ -1,7 +1,7 @@
 import app from "../../utils/config/slack-config.ts";
 import { get_document_reference } from "../../utils/config/firebase-config.ts";
 import { getDoc } from "firebase/firestore";
-import { getWeek } from "date-fns";
+import { getWeek, getYear } from "date-fns";
 
 import { welcomes_type } from "../../utils/types/zod-types.ts";
 
@@ -17,7 +17,7 @@ const format_users_array = (lst: string[]) => {
 
 export const send_weekly_welcome_message = async () => {
   const now = new Date();
-  const doc_id = `week-${getWeek(now) - 1}`;
+  const doc_id = `week-${getWeek(now) - 1}-${getYear(now)}`;
 
   try {
     const doc_ref = await get_document_reference("welcomes", doc_id);

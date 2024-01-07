@@ -72,7 +72,7 @@ const transform_to_block_fyi = (section: sanity_fyi_block[]) => {
 
 const transform_to_block_upcoming_events = (section: google_cal_event) => {
   const tech_tank_events = section.filter(
-    (event) => !event.description.includes(TECHTANK_EVENT_TAG)
+    (event) => !event.summary.includes(TECHTANK_EVENT_TAG)
   );
 
   return tech_tank_events.map((sec) => {
@@ -99,7 +99,7 @@ const transform_to_block_upcoming_events_techtank = (
   section: google_cal_event
 ) => {
   const tech_tank_events = section.filter((event) =>
-    event.description.includes(TECHTANK_EVENT_TAG)
+    event.summary.includes(TECHTANK_EVENT_TAG)
   );
 
   return tech_tank_events.map((sec) => {
