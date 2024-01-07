@@ -7,7 +7,7 @@ import {
   getDoc,
 } from "firebase/firestore";
 
-import { endOfWeek, getWeek, isBefore } from "date-fns";
+import { endOfWeek, getWeek, isBefore, getYear } from "date-fns";
 
 export const append_user_to_welcome_lst = async (user_id: string) => {
   // Given a date, determine the end of the week
@@ -16,7 +16,7 @@ export const append_user_to_welcome_lst = async (user_id: string) => {
   // otherwise create a new doc with the users array and timestamp
 
   const now = new Date();
-  const doc_id = `week-${getWeek(now)}`;
+  const doc_id = `week-${getWeek(now)}-${getYear(now)}`;
   const doc_ref = await get_document_reference("welcomes", doc_id);
   const end_of_current_week = endOfWeek(now);
 

@@ -17,7 +17,7 @@ const format_users_array = (lst: string[]) => {
 
 export const send_weekly_welcome_message = async () => {
   const now = new Date();
-  const doc_id = `week-${getWeek(now) - 1}`;
+  const doc_id = `week-${getWeek(now) - 1}-${getYear(now)}`;
 
   try {
     const doc_ref = await get_document_reference("welcomes", doc_id);
