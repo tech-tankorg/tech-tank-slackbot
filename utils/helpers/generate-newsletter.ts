@@ -1,20 +1,20 @@
-import { startOfMonth, format } from "date-fns";
+import { format, startOfMonth } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
-import type {
-  sanity_letter_info,
-  sanity_fyi_block,
-  google_cal_event,
-  transform_block_type,
-  transform_Block_img_type,
-} from "../types/projectTypes.ts";
 import { get_upcoming_events_for_the_month } from "../service/google-calendar.ts";
 import { generate_sanity_newsletter } from "../service/sanity-client.ts";
+import type {
+  google_cal_event,
+  sanity_fyi_block,
+  sanity_letter_info,
+  transform_Block_img_type,
+  transform_block_type,
+} from "../types/projectTypes.ts";
 
 import {
-  GOOGLE_CALENDAR_ID,
   GOOGLE_API_KEY,
-  TORONTO_TIME_ZONE_IDENTIFIER,
+  GOOGLE_CALENDAR_ID,
   TECHTANK_EVENT_TAG,
+  TORONTO_TIME_ZONE_IDENTIFIER,
 } from "../constants/consts.ts";
 
 import { generate_sanity_img_url } from "../config/sanity-config.ts";

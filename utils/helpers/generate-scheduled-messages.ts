@@ -1,9 +1,9 @@
-import type { day } from "../types/projectTypes.ts";
+import { getRandomNumber } from "../helpers/generate-random-number.ts";
 import {
   generate_thoughtful_thursdays_post,
   generate_wonder_wednesday_post,
 } from "../helpers/generate_message.ts";
-import { getRandomNumber } from "../helpers/generate-random-number.ts";
+import type { day } from "../types/projectTypes.ts";
 import {
   determine_next_day_function,
   determine_next_execute_date_freq,

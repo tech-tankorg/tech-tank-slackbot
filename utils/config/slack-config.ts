@@ -1,5 +1,5 @@
-import { config } from "dotenv";
 import pkg from "@slack/bolt";
+import { config } from "dotenv";
 
 config();
 
