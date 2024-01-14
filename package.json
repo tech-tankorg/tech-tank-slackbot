@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "jest",
-    "dev": "ts-node --esm ./src/index.ts",
+    "dev": "node --loader ts-node/esm ./src/index.ts",
     "build": "tsup ./src/index.ts ./utils/service/cron_schedule_message.ts --format esm --dts utils/types/projectTypes.ts",
     "start": "NODE_ENV=production node ./dist/src/index.js & node ./dist/utils/service/cron_schedule_message.js",
     "typecheck": "tsc",
