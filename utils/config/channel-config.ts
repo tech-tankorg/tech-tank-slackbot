@@ -25,6 +25,7 @@ export const channels = {
   mentee: "C05H6HJDEQM",
   mentor: "C05H67NDYQ4",
   code_diversity: "C063EFTU5F1",
+  tank_toasts: "C06DRD6PPT7",
   notification: process.env.SLACK_NOTIFICATION_CHANNEL ?? "",
 } as const;
 
