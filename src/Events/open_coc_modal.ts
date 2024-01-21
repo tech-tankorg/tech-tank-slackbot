@@ -1,13 +1,13 @@
+import { channels } from "../../utils/config/channel-config.ts";
 import app from "../../utils/config/slack-config.ts";
 import {
   coc_view_modal_with_ack_btns,
   coc_view_modal_without_ack_btns,
 } from "../../utils/constants/coc-view-modal.ts";
-import { channels } from "../../utils/config/channel-config.ts";
 
 import type { InteractiveMessage } from "@slack/bolt";
-import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 import Axiom from "../../utils/config/axiom-config.ts";
+import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 import {
   add_user_to_db,
   has_user_ack_coc,

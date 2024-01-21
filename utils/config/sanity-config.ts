@@ -11,6 +11,7 @@ export const client = createClient({
 
 const builder = imageUrlBuilder(client);
 
+// biome-ignore lint: type of sanity source unknown
 export const generate_sanity_img_url = (source: any) => {
   return builder.image(source).url();
 };

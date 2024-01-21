@@ -5,13 +5,13 @@ import {
 import { redis } from "../config/upstash-config.ts";
 
 import {
-  serverTimestamp,
-  query,
-  where,
-  getDocs,
   getDoc,
+  getDocs,
   orderBy,
+  query,
+  serverTimestamp,
   setDoc,
+  where,
 } from "firebase/firestore";
 
 export const add_user_to_db = async (

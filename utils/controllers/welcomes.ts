@@ -1,13 +1,13 @@
-import { get_document_reference } from "../config/firebase-config.ts";
 import {
-  setDoc,
-  serverTimestamp,
-  updateDoc,
   arrayUnion,
   getDoc,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
 } from "firebase/firestore";
+import { get_document_reference } from "../config/firebase-config.ts";
 
-import { endOfWeek, getWeek, isBefore, getYear } from "date-fns";
+import { endOfWeek, getWeek, getYear, isBefore } from "date-fns";
 
 export const append_user_to_welcome_lst = async (user_id: string) => {
   // Given a date, determine the end of the week

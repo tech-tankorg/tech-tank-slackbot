@@ -1,9 +1,9 @@
-import type app from "../config/slack-config.ts";
 import type { z } from "zod";
+import type app from "../config/slack-config.ts";
 import type {
-  sanity_letter_section,
   db_thanks_type,
   gcal_event,
+  sanity_letter_section,
 } from "./zod-types.ts";
 export type Channel = Record<string, string>;
 

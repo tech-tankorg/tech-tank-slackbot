@@ -1,13 +1,13 @@
 import {
-  isBefore,
   isAfter,
-  nextMonday,
-  nextTuesday,
-  nextWednesday,
-  nextThursday,
+  isBefore,
   nextFriday,
+  nextMonday,
   nextSaturday,
   nextSunday,
+  nextThursday,
+  nextTuesday,
+  nextWednesday,
 } from "date-fns";
 import type { day } from "../types/projectTypes.ts";
 
