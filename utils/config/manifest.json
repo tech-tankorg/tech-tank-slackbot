@@ -17,35 +17,26 @@
     },
     "slash_commands": [
       {
-        "command": "/random",
-        "description": "Selects random member",
-        "should_escape": false
-      },
-      {
         "command": "/jokes",
         "description": "Select a category",
         "usage_hint": "(Programming, Pun, Spooky)",
         "should_escape": false
       },
       {
-        "command": "/suggestion-other",
-        "description": "What's your general suggestion",
+        "command": "/suggestion",
+        "description": "What's your suggestion",
         "should_escape": false
       },
       {
-        "command": "/suggestion-social",
-        "description": "Suggestions for social event",
-        "should_escape": false
-      },
-      {
-        "command": "/suggestion-study",
-        "description": "Suggestions for study sessions",
+        "command": "/notify-admins",
+        "description": "Message to admins",
         "should_escape": false
       }
     ]
   },
   "oauth_config": {
     "scopes": {
+      "user": ["users:read", "users.profile:write"],
       "bot": [
         "app_mentions:read",
         "channels:history",
@@ -53,11 +44,18 @@
         "chat:write",
         "commands",
         "groups:history",
+        "groups:read",
         "im:history",
         "im:write",
         "incoming-webhook",
+        "mpim:write",
+        "users.profile:read",
         "users:read",
-        "users.profile:read"
+        "channels:write.invites",
+        "groups:write.invites",
+        "mpim:write.invites",
+        "channels:manage",
+        "groups:write"
       ]
     }
   },
