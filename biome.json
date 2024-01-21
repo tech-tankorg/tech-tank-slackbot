@@ -1,6 +1,6 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
-  "extends": ["./formatter.json", "./linter.json"],
+  "extends": ["./biome-config/formatter.json", "./biome-config/linter.json"],
   "organizeImports": {
     "enabled": true
   },
