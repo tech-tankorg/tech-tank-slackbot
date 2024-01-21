@@ -25,6 +25,8 @@ Afterwards, you can check out some of our other channels. Here's a list of our c
 
 • <#${channels.job_prep}>: A space that supports job-preppers through: resume/portfolio feedback, interview prep (including technical assessments), and mock interviews sessions!
 
+• <#${channels.tank_toasts}>: This is where you can share your journey, and your wins, and even give kudos to your resilient fellow job search buddy, your fabulous mentor or mentee, or your cat that wakes you up every morning forcing you to start your day!
+
 • <#${channels.random}>: just random stuff. no further explanation needed :stuck_out_tongue_winking_eye:
 
 • <#${channels.rant_tank}>: a space to rant or complain about anything and everything:purple_heart:
