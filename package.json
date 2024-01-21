@@ -28,7 +28,7 @@
   "author": "TechTank, Nonso O.",
   "license": "MIT",
   "devDependencies": {
-    "@biomejs/biome": "1.4.1",
+    "@biomejs/biome": "^1.5.2",
     "@types/jest": "^29.5.11",
     "@types/node": "^20.11.5",
     "@types/node-cron": "^3.0.11",
