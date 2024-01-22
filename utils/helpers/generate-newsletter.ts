@@ -1,5 +1,5 @@
 import { format, startOfMonth } from "date-fns";
-import { formatInTimeZone } from "date-fns-tz";
+import { utcToZonedTime } from "date-fns-tz";
 import { get_upcoming_events_for_the_month } from "../service/google-calendar.ts";
 import { generate_sanity_newsletter } from "../service/sanity-client.ts";
 import type {
@@ -16,6 +16,8 @@ import {
   TECHTANK_EVENT_TAG,
   TORONTO_TIME_ZONE_IDENTIFIER,
 } from "../constants/consts.ts";
+
+import { international_timezone_formatter } from "../helpers/custom-date-fns.ts";
 
 import { generate_sanity_img_url } from "../config/sanity-config.ts";
 
@@ -79,11 +81,9 @@ const transform_to_block_upcoming_events = (section: google_cal_event) => {
     const web_address = find_web_address(sec.description) ?? "#";
 
     const start_date_time = new Date(sec.start.dateTime);
-    const start_date_time_formatted = formatInTimeZone(
-      start_date_time,
-      TORONTO_TIME_ZONE_IDENTIFIER,
-      "MMM do - p"
-    );
+
+    const start_date_time_formatted =
+      international_timezone_formatter(start_date_time);
 
     return {
       type: "section",
@@ -106,11 +106,8 @@ const transform_to_block_upcoming_events_techtank = (
     const web_address = find_web_address(sec.description) ?? "#";
 
     const start_date_time = new Date(sec.start.dateTime);
-    const start_date_time_formatted = formatInTimeZone(
-      start_date_time,
-      TORONTO_TIME_ZONE_IDENTIFIER,
-      "MMM do - p"
-    );
+    const start_date_time_formatted =
+      international_timezone_formatter(start_date_time);
 
     return {
       type: "section",
