@@ -1,5 +1,4 @@
 import { format, startOfMonth } from "date-fns";
-import { utcToZonedTime } from "date-fns-tz";
 import { get_upcoming_events_for_the_month } from "../service/google-calendar.ts";
 import { generate_sanity_newsletter } from "../service/sanity-client.ts";
 import type {
@@ -14,7 +13,6 @@ import {
   GOOGLE_API_KEY,
   GOOGLE_CALENDAR_ID,
   TECHTANK_EVENT_TAG,
-  TORONTO_TIME_ZONE_IDENTIFIER,
 } from "../constants/consts.ts";
 
 import { international_timezone_formatter } from "../helpers/custom-date-fns.ts";
