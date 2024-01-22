@@ -4,9 +4,9 @@ export const flatten_object = (obj: Record<string, string[]>) => {
 
   const new_array: string[] = [];
 
-  values.forEach((value) => {
+  for (const value of values) {
     new_array.push(...value);
-  });
+  }
 
   return new_array;
 };
@@ -16,9 +16,9 @@ export const flatten_all_scheduled_messages_reponse = (
 ) => {
   const new_array: Array<string | undefined> = [];
 
-  obj.forEach((value) => {
+  for (const value of obj) {
     new_array.push(value.text);
-  });
+  }
 
   return new_array;
 };
@@ -31,9 +31,9 @@ export const flatten_all_scheduled_messages_reponse_for_delete = (
     channel: string | undefined;
   }> = [];
 
-  obj.forEach((value) => {
+  for (const value of obj) {
     new_array.push({ msg_id: value.id, channel: value.channel_id });
-  });
+  }
 
   return new_array;
 };

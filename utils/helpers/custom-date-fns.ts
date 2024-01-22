@@ -1,15 +1,16 @@
 import {
-  isBefore,
   isAfter,
-  nextMonday,
-  nextTuesday,
-  nextWednesday,
-  nextThursday,
+  isBefore,
   nextFriday,
+  nextMonday,
   nextSaturday,
   nextSunday,
+  nextThursday,
+  nextTuesday,
+  nextWednesday,
 } from "date-fns";
 import type { day } from "../types/projectTypes.ts";
+import { TORONTO_TIME_ZONE_IDENTIFIER } from "../constants/consts.ts";
 
 export const filter_dates_range = (
   date: Date,
@@ -58,4 +59,19 @@ export const determine_next_execute_date_freq = (
     repeat_day,
     frequency - 1
   );
+};
+
+export const international_timezone_formatter = (date: Date) => {
+  const options = {
+    month: "short",
+    day: "2-digit",
+    hour: "numeric",
+    minute: "numeric",
+    timeZoneName: "short",
+    timeZone: TORONTO_TIME_ZONE_IDENTIFIER,
+  } as const;
+
+  const date_formatted = new Intl.DateTimeFormat("en-CA", options).format(date);
+
+  return date_formatted;
 };

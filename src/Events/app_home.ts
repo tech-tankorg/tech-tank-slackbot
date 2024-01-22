@@ -1,9 +1,9 @@
-import app from "../../utils/config/slack-config.ts";
 import Axiom from "../../utils/config/axiom-config.ts";
+import app from "../../utils/config/slack-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
-import { generate_newsletter } from "../../utils/helpers/generate-newsletter.ts";
 import Sentry from "../../utils/config/sentry.config.ts";
+import { generate_newsletter } from "../../utils/helpers/generate-newsletter.ts";
 
 const transaction = Sentry.startTransaction({
   op: "app_home",

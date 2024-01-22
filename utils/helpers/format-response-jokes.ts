@@ -5,11 +5,18 @@ import type {
   twoPartJoke,
 } from "../types/projectTypes.d.ts";
 
+const isTwoPartJoke = (
+  type: JokeType,
+  joke: singleJoke | twoPartJoke
+): joke is twoPartJoke => {
+  return "setup" in joke && type === "twopart";
+};
+
 export const format_response_jokes = (
   type: JokeType,
   joke: singleJoke | twoPartJoke
 ) => {
-  if (type === "twopart" && "setup" in joke) {
+  if (isTwoPartJoke(type, joke)) {
     return {
       response_type: "in_channel" as response_type,
       blocks: [
@@ -32,10 +39,9 @@ export const format_response_jokes = (
         },
       ],
     };
-  } else if (type === "single" && "joke" in joke) {
-    return {
-      response_type: "in_channel" as response_type,
-      text: joke.joke,
-    };
   }
+  return {
+    response_type: "in_channel" as response_type,
+    text: joke.joke,
+  };
 };

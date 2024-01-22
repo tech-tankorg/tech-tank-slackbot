@@ -1,15 +1,16 @@
+import Axiom from "../../utils/config/axiom-config.ts";
 import app from "../../utils/config/slack-config.ts";
 import {
-  NON_INCLUSIVE_WORDS,
   AXIOM_DATA_SET,
+  NON_INCLUSIVE_WORDS,
 } from "../../utils/constants/consts.ts";
 import { getRandomNumber } from "../../utils/helpers/generate-random-number.ts";
 import { generate_inclusive_message } from "../../utils/helpers/isThread.ts";
-import Axiom from "../../utils/config/axiom-config.ts";
 
 export const check_non_inclusive_words = () => {
   app.message(NON_INCLUSIVE_WORDS, async ({ message, client }) => {
-    const msg = message as any;
+    // biome-ignore lint: incorrect typescript types therefore any has to be enforced
+    const msg = message as unknown as any;
     const user_id_sender = msg.user as string;
     const random_number = getRandomNumber(1, 5, false);
     const respond_type_1 =

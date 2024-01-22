@@ -1,7 +1,7 @@
-import app from "../../utils/config/slack-config.ts";
 import axios from "axios";
-import { joke_category } from "../../utils/types/zod-types.ts";
+import app from "../../utils/config/slack-config.ts";
 import { format_response_jokes } from "../../utils/helpers/format-response-jokes.ts";
+import { joke_category } from "../../utils/types/zod-types.ts";
 
 import Axiom from "../../utils/config/axiom-config.ts";
 
@@ -35,7 +35,7 @@ export const jokes = () => {
       await respond({
         response_type: "ephemeral",
         mrkdwn: true,
-        text: `oh no! Looks like something went wrong! Try again later and make sure you are only entering the available categories. \n Programming | Pun | Spooky`,
+        text: "oh no! Looks like something went wrong! Try again later and make sure you are only entering the available categories. \n Programming | Pun | Spooky",
       });
     }
   });

@@ -1,7 +1,7 @@
 import app from "../../utils/config/slack-config.ts";
-import type { day } from "../../utils/types/projectTypes.ts";
 import { generate_scheduled_messages } from "../../utils/helpers/generate-scheduled-messages.ts";
 import { prep_final_scheduled_message } from "../../utils/helpers/prep-final-scheduled-message.ts";
+import type { day } from "../../utils/types/projectTypes.ts";
 
 import Axiom from "../../utils/config/axiom-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";

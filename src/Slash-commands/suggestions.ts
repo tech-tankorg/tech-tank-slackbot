@@ -1,5 +1,5 @@
-import app from "../../utils/config/slack-config.ts";
 import Axiom from "../../utils/config/axiom-config.ts";
+import app from "../../utils/config/slack-config.ts";
 
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
@@ -36,7 +36,7 @@ export const suggestion = () => {
       await respond({
         response_type: "ephemeral",
         mrkdwn: true,
-        text: `Your suggestion has successfully been submitted!`,
+        text: "Your suggestion has successfully been submitted!",
       });
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
@@ -52,7 +52,7 @@ export const suggestion = () => {
       await respond({
         response_type: "ephemeral",
         mrkdwn: true,
-        text: `Oh no! Something went wrong! \nTry again later.`,
+        text: "Oh no! Something went wrong! \nTry again later.",
       });
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [

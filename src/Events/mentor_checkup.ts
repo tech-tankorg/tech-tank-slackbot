@@ -1,10 +1,10 @@
+import Axiom from "../../utils/config/axiom-config.ts";
+import { admins, bots, channels } from "../../utils/config/channel-config.ts";
 import app from "../../utils/config/slack-config.ts";
 import {
   generate_mentee_message,
   generate_mentor_message,
 } from "../../utils/helpers/generate_message.ts";
-import Axiom from "../../utils/config/axiom-config.ts";
-import { channels, admins, bots } from "../../utils/config/channel-config.ts";
 
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 

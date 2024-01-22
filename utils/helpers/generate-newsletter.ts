@@ -1,21 +1,21 @@
-import { startOfMonth, format } from "date-fns";
-import { formatInTimeZone } from "date-fns-tz";
-import type {
-  sanity_letter_info,
-  sanity_fyi_block,
-  google_cal_event,
-  transform_block_type,
-  transform_Block_img_type,
-} from "../types/projectTypes.ts";
+import { format, startOfMonth } from "date-fns";
 import { get_upcoming_events_for_the_month } from "../service/google-calendar.ts";
 import { generate_sanity_newsletter } from "../service/sanity-client.ts";
+import type {
+  google_cal_event,
+  sanity_fyi_block,
+  sanity_letter_info,
+  transform_Block_img_type,
+  transform_block_type,
+} from "../types/projectTypes.ts";
 
 import {
-  GOOGLE_CALENDAR_ID,
   GOOGLE_API_KEY,
-  TORONTO_TIME_ZONE_IDENTIFIER,
+  GOOGLE_CALENDAR_ID,
   TECHTANK_EVENT_TAG,
 } from "../constants/consts.ts";
+
+import { international_timezone_formatter } from "../helpers/custom-date-fns.ts";
 
 import { generate_sanity_img_url } from "../config/sanity-config.ts";
 
@@ -79,11 +79,9 @@ const transform_to_block_upcoming_events = (section: google_cal_event) => {
     const web_address = find_web_address(sec.description) ?? "#";
 
     const start_date_time = new Date(sec.start.dateTime);
-    const start_date_time_formatted = formatInTimeZone(
-      start_date_time,
-      TORONTO_TIME_ZONE_IDENTIFIER,
-      "MMM do - p"
-    );
+
+    const start_date_time_formatted =
+      international_timezone_formatter(start_date_time);
 
     return {
       type: "section",
@@ -106,11 +104,8 @@ const transform_to_block_upcoming_events_techtank = (
     const web_address = find_web_address(sec.description) ?? "#";
 
     const start_date_time = new Date(sec.start.dateTime);
-    const start_date_time_formatted = formatInTimeZone(
-      start_date_time,
-      TORONTO_TIME_ZONE_IDENTIFIER,
-      "MMM do - p"
-    );
+    const start_date_time_formatted =
+      international_timezone_formatter(start_date_time);
 
     return {
       type: "section",

@@ -1,22 +1,22 @@
+import client from "../utils/config/axiom-config.ts";
 // import app from "@utils/config/slack-config.ts";
 import app from "../utils/config/slack-config.ts";
-import client from "../utils/config/axiom-config.ts";
 
 import { greet_new_team_member } from "./Events/greetings.ts";
 import { sayHello } from "./Events/sayHello.ts";
 
+import { thanks } from "../src/Events/thanks.ts";
 import { app_home_opened } from "./Events/app_home.ts";
 import {
-  open_coc_modal,
   accept_coc,
   deny_coc,
+  open_coc_modal,
 } from "./Events/open_coc_modal.ts";
-import { thanks } from "../src/Events/thanks.ts";
 
-import { jokes } from "./Slash-commands/jokes.ts";
-import { suggestion } from "./Slash-commands/suggestions.ts";
-import { notify_admins } from "./Slash-commands/notify-admins.ts";
 import { check_non_inclusive_words } from "./Events/inclusive.ts";
+import { jokes } from "./Slash-commands/jokes.ts";
+import { notify_admins } from "./Slash-commands/notify-admins.ts";
+import { suggestion } from "./Slash-commands/suggestions.ts";
 
 import { AXIOM_DATA_SET } from "../utils/constants/consts.ts";
 
