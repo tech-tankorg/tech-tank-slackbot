@@ -1,10 +1,13 @@
 import {
+  getDoc,
   setDoc,
   updateDoc,
   serverTimestamp,
   deleteDoc,
 } from "firebase/firestore";
 import { get_document_reference } from "../config/firebase-config.ts";
+
+import { shuffle_bot_user } from "../types/zod-types.ts";
 
 export const create_shuffle_bot_user = async (
   user_id: string,
@@ -61,4 +64,14 @@ export const delete_shuffle_bot_user = async (user_id: string) => {
   const doc_ref = await get_document_reference("shuffle-bot-users", user_id);
 
   await deleteDoc(doc_ref);
+};
+
+export const get_shuffle_bot_user = async (user_id: string) => {
+  const doc_ref = await get_document_reference("shuffle-bot-users", user_id);
+
+  const doc = await getDoc(doc_ref);
+
+  const user_data = shuffle_bot_user.parse(doc.data());
+
+  return user_data;
 };
