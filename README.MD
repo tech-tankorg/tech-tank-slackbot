@@ -30,7 +30,11 @@ We've added a docker file to this project so that you can spin up a production r
 docker-compose up
 ```
 
-## Setup a test slack app/bot
+## Access test environment workspace
+
+Contact admins to receive the `env` variables and to be added to the test environment workspace.
+
+## Setup a your own test slack app/bot (optional)
 
 1. Create a test slack workspace
 2. Navigate over to [slack's api](https://api.slack.com/apps)
