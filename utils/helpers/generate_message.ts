@@ -39,7 +39,7 @@ Afterwards, you can check out some of our other channels. Here's a list of our c
 
 And of course, if you don't see an appropriate place to post, you can always just post in #general! We would also love to hear your ideas! So at anytime, feel free to use the "/suggestion" command to send your idea's directly to the admin team. 
 
-If you want to stay updated with all our events, feel free to subscribe to our public calendar using one of the following links <https://calendar.google.com/calendar/embed?src=cfda7c6ac8ce0fc9eaf3acb92419608d7c3cc9bcf3ed49b5f7c7d8a1058f697c%40group.calendar.google.com&ctz=America%2FToronto|generic calendar link> or <https://calendar.google.com/calendar/ical/cfda7c6ac8ce0fc9eaf3acb92419608d7c3cc9bcf3ed49b5f7c7d8a1058f697c%40group.calendar.google.com/public/basic.ics|calendar link for apple devices>. Lastly, we wanted to provide you a link to our code of conduct which you can find <https://www.techtankto.com/code-of-conduct|here>.
+Lastly, we wanted to provide you a link to our code of conduct which you can find <https://www.techtankto.com/code-of-conduct|here>.
 
 If you have any questions or concerns at any time, please don't hesitate to contact <@${admins.chris}>, <@${admins.sammy}>, <@${admins.nonso}>, <@${admins.niya}>, <@${admins.riaz}>, <@${admins.neal}>, or <@${admins.eric}> your friendly admins:party_blob:
 
