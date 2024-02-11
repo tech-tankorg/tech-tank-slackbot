@@ -91,3 +91,15 @@ export const shuffle_bot_user = z.object({
     intro: z.string(),
   }),
 });
+
+export const shuffle_bot_groups = z.object({
+  date_created: z.object({ dateTime: z.string(), timeZone: z.string() }),
+  groups: z.array(
+    z.record(
+      z.string().regex(/^group_\d+$/, {
+        message: "Must match SLACK user id: group_<some-digit>]",
+      }),
+      z.array(z.string())
+    )
+  ),
+});

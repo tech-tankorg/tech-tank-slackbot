@@ -3,12 +3,17 @@ import app from "../config/slack-config.ts";
 export const dm_lst_of_people = async (
   lst_of_user_id: string[],
   message: string,
-  additional_person: string | null
+  additional_persons: string | string[] | null
 ) => {
+  const additional_persons_formatted = Array.isArray(additional_persons)
+    ? additional_persons.join(",")
+    : additional_persons;
   return await Promise.allSettled(
     lst_of_user_id.map(async (id) => {
       const users =
-        additional_person !== null ? `${id},${additional_person}` : `${id}`;
+        additional_persons_formatted !== null
+          ? `${id},${additional_persons_formatted}`
+          : `${id}`;
       const channel = await app.client.conversations.open({
         users,
       });
