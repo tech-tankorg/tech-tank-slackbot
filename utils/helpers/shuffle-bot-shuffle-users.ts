@@ -24,7 +24,8 @@ export const shuffle_users = (
 
   for (const user of active_users) {
     if (newGroup.length === 0) break;
-    if (newGroup[index].length <= people_per_group) {
+    // biome-ignore lint: TESTING not-null check for working function
+    if (newGroup[index]!.length <= people_per_group) {
       // check if the number of people in the group does not exceeed the setting
       newGroup[index]?.push(user);
     } else {

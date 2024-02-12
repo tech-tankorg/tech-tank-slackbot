@@ -88,6 +88,7 @@ export const coffee_chat_user_deactivate = () => {
   app.command("/coffee-chat-deactivate", async ({ ack, body, client }) => {
     await ack();
     const user_id = body.user_id;
+    const channel = body.channel_id;
 
     try {
       await update_shuffle_activity(user_id, false);
@@ -100,6 +101,12 @@ export const coffee_chat_user_deactivate = () => {
           },
         },
       ]);
+
+      await client.chat.postEphemeral({
+        channel,
+        user: user_id,
+        text: "Your coffee chat activity has been deactived. You will not appear within the next rotation. ",
+      });
     } catch {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
@@ -110,6 +117,11 @@ export const coffee_chat_user_deactivate = () => {
           },
         },
       ]);
+      await client.chat.postEphemeral({
+        channel,
+        user: user_id,
+        text: "Failed to deactive your coffee chat activity. You will still appear within the next rotation. ",
+      });
     }
   });
 };
@@ -118,6 +130,7 @@ export const coffee_chat_user_activate = () => {
   app.command("/coffee-chat-activate", async ({ ack, body, client }) => {
     await ack();
     const user_id = body.user_id;
+    const channel = body.channel_id;
 
     try {
       await update_shuffle_activity(user_id, true);
@@ -130,6 +143,11 @@ export const coffee_chat_user_activate = () => {
           },
         },
       ]);
+      await client.chat.postEphemeral({
+        channel,
+        user: user_id,
+        text: "Your coffee chat activity has been activated. You will appear within the next rotation.",
+      });
     } catch {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
@@ -140,15 +158,23 @@ export const coffee_chat_user_activate = () => {
           },
         },
       ]);
+      await client.chat.postEphemeral({
+        channel,
+        user: user_id,
+        text: "Failed to activate your coffee chat activity. You will not appear within the next rotation. ",
+      });
     }
   });
 };
 
+/**
+ * Creates a brand new shuffle for users
+ *
+ * Gets all active users and filters for just the ID's.
+ * Shuffles users into groups of a specified size and then creates a private chat with all appropriate members
+ * */
+
 export const coffee_chat_bot_shuffle = async () => {
-  // get the last weeks group
-  // shuffle the groups
-  // create the new groups and save groups to db
-  // message the new groups
   const all_active_users = await get_all_shuffle_bot_users();
   const all_active_users_ids = all_active_users.map((user) => user.user_id);
 
@@ -157,9 +183,8 @@ export const coffee_chat_bot_shuffle = async () => {
   await create_shuffle_groups(shuffled_new_users);
 
   for (let i = 0; i <= shuffled_new_users.length; i++) {
-    await dm_lst_of_people([shuffled_new_users[i][0]], "message", [
-      shuffled_new_users[i][1],
-      shuffled_new_users[i][2],
-    ]);
+    const first_user = shuffled_new_users[i]?.shift() ?? "";
+    const additional_users = shuffled_new_users[i]?.join(",") ?? "";
+    await dm_lst_of_people([first_user], "message", additional_users);
   }
 };
