@@ -14,7 +14,7 @@ import { dm_lst_of_people } from "../../utils/helpers/send-message-to-lst-of-peo
 import Axiom from "../../utils/config/axiom-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
-import { shuffle_bot_bio_modal } from "@utils/constants/shuffle-bot-bio-modal.ts";
+import { shuffle_bot_bio_modal } from "../../utils/constants/shuffle-bot-bio-modal.ts";
 
 /**
  * Creates a brand new shuffle for users
@@ -205,20 +205,20 @@ export const handle_coffee_chat_bio_submit = () => {
     await ack();
 
     const view_values = view.state.values;
-    const pronouns = view_values["block-id"]
-      ? view_values["block-id"]["pronouns-action"]
+    const pronouns = view_values["pronouns-action-block"]
+      ? view_values["pronouns-action-block"]["pronouns-action"]?.value
       : undefined;
 
-    const title = view_values["block-id"]
-      ? view_values["block-id"]["title-action"]
+    const title = view_values["title-action-block"]
+      ? view_values["title-action-block"]["title-action"]?.value
       : undefined;
 
-    const location = view_values["block-id"]
-      ? view_values["block-id"]["location-action"]
+    const location = view_values["location-action-block"]
+      ? view_values["location-action-block"]["location-action"]?.value
       : undefined;
 
-    const intro = view_values["block-id"]
-      ? view_values["block-id"]["intro-action"]
+    const intro = view_values["intro-action-block"]
+      ? view_values["intro-action-block"]["intro-action"]?.value
       : undefined;
 
     const user_id = body.user.id;

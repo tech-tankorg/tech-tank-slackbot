@@ -38,6 +38,7 @@ export const shuffle_bot_bio_modal = {
     },
     {
       type: "input",
+      block_id: "pronouns-action-block",
       element: {
         type: "static_select",
         placeholder: {
@@ -81,6 +82,7 @@ export const shuffle_bot_bio_modal = {
     },
     {
       type: "input",
+      block_id: "title-action-block",
       element: {
         type: "static_select",
         placeholder: {
@@ -124,6 +126,7 @@ export const shuffle_bot_bio_modal = {
     },
     {
       type: "input",
+      block_id: "location-action-block",
       element: {
         type: "static_select",
         placeholder: {
@@ -167,6 +170,7 @@ export const shuffle_bot_bio_modal = {
     },
     {
       type: "input",
+      block_id: "intro-action-block",
       element: {
         type: "plain_text_input",
         multiline: true,
