@@ -45,11 +45,10 @@ export const create_shuffle_bot_user = async (
 export const update_shuffle_bot_bio = async (
   user_id: string,
   bio: {
-    pronouns: string;
-    title: string;
-    location: string;
-    interests: string;
-    intro: string;
+    pronouns: unknown;
+    title: unknown;
+    location: unknown;
+    intro: unknown;
   }
 ) => {
   const doc_ref = await get_document_reference("shuffle-bot-users", user_id);

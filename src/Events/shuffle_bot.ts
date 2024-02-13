@@ -5,6 +5,7 @@ import {
   create_shuffle_bot_user,
   delete_shuffle_bot_user,
   update_shuffle_activity,
+  update_shuffle_bot_bio,
 } from "../../utils/controllers/shuffle-bot-users.ts";
 import { shuffle_users } from "../../utils/helpers/shuffle-bot-shuffle-users.ts";
 
@@ -12,6 +13,30 @@ import { dm_lst_of_people } from "../../utils/helpers/send-message-to-lst-of-peo
 
 import Axiom from "../../utils/config/axiom-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
+
+import { shuffle_bot_bio_modal } from "@utils/constants/shuffle-bot-bio-modal.ts";
+
+/**
+ * Creates a brand new shuffle for users
+ *
+ * Gets all active users and filters for just the ID's.
+ * Shuffles users into groups of a specified size and then creates a private chat with all appropriate members
+ * */
+
+export const coffee_chat_bot_shuffle = async () => {
+  const all_active_users = await get_all_shuffle_bot_users();
+  const all_active_users_ids = all_active_users.map((user) => user.user_id);
+
+  const shuffled_new_users = shuffle_users(all_active_users_ids, 3);
+
+  await create_shuffle_groups(shuffled_new_users);
+
+  for (let i = 0; i <= shuffled_new_users.length; i++) {
+    const first_user = shuffled_new_users[i]?.shift() ?? "";
+    const additional_users = shuffled_new_users[i]?.join(",") ?? "";
+    await dm_lst_of_people([first_user], "message", additional_users);
+  }
+};
 
 export const coffee_chat_bot_joined_channel = (allow_channels: string[]) => {
   app.event("member_joined_channel", async ({ event, client }) => {
@@ -167,24 +192,53 @@ export const coffee_chat_user_activate = () => {
   });
 };
 
-/**
- * Creates a brand new shuffle for users
- *
- * Gets all active users and filters for just the ID's.
- * Shuffles users into groups of a specified size and then creates a private chat with all appropriate members
- * */
+export const coffee_chat_bio = () => {
+  app.command("/coffee-chat-bio", async ({ ack, body, client }) => {
+    await ack();
+    const trigger_id = body.trigger_id;
+    await client.views.open({ trigger_id, view: shuffle_bot_bio_modal });
+  });
+};
 
-export const coffee_chat_bot_shuffle = async () => {
-  const all_active_users = await get_all_shuffle_bot_users();
-  const all_active_users_ids = all_active_users.map((user) => user.user_id);
+export const handle_coffee_chat_bio_submit = () => {
+  app.view("coffee-chat-bio-modal", async ({ ack, view, body }) => {
+    await ack();
 
-  const shuffled_new_users = shuffle_users(all_active_users_ids, 3);
+    const view_values = view.state.values;
+    const pronouns = view_values["block-id"]
+      ? view_values["block-id"]["pronouns-action"]
+      : undefined;
 
-  await create_shuffle_groups(shuffled_new_users);
+    const title = view_values["block-id"]
+      ? view_values["block-id"]["title-action"]
+      : undefined;
 
-  for (let i = 0; i <= shuffled_new_users.length; i++) {
-    const first_user = shuffled_new_users[i]?.shift() ?? "";
-    const additional_users = shuffled_new_users[i]?.join(",") ?? "";
-    await dm_lst_of_people([first_user], "message", additional_users);
-  }
+    const location = view_values["block-id"]
+      ? view_values["block-id"]["location-action"]
+      : undefined;
+
+    const intro = view_values["block-id"]
+      ? view_values["block-id"]["intro-action"]
+      : undefined;
+
+    const user_id = body.user.id;
+
+    const bio = {
+      pronouns: pronouns ?? "",
+      title: title ?? "",
+      location: location ?? "",
+      intro: intro ?? "",
+    };
+
+    await update_shuffle_bot_bio(user_id, bio);
+  });
+};
+
+export const handle_close_coffee_chat_bio_modal = () => {
+  app.view(
+    { callback_id: "coffee-chat-bio-modal", type: "view_closed" },
+    async ({ ack }) => {
+      await ack();
+    }
+  );
 };
