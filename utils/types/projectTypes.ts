@@ -90,6 +90,10 @@ export type app_home_view_response = Awaited<
   ReturnType<typeof app.client.views.publish>
 >;
 
+export type chat_response = Awaited<
+  ReturnType<typeof app.client.chat.postMessage>
+>;
+
 export interface thanks {
   user_id_sender: string;
   message: string;

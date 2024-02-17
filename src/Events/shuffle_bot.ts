@@ -14,7 +14,12 @@ import { dm_lst_of_people } from "../../utils/helpers/send-message-to-lst-of-peo
 import Axiom from "../../utils/config/axiom-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
-import { shuffle_bot_bio_modal } from "../../utils/constants/shuffle-bot-bio-modal.ts";
+import {
+  shuffle_bot_bio_modal,
+  coffee_chat_intro_message,
+} from "../../utils/constants/shuffle-bot-bio-modal.ts";
+
+import { send_message } from "../../utils/helpers/send-message.ts";
 
 /**
  * Creates a brand new shuffle for users
@@ -34,7 +39,11 @@ export const coffee_chat_bot_shuffle = async () => {
   for (let i = 0; i <= shuffled_new_users.length; i++) {
     const first_user = shuffled_new_users[i]?.shift() ?? "";
     const additional_users = shuffled_new_users[i]?.join(",") ?? "";
-    await dm_lst_of_people([first_user], "message", additional_users);
+    await dm_lst_of_people(
+      [first_user],
+      { type: "msg", message: "Message" },
+      additional_users
+    );
   }
 };
 
@@ -43,6 +52,7 @@ export const coffee_chat_bot_joined_channel = (allow_channels: string[]) => {
     if (!allow_channels.includes(event.channel)) return;
 
     // When a member joins the channel they should be added to the shuffle list
+    // The newly joined member should also receive a message telling them to fill out their bio
 
     try {
       const userInfo = await client.users.info({ user: event.user });
@@ -50,6 +60,14 @@ export const coffee_chat_bot_joined_channel = (allow_channels: string[]) => {
       const user_name = userInfo.user?.profile?.display_name_normalized ?? "";
 
       await create_shuffle_bot_user(event.user, user_name);
+
+      await send_message({
+        user_id: event.user,
+        input: {
+          type: "blocks",
+          blocks: coffee_chat_intro_message(event.user),
+        },
+      });
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
@@ -84,6 +102,13 @@ export const coffee_chat_bot_left_channel = (allow_channels: string[]) => {
     // When a member leaves the channel they should be removed to the shuffle list
     try {
       await delete_shuffle_bot_user(event.user);
+      await send_message({
+        user_id: event.user,
+        input: {
+          type: "msg",
+          message: `You've been removed from the following coffee chat channel: ${event.channel}`,
+        },
+      });
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {

@@ -184,3 +184,53 @@ export const shuffle_bot_bio_modal = {
     },
   ],
 };
+
+export const coffee_chat_intro_message = (user_id: string) => {
+  return [
+    {
+      type: "section",
+      text: {
+        type: "plain_text",
+        text: ":exclamation: Nemo coffee chat onboarding is incomplete",
+        emoji: true,
+      },
+    },
+    {
+      type: "section",
+      text: {
+        type: "plain_text",
+        text: `Hi <@${user_id}>, please use "/coffee-chat-bio" to complete your onboarding to the coffee chat feature. Here you can complete your bio which will be used to introduce you. to other participants within the channel.`,
+        emoji: true,
+      },
+    },
+  ];
+};
+
+export const coffee_chat_shuffle_channel_msg = (date: string) => {
+  return [
+    {
+      type: "section",
+      text: {
+        type: "plain_text",
+        text: ":tada: Hooray! I just shuffled everyone here just a few moments ago.",
+        emoji: true,
+      },
+    },
+    {
+      type: "section",
+      text: {
+        type: "plain_text",
+        text: ":computer: Have fun meeting in your new groups :smile:",
+        emoji: true,
+      },
+    },
+    {
+      type: "section",
+      text: {
+        type: "plain_text",
+        text: `:calendar: Your next scheduled shuffle is on ${date}.`,
+        emoji: true,
+      },
+    },
+  ];
+};
