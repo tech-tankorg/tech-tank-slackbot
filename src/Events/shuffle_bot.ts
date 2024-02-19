@@ -9,8 +9,6 @@ import {
 } from "../../utils/controllers/shuffle-bot-users.ts";
 import { shuffle_users } from "../../utils/helpers/shuffle-bot-shuffle-users.ts";
 
-import { dm_lst_of_people } from "../../utils/helpers/send-message-to-lst-of-people.ts";
-
 import Axiom from "../../utils/config/axiom-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
@@ -19,7 +17,10 @@ import {
   coffee_chat_intro_message,
 } from "../../utils/constants/shuffle-bot-bio-modal.ts";
 
-import { send_message } from "../../utils/helpers/send-message.ts";
+import {
+  send_message,
+  dm_lst_of_people,
+} from "../../utils/helpers/send-message.ts";
 
 /**
  * Creates a brand new shuffle for users
