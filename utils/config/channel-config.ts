@@ -32,3 +32,7 @@ export const channels = {
 export const bots = {
   nemo: "U054MF49HGU",
 };
+
+export const coffee_chat_allowed_channels = new Set<string>([
+  channels.coffee_chat,
+]);

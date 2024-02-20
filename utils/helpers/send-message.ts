@@ -13,13 +13,13 @@ interface BLOCKS {
 }
 
 interface Args {
-  user_id: string;
+  id: string;
   input: MSG | BLOCKS;
 }
 
 export const send_message = async (msg_user: Args) => {
   const channel = await app.client.conversations.open({
-    users: msg_user.user_id,
+    users: msg_user.id,
   });
 
   let msg: chat_response;
