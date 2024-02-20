@@ -89,6 +89,7 @@ export const shuffle_bot_user = z.object({
     location: z.string(),
     interests: z.string(),
     intro: z.string(),
+    img_url: z.string(),
   }),
 });
 

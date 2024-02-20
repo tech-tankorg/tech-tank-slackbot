@@ -17,7 +17,8 @@ import { shuffle_bot_user } from "../types/zod-types.ts";
 
 export const create_shuffle_bot_user = async (
   user_id: string,
-  user_name: string
+  user_name: string,
+  user_image: string
 ) => {
   const shuffle_user = {
     user_name,
@@ -30,6 +31,7 @@ export const create_shuffle_bot_user = async (
       location: "",
       interests: "",
       intro: "",
+      img_url: user_image,
     },
   };
 

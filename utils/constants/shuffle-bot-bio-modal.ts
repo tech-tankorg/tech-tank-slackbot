@@ -1,3 +1,4 @@
+import { shuffle_bot_user_type } from "../types/projectTypes.ts";
 export const shuffle_bot_bio_modal = (user_id: string) => {
   return {
     type: "modal" as const,
@@ -142,6 +143,45 @@ export const coffee_chat_shuffle_channel_msg = (date: string) => {
         type: "plain_text",
         text: `:calendar: Your next scheduled shuffle is on ${date}.`,
         emoji: true,
+      },
+    },
+  ];
+};
+
+export const shuffle_user_group_intro_msg = (
+  profile: shuffle_bot_user_type
+) => {
+  return [
+    {
+      type: "section",
+      text: {
+        type: "plain_text",
+        text: `Everyone, meet <@${profile.user_id}> (${profile.bio.pronouns}):`,
+        emoji: true,
+      },
+    },
+    {
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: profile.bio.intro,
+      },
+      fields: [
+        {
+          type: "plain_text",
+          text: `:computer: ${profile.bio.title}`,
+          emoji: true,
+        },
+        {
+          type: "plain_text",
+          text: `:round_pushpin: ${profile.bio.location}`,
+          emoji: true,
+        },
+      ],
+      accessory: {
+        type: "image",
+        image_url: profile.bio.img_url,
+        alt_text: "Profile picture",
       },
     },
   ];

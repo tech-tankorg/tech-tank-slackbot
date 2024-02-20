@@ -16,6 +16,7 @@ import {
   shuffle_bot_bio_modal,
   coffee_chat_intro_message,
   coffee_chat_shuffle_channel_msg,
+  shuffle_user_group_intro_msg,
 } from "../../utils/constants/shuffle-bot-bio-modal.ts";
 
 import {
@@ -27,6 +28,8 @@ import {
   channels,
   coffee_chat_config,
 } from "../../utils/config/channel-config.ts";
+
+import { flatten_array } from "../../utils/helpers/flatten-object.ts";
 
 /**
  * Creates a brand new shuffle for users
@@ -49,10 +52,24 @@ export const coffee_chat_bot_shuffle = async () => {
   // Create msg groups and send message to all users in the shuffled_new_users array
   for (let i = 0; i <= shuffled_new_users.length; i++) {
     const first_user = shuffled_new_users[i]?.shift() ?? "";
-    const additional_users = shuffled_new_users[i]?.join(",") ?? "";
+    const additional_users_lst = shuffled_new_users[i] ?? [];
+    const additional_users = additional_users_lst[i] ?? "";
+
+    const group_profiles = all_active_users.filter(
+      (profile) =>
+        profile.user_id === first_user ||
+        additional_users_lst.includes(profile.user_id)
+    );
+
+    const profile_message_lst = group_profiles.map((profile) =>
+      shuffle_user_group_intro_msg(profile)
+    );
+
+    const blocks_message = flatten_array(profile_message_lst);
+
     await dm_lst_of_people(
       [first_user],
-      { type: "msg", message: "Message" },
+      { type: "blocks", blocks: blocks_message },
       additional_users
     );
   }
@@ -77,10 +94,10 @@ export const coffee_chat_bot_joined_channel = (allow_channels: Set<string>) => {
 
     try {
       const userInfo = await client.users.info({ user: event.user });
-
       const user_name = userInfo.user?.profile?.display_name_normalized ?? "";
+      const user_profile_image = userInfo.user?.profile?.image_512 ?? "";
 
-      await create_shuffle_bot_user(event.user, user_name);
+      await create_shuffle_bot_user(event.user, user_name, user_profile_image);
 
       await send_message({
         id: event.user,
