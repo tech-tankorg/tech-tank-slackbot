@@ -10,18 +10,6 @@ export const flatten_array = <T>(arr: T[][]) => {
   return new_array;
 };
 
-export const flatten_object = (obj: Record<string, string[]>) => {
-  const values = Object.values(obj);
-
-  const new_array: string[] = [];
-
-  for (const value of values) {
-    new_array.push(...value);
-  }
-
-  return new_array;
-};
-
 export const flatten_all_scheduled_messages_reponse = (
   obj: ScheduledMessageResponse[]
 ) => {
