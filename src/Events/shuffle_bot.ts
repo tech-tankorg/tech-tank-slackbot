@@ -23,7 +23,10 @@ import {
   dm_lst_of_people,
 } from "../../utils/helpers/send-message.ts";
 
-import { channels } from "../../utils/config/channel-config.ts";
+import {
+  channels,
+  coffee_chat_config,
+} from "../../utils/config/channel-config.ts";
 
 /**
  * Creates a brand new shuffle for users
@@ -36,7 +39,10 @@ export const coffee_chat_bot_shuffle = async () => {
   const all_active_users = await get_all_shuffle_bot_users();
   const all_active_users_ids = all_active_users.map((user) => user.user_id);
 
-  const shuffled_new_users = shuffle_users(all_active_users_ids, 3);
+  const shuffled_new_users = shuffle_users(
+    all_active_users_ids,
+    coffee_chat_config.users_per_group
+  );
 
   await create_shuffle_groups(shuffled_new_users);
 
@@ -238,7 +244,10 @@ export const coffee_chat_bio = () => {
   app.command("/coffee-chat-bio", async ({ ack, body, client }) => {
     await ack();
     const trigger_id = body.trigger_id;
-    await client.views.open({ trigger_id, view: shuffle_bot_bio_modal });
+    await client.views.open({
+      trigger_id,
+      view: shuffle_bot_bio_modal(body.user_id),
+    });
   });
 };
 

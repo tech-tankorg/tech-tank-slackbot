@@ -1,188 +1,100 @@
-export const shuffle_bot_bio_modal = {
-  type: "modal" as const,
-  callback_id: "coffee-chat-bio-modal",
-  title: {
-    type: "plain_text" as const,
-    text: "Edit your Nemo Bio",
-    emoji: true,
-  },
-  submit: {
-    type: "plain_text" as const,
-    text: "Submit",
-    emoji: true,
-  },
-  close: {
-    type: "plain_text" as const,
-    text: "Cancel",
-    emoji: true,
-  },
-  blocks: [
-    {
-      type: "section",
-      text: {
-        type: "plain_text" as const,
-        text: "Hey [user]! Let's get started!",
-        emoji: true,
-      },
+export const shuffle_bot_bio_modal = (user_id: string) => {
+  return {
+    type: "modal" as const,
+    callback_id: "coffee-chat-bio-modal",
+    title: {
+      type: "plain_text" as const,
+      text: "Edit your Nemo coffee chat Bio",
+      emoji: true,
     },
-    {
-      type: "divider",
+    submit: {
+      type: "plain_text" as const,
+      text: "Submit",
+      emoji: true,
     },
-    {
-      type: "section",
-      text: {
-        type: "plain_text" as const,
-        text: "Complete your bio below, which will be shared with your next coffee chat group!",
-        emoji: true,
-      },
+    close: {
+      type: "plain_text" as const,
+      text: "Cancel",
+      emoji: true,
     },
-    {
-      type: "input",
-      block_id: "pronouns-action-block",
-      element: {
-        type: "static_select",
-        placeholder: {
+    blocks: [
+      {
+        type: "section",
+        text: {
           type: "plain_text" as const,
-          text: "Select an item",
+          text: `Hey <@${user_id}>! Let's get started!`,
           emoji: true,
         },
-        options: [
-          {
-            text: {
-              type: "plain_text" as const,
-              text: "*this is plain_text text*",
-              emoji: true,
-            },
-            value: "value-0",
-          },
-          {
-            text: {
-              type: "plain_text" as const,
-              text: "*this is plain_text text*",
-              emoji: true,
-            },
-            value: "value-1",
-          },
-          {
-            text: {
-              type: "plain_text" as const,
-              text: "*this is plain_text text*",
-              emoji: true,
-            },
-            value: "value-2",
-          },
-        ],
-        action_id: "pronouns-action",
       },
-      label: {
-        type: "plain_text" as const,
-        text: ":speech_balloon: Pronouns",
-        emoji: true,
+      {
+        type: "divider",
       },
-    },
-    {
-      type: "input",
-      block_id: "title-action-block",
-      element: {
-        type: "static_select",
-        placeholder: {
+      {
+        type: "section",
+        text: {
           type: "plain_text" as const,
-          text: "Select an item",
+          text: "Complete your bio below, which will be shared with your next coffee chat group!",
           emoji: true,
         },
-        options: [
-          {
-            text: {
-              type: "plain_text" as const,
-              text: "*this is plain_text text*",
-              emoji: true,
-            },
-            value: "value-0",
-          },
-          {
-            text: {
-              type: "plain_text" as const,
-              text: "*this is plain_text text*",
-              emoji: true,
-            },
-            value: "value-1",
-          },
-          {
-            text: {
-              type: "plain_text" as const,
-              text: "*this is plain_text text*",
-              emoji: true,
-            },
-            value: "value-2",
-          },
-        ],
-        action_id: "title-action",
       },
-      label: {
-        type: "plain_text" as const,
-        text: ":computer: Title",
-        emoji: true,
-      },
-    },
-    {
-      type: "input",
-      block_id: "location-action-block",
-      element: {
-        type: "static_select",
-        placeholder: {
+      {
+        type: "input",
+        block_id: "pronouns-action-block",
+        element: {
+          type: "plain_text_input",
+          multiline: true,
+          action_id: "pronouns-action",
+        },
+        label: {
           type: "plain_text" as const,
-          text: "Select an item",
+          text: ":speech_balloon: Pronouns",
           emoji: true,
         },
-        options: [
-          {
-            text: {
-              type: "plain_text" as const,
-              text: "*this is plain_text text*",
-              emoji: true,
-            },
-            value: "value-0",
-          },
-          {
-            text: {
-              type: "plain_text" as const,
-              text: "*this is plain_text text*",
-              emoji: true,
-            },
-            value: "value-1",
-          },
-          {
-            text: {
-              type: "plain_text" as const,
-              text: "*this is plain_text text*",
-              emoji: true,
-            },
-            value: "value-2",
-          },
-        ],
-        action_id: "location-action",
       },
-      label: {
-        type: "plain_text" as const,
-        text: ":round_pushpin: Location",
-        emoji: true,
+      {
+        type: "input",
+        block_id: "title-action-block",
+        element: {
+          type: "plain_text_input",
+          multiline: true,
+          action_id: "title-action",
+        },
+        label: {
+          type: "plain_text" as const,
+          text: ":computer: Title",
+          emoji: true,
+        },
       },
-    },
-    {
-      type: "input",
-      block_id: "intro-action-block",
-      element: {
-        type: "plain_text_input",
-        multiline: true,
-        action_id: "intro-action",
+      {
+        type: "input",
+        block_id: "location-action-block",
+        element: {
+          type: "plain_text_input",
+          multiline: true,
+          action_id: "location-action",
+        },
+        label: {
+          type: "plain_text" as const,
+          text: ":round_pushpin: Location",
+          emoji: true,
+        },
       },
-      label: {
-        type: "plain_text" as const,
-        text: ":wave: Short Intro",
-        emoji: true,
+      {
+        type: "input",
+        block_id: "intro-action-block",
+        element: {
+          type: "plain_text_input",
+          multiline: true,
+          action_id: "intro-action",
+        },
+        label: {
+          type: "plain_text" as const,
+          text: ":wave: Short Intro",
+          emoji: true,
+        },
       },
-    },
-  ],
+    ],
+  };
 };
 
 export const coffee_chat_intro_message = (user_id: string) => {
