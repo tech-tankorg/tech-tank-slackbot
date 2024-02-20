@@ -58,6 +58,7 @@ export const coffee_chat_bot_shuffle = async () => {
       type: "blocks",
       blocks: coffee_chat_shuffle_channel_msg(new Date().toUTCString()),
     },
+    group: "channel",
   });
 };
 
@@ -81,6 +82,7 @@ export const coffee_chat_bot_joined_channel = (allow_channels: Set<string>) => {
           type: "blocks",
           blocks: coffee_chat_intro_message(event.user),
         },
+        group: "user",
       });
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
@@ -120,8 +122,9 @@ export const coffee_chat_bot_left_channel = (allow_channels: Set<string>) => {
         id: event.user,
         input: {
           type: "msg",
-          message: `You've been removed from the following coffee chat channel: ${event.channel}`,
+          message: `You've been removed from the following coffee chat channel: <#${event.channel}>`,
         },
+        group: "user",
       });
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
@@ -169,7 +172,7 @@ export const coffee_chat_user_deactivate = () => {
       await client.chat.postEphemeral({
         channel,
         user: user_id,
-        text: "Your coffee chat activity has been deactived. You will not appear within the next rotation. ",
+        text: `Your coffee chat activity in the following channel (<#${channel}>) has been deactived. You will not appear within the next rotation.`,
       });
     } catch {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
@@ -210,7 +213,7 @@ export const coffee_chat_user_activate = () => {
       await client.chat.postEphemeral({
         channel,
         user: user_id,
-        text: "Your coffee chat activity has been activated. You will appear within the next rotation.",
+        text: `Your coffee chat activity in the following channel (<#${channel}>) has been activated. You will appear within the next rotation.`,
       });
     } catch {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
