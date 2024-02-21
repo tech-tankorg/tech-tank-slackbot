@@ -31,6 +31,11 @@ import {
 
 import { flatten_array } from "../../utils/helpers/flatten-object.ts";
 
+import {
+  determine_next_execute_date_freq,
+  international_timezone_formatter,
+} from "../../utils/helpers/custom-date-fns.ts";
+
 /**
  * Creates a brand new shuffle for users
  *
@@ -42,6 +47,17 @@ export const coffee_chat_bot_shuffle = async () => {
   const all_active_users = await get_all_shuffle_bot_users();
   const all_active_users_ids = all_active_users.map((user) => user.user_id);
 
+  const today = new Date();
+  today.setHours(10, 0);
+
+  const next_shuffle_date = international_timezone_formatter(
+    determine_next_execute_date_freq(
+      today,
+      "monday",
+      coffee_chat_config.shuffle_frequency
+    )
+  );
+
   const shuffled_new_users = shuffle_users(
     all_active_users_ids,
     coffee_chat_config.users_per_group
@@ -52,15 +68,16 @@ export const coffee_chat_bot_shuffle = async () => {
   // Create msg groups and send message to all users in the shuffled_new_users array
   for (let i = 0; i <= shuffled_new_users.length; i++) {
     const first_user = shuffled_new_users[i]?.shift() ?? "";
-    const additional_users_lst = shuffled_new_users[i] ?? [];
-    const additional_users = additional_users_lst[i] ?? "";
+    const additional_users = shuffled_new_users[i] ?? [];
 
+    // Get the profiles for the users in the current group
     const group_profiles = all_active_users.filter(
       (profile) =>
         profile.user_id === first_user ||
-        additional_users_lst.includes(profile.user_id)
+        additional_users.includes(profile.user_id)
     );
 
+    // Construct the message to be sent in the current group
     const profile_message_lst = group_profiles.map((profile) =>
       shuffle_user_group_intro_msg(profile)
     );
@@ -70,7 +87,7 @@ export const coffee_chat_bot_shuffle = async () => {
     await dm_lst_of_people(
       [first_user],
       { type: "blocks", blocks: blocks_message },
-      additional_users
+      additional_users.join(",") ?? ""
     );
   }
 
@@ -79,7 +96,7 @@ export const coffee_chat_bot_shuffle = async () => {
     id: channels.coffee_chat,
     input: {
       type: "blocks",
-      blocks: coffee_chat_shuffle_channel_msg(new Date().toUTCString()),
+      blocks: coffee_chat_shuffle_channel_msg(next_shuffle_date),
     },
     group: "channel",
   });
