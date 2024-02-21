@@ -192,7 +192,7 @@ export const coffee_chat_bot_left_channel = (allow_channels: Set<string>) => {
 };
 
 export const coffee_chat_user_deactivate = () => {
-  app.command("/coffee-chat-deactivate", async ({ ack, body, client }) => {
+  app.command("/coffee-chat-deactivate", async ({ ack, body, respond }) => {
     await ack();
     const user_id = body.user_id;
     const channel = body.channel_id;
@@ -209,9 +209,9 @@ export const coffee_chat_user_deactivate = () => {
         },
       ]);
 
-      await client.chat.postEphemeral({
-        channel,
-        user: user_id,
+      await respond({
+        response_type: "ephemeral",
+        mrkdwn: true,
         text: `Your coffee chat activity in the following channel (<#${channel}>) has been deactived. You will not appear within the next rotation.`,
       });
     } catch {
@@ -224,9 +224,9 @@ export const coffee_chat_user_deactivate = () => {
           },
         },
       ]);
-      await client.chat.postEphemeral({
-        channel,
-        user: user_id,
+      await respond({
+        response_type: "ephemeral",
+        mrkdwn: true,
         text: "Failed to deactive your coffee chat activity. You will still appear within the next rotation. ",
       });
     }
@@ -234,7 +234,7 @@ export const coffee_chat_user_deactivate = () => {
 };
 
 export const coffee_chat_user_activate = () => {
-  app.command("/coffee-chat-activate", async ({ ack, body, client }) => {
+  app.command("/coffee-chat-activate", async ({ ack, body, respond }) => {
     await ack();
     const user_id = body.user_id;
     const channel = body.channel_id;
@@ -250,9 +250,10 @@ export const coffee_chat_user_activate = () => {
           },
         },
       ]);
-      await client.chat.postEphemeral({
-        channel,
-        user: user_id,
+
+      await respond({
+        response_type: "ephemeral",
+        mrkdwn: true,
         text: `Your coffee chat activity in the following channel (<#${channel}>) has been activated. You will appear within the next rotation.`,
       });
     } catch {
@@ -265,9 +266,10 @@ export const coffee_chat_user_activate = () => {
           },
         },
       ]);
-      await client.chat.postEphemeral({
-        channel,
-        user: user_id,
+
+      await respond({
+        response_type: "ephemeral",
+        mrkdwn: true,
         text: "Failed to activate your coffee chat activity. You will not appear within the next rotation. ",
       });
     }
