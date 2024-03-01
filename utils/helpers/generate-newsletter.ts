@@ -346,3 +346,200 @@ export const generate_newsletter = async () => {
     ];
   }
 };
+
+export const generate_newsletter_post = async () => {
+  const start_of_month = startOfMonth(new Date());
+
+  const formatted_date = format(start_of_month, "MMMM yyyy");
+
+  const request_format_date = format(start_of_month, "yyyy-MM-dd");
+
+  try {
+    const response = await generate_sanity_newsletter(request_format_date);
+
+    const transform_block_fyi = transform_to_block_fyi(response.letter_fyi);
+    const transform_block_tech_insights = transform_to_block_fyi(
+      response.letter_tech_insights ?? { title: "", description: "" }
+    );
+    const transform_block_info = transform_to_block(response.letter_info);
+
+    const community_highlight_member_name = response.letter_member_highlight
+      .community_member_name as string;
+    const community_highlight_member_description = response
+      .letter_member_highlight.community_member_description as string;
+
+    return [
+      {
+        type: "header",
+        text: {
+          type: "plain_text",
+          text: ":newspaper: Nemo's Monthly Newsletter  :newspaper:",
+        },
+      },
+      {
+        type: "context",
+        elements: [
+          {
+            text: formatted_date,
+            type: "mrkdwn",
+          },
+        ],
+      },
+      {
+        type: "divider",
+      },
+      {
+        type: "header",
+        text: {
+          type: "plain_text",
+          text: ":page_facing_up: Tech Tank Code of Conduct",
+          emoji: true,
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: "*Please read and acknowledge*",
+        },
+        accessory: {
+          type: "button",
+          text: {
+            type: "plain_text",
+            text: ":page_facing_up: Open COC",
+            emoji: true,
+          },
+          value: "open_COC",
+          action_id: "open_coc_modal",
+        },
+      },
+      {
+        type: "divider",
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: "*COMMUNITY MEMBER HIGHLIGHTS* :star2:",
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `*This months community member highlight goes to ${community_highlight_member_name}*!! :tada::tada:`,
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `${community_highlight_member_description} \n\n`,
+        },
+      },
+      {
+        type: "divider",
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: " :loud_sound: *IN CASE YOU MISSED IT* :loud_sound:",
+        },
+      },
+
+      ...transform_block_info,
+      {
+        type: "divider",
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: "*TECH INSIGHTS* :newspaper:",
+        },
+      },
+      ...transform_block_tech_insights,
+      {
+        type: "divider",
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: "*FOR YOUR INFORMATION* :reminder_ribbon:",
+        },
+      },
+      ...transform_block_fyi,
+      {
+        type: "divider",
+      },
+      {
+        type: "context",
+        elements: [
+          {
+            type: "mrkdwn",
+            text: ":pushpin: Your monthly newsletter brought to you by *Nemo* from *Tech Tank*.",
+          },
+        ],
+      },
+    ];
+  } catch {
+    return [
+      {
+        type: "header",
+        text: {
+          type: "plain_text",
+          text: ":newspaper: Nemo's Monthly Newsletter  :newspaper:",
+        },
+      },
+      {
+        type: "context",
+        elements: [
+          {
+            text: formatted_date,
+            type: "mrkdwn",
+          },
+        ],
+      },
+      {
+        type: "divider",
+      },
+      {
+        type: "header",
+        text: {
+          type: "plain_text",
+          text: ":page_facing_up: Tech Tank Code of Conduct",
+          emoji: true,
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: "*Please read and acknowledge*",
+        },
+        accessory: {
+          type: "button",
+          text: {
+            type: "plain_text",
+            text: ":page_facing_up: Open COC",
+            emoji: true,
+          },
+          value: "open_COC",
+          action_id: "open_coc_modal",
+        },
+      },
+      {
+        type: "divider",
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: "*Sorry! No newsletter this month!*",
+        },
+      },
+    ];
+  }
+};
