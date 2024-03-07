@@ -138,3 +138,48 @@ export const generate_networking_post = async () => {
     },
   ];
 };
+
+export const generate_network_calender = async () => {
+  const google_calendar = await get_upcoming_events_upper_ranges(
+    GOOGLE_CALENDAR_ID,
+    GOOGLE_API_KEY,
+    20
+  );
+
+  const today = new Date();
+  const next_month_date = addMonths(today, 1);
+
+  const cal_object = construct_month_obj(google_calendar, today);
+
+  const this_month_message = transform_to_block_upcoming_events(
+    cal_object.this_month
+  );
+  const next_month_message = transform_to_block_upcoming_events(
+    cal_object.next_month
+  );
+
+  if (cal_object.next_month.length > 0) {
+    return `:spiral_calendar_pad: ${format(
+      today,
+      "MMMM"
+    )} Events:spiral_calendar_pad::\n
+  ${this_month_message} \n
+  :spiral_calendar_pad: ${format(
+    next_month_date,
+    "MMMM"
+  )} Events:spiral_calendar_pad::\n
+  ${next_month_message}\n\n
+    *If you know of any other events please post them and I will add them to the calendar and keep updating weekly!* \n
+    :sparkles: Subscribe to the events calendar to get all these events added automatically!"
+    `;
+  }
+
+  return `:spiral_calendar_pad: ${format(
+    today,
+    "MMMM"
+  )} Events:spiral_calendar_pad::\n
+  ${this_month_message}\n
+    *If you know of any other events please post them and I will add them to the calendar and keep updating weekly!* \n
+    :sparkles: Subscribe to the events calendar to get all these events added automatically!"
+    `;
+};
