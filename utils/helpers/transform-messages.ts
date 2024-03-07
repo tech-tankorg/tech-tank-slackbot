@@ -17,10 +17,13 @@ export const transform_to_block_upcoming_events = (
     const start_date_time_formatted =
       international_timezone_formatter(start_date_time);
 
-    if (sec.summary.includes(TECHTANK_EVENT_TAG))
-      return `• ${start_date_time_formatted}: :tech_tank:TechTank Event:tech_tank:<${web_address}|${sec.summary}> @ ${sec.location}\n`;
+    if (sec.summary.includes(TECHTANK_EVENT_TAG)) {
+      const title = sec.summary.replace(TECHTANK_EVENT_TAG, "");
 
-    return `• ${start_date_time_formatted}: <${web_address}|${sec.summary}> @ ${sec.location}\n`;
+      return `• ${start_date_time_formatted}: :tech_tank:TechTank Event:tech_tank:<${web_address}|${title}> @ ${sec.location} \n`;
+    }
+
+    return `• ${start_date_time_formatted}: <${web_address}|${sec.summary}> @ ${sec.location} \n`;
   });
 
   return formatted_array.join("");
