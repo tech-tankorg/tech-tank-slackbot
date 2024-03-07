@@ -1,10 +1,9 @@
 import type { ScheduledMessageResponse } from "../types/projectTypes.ts";
-export const flatten_object = (obj: Record<string, string[]>) => {
-  const values = Object.values(obj);
 
-  const new_array: string[] = [];
+export const flatten_array = <T>(arr: T[][]) => {
+  const new_array: T[] = [];
 
-  for (const value of values) {
+  for (const value of arr) {
     new_array.push(...value);
   }
 
