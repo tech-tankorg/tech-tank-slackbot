@@ -4,6 +4,8 @@ import type {
   db_thanks_type,
   gcal_event,
   sanity_letter_section,
+  shuffle_bot_groups,
+  shuffle_bot_user,
 } from "./zod-types.ts";
 export type Channel = Record<string, string>;
 
@@ -88,6 +90,10 @@ export type app_home_view_response = Awaited<
   ReturnType<typeof app.client.views.publish>
 >;
 
+export type chat_response = Awaited<
+  ReturnType<typeof app.client.chat.postMessage>
+>;
+
 export interface thanks {
   user_id_sender: string;
   message: string;
@@ -96,3 +102,6 @@ export interface thanks {
 
 export type db_thanks = z.infer<typeof db_thanks_type>;
 export type db_thanks_no_reciever = Omit<db_thanks, "user_id_receiver">;
+export type shuffle_bot_groups_type = z.infer<typeof shuffle_bot_groups>;
+export type shuffle_group = shuffle_bot_groups_type["groups"];
+export type shuffle_bot_user_type = z.infer<typeof shuffle_bot_user>;

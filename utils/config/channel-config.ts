@@ -32,3 +32,9 @@ export const channels = {
 export const bots = {
   nemo: "U054MF49HGU",
 };
+
+export const coffee_chat_config = {
+  active_channels: new Set([channels.coffee_chat]),
+  shuffle_frequency: 2,
+  users_per_group: 3,
+};

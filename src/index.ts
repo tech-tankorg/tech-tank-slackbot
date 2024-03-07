@@ -19,6 +19,16 @@ import { notify_admins } from "./Slash-commands/notify-admins.ts";
 import { suggestion } from "./Slash-commands/suggestions.ts";
 
 import { AXIOM_DATA_SET } from "../utils/constants/consts.ts";
+import {
+  coffee_chat_bot_joined_channel,
+  coffee_chat_bot_left_channel,
+  coffee_chat_user_activate,
+  coffee_chat_user_deactivate,
+  coffee_chat_bio,
+  handle_coffee_chat_bio_submit,
+  handle_close_coffee_chat_bio_modal,
+} from "./Events/shuffle_bot.ts";
+import { coffee_chat_config } from "../utils/config/channel-config.ts";
 
 // const PREPPED_QUESTIONS = flatten_object(questions);
 // const test_channel = "C05BYP98MTR";
@@ -59,6 +69,15 @@ accept_coc();
 deny_coc();
 
 void thanks();
+
+//c coffee chat bot
+coffee_chat_bot_joined_channel(coffee_chat_config.active_channels);
+coffee_chat_bot_left_channel(coffee_chat_config.active_channels);
+coffee_chat_user_activate();
+coffee_chat_user_deactivate();
+coffee_chat_bio();
+handle_coffee_chat_bio_submit();
+handle_close_coffee_chat_bio_modal();
 
 await (async () => {
   // Start your app

@@ -13,7 +13,6 @@ export const greet_new_team_member = () => {
   app.event("team_join", async ({ event, client, logger }) => {
     try {
       // Call chat.postMessage with the built-in client
-
       const userId = event.user.id;
       const userInfo = await client.users.info({
         user: userId,
