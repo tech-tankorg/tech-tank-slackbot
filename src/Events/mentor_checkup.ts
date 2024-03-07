@@ -8,7 +8,7 @@ import {
 
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
-import { dm_lst_of_people } from "../../utils/helpers/send-message-to-lst-of-people.ts";
+import { dm_lst_of_people } from "../../utils/helpers/send-message.ts";
 
 export const mentor_checkup = async () => {
   // if 15th of month, check two channels, send a a message checking in from admin.sammy,
@@ -40,12 +40,12 @@ export const mentor_checkup = async () => {
     if (today.getDate() === 15) {
       const mentees_messaged = await dm_lst_of_people(
         filtered_mentee_channel,
-        generate_mentee_message(),
+        { type: "msg", message: generate_mentee_message() },
         admins.sammy
       );
       const mentors_messaged = await dm_lst_of_people(
         filtered_mentor_channel,
-        generate_mentor_message(),
+        { type: "msg", message: generate_mentor_message() },
         admins.sammy
       );
 
