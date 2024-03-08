@@ -38,6 +38,7 @@ export const send_message = async (msg_user: Args) => {
     });
   } else {
     msg = await app.client.chat.postMessage({
+      text: "test",
       channel: channel.channel?.id ?? "",
       blocks: msg_user.input.blocks,
     });
