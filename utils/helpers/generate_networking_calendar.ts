@@ -162,24 +162,16 @@ export const generate_network_calender = async () => {
     return `:spiral_calendar_pad: ${format(
       today,
       "MMMM"
-    )} Events:spiral_calendar_pad::\n
-  ${this_month_message} \n
-  :spiral_calendar_pad: ${format(
-    next_month_date,
-    "MMMM"
-  )} Events:spiral_calendar_pad::\n
-  ${next_month_message}\n\n
-    *If you know of any other events please post them and I will add them to the calendar and keep updating weekly!* \n
-    :sparkles: Subscribe to the events calendar to get all these events added automatically!"
+    )} Events:spiral_calendar_pad:\n\n${this_month_message}\n:spiral_calendar_pad: ${format(
+      next_month_date,
+      "MMMM"
+    )} Events:spiral_calendar_pad::\n\n${next_month_message}\n\n*If you know of any other events please post them and I will add them to the calendar and keep updating weekly!*\n:sparkles: <https://calendar.google.com/calendar/u/2?cid=Y2ZkYTdjNmFjOGNlMGZjOWVhZjNhY2I5MjQxOTYwOGQ3YzNjYzliY2YzZWQ0OWI1ZjdjN2Q4YTEwNThmNjk3Y0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t|Subscribe to the events calendar> to get all these events added automatically!
     `;
   }
 
   return `:spiral_calendar_pad: ${format(
     today,
     "MMMM"
-  )} Events:spiral_calendar_pad::\n
-  ${this_month_message}\n
-    *If you know of any other events please post them and I will add them to the calendar and keep updating weekly!* \n
-    :sparkles: Subscribe to the events calendar to get all these events added automatically!"
+  )} Events:spiral_calendar_pad:\n\n${this_month_message}\n\n*If you know of any other events please post them and I will add them to the calendar and keep updating weekly!*\n:sparkles: <https://calendar.google.com/calendar/u/2?cid=Y2ZkYTdjNmFjOGNlMGZjOWVhZjNhY2I5MjQxOTYwOGQ3YzNjYzliY2YzZWQ0OWI1ZjdjN2Q4YTEwNThmNjk3Y0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t|Subscribe to the events calendar> to get all these events added automatically!
     `;
 };
