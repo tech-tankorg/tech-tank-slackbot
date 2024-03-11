@@ -19,6 +19,8 @@ import { notify_admins } from "./Slash-commands/notify-admins.ts";
 import { suggestion } from "./Slash-commands/suggestions.ts";
 
 import { AXIOM_DATA_SET } from "../utils/constants/consts.ts";
+
+import { search_user } from "./Slash-commands/search-user.ts";
 // import {
 //   coffee_chat_bot_joined_channel,
 //   coffee_chat_bot_left_channel,
@@ -63,7 +65,7 @@ jokes();
 suggestion();
 open_coc_modal();
 notify_admins();
-
+search_user();
 // actions
 accept_coc();
 deny_coc();
