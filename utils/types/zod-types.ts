@@ -77,3 +77,23 @@ export const gcal_event = z.array(
     eventType: z.string(),
   })
 );
+
+export const shuffle_bot_user = z.object({
+  user_name: z.string(),
+  user_id: z.string(),
+  date_joined: z.object({ dateTime: z.string(), timeZone: z.string() }),
+  is_active: z.boolean(),
+  bio: z.object({
+    pronouns: z.string(),
+    title: z.string(),
+    location: z.string(),
+    interests: z.string(),
+    intro: z.string(),
+    img_url: z.string(),
+  }),
+});
+
+export const shuffle_bot_groups = z.object({
+  date_created: z.object({ dateTime: z.string(), timeZone: z.string() }),
+  groups: z.array(z.array(z.string())),
+});

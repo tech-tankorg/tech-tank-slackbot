@@ -45,12 +45,14 @@ export const get_upcoming_events_for_the_month = async (
   }
 };
 
-export const get_upcoming_events_upper_range = async (
+export const get_upcoming_events_upper_ranges = async (
   google_calendar_id: string,
   google_api_key: string,
   day_from_now: number
 ) => {
-  const API_REQ = `https://www.googleapis.com/calendar/v3/calendars/${google_calendar_id}/events?key=${google_api_key}`;
+  const today = new Date();
+  const upper_range_date = addDays(today, day_from_now);
+  const API_REQ = `https://www.googleapis.com/calendar/v3/calendars/${google_calendar_id}/events?key=${google_api_key}&timeMin=${today.toISOString()}&timeMax=${upper_range_date.toISOString()}`;
 
   const options = {
     headers: {
@@ -64,12 +66,8 @@ export const get_upcoming_events_upper_range = async (
 
     const events = gcal_event.parse(result.data.items);
 
-    const today = new Date();
-    const upper_range_date = addDays(today, day_from_now);
-
     const filtered_upcoming_events = events.filter((event) => {
       const event_date_start = new Date(event.start.dateTime);
-      const today = new Date();
 
       return (
         filter_dates_range(event_date_start, today, upper_range_date) &&
@@ -80,7 +78,7 @@ export const get_upcoming_events_upper_range = async (
     generic_sort_array(filtered_upcoming_events);
 
     return filtered_upcoming_events;
-  } catch (e) {
+  } catch {
     return [];
   }
 };
