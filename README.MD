@@ -2,9 +2,7 @@
 
 We're excited to announce the creation of a powerful tool designed to enhance communication within our vibrant Slack community. The Tech Tank Slack Bot is here to streamline various aspects of our community interactions, making it easier than ever to connect, collaborate, and engage with fellow members. 💙
 
-Currently, the bot is equipped with the auto-generation of welcome messages, ensuring that every new member feels warmly greeted and included. In the future, the bot may gain the potential to facilitate polls, thereby enabling us to gather opinions, make decisions together, and engage in fun activities.
-
-But that's not all! The Tech Tank Slack Bot is open to limitless possibilities. We encourage you to dream big and suggest the next innovative feature you'd like to see added. Together, we can shape the future functionality of the bot, making it an indispensable tool for our community.
+The Tech Tank Slack Bot is open to limitless possibilities. We encourage you to dream big and suggest the next innovative feature you'd like to see added. Together, we can shape the future functionality of the bot, making it an indispensable tool for our community.
 
 While write access to this repository is restricted, we have made sure that you have read access, allowing you to explore the code, fork the repository, work on your own enhancements, and contribute by creating a pull request. This collaborative approach ensures that our bot continually evolves, driven by the collective creativity and expertise of our members.
 
