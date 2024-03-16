@@ -3,6 +3,7 @@ import { messageElement } from "../types/projectTypes.ts";
 import { international_timezone_formatter } from "../helpers/custom-date-fns.ts";
 export const edit_message_modal = (userID: string) => {
   return {
+    private_metadata: "fdfdfdf",
     type: "modal" as const,
     callback_id: "edit-message-modal",
     title: {
@@ -47,24 +48,6 @@ export const edit_message_modal = (userID: string) => {
           },
         ],
       },
-      {
-        type: "section" as const,
-        block_id: "view_messages",
-        text: {
-          type: "mrkdwn",
-          text: "View messages from the channel by the user",
-        },
-        accessory: {
-          type: "button",
-          text: {
-            type: "plain_text" as const,
-            text: "View message",
-            emoji: true,
-          },
-          value: "view-messages",
-          action_id: "view-message-action",
-        },
-      },
     ],
   };
 };
@@ -91,6 +74,7 @@ export const show_message_for_user = (msgs: messageElement) => {
     blocks: [
       {
         type: "input",
+        block_id: "select-timestamp-block",
         element: {
           type: "static_select" as const,
           placeholder: {

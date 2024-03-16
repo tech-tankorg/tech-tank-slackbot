@@ -47,3 +47,17 @@ export const handle_edit_message_submit = () => {
     });
   });
 };
+
+export const handle_view_message_submit = () => {
+  app.view("edit-message-select-modal", async ({ ack, view, client }) => {
+    await ack();
+
+    const view_values = view.state.values;
+    const msg_timestamp = view_values["select-timestamp-block"]
+      ? view_values["select-timestamp-block"]["static-select-action"]
+          ?.selected_option?.value
+      : undefined;
+
+    console.log(msg_timestamp);
+  });
+};
