@@ -24,7 +24,7 @@ import { search_user } from "./Slash-commands/search-user.ts";
 import {
   edit_message_command,
   handle_edit_message_submit,
-  handle_view_next_message,
+  handle_view_message_submit,
 } from "./Slash-commands/edit-message.ts";
 // import {
 //   coffee_chat_bot_joined_channel,
@@ -43,7 +43,8 @@ import {
 
 edit_message_command();
 handle_edit_message_submit();
-handle_view_next_message();
+handle_view_message_submit();
+
 // Events
 sayHello();
 greet_new_team_member();
