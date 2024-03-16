@@ -98,19 +98,27 @@ export const show_message_for_user = (msgs: messageElement) => {
             text: "Select an item",
             emoji: true,
           },
-          options: msgs.map((msg, index) => ({
-            text: {
-              type: "plain_text" as const,
-              text: msg.ts,
-              emoji: true,
-            },
-            value: `msg-${index + 1}`,
-          })),
+          options: msgs.map((msg) => {
+            const unix_time = Number(msg.ts);
+
+            const time = international_timezone_formatter(
+              new Date(unix_time * 1000)
+            );
+
+            return {
+              text: {
+                type: "plain_text" as const,
+                text: time,
+                emoji: true,
+              },
+              value: msg.ts,
+            };
+          }),
           action_id: "static_select-action",
         },
         label: {
           type: "plain_text" as const,
-          text: "Label",
+          text: "Select the message time stamp",
           emoji: true,
         },
       },
