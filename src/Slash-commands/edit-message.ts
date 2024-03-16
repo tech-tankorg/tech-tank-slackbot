@@ -47,19 +47,3 @@ export const handle_edit_message_submit = () => {
     });
   });
 };
-
-export const handle_view_next_message = () => {
-  app.action("view-message-action", async ({ ack, client, body }) => {
-    await ack();
-
-    const channel = body.channel?.id ?? "";
-
-    console.log(channel);
-
-    // const history_msg = await client.conversations.history({ channel });
-
-    // console.log(history_msg);
-
-    // client.views.update({ view: show_message_for_user() });
-  });
-};
