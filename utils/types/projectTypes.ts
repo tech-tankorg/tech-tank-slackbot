@@ -105,3 +105,7 @@ export type db_thanks_no_reciever = Omit<db_thanks, "user_id_receiver">;
 export type shuffle_bot_groups_type = z.infer<typeof shuffle_bot_groups>;
 export type shuffle_group = shuffle_bot_groups_type["groups"];
 export type shuffle_bot_user_type = z.infer<typeof shuffle_bot_user>;
+
+export type messageElement = NonNullable<
+  Awaited<ReturnType<typeof app.client.conversations.history>>["messages"]
+>;

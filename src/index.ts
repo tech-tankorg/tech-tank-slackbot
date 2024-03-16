@@ -19,6 +19,12 @@ import { notify_admins } from "./Slash-commands/notify-admins.ts";
 import { suggestion } from "./Slash-commands/suggestions.ts";
 
 import { AXIOM_DATA_SET } from "../utils/constants/consts.ts";
+
+import {
+  edit_message_command,
+  handle_edit_message_submit,
+  handle_view_next_message,
+} from "./Slash-commands/edit-message.ts";
 // import {
 //   coffee_chat_bot_joined_channel,
 //   coffee_chat_bot_left_channel,
@@ -34,6 +40,9 @@ import { AXIOM_DATA_SET } from "../utils/constants/consts.ts";
 // const test_channel = "C05BYP98MTR";
 // const test_channel_two = "C05C6KVHWAJ";
 
+edit_message_command();
+handle_edit_message_submit();
+handle_view_next_message();
 // Events
 sayHello();
 greet_new_team_member();
@@ -83,7 +92,7 @@ await (async () => {
   // Start your app
   await app.start();
 
-  await client.ingestEvents(AXIOM_DATA_SET, [{ start: "App has started" }]);
+  // await client.ingestEvents(AXIOM_DATA_SET, [{ start: "App has started" }]);
 
   console.log("⚡️ Bolt app is running!");
 })();
