@@ -21,6 +21,11 @@ import { suggestion } from "./Slash-commands/suggestions.ts";
 import { AXIOM_DATA_SET } from "../utils/constants/consts.ts";
 
 import { search_user } from "./Slash-commands/search-user.ts";
+import {
+  edit_message_command,
+  handle_edit_message_submit,
+  handle_view_next_message,
+} from "./Slash-commands/edit-message.ts";
 // import {
 //   coffee_chat_bot_joined_channel,
 //   coffee_chat_bot_left_channel,
@@ -36,6 +41,9 @@ import { search_user } from "./Slash-commands/search-user.ts";
 // const test_channel = "C05BYP98MTR";
 // const test_channel_two = "C05C6KVHWAJ";
 
+edit_message_command();
+handle_edit_message_submit();
+handle_view_next_message();
 // Events
 sayHello();
 greet_new_team_member();
