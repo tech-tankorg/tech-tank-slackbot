@@ -4,6 +4,7 @@ import {
   show_message_for_user,
   edit_message_tab,
 } from "../../utils/constants/edit-message-modal.ts";
+import { is_admin } from "../../utils/helpers/feat-flag.ts";
 
 import type { ViewOpenResponse } from "../../utils/types/projectTypes.ts";
 
@@ -11,11 +12,21 @@ let handle_message_submit_open_views: ViewOpenResponse;
 let handle_view_message_submit_open_views: ViewOpenResponse;
 
 export const edit_message_command = () => {
-  app.command("/edit-message", async ({ ack, body, client }) => {
+  app.command("/edit-message", async ({ ack, body, client, respond }) => {
     await ack();
     const trigger_id = body.trigger_id;
     const user_id = body.user_id;
-    const open_view = await client.views.open({
+
+    if (!is_admin(user_id)) {
+      await respond({
+        response_type: "ephemeral",
+        mrkdwn: true,
+        text: ":octagonal_sign: Sorry, only specific users are allowed to access this command!! :octagonal_sign:",
+      });
+      return;
+    }
+
+    await client.views.open({
       trigger_id,
       view: edit_message_modal(user_id),
     });
