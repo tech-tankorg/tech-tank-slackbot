@@ -6,6 +6,8 @@ import {
 } from "../../utils/constants/edit-message-modal.ts";
 import { is_admin } from "../../utils/helpers/feat-flag.ts";
 
+import { subDays } from "date-fns";
+
 import type { ViewOpenResponse } from "../../utils/types/projectTypes.ts";
 
 let handle_message_submit_open_views: ViewOpenResponse;
@@ -50,8 +52,13 @@ export const handle_edit_message_submit = () => {
       ? view_values["conv_select-block"]["select-user-action"]?.selected_user
       : undefined;
 
+    const today = new Date();
+    const oldestTime = subDays(today, 3);
+    const unixTimestamp = Math.floor(oldestTime.getTime() / 1000);
+
     const history_msg = await client.conversations.history({
       channel: convo_select ?? "",
+      oldest: String(unixTimestamp),
     });
 
     const user_msg_history = history_msg.messages?.filter(
