@@ -109,3 +109,6 @@ export type shuffle_bot_user_type = z.infer<typeof shuffle_bot_user>;
 export type messageElement = NonNullable<
   Awaited<ReturnType<typeof app.client.conversations.history>>["messages"]
 >;
+export type ViewOpenResponse = NonNullable<
+  Awaited<ReturnType<typeof app.client.views.open>>
+>;
