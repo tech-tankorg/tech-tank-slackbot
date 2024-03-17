@@ -3,12 +3,11 @@ import { messageElement } from "../types/projectTypes.ts";
 import { international_timezone_formatter } from "../helpers/custom-date-fns.ts";
 export const edit_message_modal = (userID: string) => {
   return {
-    private_metadata: "fdfdfdf",
     type: "modal" as const,
     callback_id: "edit-message-modal",
     title: {
       type: "plain_text" as const,
-      text: "Edit message",
+      text: "Nemo Edit message",
       emoji: true,
     },
     submit: {
@@ -33,7 +32,7 @@ export const edit_message_modal = (userID: string) => {
               text: "Select a conversation",
               emoji: true,
             },
-            initial_conversation: "C05BYP98MTR",
+            initial_conversation: channels.networking,
             action_id: "select-convo-action",
           },
           {
@@ -52,12 +51,16 @@ export const edit_message_modal = (userID: string) => {
   };
 };
 
-export const show_message_for_user = (msgs: messageElement) => {
+export const show_message_for_user = (
+  msgs: messageElement,
+  private_metadata: string
+) => {
   return {
+    private_metadata,
     type: "modal" as const,
     title: {
       type: "plain_text" as const,
-      text: "My App",
+      text: "Nemo Edit Message",
       emoji: true,
     },
     callback_id: "edit-message-select-modal",
@@ -82,27 +85,64 @@ export const show_message_for_user = (msgs: messageElement) => {
             text: "Select an item",
             emoji: true,
           },
-          options: msgs.map((msg) => {
-            const unix_time = Number(msg.ts);
-
-            const time = international_timezone_formatter(
-              new Date(unix_time * 1000)
-            );
-
-            return {
-              text: {
-                type: "plain_text" as const,
-                text: time,
-                emoji: true,
-              },
-              value: msg.ts,
-            };
-          }),
-          action_id: "static_select-action",
+          options: msgs.map((msg) => ({
+            text: {
+              type: "plain_text" as const,
+              text: international_timezone_formatter(
+                new Date(Number(msg.ts) * 1000)
+              ),
+              emoji: true,
+            },
+            value: msg.ts,
+          })),
+          action_id: "select-timestamp-action",
         },
         label: {
           type: "plain_text" as const,
           text: "Select the message time stamp",
+          emoji: true,
+        },
+      },
+    ],
+  };
+};
+
+export const edit_message_tab = (
+  private_metadata: string,
+  previous_message: string
+) => {
+  return {
+    private_metadata,
+    type: "modal" as const,
+    callback_id: "edit-message-tab-modal",
+    title: {
+      type: "plain_text" as const,
+      text: "Nemo Edit Message",
+      emoji: true,
+    },
+    submit: {
+      type: "plain_text" as const,
+      text: "Submit",
+      emoji: true,
+    },
+    close: {
+      type: "plain_text" as const,
+      text: "Cancel",
+      emoji: true,
+    },
+    blocks: [
+      {
+        block_id: "text-input-block",
+        type: "input",
+        element: {
+          type: "plain_text_input",
+          multiline: true,
+          action_id: "text-input-action",
+          initial_value: previous_message,
+        },
+        label: {
+          type: "plain_text",
+          text: "Type New message Below",
           emoji: true,
         },
       },
