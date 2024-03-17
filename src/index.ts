@@ -14,17 +14,19 @@ import {
 } from "./Events/open_coc_modal.ts";
 
 import { check_non_inclusive_words } from "./Events/inclusive.ts";
+
 import { jokes } from "./Slash-commands/jokes.ts";
 import { notify_admins } from "./Slash-commands/notify-admins.ts";
 import { suggestion } from "./Slash-commands/suggestions.ts";
-
-import { AXIOM_DATA_SET } from "../utils/constants/consts.ts";
-
 import {
   edit_message_command,
   handle_edit_message_submit,
   handle_view_message_submit,
+  handle_view_message_tab_submit,
 } from "./Slash-commands/edit-message.ts";
+
+import { AXIOM_DATA_SET } from "../utils/constants/consts.ts";
+
 // import {
 //   coffee_chat_bot_joined_channel,
 //   coffee_chat_bot_left_channel,
@@ -39,10 +41,6 @@ import {
 // const PREPPED_QUESTIONS = flatten_object(questions);
 // const test_channel = "C05BYP98MTR";
 // const test_channel_two = "C05C6KVHWAJ";
-
-edit_message_command();
-handle_edit_message_submit();
-handle_view_message_submit();
 
 // Events
 sayHello();
@@ -74,6 +72,11 @@ suggestion();
 open_coc_modal();
 notify_admins();
 
+edit_message_command();
+handle_edit_message_submit();
+handle_view_message_submit();
+handle_view_message_tab_submit();
+
 // actions
 accept_coc();
 deny_coc();
@@ -93,7 +96,7 @@ await (async () => {
   // Start your app
   await app.start();
 
-  // await client.ingestEvents(AXIOM_DATA_SET, [{ start: "App has started" }]);
+  await client.ingestEvents(AXIOM_DATA_SET, [{ start: "App has started" }]);
 
   console.log("⚡️ Bolt app is running!");
 })();
