@@ -18,6 +18,12 @@ import { check_non_inclusive_words } from "./Events/inclusive.ts";
 import { jokes } from "./Slash-commands/jokes.ts";
 import { notify_admins } from "./Slash-commands/notify-admins.ts";
 import { suggestion } from "./Slash-commands/suggestions.ts";
+import {
+  edit_message_command,
+  handle_edit_message_submit,
+  handle_view_message_submit,
+  handle_view_message_tab_submit,
+} from "./Slash-commands/edit-message.ts";
 
 import { search_user } from "./Slash-commands/search-user.ts";
 
@@ -75,6 +81,11 @@ suggestion();
 open_coc_modal();
 notify_admins();
 search_user();
+
+edit_message_command();
+handle_edit_message_submit();
+handle_view_message_submit();
+handle_view_message_tab_submit();
 
 edit_message_command();
 handle_edit_message_submit();
