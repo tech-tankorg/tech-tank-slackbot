@@ -27,13 +27,6 @@ import {
 
 import { search_user } from "./Slash-commands/search-user.ts";
 
-import {
-  edit_message_command,
-  handle_edit_message_submit,
-  handle_view_message_submit,
-  handle_view_message_tab_submit,
-} from "./Slash-commands/edit-message.ts";
-
 import { AXIOM_DATA_SET } from "../utils/constants/consts.ts";
 
 // import {
