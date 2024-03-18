@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Slack bot for Tech Tank",
   "main": "./src/index.ts",
+  "types": "./dist/projectTypes.d.ts",
   "type": "module",
   "scripts": {
     "test": "jest",
