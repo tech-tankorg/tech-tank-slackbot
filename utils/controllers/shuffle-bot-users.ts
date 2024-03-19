@@ -83,7 +83,7 @@ export const get_shuffle_bot_user = async (user_id: string) => {
   return user_data;
 };
 
-export const get_all_shuffle_bot_users = async () => {
+export const get_all_active_shuffle_bot_users = async () => {
   const col_ref = await get_collection_reference("shuffle-bot-users");
 
   const q = query(col_ref, where("is_active", "==", true));
