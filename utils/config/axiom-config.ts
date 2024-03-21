@@ -15,8 +15,8 @@ class AxiomAPIClient {
 
   async ingestEvents(
     axiomDatasetName: string,
-    data: Array<any>
-  ): Promise<AxiosResponse<any>> {
+    data: Array<unknown>
+  ): Promise<AxiosResponse<unknown>> {
     const url = `${this.apiUrl}/${axiomDatasetName}/ingest`;
     const headers = {
       Authorization: `Bearer ${this.apiToken}`,
