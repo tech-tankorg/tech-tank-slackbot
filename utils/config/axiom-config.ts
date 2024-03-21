@@ -1,10 +1,37 @@
-import { Client } from "@axiomhq/axiom-node";
+import axios, { AxiosResponse } from "axios";
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
+if (!process.env.AXIOM_API_TOKEN) {
+  throw new Error("AXIOM_API_TOKEN environment variable is not defined");
+}
 
-const client = new Client({
-  token: process.env.AXIOM_PERSONAL_TOKEN,
-  orgId: process.env.AXIOM_ORG_ID,
-});
+class AxiomAPIClient {
+  private apiUrl: string;
+  private apiToken: string;
+
+  constructor(apiToken: string) {
+    this.apiUrl = "https://api.axiom.co/v1/datasets";
+    this.apiToken = apiToken;
+  }
+
+  async ingestEvents(
+    axiomDatasetName: string,
+    data: Array<any>
+  ): Promise<AxiosResponse<any>> {
+    const url = `${this.apiUrl}/${axiomDatasetName}/ingest`;
+    const headers = {
+      Authorization: `Bearer ${this.apiToken}`,
+      "Content-Type": "application/json",
+    };
+
+    try {
+      const response = await axios.post(url, data, { headers });
+      return response;
+    } catch (error) {
+      throw new Error(`Error ingesting data: ${error}`);
+    }
+  }
+}
+
+const client = new AxiomAPIClient(process.env.AXIOM_API_TOKEN);
 
 export default client;
