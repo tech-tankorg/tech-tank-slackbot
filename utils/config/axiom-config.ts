@@ -1,4 +1,7 @@
 import axios, { AxiosResponse } from "axios";
+import { config } from "dotenv";
+
+config();
 
 if (!process.env.AXIOM_API_TOKEN) {
   throw new Error("AXIOM_API_TOKEN environment variable is not defined");
