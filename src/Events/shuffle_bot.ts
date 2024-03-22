@@ -1,27 +1,27 @@
 import app from "../../utils/config/slack-config.ts";
 import { create_shuffle_groups } from "../../utils/controllers/shuffle-bot-groups.ts";
 import {
-  get_all_active_shuffle_bot_users,
   create_shuffle_bot_user,
   delete_shuffle_bot_user,
+  get_all_active_shuffle_bot_users,
+  get_shuffle_bot_user,
   update_shuffle_activity,
   update_shuffle_bot_bio,
-  get_shuffle_bot_user,
 } from "../../utils/controllers/shuffle-bot-users.ts";
-import {
-  shuffle_users,
-  create_group_sendMsg,
-} from "../../utils/helpers/shuffle-bot-helpers.ts";
-import { send_message } from "../../utils/helpers/send-message.ts";
 import {
   determine_next_execute_date_freq,
   international_timezone_formatter,
 } from "../../utils/helpers/custom-date-fns.ts";
+import { send_message } from "../../utils/helpers/send-message.ts";
+import {
+  create_group_sendMsg,
+  shuffle_users,
+} from "../../utils/helpers/shuffle-bot-helpers.ts";
 
 import {
-  shuffle_bot_bio_modal,
   coffee_chat_intro_message,
   coffee_chat_shuffle_channel_msg,
+  shuffle_bot_bio_modal,
 } from "../../utils/constants/shuffle-bot-bio-modal.ts";
 
 import {

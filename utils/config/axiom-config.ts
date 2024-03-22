@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { type AxiosResponse } from "axios";
 import { config } from "dotenv";
 
 config();
@@ -16,9 +16,9 @@ class AxiomAPIClient {
     this.apiToken = apiToken;
   }
 
-  async ingestEvents(
+  async ingestEvents<T>(
     axiomDatasetName: string,
-    data: Array<unknown>
+    data: Array<T>
   ): Promise<AxiosResponse<unknown>> {
     const url = `${this.apiUrl}/${axiomDatasetName}/ingest`;
     const headers = {

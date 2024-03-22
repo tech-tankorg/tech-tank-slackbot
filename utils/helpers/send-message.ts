@@ -1,5 +1,5 @@
-import app from "../config/slack-config.ts";
 import type { Block } from "@slack/bolt";
+import app from "../config/slack-config.ts";
 import type { chat_response } from "../types/projectTypes.ts";
 
 interface MSG {

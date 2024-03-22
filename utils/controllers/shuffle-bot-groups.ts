@@ -2,7 +2,7 @@ import { getWeek, getYear } from "date-fns";
 
 import { shuffle_bot_groups } from "../types/zod-types.ts";
 
-import { getDoc, setDoc, serverTimestamp } from "firebase/firestore";
+import { getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { get_document_reference } from "../config/firebase-config.ts";
 
 import type { shuffle_group } from "../types/projectTypes.ts";

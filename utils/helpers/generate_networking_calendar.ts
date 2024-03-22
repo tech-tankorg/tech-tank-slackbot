@@ -1,8 +1,8 @@
-import { transform_to_block_upcoming_events } from "./transform-messages.ts";
+import { GOOGLE_API_KEY, GOOGLE_CALENDAR_ID } from "../constants/consts.ts";
 import { get_upcoming_events_upper_ranges } from "../service/google-calendar.ts";
-import { GOOGLE_CALENDAR_ID, GOOGLE_API_KEY } from "../constants/consts.ts";
+import { transform_to_block_upcoming_events } from "./transform-messages.ts";
 
-import { getMonth, format, addMonths } from "date-fns";
+import { addMonths, format, getMonth } from "date-fns";
 
 type google_calendar = Awaited<
   ReturnType<typeof get_upcoming_events_upper_ranges>
