@@ -1,16 +1,16 @@
 import {
+  deleteDoc,
   getDoc,
+  getDocs,
+  query,
+  serverTimestamp,
   setDoc,
   updateDoc,
-  serverTimestamp,
-  deleteDoc,
-  query,
   where,
-  getDocs,
 } from "firebase/firestore";
 import {
-  get_document_reference,
   get_collection_reference,
+  get_document_reference,
 } from "../config/firebase-config.ts";
 
 import { shuffle_bot_user } from "../types/zod-types.ts";

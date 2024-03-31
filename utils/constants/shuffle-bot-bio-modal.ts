@@ -1,4 +1,4 @@
-import { shuffle_bot_user_type } from "../types/projectTypes.ts";
+import type { shuffle_bot_user_type } from "../types/projectTypes.ts";
 
 interface Initials {
   pronouns: string;

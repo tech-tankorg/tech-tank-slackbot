@@ -9,8 +9,8 @@ import {
   nextTuesday,
   nextWednesday,
 } from "date-fns";
-import type { day } from "../types/projectTypes.ts";
 import { TORONTO_TIME_ZONE_IDENTIFIER } from "../constants/consts.ts";
+import type { day } from "../types/projectTypes.ts";
 
 export const filter_dates_range = (
   date: Date,

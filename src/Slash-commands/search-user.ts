@@ -1,14 +1,14 @@
 import app from "../../utils/config/slack-config.ts";
 import { is_admin } from "../../utils/helpers/feat-flag.ts";
 import {
-  sanitize_msg,
-  remove_chars,
   generate_user_profile_string,
+  remove_chars,
+  sanitize_msg,
 } from "../../utils/helpers/search-user-helper.ts";
 
-import { send_message } from "../../utils/helpers/send-message.ts";
 import Axiom from "../../utils/config/axiom-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
+import { send_message } from "../../utils/helpers/send-message.ts";
 export const search_user = () => {
   app.message("!search-user", async ({ client, message }) => {
     // biome-ignore lint: incorrect typescript types therefore any has to be enforced
