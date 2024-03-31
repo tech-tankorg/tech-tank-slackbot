@@ -117,6 +117,41 @@ const transform_to_block_upcoming_events_techtank = (
   });
 };
 
+const generate_community_member_section = (
+  community_highlight_member_name: string | null,
+  community_highlight_member_description: string | null
+) => {
+  if (community_highlight_member_name && community_highlight_member_description)
+    return [
+      {
+        type: "divider",
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: "*COMMUNITY MEMBER HIGHLIGHTS* :star2:",
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `*This months community member highlight goes to ${community_highlight_member_name}*!! :tada::tada:`,
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `${community_highlight_member_description} \n\n`,
+        },
+      },
+    ];
+
+  return [];
+};
+
 export const generate_newsletter = async () => {
   const start_of_month = startOfMonth(new Date());
 
@@ -144,9 +179,14 @@ export const generate_newsletter = async () => {
       transform_to_block_upcoming_events_techtank(response[1]);
 
     const community_highlight_member_name = response[0].letter_member_highlight
-      .community_member_name as string;
+      .community_member_name as string | null;
     const community_highlight_member_description = response[0]
-      .letter_member_highlight.community_member_description as string;
+      .letter_member_highlight.community_member_description as string | null;
+
+    const community_member_section = generate_community_member_section(
+      community_highlight_member_name,
+      community_highlight_member_description
+    );
 
     return [
       {
@@ -193,30 +233,7 @@ export const generate_newsletter = async () => {
           action_id: "open_coc_modal",
         },
       },
-      {
-        type: "divider",
-      },
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: "*COMMUNITY MEMBER HIGHLIGHTS* :star2:",
-        },
-      },
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: `*This months community member highlight goes to ${community_highlight_member_name}*!! :tada::tada:`,
-        },
-      },
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: `${community_highlight_member_description} \n\n`,
-        },
-      },
+      ...community_member_section,
       {
         type: "divider",
       },
@@ -364,9 +381,14 @@ export const generate_newsletter_post = async () => {
     const transform_block_info = transform_to_block(response.letter_info);
 
     const community_highlight_member_name = response.letter_member_highlight
-      .community_member_name as string;
+      .community_member_name as string | null;
     const community_highlight_member_description = response
-      .letter_member_highlight.community_member_description as string;
+      .letter_member_highlight.community_member_description as string | null;
+
+    const community_member_section = generate_community_member_section(
+      community_highlight_member_name,
+      community_highlight_member_description
+    );
 
     return [
       {
@@ -413,30 +435,7 @@ export const generate_newsletter_post = async () => {
           action_id: "open_coc_modal",
         },
       },
-      {
-        type: "divider",
-      },
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: "*COMMUNITY MEMBER HIGHLIGHTS* :star2:",
-        },
-      },
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: `*This months community member highlight goes to ${community_highlight_member_name}*!! :tada::tada:`,
-        },
-      },
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: `${community_highlight_member_description} \n\n`,
-        },
-      },
+      ...community_member_section,
       {
         type: "divider",
       },
