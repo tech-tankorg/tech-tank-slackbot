@@ -1,5 +1,15 @@
-import { shuffle_bot_user_type } from "../types/projectTypes.ts";
-export const shuffle_bot_bio_modal = (user_id: string) => {
+import type { shuffle_bot_user_type } from "../types/projectTypes.ts";
+
+interface Initials {
+  pronouns: string;
+  title: string;
+  location: string;
+  intro: string;
+}
+export const shuffle_bot_bio_modal = (
+  user_id: string,
+  initValues: Initials
+) => {
   return {
     type: "modal" as const,
     callback_id: "coffee-chat-bio-modal",
@@ -45,6 +55,7 @@ export const shuffle_bot_bio_modal = (user_id: string) => {
           type: "plain_text_input",
           multiline: true,
           action_id: "pronouns-action",
+          initial_value: initValues.pronouns,
         },
         label: {
           type: "plain_text" as const,
@@ -64,6 +75,7 @@ export const shuffle_bot_bio_modal = (user_id: string) => {
           type: "plain_text" as const,
           text: ":computer: Title",
           emoji: true,
+          initial_value: initValues.title,
         },
       },
       {
@@ -73,6 +85,7 @@ export const shuffle_bot_bio_modal = (user_id: string) => {
           type: "plain_text_input",
           multiline: true,
           action_id: "location-action",
+          initial_value: initValues.location,
         },
         label: {
           type: "plain_text" as const,
@@ -87,6 +100,7 @@ export const shuffle_bot_bio_modal = (user_id: string) => {
           type: "plain_text_input",
           multiline: true,
           action_id: "intro-action",
+          initial_value: initValues.intro,
         },
         label: {
           type: "plain_text" as const,

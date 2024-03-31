@@ -1,40 +1,36 @@
 import app from "../../utils/config/slack-config.ts";
 import { create_shuffle_groups } from "../../utils/controllers/shuffle-bot-groups.ts";
 import {
-  get_all_shuffle_bot_users,
   create_shuffle_bot_user,
   delete_shuffle_bot_user,
+  get_all_active_shuffle_bot_users,
+  get_shuffle_bot_user,
   update_shuffle_activity,
   update_shuffle_bot_bio,
 } from "../../utils/controllers/shuffle-bot-users.ts";
-import { shuffle_users } from "../../utils/helpers/shuffle-bot-shuffle-users.ts";
-
-import Axiom from "../../utils/config/axiom-config.ts";
-import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
+import {
+  determine_next_execute_date_freq,
+  international_timezone_formatter,
+} from "../../utils/helpers/custom-date-fns.ts";
+import { send_message } from "../../utils/helpers/send-message.ts";
+import {
+  create_group_sendMsg,
+  shuffle_users,
+} from "../../utils/helpers/shuffle-bot-helpers.ts";
 
 import {
-  shuffle_bot_bio_modal,
   coffee_chat_intro_message,
   coffee_chat_shuffle_channel_msg,
-  shuffle_user_group_intro_msg,
+  shuffle_bot_bio_modal,
 } from "../../utils/constants/shuffle-bot-bio-modal.ts";
-
-import {
-  send_message,
-  dm_lst_of_people,
-} from "../../utils/helpers/send-message.ts";
 
 import {
   channels,
   coffee_chat_config,
 } from "../../utils/config/channel-config.ts";
 
-import { flatten_array } from "../../utils/helpers/flatten-object.ts";
-
-import {
-  determine_next_execute_date_freq,
-  international_timezone_formatter,
-} from "../../utils/helpers/custom-date-fns.ts";
+import Axiom from "../../utils/config/axiom-config.ts";
+import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
 /**
  * Creates a brand new shuffle for users
@@ -44,7 +40,7 @@ import {
  * */
 
 export const coffee_chat_bot_shuffle = async () => {
-  const all_active_users = await get_all_shuffle_bot_users();
+  const all_active_users = await get_all_active_shuffle_bot_users();
   const all_active_users_ids = all_active_users.map((user) => user.user_id);
 
   const today = new Date();
@@ -65,31 +61,7 @@ export const coffee_chat_bot_shuffle = async () => {
 
   await create_shuffle_groups(shuffled_new_users);
 
-  // Create msg groups and send message to all users in the shuffled_new_users array
-  for (let i = 0; i <= shuffled_new_users.length; i++) {
-    const first_user = shuffled_new_users[i]?.shift() ?? "";
-    const additional_users = shuffled_new_users[i] ?? [];
-
-    // Get the profiles for the users in the current group
-    const group_profiles = all_active_users.filter(
-      (profile) =>
-        profile.user_id === first_user ||
-        additional_users.includes(profile.user_id)
-    );
-
-    // Construct the message to be sent in the current group
-    const profile_message_lst = group_profiles.map((profile) =>
-      shuffle_user_group_intro_msg(profile)
-    );
-
-    const blocks_message = flatten_array(profile_message_lst);
-
-    await dm_lst_of_people(
-      [first_user],
-      { type: "blocks", blocks: blocks_message },
-      additional_users.join(",") ?? ""
-    );
-  }
+  await create_group_sendMsg(shuffled_new_users, all_active_users);
 
   // post message in the channel that new groups have been made
   await send_message({
@@ -280,9 +252,16 @@ export const coffee_chat_bio = () => {
   app.command("/coffee-chat-bio", async ({ ack, body, client }) => {
     await ack();
     const trigger_id = body.trigger_id;
+    const user_id = body.user_id;
+    const user_data = await get_shuffle_bot_user(user_id);
     await client.views.open({
       trigger_id,
-      view: shuffle_bot_bio_modal(body.user_id),
+      view: shuffle_bot_bio_modal(body.user_id, {
+        intro: user_data.bio.intro,
+        pronouns: user_data.bio.pronouns,
+        location: user_data.bio.location,
+        title: user_data.bio.title,
+      }),
     });
   });
 };

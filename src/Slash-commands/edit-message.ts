@@ -1,8 +1,8 @@
 import app from "../../utils/config/slack-config.ts";
 import {
   edit_message_modal,
-  show_message_for_user,
   edit_message_tab,
+  show_message_for_user,
 } from "../../utils/constants/edit-message-modal.ts";
 import { is_admin } from "../../utils/helpers/feat-flag.ts";
 

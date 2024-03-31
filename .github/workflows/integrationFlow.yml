@@ -45,5 +45,5 @@ jobs:
           SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
           SLACK_TITLE: ${{ secrets.SLACK_TITLE}}
           SLACK_USERNAME: ${{ secrets.SLACK_USERNAME }}
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_MESSAGE: ${{ github.event.pull_request.title }}

@@ -20,9 +20,9 @@ import { post_newsletter } from "../../src/Events/post_newsletter.ts";
 
 // import { mentor_checkup } from "src/Events/mentor_checkup.ts";
 
+import { post_networking_calendar } from "src/Events/post_networking_calendar.ts";
 import { post_thanks_message } from "../../src/Events/thanks.ts";
 import { send_weekly_welcome_message } from "../../src/Events/weekly_welcome_message.ts";
-import { post_networking_calendar } from "src/Events/post_networking_calendar.ts";
 
 // const PREPPED_QUESTIONS = flatten_object(questions);
 
