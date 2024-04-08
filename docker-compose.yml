@@ -19,29 +19,43 @@ services:
       SANITY_DATA_SET: ${SANITY_DATA_SET}
       AXIOM_API_TOKEN: ${AXIOM_API_TOKEN}
 
-  mongo:
+  mongo_db1:
     image: mongo
-    container_name: mongo_db
+    container_name: mongo_db_1
+    command:
+      - mongod --replSet myReplicaSet --bind_ip localhost,mongo_db_1
+      - mongosh --eval rs.initiate({})
     restart: always
     ports:
-      - 8080:8080
+      - 27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
       MONGO_INITDB_DATABASE: nemo
     volumes:
       - nemo_volume:/data/db
+    networks:
+      - mongo_db_cluster
 
-  mongo-express:
-    image: mongo-express
-    container_name: mongo_db_admin
+  mongo_db2:
+    image: mongo
+    container_name: mongo_db_2
+    command: mongod --replSet myReplicaSet --bind_ip localhost,mongo_db_2
     restart: always
     ports:
-      - 8081:8081
+      - 27018:27017
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: ${MONGO_CONNECTION_URI}
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: nemo
+    volumes:
+      - nemo_volume:/data/db
+    networks:
+      - mongo_db_cluster
 
 volumes:
   nemo_volume: ~
+
+networks:
+  mongo_db_cluster:
+    name: mongodb_network
