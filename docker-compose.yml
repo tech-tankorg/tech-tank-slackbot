@@ -19,43 +19,32 @@ services:
       SANITY_DATA_SET: ${SANITY_DATA_SET}
       AXIOM_API_TOKEN: ${AXIOM_API_TOKEN}
 
-  mongo_db1:
-    image: mongo
-    container_name: mongo_db_1
-    command:
-      - mongod --replSet myReplicaSet --bind_ip localhost,mongo_db_1
-      - mongosh --eval rs.initiate({})
+  mongo:
+    build: ./utils/config/mongodb_rs
     restart: always
-    ports:
-      - 27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
       MONGO_INITDB_DATABASE: nemo
-    volumes:
-      - nemo_volume:/data/db
-    networks:
-      - mongo_db_cluster
+      MONGO_REPLICA_HOST: 127.0.0.1
+      MONGO_REPLICA_PORT: 27018
+      MONGO_COMMAND: "mongosh"
 
-  mongo_db2:
-    image: mongo
-    container_name: mongo_db_2
-    command: mongod --replSet myReplicaSet --bind_ip localhost,mongo_db_2
-    restart: always
     ports:
-      - 27018:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-      MONGO_INITDB_DATABASE: nemo
-    volumes:
-      - nemo_volume:/data/db
-    networks:
-      - mongo_db_cluster
+      - "27018:27018"
 
-volumes:
-  nemo_volume: ~
-
-networks:
-  mongo_db_cluster:
-    name: mongodb_network
+    healthcheck:
+      # Use "mongo" instead of "mongosh" before v5.0
+      test:
+        [
+          "CMD",
+          "mongosh",
+          "admin",
+          "--port",
+          "27017",
+          "--eval",
+          "db.adminCommand('ping').ok",
+        ]
+      interval: 5s
+      timeout: 2s
+      retries: 20
