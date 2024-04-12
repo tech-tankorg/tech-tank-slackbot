@@ -2,7 +2,7 @@ import { prisma } from "../config/prisma.ts";
 
 import { endOfWeek, getWeek, getYear, isBefore } from "date-fns";
 
-const get_welcomes = async (id: string) => {
+export const get_welcomes = async (id: string) => {
   return await prisma.welcomes.findFirst({ where: { week_id: id } });
 };
 

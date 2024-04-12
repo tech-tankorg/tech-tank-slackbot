@@ -31,8 +31,10 @@ export const sanity_letter_section = z.object({
 });
 
 export const welcomes_type = z.object({
+  id: z.string(),
+  week_id: z.string(),
   users: z.array(z.string()),
-  time_stamp: z.object({ seconds: z.number(), nanoseconds: z.number() }),
+  time_stamp: z.date(),
 });
 
 export const shoutout_message_user_text_validation = z

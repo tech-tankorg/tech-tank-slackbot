@@ -57,7 +57,5 @@ export const get_all_active_shuffle_bot_users = async () => {
     where: { is_active: { equals: true } },
   });
 
-  const user_data = shuffle_bot_user.parse(doc);
-
-  return user_data;
+  return doc.map((doc) => shuffle_bot_user.parse(doc));
 };

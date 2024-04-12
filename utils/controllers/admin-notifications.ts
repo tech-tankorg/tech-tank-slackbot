@@ -1,5 +1,3 @@
-import { get_collection_reference } from "../config/firebase-config.ts";
-
 import { prisma } from "../config/prisma.ts";
 
 export const create_admin_notification = async (
