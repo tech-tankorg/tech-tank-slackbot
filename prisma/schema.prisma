@@ -18,3 +18,49 @@ model User {
   email String  @unique
   name  String?
 }
+
+model admin_notifications {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  message   String
+  user_id   String
+  user_name String
+  createdAt DateTime @default(now())
+}
+
+model suggestions_bot {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  suggestion String
+  user_id    String
+  user_name  String
+  createdAt  DateTime @default(now())
+}
+
+model welcomes {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  week_id    String   @unique
+  users      Json
+  time_stamp DateTime @default(now())
+}
+
+model thanks {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  user_id_sender   String
+  user_id_receiver String
+  message          String
+  date_created     DateTime @default(now())
+
+  @@index([date_created])
+}
+
+model users {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  user_name         String
+  user_id           String   @unique
+  coc               coc_ack
+  coc_ack_timestamp DateTime @default(now())
+}
+
+enum coc_ack {
+  accepted
+  denied
+}

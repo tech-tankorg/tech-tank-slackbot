@@ -45,7 +45,7 @@ export const db_thanks_type = z.object({
   user_id_sender: z.string(),
   message: z.string(),
   user_id_receiver: z.string(),
-  date_created: z.object({ seconds: z.number(), nanoseconds: z.number() }),
+  date_created: z.date(),
 });
 
 export const create_thanks_usr_name_validation = z
