@@ -28,6 +28,6 @@
     "isolatedModules": true,
     "allowImportingTsExtensions": true
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "./prisma/seed.ts"],
   "exclude": ["node_modules"]
 }
