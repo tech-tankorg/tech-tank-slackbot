@@ -60,6 +60,22 @@ model users {
   coc_ack_timestamp DateTime @default(now())
 }
 
+model shuffle_groups {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  week_id      String   @unique
+  date_created DateTime @default(now())
+  groups       Json
+}
+
+model shuffle_users {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  user_name   String
+  user_id     String   @unique
+  date_joined DateTime @default(now())
+  is_active   Boolean  @default(true)
+  bio         Json
+}
+
 enum coc_ack {
   accepted
   denied
