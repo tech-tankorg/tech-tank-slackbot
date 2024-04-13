@@ -75,3 +75,12 @@ export const international_timezone_formatter = (date: Date) => {
 
   return date_formatted;
 };
+
+export const convert_date = (time: {
+  seconds: number;
+  nanoseconds: number;
+}) => {
+  const milliseconds = time.seconds * 1000 + time.nanoseconds / 1000000;
+  const utcDate = new Date(milliseconds);
+  return utcDate;
+};

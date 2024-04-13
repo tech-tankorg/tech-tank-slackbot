@@ -31,8 +31,10 @@ export const sanity_letter_section = z.object({
 });
 
 export const welcomes_type = z.object({
+  id: z.string(),
+  week_id: z.string(),
   users: z.array(z.string()),
-  time_stamp: z.object({ seconds: z.number(), nanoseconds: z.number() }),
+  time_stamp: z.date(),
 });
 
 export const shoutout_message_user_text_validation = z
@@ -45,7 +47,7 @@ export const db_thanks_type = z.object({
   user_id_sender: z.string(),
   message: z.string(),
   user_id_receiver: z.string(),
-  date_created: z.object({ seconds: z.number(), nanoseconds: z.number() }),
+  date_created: z.date(),
 });
 
 export const create_thanks_usr_name_validation = z
@@ -81,7 +83,7 @@ export const gcal_event = z.array(
 export const shuffle_bot_user = z.object({
   user_name: z.string(),
   user_id: z.string(),
-  date_joined: z.object({ dateTime: z.string(), timeZone: z.string() }),
+  date_joined: z.date(),
   is_active: z.boolean(),
   bio: z.object({
     pronouns: z.string(),
@@ -94,6 +96,6 @@ export const shuffle_bot_user = z.object({
 });
 
 export const shuffle_bot_groups = z.object({
-  date_created: z.object({ dateTime: z.string(), timeZone: z.string() }),
+  date_created: z.date(),
   groups: z.array(z.array(z.string())),
 });

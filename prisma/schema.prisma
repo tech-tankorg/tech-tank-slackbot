@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DEV_MONGO_URL")
+}
+
+model admin_notifications {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  message   String
+  user_id   String
+  user_name String
+  createdAt DateTime @default(now())
+}
+
+model suggestions_bot {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  suggestion String
+  user_id    String
+  user_name  String
+  createdAt  DateTime @default(now())
+}
+
+model welcomes {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  week_id    String   @unique
+  users      Json
+  time_stamp DateTime @default(now())
+}
+
+model thanks {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  user_id_sender   String
+  user_id_receiver String
+  message          String
+  date_created     DateTime @default(now())
+
+  @@index([date_created])
+}
+
+model users {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  user_name         String
+  user_id           String   @unique
+  coc               coc_ack
+  coc_ack_timestamp DateTime @default(now())
+}
+
+model shuffle_groups {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  week_id      String   @unique
+  date_created DateTime @default(now())
+  groups       Json
+}
+
+model shuffle_users {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  user_name   String
+  user_id     String   @unique
+  date_joined DateTime @default(now())
+  is_active   Boolean  @default(true)
+  bio         Json
+}
+
+enum coc_ack {
+  accepted
+  denied
+}
