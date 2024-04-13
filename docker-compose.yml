@@ -18,6 +18,7 @@ services:
       SANITY_PROJECT_ID: ${SANITY_PROJECT_ID}
       SANITY_DATA_SET: ${SANITY_DATA_SET}
       AXIOM_API_TOKEN: ${AXIOM_API_TOKEN}
+      DEV_MONGO_URL: ${DEV_MONGO_URL}
 
   mongo:
     build: ./utils/config/mongodb_rs
