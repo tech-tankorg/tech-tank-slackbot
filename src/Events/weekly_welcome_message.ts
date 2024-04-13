@@ -31,7 +31,7 @@ export const send_weekly_welcome_message = async () => {
         ", "
       )} to the tank!:tech_tank: :tech_tank: `;
       await app.client.chat.postMessage({
-        channel: "C05C6KVHWAJ",
+        channel: channels.intro,
         text: message,
       });
 
