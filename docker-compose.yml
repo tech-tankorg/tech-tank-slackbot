@@ -22,6 +22,7 @@ services:
 
   mongo:
     build: ./utils/config/mongodb_rs
+    container_name: mongo_database
     restart: always
     environment:
       MONGO_INITDB_DATABASE: nemo
