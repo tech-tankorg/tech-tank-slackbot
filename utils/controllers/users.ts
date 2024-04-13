@@ -1,76 +1,30 @@
-import {
-  get_collection_reference,
-  get_document_reference,
-} from "../config/firebase-config.ts";
-import { redis } from "../config/upstash-config.ts";
-
-import {
-  getDoc,
-  getDocs,
-  orderBy,
-  query,
-  serverTimestamp,
-  setDoc,
-  where,
-} from "firebase/firestore";
+import { prisma } from "../config/prisma.ts";
 
 export const add_user_to_db = async (
   user_name: string,
   user_id: string,
   coc_ack: "accepted" | "denied"
 ) => {
-  const user = {
-    user_name,
-    user_id,
-    coc: coc_ack,
-    coc_ack_timestamp: serverTimestamp(),
-  };
+  const doc = await prisma.users.findFirst({ where: { user_id } });
 
-  const doc_ref = await get_document_reference("users", user_id);
-  const doc = await getDoc(doc_ref);
+  if (!doc)
+    await prisma.users.create({ data: { user_name, user_id, coc: coc_ack } });
 
-  if (doc.exists()) {
-    await setDoc(
-      doc_ref,
-      {
-        coc: coc_ack,
-        coc_ack_timestamp: serverTimestamp(),
-      },
-      { merge: true }
-    );
-  } else {
-    await setDoc(doc_ref, user);
-  }
-
-  const redis_user_id_exists = (await redis.get(user_id)) as string | undefined;
-
-  // first check the redis cache for the user id and value, if found then delete the record
-  // set a new record
-  if (redis_user_id_exists !== undefined) {
-    await redis.del(user_id);
-  }
-
-  await redis.set(user_id, coc_ack);
+  if (
+    !Object.hasOwn(doc ?? {}, "coc") &&
+    !Object.hasOwn(doc ?? {}, "coc_ack_timestamp")
+  )
+    await prisma.users.update({
+      where: { user_id },
+      data: { coc: coc_ack, coc_ack_timestamp: new Date() },
+    });
 };
 
 export const has_user_ack_coc = async (user_id: string) => {
-  const user_coc_ack_redis = (await redis.get(user_id)) as string | undefined;
+  const docs = await prisma.users.findMany({
+    where: { user_id: { equals: user_id } },
+    orderBy: { coc_ack_timestamp: "desc" },
+  });
 
-  // first check the redis cache for the user id and value, if not found the query the db
-  if (user_coc_ack_redis === undefined) {
-    const col_ref = await get_collection_reference("users");
-    const querys = query(
-      col_ref,
-      where("user_id", "==", user_id),
-      orderBy("timestamp", "desc")
-    );
-
-    const docs = await getDocs(querys);
-
-    const user = docs.docs[0]?.data();
-
-    return user?.coc === "accepted";
-  }
-
-  return user_coc_ack_redis === "accepted";
+  return docs[0]?.coc;
 };
