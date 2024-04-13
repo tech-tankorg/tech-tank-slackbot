@@ -21,7 +21,7 @@ export const send_weekly_welcome_message = async () => {
   const doc_id = `week-${getWeek(now) - 1}-${getYear(now)}`;
 
   try {
-    const doc = get_welcomes(doc_id);
+    const doc = await get_welcomes(doc_id);
 
     const parsed_doc = welcomes_type.parse(doc);
     const formatted_users_array = format_users_array(parsed_doc.users);
@@ -31,7 +31,7 @@ export const send_weekly_welcome_message = async () => {
         ", "
       )} to the tank!:tech_tank: :tech_tank: `;
       await app.client.chat.postMessage({
-        channel: channels.intro,
+        channel: "C05C6KVHWAJ",
         text: message,
       });
 
