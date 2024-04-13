@@ -12,7 +12,6 @@
     "start": "NODE_ENV=production node ./dist/src/index.js & node ./dist/utils/service/cron_schedule_message.js",
     "typecheck": "tsc",
     "seed:db": "node --loader ts-node/esm ./prisma/seed.ts",
-    "transform": "node --loader ts-node/esm ./utils/helpers/transform.ts",
     "biome:lint": "npx @biomejs/biome lint ./",
     "biome:fix": "npx @biomejs/biome check --apply ./",
     "biome:ci": "npx @biomejs/biome ci ./",
