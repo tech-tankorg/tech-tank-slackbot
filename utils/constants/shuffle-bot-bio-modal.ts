@@ -70,12 +70,12 @@ export const shuffle_bot_bio_modal = (
           type: "plain_text_input",
           multiline: true,
           action_id: "title-action",
+          initial_value: initValues.title,
         },
         label: {
           type: "plain_text" as const,
           text: ":computer: Title",
           emoji: true,
-          initial_value: initValues.title,
         },
       },
       {

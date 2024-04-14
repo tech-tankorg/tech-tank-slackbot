@@ -34,7 +34,7 @@ export const bots = {
 };
 
 export const coffee_chat_config = {
-  active_channels: new Set([channels.coffee_chat]),
+  active_channels: new Set(["C05C6KVHWAJ"]),
   shuffle_frequency: 2,
   users_per_group: 3,
 };
