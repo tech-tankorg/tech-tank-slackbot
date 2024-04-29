@@ -8,7 +8,7 @@
   "scripts": {
     "test": "jest",
     "dev": "node --loader ts-node/esm ./src/index.ts",
-    "build": "tsup ./src/index.ts ./utils/service/cron_schedule_message.ts --format esm --dts utils/types/projectTypes.ts",
+    "build": "tsup ./src/index.ts ./utils/service/cron_schedule_message.ts --format esm --dts utils/types/projectTypes.ts && prisma generate",
     "start": "NODE_ENV=production node ./dist/src/index.js & node ./dist/utils/service/cron_schedule_message.js",
     "typecheck": "tsc",
     "seed:db": "node --loader ts-node/esm ./prisma/seed.ts",
