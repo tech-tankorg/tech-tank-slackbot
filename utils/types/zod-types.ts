@@ -86,12 +86,12 @@ export const shuffle_bot_user = z.object({
   date_joined: z.date(),
   is_active: z.boolean(),
   bio: z.object({
-    pronouns: z.string(),
-    title: z.string(),
-    location: z.string(),
-    interests: z.string(),
-    intro: z.string(),
-    img_url: z.string(),
+    pronouns: z.string().optional(),
+    title: z.string().optional(),
+    location: z.string().optional(),
+    interests: z.string().optional(),
+    intro: z.string().optional(),
+    img_url: z.string().optional(),
   }),
 });
 

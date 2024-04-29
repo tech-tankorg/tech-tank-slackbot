@@ -252,15 +252,14 @@ export const coffee_chat_bio = () => {
   app.command("/coffee-chat-bio", async ({ ack, body, client }) => {
     await ack();
     const trigger_id = body.trigger_id;
-    const user_id = body.user_id;
-    const user_data = await get_shuffle_bot_user(user_id);
+    const user_data = await get_shuffle_bot_user(body.user_id);
     await client.views.open({
       trigger_id,
-      view: shuffle_bot_bio_modal(body.user_id, {
-        intro: user_data.bio.intro,
-        pronouns: user_data.bio.pronouns,
-        location: user_data.bio.location,
-        title: user_data.bio.title,
+      view: shuffle_bot_bio_modal(body.user_name, {
+        intro: user_data.bio.intro ?? "",
+        pronouns: user_data.bio.pronouns ?? "",
+        location: user_data.bio.location ?? "",
+        title: user_data.bio.title ?? "",
       }),
     });
   });
