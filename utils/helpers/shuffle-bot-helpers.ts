@@ -21,24 +21,28 @@ export const shuffle_users = (
   // load array into memory and then select each
   // load all groups into a large array, shuffle the array and then determine new groups
 
-  const newGroup = new Array(
-    Math.floor(active_users.length / people_per_group)
-  ).map(() => [""]);
+  const newGroup: Array<string[]> = [];
+  let currentGroup: Array<string> = [];
+  let group_size = 0;
 
   generate_master_array_shuffled(active_users);
 
-  let index = 0;
-
   for (const user of active_users) {
-    if (newGroup.length === 0) break;
-    // biome-ignore lint: TESTING not-null check for working function
-    if (newGroup[index]!.length <= people_per_group) {
-      // check if the number of people in the group does not exceeed the setting
-      newGroup[index]?.push(user);
+    if (group_size < people_per_group) {
+      currentGroup.push(user);
+      group_size++;
     } else {
-      index++;
-      newGroup[index]?.push(user);
+      newGroup.push(currentGroup);
+      currentGroup = [user];
+      group_size = 1;
     }
+  }
+
+  if (currentGroup.length === 1) {
+    newGroup[newGroup.length - 1]?.push(currentGroup[0] ?? "");
+  } else if (currentGroup.length === 2) {
+    newGroup[newGroup.length - 1]?.push(currentGroup[0] ?? "");
+    newGroup[newGroup.length - 2]?.push(currentGroup[1] ?? "");
   }
 
   return newGroup;
