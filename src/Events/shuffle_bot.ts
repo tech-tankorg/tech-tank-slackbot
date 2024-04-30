@@ -59,19 +59,37 @@ export const coffee_chat_bot_shuffle = async () => {
     coffee_chat_config.users_per_group
   );
 
-  await create_shuffle_groups(shuffled_new_users);
+  try {
+    await create_shuffle_groups(shuffled_new_users);
 
-  await create_group_sendMsg(shuffled_new_users, all_active_users);
+    await create_group_sendMsg(shuffled_new_users, all_active_users);
 
-  // post message in the channel that new groups have been made
-  await send_message({
-    id: channels.coffee_chat,
-    input: {
-      type: "blocks",
-      blocks: coffee_chat_shuffle_channel_msg(next_shuffle_date),
-    },
-    group: "channel",
-  });
+    // post message in the channel that new groups have been made
+    await send_message({
+      id: channels.coffee_chat,
+      input: {
+        type: "blocks",
+        blocks: coffee_chat_shuffle_channel_msg(next_shuffle_date),
+      },
+      group: "channel",
+    });
+
+    await Axiom.ingestEvents(AXIOM_DATA_SET, [
+      {
+        coffee_chat_bot: {
+          status: "Coffee chat bot shuffle complete",
+        },
+      },
+    ]);
+  } catch {
+    await Axiom.ingestEvents(AXIOM_DATA_SET, [
+      {
+        coffee_chat_bot: {
+          status: "Coffee chat bot shuffle incomplete",
+        },
+      },
+    ]);
+  }
 };
 
 export const coffee_chat_bot_joined_channel = (allow_channels: Set<string>) => {
@@ -253,15 +271,27 @@ export const coffee_chat_bio = () => {
     await ack();
     const trigger_id = body.trigger_id;
     const user_data = await get_shuffle_bot_user(body.user_id);
-    await client.views.open({
-      trigger_id,
-      view: shuffle_bot_bio_modal(body.user_name, {
-        intro: user_data.bio.intro ?? "",
-        pronouns: user_data.bio.pronouns ?? "",
-        location: user_data.bio.location ?? "",
-        title: user_data.bio.title ?? "",
-      }),
-    });
+    try {
+      await client.views.open({
+        trigger_id,
+        view: shuffle_bot_bio_modal(body.user_name, {
+          intro: user_data.bio.intro ?? "",
+          pronouns: user_data.bio.pronouns ?? "",
+          location: user_data.bio.location ?? "",
+          title: user_data.bio.title ?? "",
+        }),
+      });
+    } catch {
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        {
+          error_coffee_chat_bot: {
+            channel: body.channel_id,
+            user_id: user_data.user_id,
+            status: "Failed to open coffee chat bio modal",
+          },
+        },
+      ]);
+    }
   });
 };
 
