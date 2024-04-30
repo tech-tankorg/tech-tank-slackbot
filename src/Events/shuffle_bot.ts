@@ -253,15 +253,27 @@ export const coffee_chat_bio = () => {
     await ack();
     const trigger_id = body.trigger_id;
     const user_data = await get_shuffle_bot_user(body.user_id);
-    await client.views.open({
-      trigger_id,
-      view: shuffle_bot_bio_modal(body.user_name, {
-        intro: user_data.bio.intro ?? "",
-        pronouns: user_data.bio.pronouns ?? "",
-        location: user_data.bio.location ?? "",
-        title: user_data.bio.title ?? "",
-      }),
-    });
+    try {
+      await client.views.open({
+        trigger_id,
+        view: shuffle_bot_bio_modal(body.user_name, {
+          intro: user_data.bio.intro ?? "",
+          pronouns: user_data.bio.pronouns ?? "",
+          location: user_data.bio.location ?? "",
+          title: user_data.bio.title ?? "",
+        }),
+      });
+    } catch {
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        {
+          error_coffee_chat_bot: {
+            channel: body.channel_id,
+            user_id: user_data.user_id,
+            status: "Failed to open coffee chat bio modal",
+          },
+        },
+      ]);
+    }
   });
 };
 
