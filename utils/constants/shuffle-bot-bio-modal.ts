@@ -1,4 +1,5 @@
 import type { shuffle_bot_user_type } from "../types/projectTypes.ts";
+import type { View } from "@slack/types";
 
 interface Initials {
   pronouns: string;
@@ -9,13 +10,13 @@ interface Initials {
 export const shuffle_bot_bio_modal = (
   user_id: string,
   initValues: Initials
-) => {
+): View => {
   return {
     type: "modal" as const,
     callback_id: "coffee-chat-bio-modal",
     title: {
       type: "plain_text" as const,
-      text: "Edit your Nemo coffee chat Bio",
+      text: "Edit Coffee chat bio",
       emoji: true,
     },
     submit: {
@@ -70,12 +71,12 @@ export const shuffle_bot_bio_modal = (
           type: "plain_text_input",
           multiline: true,
           action_id: "title-action",
+          initial_value: initValues.title,
         },
         label: {
           type: "plain_text" as const,
           text: ":computer: Title",
           emoji: true,
-          initial_value: initValues.title,
         },
       },
       {
