@@ -13,6 +13,7 @@ const app = new App({
   socketMode: true,
   appToken: process.env.SLACK_APP_TOKEN,
   port: Number(process.env.DB_PORT) ?? 5001,
+  ignoreSelf: true,
 });
 
 export default app;

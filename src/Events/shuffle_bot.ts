@@ -106,11 +106,11 @@ export const coffee_chat_bot_joined_channel = (allow_channels: Set<string>) => {
 
       await create_shuffle_bot_user(event.user, user_name, user_profile_image);
 
-      await send_message({
+      const sent_message = await send_message({
         id: event.user,
         input: {
           type: "blocks",
-          blocks: coffee_chat_intro_message(event.user),
+          blocks: coffee_chat_intro_message(user_name),
         },
         group: "user",
       });
@@ -121,6 +121,7 @@ export const coffee_chat_bot_joined_channel = (allow_channels: Set<string>) => {
             channel: event.channel,
             user_id: event.user,
             user_name,
+            sent_message: sent_message.ok,
             status: "Added to channel",
           },
         },
@@ -148,7 +149,7 @@ export const coffee_chat_bot_left_channel = (allow_channels: Set<string>) => {
     // When a member leaves the channel they should be removed to the shuffle list
     try {
       await delete_shuffle_bot_user(event.user);
-      await send_message({
+      const sent_message = await send_message({
         id: event.user,
         input: {
           type: "msg",
@@ -162,6 +163,7 @@ export const coffee_chat_bot_left_channel = (allow_channels: Set<string>) => {
           coffee_chat_bot: {
             channel: event.channel,
             user_id: event.user,
+            sent_message: sent_message.ok,
             status: "Removed to channel",
           },
         },
