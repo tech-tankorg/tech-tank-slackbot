@@ -50,7 +50,7 @@ export const coffee_chat_bot_shuffle = async () => {
   const all_active_users_ids = all_active_users.map((user) => user.user_id);
 
   const today = new Date();
-  today.setHours(10, 0);
+  today.setHours(6, 0);
 
   const next_shuffle_date = international_timezone_formatter(
     determine_next_execute_date_freq(
@@ -214,7 +214,7 @@ export const coffee_chat_user_deactivate = () => {
       await respond({
         response_type: "ephemeral",
         mrkdwn: true,
-        text: `Your coffee chat activity in the following channel (<#${channel}>) has been deactived. You will not appear within the next rotation.`,
+        text: `Your coffee chat activity in the following channel (<#${channel}>) has been deactivated. You will not appear within the next rotation.`,
       });
     } catch {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
@@ -229,7 +229,7 @@ export const coffee_chat_user_deactivate = () => {
       await respond({
         response_type: "ephemeral",
         mrkdwn: true,
-        text: "Failed to deactive your coffee chat activity. You will still appear within the next rotation. ",
+        text: "Failed to deactivate your coffee chat activity. You will still appear within the next rotation. ",
       });
     }
   });
@@ -309,35 +309,47 @@ export const coffee_chat_bio = () => {
 
 export const handle_coffee_chat_bio_submit = () => {
   app.view("coffee-chat-bio-modal", async ({ ack, view, body }) => {
-    await ack();
+    try {
+      await ack();
 
-    const view_values = view.state.values;
-    const pronouns = view_values["pronouns-action-block"]
-      ? view_values["pronouns-action-block"]["pronouns-action"]?.value
-      : undefined;
+      const view_values = view.state.values;
+      const pronouns = view_values["pronouns-action-block"]
+        ? view_values["pronouns-action-block"]["pronouns-action"]?.value
+        : undefined;
 
-    const title = view_values["title-action-block"]
-      ? view_values["title-action-block"]["title-action"]?.value
-      : undefined;
+      const title = view_values["title-action-block"]
+        ? view_values["title-action-block"]["title-action"]?.value
+        : undefined;
 
-    const location = view_values["location-action-block"]
-      ? view_values["location-action-block"]["location-action"]?.value
-      : undefined;
+      const location = view_values["location-action-block"]
+        ? view_values["location-action-block"]["location-action"]?.value
+        : undefined;
 
-    const intro = view_values["intro-action-block"]
-      ? view_values["intro-action-block"]["intro-action"]?.value
-      : undefined;
+      const intro = view_values["intro-action-block"]
+        ? view_values["intro-action-block"]["intro-action"]?.value
+        : undefined;
 
-    const user_id = body.user.id;
+      const user_id = body.user.id;
 
-    const bio = {
-      pronouns: pronouns ?? "",
-      title: title ?? "",
-      location: location ?? "",
-      intro: intro ?? "",
-    };
+      const bio = {
+        pronouns: pronouns ?? "",
+        title: title ?? "",
+        location: location ?? "",
+        intro: intro ?? "",
+      };
 
-    await update_shuffle_bot_bio(user_id, bio);
+      await update_shuffle_bot_bio(user_id, bio);
+    } catch {
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        {
+          error_coffee_chat_bot: {
+            user_id: body.user.id,
+            user_name: body.user.name,
+            status: "Failed to submit coffee chat bio",
+          },
+        },
+      ]);
+    }
   });
 };
 

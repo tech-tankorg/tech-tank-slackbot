@@ -171,7 +171,9 @@ export const shuffle_user_group_intro_msg = (
       type: "section",
       text: {
         type: "plain_text",
-        text: `Everyone, meet <@${profile.user_id}> (${profile.bio.pronouns}):`,
+        text: `Everyone, meet ${profile.user_name} (${
+          profile.bio.pronouns ?? ""
+        }):`,
         emoji: true,
       },
     },
@@ -179,23 +181,23 @@ export const shuffle_user_group_intro_msg = (
       type: "section",
       text: {
         type: "mrkdwn",
-        text: profile.bio.intro,
+        text: profile.bio.intro ?? "",
       },
       fields: [
         {
           type: "plain_text",
-          text: `:computer: ${profile.bio.title}`,
+          text: `:computer: ${profile.bio.title ?? ""}`,
           emoji: true,
         },
         {
           type: "plain_text",
-          text: `:round_pushpin: ${profile.bio.location}`,
+          text: `:round_pushpin: ${profile.bio.location ?? ""}`,
           emoji: true,
         },
       ],
       accessory: {
         type: "image",
-        image_url: profile.bio.img_url,
+        image_url: profile.bio.img_url ?? "",
         alt_text: "Profile picture",
       },
     },
