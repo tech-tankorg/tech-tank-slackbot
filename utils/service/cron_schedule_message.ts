@@ -3,74 +3,15 @@ import {
   CRON_EVERY_MONDAY_AT_10,
   CRON_FOR_NEWSLETTER,
   TORONTO_TIME_ZONE_IDENTIFIER,
+  SHUFFLE_SETTINGS_ID,
 } from "../constants/consts.ts";
-
-// import { getOffsetDay } from "../helpers/custom-date-fns.ts";
-
-// import { flatten_object } from "../helpers/flatten-object.ts";
-// import questions from "../constants/general-questions.json" assert { type: "json" };
-// import wonder_wednesday_questions from "../constants/wonder-wednesday-questions.json" assert { type: "json" };
-
-// import { channels } from "../config/channel-config.ts";
-
-// import { thoughtful_thursday_send_scheduled_message } from "../../src/Events/send-scheduled-message.ts";
-// import { wonder_wednesday_send_schedule_message } from "../../src/Events/wonder-wednesday-schedule-message.ts";
+import { find_shuffle_setting } from "../controllers/shuffle-bot-groups.ts";
 
 import { post_newsletter } from "../../src/Events/post_newsletter.ts";
-
-// import { mentor_checkup } from "src/Events/mentor_checkup.ts";
-
 import { post_networking_calendar } from "src/Events/post_networking_calendar.ts";
+import { coffee_chat_bot_shuffle } from "../../src/Events/shuffle_bot.ts";
 import { post_thanks_message } from "../../src/Events/thanks.ts";
 import { send_weekly_welcome_message } from "../../src/Events/weekly_welcome_message.ts";
-
-// const PREPPED_QUESTIONS = flatten_object(questions);
-
-// const job_1 = new CronJob(
-//   CRON_FOR_SCHEDULE_MESSAGE,
-//   () => {
-//     const start_date_thoughtful_thursdays = new Date(
-//       GENERAL_QUESTIONS_START_DATE
-//     );
-//     const start_date_wonder_wednesdays = new Date(
-//       WONDER_WEDNESDAY_QUESTIONS_START_DATE
-//     );
-//     const now = new Date();
-
-//     const offset_date_thoughtful_thursdays = getOffsetDay(
-//       start_date_thoughtful_thursdays,
-//       now
-//     );
-
-//     const offset_date_wonder_wednesdays = getOffsetDay(
-//       start_date_wonder_wednesdays,
-//       now
-//     );
-
-//     if (offset_date_thoughtful_thursdays % 119 === 0)
-//       void thoughtful_thursday_send_scheduled_message(
-//         PREPPED_QUESTIONS,
-//         channels.general,
-//         GENERAL_QUESTIONS_START_DATE,
-//         "thursday",
-//         1
-//       );
-
-//     if (offset_date_wonder_wednesdays % 119 === 0)
-//       void wonder_wednesday_send_schedule_message(
-//         wonder_wednesday_questions,
-//         channels.study,
-//         WONDER_WEDNESDAY_QUESTIONS_START_DATE,
-//         "wednesday",
-//         2
-//       );
-//   },
-//   null,
-//   false,
-//   TORONTO_TIME_ZONE_IDENTIFIER
-// );
-
-// Turn on once newsletter is finished
 
 const job_2 = new CronJob(
   CRON_FOR_NEWSLETTER,
@@ -82,15 +23,22 @@ const job_2 = new CronJob(
   TORONTO_TIME_ZONE_IDENTIFIER
 );
 
-// const job_3 = new CronJob(
-//   CRON_FOR_MENTOR_CHECKUP,
-//   () => {
-//     void mentor_checkup();
-//   },
-//   null,
-//   false,
-//   TORONTO_TIME_ZONE_IDENTIFIER
-// );
+const job_3 = new CronJob(
+  "0 10 * * *",
+  async () => {
+    const shuffle_setting = await find_shuffle_setting(SHUFFLE_SETTINGS_ID);
+
+    if (!shuffle_setting) return;
+
+    const shuffle_day = shuffle_setting.next_shuffle.getDay();
+    const today = new Date().getDay();
+
+    if (shuffle_day === today) void coffee_chat_bot_shuffle();
+  },
+  null,
+  false,
+  TORONTO_TIME_ZONE_IDENTIFIER
+);
 
 const job_4 = new CronJob(
   CRON_EVERY_MONDAY_AT_10,
@@ -105,6 +53,7 @@ const job_4 = new CronJob(
 );
 
 job_2.start();
+job_3.start();
 job_4.start();
 
-console.log(job_2.running, job_4.running);
+console.log(job_2.running, job_3.running, job_4.running);

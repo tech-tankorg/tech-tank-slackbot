@@ -1,5 +1,8 @@
 import app from "../../utils/config/slack-config.ts";
-import { create_shuffle_groups } from "../../utils/controllers/shuffle-bot-groups.ts";
+import {
+  create_shuffle_groups,
+  update_next_shuffle_date,
+} from "../../utils/controllers/shuffle-bot-groups.ts";
 import {
   create_shuffle_bot_user,
   delete_shuffle_bot_user,
@@ -30,7 +33,10 @@ import {
 } from "../../utils/config/channel-config.ts";
 
 import Axiom from "../../utils/config/axiom-config.ts";
-import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
+import {
+  AXIOM_DATA_SET,
+  SHUFFLE_SETTINGS_ID,
+} from "../../utils/constants/consts.ts";
 
 /**
  * Creates a brand new shuffle for users
@@ -61,6 +67,10 @@ export const coffee_chat_bot_shuffle = async () => {
 
   try {
     await create_shuffle_groups(shuffled_new_users);
+    await update_next_shuffle_date(
+      SHUFFLE_SETTINGS_ID,
+      new Date(next_shuffle_date)
+    );
 
     await create_group_sendMsg(shuffled_new_users, all_active_users);
 
