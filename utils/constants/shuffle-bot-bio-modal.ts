@@ -113,7 +113,7 @@ export const shuffle_bot_bio_modal = (
   };
 };
 
-export const coffee_chat_intro_message = (user_id: string) => {
+export const coffee_chat_intro_message = (user: string) => {
   return [
     {
       type: "section",
@@ -127,7 +127,7 @@ export const coffee_chat_intro_message = (user_id: string) => {
       type: "section",
       text: {
         type: "plain_text",
-        text: `Hi <@${user_id}>, please use "/coffee-chat-bio" to complete your onboarding to the coffee chat feature. Here you can complete your bio which will be used to introduce you. to other participants within the channel.`,
+        text: `Hi ${user}! Please use "/coffee-chat-bio" to complete your onboarding to the coffee chat feature. Here you can complete your bio which will be used to introduce you to other participants within the channel.`,
         emoji: true,
       },
     },
