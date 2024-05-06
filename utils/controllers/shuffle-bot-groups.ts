@@ -25,3 +25,17 @@ export const create_shuffle_groups = async (groups: shuffle_group) => {
 
   await prisma.shuffle_groups.create({ data: { groups, week_id: doc_id } });
 };
+
+export const update_next_shuffle_date = async (
+  id: string,
+  next_shuffle: Date
+) => {
+  await prisma.shuffle_settings.update({
+    where: { id },
+    data: { next_shuffle },
+  });
+};
+
+export const find_shuffle_setting = async (id: string) => {
+  return prisma.shuffle_settings.findFirst({ where: { id } });
+};

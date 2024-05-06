@@ -27,6 +27,7 @@ export const channels = {
   code_diversity: "C063EFTU5F1",
   tank_toasts: "C06DRD6PPT7",
   notification: process.env.SLACK_NOTIFICATION_CHANNEL ?? "",
+  coffee_test: "C071LU59FRP",
 } as const;
 
 export const bots = {
@@ -34,7 +35,7 @@ export const bots = {
 };
 
 export const coffee_chat_config = {
-  active_channels: new Set([channels.coffee_chat]),
+  active_channels: new Set(channels.coffee_test),
   shuffle_frequency: 2,
   users_per_group: 3,
 };

@@ -30,3 +30,8 @@ export const NON_INCLUSIVE_WORDS = /guys/i;
 export const TORONTO_TIME_ZONE_IDENTIFIER = "America/Toronto";
 
 export const TECHTANK_EVENT_TAG = "[TechTank Event]";
+
+export const SHUFFLE_SETTINGS_ID =
+  process.env.NODE_ENV === "production"
+    ? "66381e5495544ad56e3dcda7"
+    : "663809cdcc9c1bd843fcab92";

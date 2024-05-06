@@ -70,6 +70,13 @@ model shuffle_users {
   bio         Json
 }
 
+model shuffle_settings {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  shuffle_frequency Int
+  users_per_group   Int
+  next_shuffle      DateTime
+}
+
 enum coc_ack {
   accepted
   denied
