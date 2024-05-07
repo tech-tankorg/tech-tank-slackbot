@@ -100,6 +100,7 @@ export const shuffle_bot_bio_modal = (
         element: {
           type: "plain_text_input",
           multiline: true,
+          max_length: 200,
           action_id: "intro-action",
           initial_value: initValues.intro,
         },
