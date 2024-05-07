@@ -52,13 +52,13 @@ export const coffee_chat_bot_shuffle = async () => {
   const today = new Date();
   today.setHours(6, 0);
 
-  const next_shuffle_date = international_timezone_formatter(
-    determine_next_execute_date_freq(
-      today,
-      "monday",
-      coffee_chat_config.shuffle_frequency
-    )
+  const next_shuffle_date = determine_next_execute_date_freq(
+    today,
+    "monday",
+    coffee_chat_config.shuffle_frequency
   );
+  const next_shuffle_date_formatted =
+    international_timezone_formatter(next_shuffle_date);
 
   const shuffled_new_users = shuffle_users(
     all_active_users_ids,
@@ -67,10 +67,7 @@ export const coffee_chat_bot_shuffle = async () => {
 
   try {
     await create_shuffle_groups(shuffled_new_users);
-    await update_next_shuffle_date(
-      SHUFFLE_SETTINGS_ID,
-      new Date(next_shuffle_date)
-    );
+    await update_next_shuffle_date(SHUFFLE_SETTINGS_ID, next_shuffle_date);
 
     await create_group_sendMsg(shuffled_new_users, all_active_users);
 
@@ -79,7 +76,7 @@ export const coffee_chat_bot_shuffle = async () => {
       id: channels.coffee_chat,
       input: {
         type: "blocks",
-        blocks: coffee_chat_shuffle_channel_msg(next_shuffle_date),
+        blocks: coffee_chat_shuffle_channel_msg(next_shuffle_date_formatted),
       },
       group: "channel",
     });
