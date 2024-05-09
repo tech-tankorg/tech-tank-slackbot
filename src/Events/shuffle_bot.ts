@@ -288,6 +288,17 @@ export const coffee_chat_bio = () => {
           title: user_data.bio.title ?? "",
         }),
       });
+
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        {
+          coffee_chat_bot: {
+            channel: body.channel_id,
+            user_id: user_data.user_id,
+            user_name: body.user_name,
+            status: "Bio modal opened",
+          },
+        },
+      ]);
     } catch {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
@@ -334,6 +345,15 @@ export const handle_coffee_chat_bio_submit = () => {
       };
 
       await update_shuffle_bot_bio(user_id, bio);
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        {
+          coffee_chat_bot: {
+            user_id: body.user.id,
+            user_name: body.user.name,
+            status: "Bio updated",
+          },
+        },
+      ]);
     } catch {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
