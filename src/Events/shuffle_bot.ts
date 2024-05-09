@@ -72,13 +72,11 @@ export const coffee_chat_bot_shuffle = async () => {
     await create_group_sendMsg(shuffled_new_users, all_active_users);
 
     // post message in the channel that new groups have been made
-    await send_message({
-      id: channels.coffee_chat,
-      input: {
-        type: "blocks",
-        blocks: coffee_chat_shuffle_channel_msg(next_shuffle_date_formatted),
-      },
-      group: "channel",
+
+    await app.client.chat.postMessage({
+      channel: channels.coffee_chat,
+      text: "Members have been shuffled!!",
+      blocks: coffee_chat_shuffle_channel_msg(next_shuffle_date_formatted),
     });
 
     await Axiom.ingestEvents(AXIOM_DATA_SET, [
