@@ -21,7 +21,7 @@ export const channels = {
   resources: "C04U5MWEXP1",
   project_proposals: "C05DVA1HX9U",
   general: "C061Q8D7VC6",
-  coffee_chat: "C05G1S5HB4Z",
+  coffee_chat: "C072QCLGSAW",
   mentee: "C05H6HJDEQM",
   mentor: "C05H67NDYQ4",
   code_diversity: "C063EFTU5F1",
@@ -35,7 +35,7 @@ export const bots = {
 };
 
 export const coffee_chat_config = {
-  active_channels: new Set([channels.coffee_test]),
+  active_channels: new Set([channels.coffee_chat]),
   shuffle_frequency: 2,
   users_per_group: 3,
 };
