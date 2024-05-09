@@ -173,7 +173,7 @@ export const shuffle_user_group_intro_msg = (
       text: {
         type: "plain_text",
         text: `Everyone, meet ${profile.user_name} (${
-          profile.bio.pronouns ?? ""
+          profile.bio.pronouns ?? "placeholder"
         }):`,
         emoji: true,
       },
@@ -182,23 +182,25 @@ export const shuffle_user_group_intro_msg = (
       type: "section",
       text: {
         type: "mrkdwn",
-        text: profile.bio.intro ?? "",
+        text: profile.bio.intro !== "" ? profile.bio.intro : "placeholder",
       },
       fields: [
         {
           type: "plain_text",
-          text: `:computer: ${profile.bio.title ?? ""}`,
+          text: `:computer: ${profile.bio.title ?? "placeholder"}`,
           emoji: true,
         },
         {
           type: "plain_text",
-          text: `:round_pushpin: ${profile.bio.location ?? ""}`,
+          text: `:round_pushpin: ${profile.bio.location ?? "placeholder"}`,
           emoji: true,
         },
       ],
       accessory: {
         type: "image",
-        image_url: profile.bio.img_url ?? "",
+        image_url:
+          profile.bio.img_url ??
+          "https://secure.gravatar.com/avatar/a506b0a0e7aef90663c21253c8b3f900.jpg?s=512&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0005-512.png",
         alt_text: "Profile picture",
       },
     },
