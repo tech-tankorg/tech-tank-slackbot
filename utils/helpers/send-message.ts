@@ -86,6 +86,7 @@ export const dm_lst_of_people = async (
         });
       } else {
         sent_message = await app.client.chat.postMessage({
+          text: "test",
           channel: channel.channel?.id ?? "",
           blocks: message.blocks,
         });

@@ -52,13 +52,13 @@ export const coffee_chat_bot_shuffle = async () => {
   const today = new Date();
   today.setHours(6, 0);
 
-  const next_shuffle_date = international_timezone_formatter(
-    determine_next_execute_date_freq(
-      today,
-      "monday",
-      coffee_chat_config.shuffle_frequency
-    )
+  const next_shuffle_date = determine_next_execute_date_freq(
+    today,
+    "monday",
+    coffee_chat_config.shuffle_frequency
   );
+  const next_shuffle_date_formatted =
+    international_timezone_formatter(next_shuffle_date);
 
   const shuffled_new_users = shuffle_users(
     all_active_users_ids,
@@ -67,21 +67,16 @@ export const coffee_chat_bot_shuffle = async () => {
 
   try {
     await create_shuffle_groups(shuffled_new_users);
-    await update_next_shuffle_date(
-      SHUFFLE_SETTINGS_ID,
-      new Date(next_shuffle_date)
-    );
+    await update_next_shuffle_date(SHUFFLE_SETTINGS_ID, next_shuffle_date);
 
     await create_group_sendMsg(shuffled_new_users, all_active_users);
 
     // post message in the channel that new groups have been made
-    await send_message({
-      id: channels.coffee_chat,
-      input: {
-        type: "blocks",
-        blocks: coffee_chat_shuffle_channel_msg(next_shuffle_date),
-      },
-      group: "channel",
+
+    await app.client.chat.postMessage({
+      channel: channels.coffee_chat,
+      text: "Members have been shuffled!!",
+      blocks: coffee_chat_shuffle_channel_msg(next_shuffle_date_formatted),
     });
 
     await Axiom.ingestEvents(AXIOM_DATA_SET, [
@@ -293,6 +288,17 @@ export const coffee_chat_bio = () => {
           title: user_data.bio.title ?? "",
         }),
       });
+
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        {
+          coffee_chat_bot: {
+            channel: body.channel_id,
+            user_id: user_data.user_id,
+            user_name: body.user_name,
+            status: "Bio modal opened",
+          },
+        },
+      ]);
     } catch {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
@@ -339,6 +345,15 @@ export const handle_coffee_chat_bio_submit = () => {
       };
 
       await update_shuffle_bot_bio(user_id, bio);
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        {
+          coffee_chat_bot: {
+            user_id: body.user.id,
+            user_name: body.user.name,
+            status: "Bio updated",
+          },
+        },
+      ]);
     } catch {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
