@@ -203,6 +203,7 @@ export const coffee_chat_user_deactivate = () => {
           coffee_chat_bot: {
             channel: body.channel_id,
             user_id,
+            user_name: body.user_name,
             status: "User deactivated",
           },
         },
@@ -219,6 +220,7 @@ export const coffee_chat_user_deactivate = () => {
           error_coffee_chat_bot: {
             channel: body.channel_id,
             user_id,
+            user_name: body.user_name,
             status: "Failed to deactivate",
           },
         },
@@ -245,6 +247,7 @@ export const coffee_chat_user_activate = () => {
           coffee_chat_bot: {
             channel: body.channel_id,
             user_id,
+            user_name: body.user_name,
             status: "User activated",
           },
         },
@@ -261,6 +264,7 @@ export const coffee_chat_user_activate = () => {
           error_coffee_chat_bot: {
             channel: body.channel_id,
             user_id,
+            user_name: body.user_name,
             status: "Failed to activate user",
           },
         },
