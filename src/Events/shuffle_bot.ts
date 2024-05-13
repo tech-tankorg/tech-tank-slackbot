@@ -50,7 +50,7 @@ export const coffee_chat_bot_shuffle = async () => {
   const all_active_users_ids = all_active_users.map((user) => user.user_id);
 
   const today = new Date();
-  today.setHours(6, 0);
+  today.setHours(14, 0);
 
   const next_shuffle_date = determine_next_execute_date_freq(
     today,
