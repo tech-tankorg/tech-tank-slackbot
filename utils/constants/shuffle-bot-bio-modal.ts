@@ -172,7 +172,7 @@ export const shuffle_user_group_intro_msg = (
       type: "section",
       text: {
         type: "plain_text",
-        text: `Everyone, meet <@${profile.user_id}> (${
+        text: `:wave:Everyone, meet <@${profile.user_id}> (${
           profile.bio.pronouns ?? "placeholder"
         }):`,
         emoji: true,
