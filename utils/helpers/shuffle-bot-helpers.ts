@@ -8,6 +8,8 @@ import { flatten_array } from "./flatten-object.ts";
 
 import type { shuffle_bot_user_type } from "../types/projectTypes.ts";
 
+import { getRandomNumber } from "./generate-random-number.ts";
+
 const generate_master_array_shuffled = (groups: Array<string>) => {
   for (let i = 0; i < 3; i++) {
     randomize_list(groups);
@@ -38,11 +40,11 @@ export const shuffle_users = (
     }
   }
 
-  if (currentGroup.length === 1) {
-    newGroup[newGroup.length - 1]?.push(currentGroup[0] ?? "");
-  } else if (currentGroup.length === 2) {
-    newGroup[newGroup.length - 1]?.push(currentGroup[0] ?? "");
-    newGroup[newGroup.length - 2]?.push(currentGroup[1] ?? "");
+  if (currentGroup.length > 0) {
+    for (let i = 0; i < currentGroup.length; i++) {
+      const index = getRandomNumber(0, newGroup.length);
+      newGroup[index]?.push(currentGroup[i] ?? "");
+    }
   }
 
   return newGroup;

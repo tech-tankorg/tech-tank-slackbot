@@ -2,6 +2,7 @@ import app from "../../utils/config/slack-config.ts";
 import {
   create_shuffle_groups,
   update_next_shuffle_date,
+  find_shuffle_setting,
 } from "../../utils/controllers/shuffle-bot-groups.ts";
 import {
   create_shuffle_bot_user,
@@ -47,6 +48,7 @@ import {
 
 export const coffee_chat_bot_shuffle = async () => {
   const all_active_users = await get_all_active_shuffle_bot_users();
+  const shuffle_settings = await find_shuffle_setting(SHUFFLE_SETTINGS_ID);
   const all_active_users_ids = all_active_users.map((user) => user.user_id);
 
   const today = new Date();
@@ -55,14 +57,14 @@ export const coffee_chat_bot_shuffle = async () => {
   const next_shuffle_date = determine_next_execute_date_freq(
     today,
     "monday",
-    coffee_chat_config.shuffle_frequency
+    shuffle_settings?.shuffle_frequency ?? coffee_chat_config.shuffle_frequency
   );
   const next_shuffle_date_formatted =
     international_timezone_formatter(next_shuffle_date);
 
   const shuffled_new_users = shuffle_users(
     all_active_users_ids,
-    coffee_chat_config.users_per_group
+    shuffle_settings?.users_per_group ?? coffee_chat_config.users_per_group
   );
 
   try {
