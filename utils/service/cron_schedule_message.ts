@@ -13,6 +13,8 @@ import { coffee_chat_bot_shuffle } from "../../src/Events/shuffle_bot.ts";
 import { post_thanks_message } from "../../src/Events/thanks.ts";
 import { send_weekly_welcome_message } from "../../src/Events/weekly_welcome_message.ts";
 
+import { getDate } from "date-fns";
+
 const job_2 = new CronJob(
   CRON_FOR_NEWSLETTER,
   () => {
@@ -30,8 +32,8 @@ const job_3 = new CronJob(
 
     if (!shuffle_setting) return;
 
-    const shuffle_day = shuffle_setting.next_shuffle.getDay();
-    const today = new Date().getDay();
+    const shuffle_day = getDate(shuffle_setting.next_shuffle);
+    const today = getDate(new Date());
 
     if (shuffle_day === today) void coffee_chat_bot_shuffle();
   },
