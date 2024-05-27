@@ -63,10 +63,12 @@ export const get_upcoming_events_upper_ranges = async (
 
   try {
     const result = await axios.get(API_REQ, options);
+    // console.log(result);
 
-    const events = gcal_event.parse(result.data.items);
+    // const events = gcal_event.parse(result.data.items);
 
-    const filtered_upcoming_events = events.filter((event) => {
+    // biome-ignore lint: any type is needed here
+    const filtered_upcoming_events = result.data.items.filter((event: any) => {
       const event_date_start = new Date(event.start.dateTime);
 
       return (
