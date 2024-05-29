@@ -1,5 +1,5 @@
 import type { shuffle_bot_user_type } from "../types/projectTypes.ts";
-import type { View } from "@slack/types";
+import type { View, Block, KnownBlock } from "@slack/types";
 
 interface Initials {
   pronouns: string;
@@ -114,7 +114,9 @@ export const shuffle_bot_bio_modal = (
   };
 };
 
-export const coffee_chat_intro_message = (user: string) => {
+export const coffee_chat_intro_message = (
+  user: string
+): Array<Block | KnownBlock> => {
   return [
     {
       type: "section",
@@ -135,7 +137,9 @@ export const coffee_chat_intro_message = (user: string) => {
   ];
 };
 
-export const coffee_chat_shuffle_channel_msg = (date: string) => {
+export const coffee_chat_shuffle_channel_msg = (
+  date: string
+): Array<Block | KnownBlock> => {
   return [
     {
       type: "section",
@@ -166,7 +170,7 @@ export const coffee_chat_shuffle_channel_msg = (date: string) => {
 
 export const shuffle_user_group_intro_msg = (
   profile: shuffle_bot_user_type
-) => {
+): Array<Block | KnownBlock> => {
   return [
     {
       type: "section",
@@ -181,7 +185,7 @@ export const shuffle_user_group_intro_msg = (
       type: "section",
       text: {
         type: "mrkdwn",
-        text: profile.bio.intro !== "" ? profile.bio.intro : "placeholder",
+        text: profile.bio.intro ?? "placeholder",
       },
       fields: [
         {
