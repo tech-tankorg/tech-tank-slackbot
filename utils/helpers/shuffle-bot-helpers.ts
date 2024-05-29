@@ -54,7 +54,7 @@ export const create_group_sendMsg = async (
   shuffled_groups: string[][],
   all_active_users: shuffle_bot_user_type[]
 ) => {
-  for (let i = 0; i <= shuffled_groups.length; i++) {
+  for (let i = 0; i < shuffled_groups.length; i++) {
     const first_user = shuffled_groups[i]?.shift() ?? "";
     const additional_users = shuffled_groups[i] ?? [];
 
