@@ -185,7 +185,10 @@ export const shuffle_user_group_intro_msg = (
       type: "section",
       text: {
         type: "mrkdwn",
-        text: profile.bio.intro ?? "placeholder",
+        text:
+          profile.bio.intro !== ""
+            ? profile.bio.intro ?? "placeholder"
+            : "placeholder",
       },
       fields: [
         {
