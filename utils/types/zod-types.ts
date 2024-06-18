@@ -99,3 +99,17 @@ export const shuffle_bot_groups = z.object({
   date_created: z.date(),
   groups: z.array(z.array(z.string())),
 });
+
+export const survey_question_schema = z.array(
+  z.object({
+    id: z.string(),
+    question: z.string(),
+    type: z.union([
+      z.literal("rating"),
+      z.literal("short_answer"),
+      z.literal("multiple_choice"),
+      z.literal("yes_or_no"),
+      z.literal("multi_select"),
+    ]),
+  })
+);
