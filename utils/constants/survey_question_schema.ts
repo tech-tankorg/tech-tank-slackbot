@@ -153,7 +153,7 @@ const multi_select_schema = (question: string, options: Array<string>) => {
       },
       label: {
         type: "plain_text",
-        text: "Label",
+        text: question,
         emoji: true,
       },
     },

@@ -9,6 +9,12 @@ export const survey_modal_schema = (user_id: string): View => {
     id: "q1",
   });
 
+  const question2 = generateBlock({
+    type: "yes_or_no",
+    question: "Testing the question",
+    id: "q2",
+  });
+
   return {
     type: "modal" as const,
     callback_id: "survey-modal",
@@ -40,6 +46,7 @@ export const survey_modal_schema = (user_id: string): View => {
         type: "divider",
       },
       ...question1,
+      ...question2,
     ],
   };
 };
