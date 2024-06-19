@@ -111,5 +111,6 @@ export const survey_question_schema = z.array(
       z.literal("yes_or_no"),
       z.literal("multi_select"),
     ]),
+    options: z.array(z.string()).optional(),
   })
 );

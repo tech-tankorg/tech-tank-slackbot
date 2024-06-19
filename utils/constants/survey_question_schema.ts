@@ -1,12 +1,6 @@
 import type { Block, KnownBlock } from "@slack/types";
 import type { TypeOfQuestion } from "../types/projectTypes.ts";
 
-interface Questions {
-  type: TypeOfQuestion[0]["type"];
-  question: string;
-  id: string;
-}
-
 const yes_or_no_schema = (question: string) => {
   return [
     {
@@ -195,7 +189,7 @@ export const survey_intro_message = (user_id: string) => {
 */
 
 export const generateBlock = (
-  question: Questions | undefined
+  question: TypeOfQuestion[0] | undefined
 ): Array<Block | KnownBlock> => {
   if (question === undefined)
     throw new Error("question object cannot be undefined");
@@ -204,12 +198,12 @@ export const generateBlock = (
       return yes_or_no_schema(question.question);
     }
     case "multiple_choice": {
-      return multiple_choice_schema(question.question, [
-        "option 1",
-        "option 2",
-        "option 3",
-        "option4",
-      ]);
+      if (!question.options)
+        throw new Error(
+          "Options are to be provided for MCQ, and multiple selection questions "
+        );
+
+      return multiple_choice_schema(question.question, question.options);
     }
     case "rating": {
       return rating_schema(question.question);
@@ -218,12 +212,11 @@ export const generateBlock = (
       return short_answer_schema(question.question);
     }
     case "multi_select": {
-      return multi_select_schema(question.question, [
-        "option 1",
-        "option 2",
-        "option 3",
-        "option4",
-      ]);
+      if (!question.options)
+        throw new Error(
+          "Options are to be provided for MCQ, and multiple selection questions "
+        );
+      return multi_select_schema(question.question, question.options);
     }
     default:
       return [];
