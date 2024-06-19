@@ -30,7 +30,7 @@ export const survey_modal_schema = (user_id: string): View => {
     callback_id: "survey-modal",
     title: {
       type: "plain_text" as const,
-      text: "Nemo Survey",
+      text: "TechTank Survey",
       emoji: true,
     },
     submit: {
@@ -47,9 +47,8 @@ export const survey_modal_schema = (user_id: string): View => {
       {
         type: "section",
         text: {
-          type: "plain_text" as const,
+          type: "mrkdwn" as const,
           text: `Hey <@${user_id}>! Please complete the survey below`,
-          emoji: true,
         },
       },
       {

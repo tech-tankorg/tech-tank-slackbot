@@ -1,11 +1,17 @@
 import type { Block, KnownBlock } from "@slack/types";
 import type { TypeOfQuestion } from "../types/projectTypes.ts";
 
+import { randomBytes } from "node:crypto";
+
+const generate_values = (value = 16) => {
+  return randomBytes(value).toString("hex");
+};
+
 const yes_or_no_schema = (question: string) => {
   return [
     {
       type: "section",
-      block_id: "survey_nemo-yorn-action-block",
+      block_id: `survey_nemo-yorn-action-block-${generate_values()}`,
       text: {
         type: "mrkdwn",
         text: question,
@@ -28,7 +34,7 @@ const yes_or_no_schema = (question: string) => {
             value: "false",
           },
         ],
-        action_id: "survey_nemo-yorn-action",
+        action_id: `survey_nemo-yorn-action-${generate_values()}`,
       },
     },
   ];
@@ -47,7 +53,7 @@ const multiple_choice_schema = (question: string, options: Array<string>) => {
   return [
     {
       type: "input",
-      block_id: "survey_nemo_mcq-action-block",
+      block_id: `survey_nemo_mcq-action-block-${generate_values()}`,
       element: {
         type: "static_select",
         placeholder: {
@@ -56,7 +62,7 @@ const multiple_choice_schema = (question: string, options: Array<string>) => {
           emoji: true,
         },
         options: all_options,
-        action_id: "survey_nemo_mcq-action",
+        action_id: `survey_nemo_mcq-action-${generate_values()}`,
       },
       label: {
         type: "plain_text",
@@ -82,7 +88,7 @@ const rating_schema = (question: string) => {
   return [
     {
       type: "input",
-      block_id: "survey_nemo_rating-action-block",
+      block_id: `survey_nemo_rating-action-block-${generate_values()}`,
       element: {
         type: "static_select",
         placeholder: {
@@ -91,7 +97,7 @@ const rating_schema = (question: string) => {
           emoji: true,
         },
         options: all_options,
-        action_id: "survey_nemo_rating-action",
+        action_id: `survey_nemo_rating-action-${generate_values()}`,
       },
       label: {
         type: "plain_text",
@@ -106,11 +112,11 @@ const short_answer_schema = (question: string) => {
   return [
     {
       type: "input",
-      block_id: "short-answer-action-block",
+      block_id: `short-answer-action-block-${generate_values()}`,
       element: {
         type: "plain_text_input",
         multiline: true,
-        action_id: "short-answer-action",
+        action_id: `short-answer-action-${generate_values()}`,
       },
       label: {
         type: "plain_text",
@@ -134,7 +140,7 @@ const multi_select_schema = (question: string, options: Array<string>) => {
   return [
     {
       type: "input",
-      block_id: "multi-select-action-block",
+      block_id: `multi-select-action-block-${generate_values}`,
       element: {
         type: "multi_static_select",
         placeholder: {
@@ -143,7 +149,7 @@ const multi_select_schema = (question: string, options: Array<string>) => {
           emoji: true,
         },
         options: all_options,
-        action_id: "multi-select-action",
+        action_id: `multi-select-action-${generate_values()}`,
       },
       label: {
         type: "plain_text",
