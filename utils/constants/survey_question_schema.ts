@@ -195,8 +195,10 @@ export const survey_intro_message = (user_id: string) => {
 */
 
 export const generateBlock = (
-  question: Questions
+  question: Questions | undefined
 ): Array<Block | KnownBlock> => {
+  if (question === undefined)
+    throw new Error("question object cannot be undefined");
   switch (question.type) {
     case "yes_or_no": {
       return yes_or_no_schema(question.question);

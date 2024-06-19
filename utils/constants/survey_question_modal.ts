@@ -1,19 +1,13 @@
 import type { View } from "@slack/types";
-
 import { generateBlock } from "./survey_question_schema.ts";
+import { questions } from "./test_file.ts";
+import { getRandomNumber } from "../helpers/generate-random-number.ts";
 
 export const survey_modal_schema = (user_id: string): View => {
-  const question1 = generateBlock({
-    type: "multi_select",
-    question: "The Earth is flat.",
-    id: "q1",
-  });
-
-  const question2 = generateBlock({
-    type: "yes_or_no",
-    question: "Testing the question",
-    id: "q2",
-  });
+  const random_index_1 = getRandomNumber(0, questions.length);
+  const random_index_2 = getRandomNumber(0, questions.length);
+  const question1 = generateBlock(questions[random_index_1]);
+  const question2 = generateBlock(questions[random_index_2]);
 
   return {
     type: "modal" as const,
