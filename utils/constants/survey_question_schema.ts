@@ -165,9 +165,8 @@ export const survey_intro_message = (user_id: string) => {
     {
       type: "section",
       text: {
-        type: "plain_text",
+        type: "mrkdwn",
         text: `Hey <@${user_id}>! Please complete the 2 question survey by clicking the open button!`,
-        emoji: true,
       },
     },
     {
