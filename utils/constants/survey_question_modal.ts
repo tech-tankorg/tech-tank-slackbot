@@ -1,6 +1,6 @@
 import type { View } from "@slack/types";
 import { generateBlock } from "./survey_question_schema.ts";
-import { questions } from "./test_file.ts";
+import { questions } from "./survey_questions.ts";
 import { getRandomNumber } from "../helpers/generate-random-number.ts";
 
 export const survey_modal_schema = (user_id: string): View => {
