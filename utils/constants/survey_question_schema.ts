@@ -74,7 +74,7 @@ const multiple_choice_schema = (question: string, options: Array<string>) => {
 };
 
 const rating_schema = (question: string) => {
-  const options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+  const options = ["1", "2", "3", "4", "5"];
 
   const all_options = options.map((option) => ({
     text: {
