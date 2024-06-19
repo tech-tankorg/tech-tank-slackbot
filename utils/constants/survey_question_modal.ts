@@ -6,8 +6,24 @@ import { getRandomNumber } from "../helpers/generate-random-number.ts";
 export const survey_modal_schema = (user_id: string): View => {
   const random_index_1 = getRandomNumber(0, questions.length);
   const random_index_2 = getRandomNumber(0, questions.length);
-  const question1 = generateBlock(questions[random_index_1]);
-  const question2 = generateBlock(questions[random_index_2]);
+
+  const question_1 = questions[random_index_1];
+  let question_2 = questions[random_index_2];
+
+  if (
+    question_1?.type === "short_answer" &&
+    question_2?.type === "short_answer"
+  ) {
+    const new_question_lst = questions.filter(
+      (question) => question.type !== "short_answer"
+    );
+    const random_index = getRandomNumber(0, new_question_lst.length);
+
+    question_2 = new_question_lst[random_index];
+  }
+
+  const question1_block = generateBlock(question_1);
+  const question2_block = generateBlock(question_2);
 
   return {
     type: "modal" as const,
@@ -39,8 +55,8 @@ export const survey_modal_schema = (user_id: string): View => {
       {
         type: "divider",
       },
-      ...question1,
-      ...question2,
+      ...question1_block,
+      ...question2_block,
     ],
   };
 };
