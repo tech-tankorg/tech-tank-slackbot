@@ -1,10 +1,5 @@
 import type { Block, KnownBlock } from "@slack/types";
 
-type r = Block;
-type s = KnownBlock;
-
-type v = s["type"];
-
 //biome-ignore lint:testing
 export function assertFunc<T extends Object | undefined>(
   obj: T,

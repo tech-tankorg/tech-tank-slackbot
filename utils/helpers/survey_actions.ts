@@ -4,10 +4,18 @@ import { survey_modal_schema } from "../constants/survey_question_modal.ts";
 
 import { key_is_present } from "../helpers/obj-has-property.ts";
 
-// biome-ignore lint:needed
-const choose_option = (obj: any) => {
-  if (key_is_present(obj, "selected_option")) return obj.selected_option;
-  if (key_is_present(obj, "selected_options")) return obj.selected_options;
+import type { ViewStateValue } from "@slack/bolt";
+
+const choose_option = (obj: ViewStateValue | undefined) => {
+  if (key_is_present(obj, "selected_option")) {
+    assertFunc(obj, "selected_option");
+    return obj.selected_option;
+  }
+
+  if (key_is_present(obj, "selected_options")) {
+    assertFunc(obj, "selected_options");
+    return obj.selected_options;
+  }
 
   return obj;
 };
@@ -69,14 +77,20 @@ export const survey_submit = () => {
       const pre_1 = choose_option(view_values_q1[q1_action_id]);
       const pre_2 = choose_option(view_values_q2[q2_action_id]);
 
+      const question_1 = key_is_present(q1, "label")
+        ? q1.label.text
+        : q1.text.text;
+      const question_2 = key_is_present(q2, "label")
+        ? q2.label.text
+        : q2.text.text;
       const answer_1 = getValue(pre_1);
       const answer_2 = getValue(pre_2);
 
       const user_select = {
         user_id: body.user.id,
         user_name: body.user.name,
-        question_1: { q: q1?.label.text, a: answer_1 },
-        question_2: { q: q2?.label.text, a: answer_2 },
+        question_1: { q: question_1, a: answer_1 },
+        question_2: { q: question_2, a: answer_2 },
       };
       console.log(user_select);
     } catch (error) {
