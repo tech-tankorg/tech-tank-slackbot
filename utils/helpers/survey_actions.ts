@@ -6,6 +6,18 @@ import { key_is_present } from "../helpers/obj-has-property.ts";
 
 import type { ViewStateValue } from "@slack/bolt";
 
+import Axiom from "../config/axiom-config.ts";
+import { AXIOM_DATA_SET } from "../constants/consts.ts";
+
+import { getQuarter } from "date-fns";
+
+import {
+  save_survey_response,
+  get_user_survey_response,
+} from "../controllers/survey-controller.ts";
+
+import { send_message } from "./send-message.ts";
+
 const choose_option = (obj: ViewStateValue | undefined) => {
   if (key_is_present(obj, "selected_option")) {
     assertFunc(obj, "selected_option");
@@ -30,28 +42,64 @@ const getValue = (options: any) => {
 
 // ++++++++++++
 export const open_survey_modal = () => {
-  app.action("open-survey-modal", async ({ ack, body, client }) => {
+  app.action("open-survey-modal", async ({ ack, body, client, respond }) => {
     await ack();
+    const user_id = body.user.id;
+    const today = new Date();
+    const quarter = getQuarter(today);
 
+    const user_survey_responses = await get_user_survey_response(user_id);
+
+    const user_has_submitted = user_survey_responses.find(
+      (response) => response.quarter === quarter
+    );
+
+    if (user_has_submitted) {
+      await respond({
+        response_type: "ephemeral",
+        mrkdwn: true,
+        text: "You've already submitted a survey for this quarter",
+      });
+      return;
+    }
     //biome-ignore lint: needs to be here
     const pre_body = body as any;
 
     try {
       const view = await client.views.open({
         trigger_id: pre_body.trigger_id,
-        view: survey_modal_schema(body.user.id),
+        view: survey_modal_schema(user_id),
       });
 
-      // console.log(view);
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        {
+          nemo_survey: {
+            user_id,
+            status: "Survey opened",
+            view: view.ok,
+          },
+        },
+      ]);
     } catch (error) {
-      console.log(error);
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        {
+          error_nemo_survey: {
+            user_id: body.user.id,
+            status: "Survey failed to open",
+            error: error,
+          },
+        },
+      ]);
     }
   });
 };
 
 export const survey_submit = () => {
-  app.view("survey-modal", async ({ ack, view, body, context }) => {
+  app.view("survey-modal", async ({ ack, view, body, respond }) => {
     await ack();
+
+    const today = new Date();
+    const quarter = getQuarter(today);
 
     //biome-ignore lint:needed
     const q1 = view.blocks[2] as any;
@@ -88,13 +136,53 @@ export const survey_submit = () => {
 
       const user_select = {
         user_id: body.user.id,
-        user_name: body.user.name,
+        quarter,
         question_1: { q: question_1, a: answer_1 },
         question_2: { q: question_2, a: answer_2 },
       };
-      console.log(user_select);
+
+      await save_survey_response(user_select);
+
+      await send_message({
+        group: "user",
+        id: user_select.user_id,
+        input: {
+          type: "msg",
+          message:
+            "You're response has been saved and we appreciate you submitting the survey!:blue_heart::techtank:",
+        },
+      });
+
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        {
+          nemo_survey: {
+            user_id: body.user.id,
+            user_name: body.user.name,
+            status: "Survey saved",
+          },
+        },
+      ]);
     } catch (error) {
-      console.log(error);
+      await send_message({
+        group: "user",
+        id: body.user.id,
+        input: {
+          type: "msg",
+          message:
+            "Oh no! Something went wrong when saving your response. Try again later!",
+        },
+      });
+
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        {
+          error_nemo_survey: {
+            user_id: body.user.id,
+            user_name: body.user.name,
+            status: "Survey failed to save",
+            error: error,
+          },
+        },
+      ]);
     }
   });
 };
