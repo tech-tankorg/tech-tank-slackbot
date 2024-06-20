@@ -18,6 +18,8 @@ import { unlinkSync } from "node:fs";
 import Axiom from "../../utils/config/axiom-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
+import { channels } from "../../utils/config/channel-config.ts";
+
 const generate_values = (value = 16) => {
   return randomBytes(value).toString("hex");
 };
@@ -88,7 +90,7 @@ export const download_survey_results = () => {
             file: filepath,
           },
         ],
-        channel_id: "C05C6KVHWAJ",
+        channel_id: channels.admin,
         initial_comment: "Here is a file containing the survey results",
       });
 
