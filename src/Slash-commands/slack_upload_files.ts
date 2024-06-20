@@ -44,11 +44,9 @@ const create_file = async (file_name: string) => {
     (result) =>
       `${sanitize_string(
         international_timezone_formatter(result.created_at)
-      )}, ${result.quarter}, "${result.response.question_1.q}", "${
+      )}, ${result.quarter},"${result.response.question_1.q}","${
         result.response.question_1.a
-      }", "${result.response.question_2.q}", "${
-        result.response.question_2.a
-      }"\n`
+      }","${result.response.question_2.q}","${result.response.question_2.a}"\n`
   );
   const data_csv = columns + mapped_value.join();
 
@@ -96,12 +94,12 @@ export const download_survey_results = () => {
       const upload = await client.files.uploadV2({
         file_uploads: [
           {
-            filename: `survey_results_${formatted_date}s.csv`,
+            filename: `survey_results_${formatted_date}.csv`,
             alt_text: "A file containing the survey results",
             file: complete_filepath,
           },
         ],
-        channel_id: channels.admin,
+        channel_id: "C05C6KVHWAJ",
         initial_comment: "Here is a file containing the survey results",
       });
 

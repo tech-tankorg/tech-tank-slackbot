@@ -9,6 +9,7 @@ interface File {
 export const writeFile = (file: File) => {
   fs.writeFileSync(
     `${file.file_path}/${file.file_name}.${file.file_type}`,
-    file.data
+    file.data,
+    { encoding: "utf-8" }
   );
 };
