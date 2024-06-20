@@ -95,7 +95,7 @@ export const open_survey_modal = () => {
 };
 
 export const survey_submit = () => {
-  app.view("survey-modal", async ({ ack, view, body, respond }) => {
+  app.view("survey-modal", async ({ ack, view, body }) => {
     await ack();
 
     const today = new Date();

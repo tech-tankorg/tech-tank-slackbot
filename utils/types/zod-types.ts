@@ -114,3 +114,14 @@ export const survey_question_schema = z.array(
     options: z.array(z.string()).optional(),
   })
 );
+
+export const survey_results_schema = z.array(
+  z.object({
+    created_at: z.date(),
+    quarter: z.number(),
+    response: z.object({
+      question_1: z.object({ q: z.string(), a: z.string() }),
+      question_2: z.object({ q: z.string(), a: z.string() }),
+    }),
+  })
+);

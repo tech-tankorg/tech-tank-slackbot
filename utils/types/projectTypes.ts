@@ -7,6 +7,7 @@ import type {
   shuffle_bot_groups,
   shuffle_bot_user,
   survey_question_schema,
+  survey_results_schema,
 } from "./zod-types.ts";
 
 export type Channel = Record<string, string>;
@@ -116,3 +117,4 @@ export type ViewOpenResponse = NonNullable<
 >;
 
 export type TypeOfQuestion = z.infer<typeof survey_question_schema>;
+export type SurveyResultsType = z.infer<typeof survey_results_schema>;
