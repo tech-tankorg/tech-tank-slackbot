@@ -27,6 +27,7 @@ export const channels = {
   code_diversity: "C063EFTU5F1",
   tank_toasts: "C06DRD6PPT7",
   notification: process.env.SLACK_NOTIFICATION_CHANNEL ?? "",
+  admin: process.env.SLACK_ADMIN_CHANNEL ?? "",
   coffee_test: "C071LU59FRP",
 } as const;
 

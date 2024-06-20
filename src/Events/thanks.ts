@@ -5,7 +5,7 @@ import {
   THANKS_CHANNEL_REGEX,
 } from "../../utils/constants/consts.ts";
 
-import { is_msg_in_thread } from "../../utils/helpers/isThread.ts";
+import { key_is_present } from "../../utils/helpers/obj-has-property.ts";
 
 import {
   generate_user_id_receiver_array,
@@ -24,7 +24,7 @@ export const thanks = async () => {
     // biome-ignore lint: incorrect typescript types therefore any has to be enforced
     const msg = message as any;
     const user_id_sender = msg.user as string;
-    const in_thread = is_msg_in_thread(msg);
+    const in_thread = key_is_present(msg, "thread_ts");
 
     try {
       const final_lst = sanitize_msg_lst(msg.text);
