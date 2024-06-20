@@ -44,11 +44,11 @@ const create_file = async (file_name: string) => {
     (result) =>
       `${sanitize_string(
         international_timezone_formatter(result.created_at)
-      )}, ${result.quarter}, ${sanitize_string(
-        result.response.question_1.q
-      )}, ${sanitize_string(result.response.question_1.a)}, ${sanitize_string(
-        result.response.question_2.q
-      )}, ${sanitize_string(result.response.question_2.a)}\n`
+      )}, ${result.quarter}, "${result.response.question_1.q}", "${
+        result.response.question_1.a
+      }", "${result.response.question_2.q}", "${
+        result.response.question_2.a
+      }"\n`
   );
   const data_csv = columns + mapped_value.join();
 
@@ -66,8 +66,8 @@ export const download_survey_results = () => {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
           admin_commands: {
-            user_id: body.user.id,
-            user_name: body.user.name,
+            user_id,
+            user_name: body.user_name,
             message:
               "Attempted to access /survey-results command but does not have correct permissions",
           },
@@ -96,7 +96,7 @@ export const download_survey_results = () => {
       const upload = await client.files.uploadV2({
         file_uploads: [
           {
-            filename: `survey_results_${formatted_date}.csv`,
+            filename: `survey_results_${formatted_date}s.csv`,
             alt_text: "A file containing the survey results",
             file: complete_filepath,
           },
@@ -112,8 +112,8 @@ export const download_survey_results = () => {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
           nemo_survey: {
-            user_id: body.user.id,
-            user_name: body.user.name,
+            user_id,
+            user_name: body.user_name,
             status: "file uploaded",
             file: upload.ok,
           },
@@ -125,8 +125,8 @@ export const download_survey_results = () => {
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
           error_nemo_survey: {
-            user_id: body.user.id,
-            user_name: body.user.name,
+            user_id: body.user_id,
+            user_name: body.user_name,
             status: "file failed to upload",
             error: error,
           },
