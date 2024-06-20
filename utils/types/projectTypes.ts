@@ -6,7 +6,10 @@ import type {
   sanity_letter_section,
   shuffle_bot_groups,
   shuffle_bot_user,
+  survey_question_schema,
+  survey_results_schema,
 } from "./zod-types.ts";
+
 export type Channel = Record<string, string>;
 
 export type JokeType = "single" | "twopart";
@@ -112,3 +115,6 @@ export type messageElement = NonNullable<
 export type ViewOpenResponse = NonNullable<
   Awaited<ReturnType<typeof app.client.views.open>>
 >;
+
+export type TypeOfQuestion = z.infer<typeof survey_question_schema>;
+export type SurveyResultsType = z.infer<typeof survey_results_schema>;

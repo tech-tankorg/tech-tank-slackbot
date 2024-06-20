@@ -77,6 +77,16 @@ model shuffle_settings {
   next_shuffle      DateTime
 }
 
+model survey {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  user_id    String
+  created_at DateTime @default(now())
+  quarter    Int
+  response   Json
+
+  @@index([user_id])
+}
+
 enum coc_ack {
   accepted
   denied
