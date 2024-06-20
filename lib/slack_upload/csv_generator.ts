@@ -1,5 +1,5 @@
 import { writeFile } from "../node_files/index.ts";
-import { unlinkSync } from "node:fs";
+import { unlinkSync, existsSync } from "node:fs";
 import path from "node:path";
 import app from "../../utils/config/slack-config.ts";
 
@@ -58,7 +58,7 @@ export const upload_csv_to_slack = async (file: File, meta_data: MetaData) => {
 
     return { status: upload.ok, error: null };
   } catch (error) {
-    unlinkSync(complete_file_path);
+    if (existsSync(complete_file_path)) unlinkSync(complete_file_path);
     return { status: false, error };
   }
 };

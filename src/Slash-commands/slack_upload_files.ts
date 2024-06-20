@@ -13,7 +13,7 @@ import path from "node:path";
 
 import { format } from "date-fns";
 
-import { unlinkSync } from "node:fs";
+import { unlinkSync, existsSync } from "node:fs";
 
 import Axiom from "../../utils/config/axiom-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
@@ -59,6 +59,7 @@ export const download_survey_results = () => {
   app.command("/survey-results", async ({ ack, body, client, respond }) => {
     await ack();
     const user_id = body.user_id;
+    let complete_filepath = "";
 
     const is_allowed = is_admin(user_id);
     if (!is_allowed) {
@@ -87,7 +88,7 @@ export const download_survey_results = () => {
 
       const cwd = process.cwd();
       const filename = `${file_name}.csv`;
-      const filepath = path.join(cwd, filename);
+      complete_filepath = path.join(cwd, filename);
 
       const today = new Date();
       const formatted_date = format(today, "MM_dd_yyyy");
@@ -97,7 +98,7 @@ export const download_survey_results = () => {
           {
             filename: `survey_results_${formatted_date}.csv`,
             alt_text: "A file containing the survey results",
-            file: filepath,
+            file: complete_filepath,
           },
         ],
         channel_id: channels.admin,
@@ -105,7 +106,7 @@ export const download_survey_results = () => {
       });
 
       if (upload.ok || !upload.ok) {
-        unlinkSync(filepath);
+        unlinkSync(complete_filepath);
       }
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
@@ -119,6 +120,8 @@ export const download_survey_results = () => {
         },
       ]);
     } catch (error) {
+      if (existsSync(complete_filepath)) unlinkSync(complete_filepath);
+
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
         {
           error_nemo_survey: {
