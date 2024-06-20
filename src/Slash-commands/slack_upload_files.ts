@@ -62,6 +62,16 @@ export const download_survey_results = () => {
 
     const is_allowed = is_admin(user_id);
     if (!is_allowed) {
+      await Axiom.ingestEvents(AXIOM_DATA_SET, [
+        {
+          admin_commands: {
+            user_id: body.user.id,
+            user_name: body.user.name,
+            message:
+              "Attempted to access /survey-results command but does not have correct permissions",
+          },
+        },
+      ]);
       await respond({
         response_type: "ephemeral",
         mrkdwn: true,
