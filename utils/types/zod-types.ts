@@ -120,10 +120,15 @@ export const survey_results_schema = z.array(
     created_at: z.date(),
     quarter: z.number(),
     response: z.object({
-      question_1: z.object({ q: z.string(), a: z.string() }),
+      question_1: z.object({
+        q: z.string(),
+        a: z.string(),
+        question_id: z.string(),
+      }),
       question_2: z.object({
         q: z.string(),
-        a: z.union([z.string(), z.array(z.string())]),
+        a: z.string(),
+        question_id: z.string(),
       }),
     }),
   })

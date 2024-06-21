@@ -7,7 +7,7 @@ const generate_values = (value = 16) => {
   return randomBytes(value).toString("hex");
 };
 
-const yes_or_no_schema = (question: string) => {
+const yes_or_no_schema = (question: string, id: string) => {
   return [
     {
       type: "section",
@@ -37,10 +37,24 @@ const yes_or_no_schema = (question: string) => {
         action_id: `survey_nemo-yorn-action-${generate_values()}`,
       },
     },
+    {
+      type: "context",
+      block_id: `survey_nemo-yorn-context-block-${generate_values()}`,
+      elements: [
+        {
+          type: "mrkdwn",
+          text: id,
+        },
+      ],
+    },
   ];
 };
 
-const multiple_choice_schema = (question: string, options: Array<string>) => {
+const multiple_choice_schema = (
+  question: string,
+  options: Array<string>,
+  id: string
+) => {
   const all_options = options.map((option) => ({
     text: {
       type: "plain_text" as const,
@@ -70,10 +84,20 @@ const multiple_choice_schema = (question: string, options: Array<string>) => {
         emoji: true,
       },
     },
+    {
+      type: "context",
+      block_id: `survey_nemo-mcq-context-block-${generate_values()}`,
+      elements: [
+        {
+          type: "mrkdwn",
+          text: id,
+        },
+      ],
+    },
   ];
 };
 
-const rating_schema = (question: string) => {
+const rating_schema = (question: string, id: string) => {
   const options = ["1", "2", "3", "4", "5"];
 
   const all_options = options.map((option) => ({
@@ -105,10 +129,20 @@ const rating_schema = (question: string) => {
         emoji: true,
       },
     },
+    {
+      type: "context",
+      block_id: `survey_nemo-rating-context-block-${generate_values()}`,
+      elements: [
+        {
+          type: "mrkdwn",
+          text: id,
+        },
+      ],
+    },
   ];
 };
 
-const short_answer_schema = (question: string) => {
+const short_answer_schema = (question: string, id: string) => {
   return [
     {
       type: "input",
@@ -124,10 +158,24 @@ const short_answer_schema = (question: string) => {
         emoji: true,
       },
     },
+    {
+      type: "context",
+      block_id: `survey_nemo-short-answer-context-block-${generate_values()}`,
+      elements: [
+        {
+          type: "mrkdwn",
+          text: id,
+        },
+      ],
+    },
   ];
 };
 
-const multi_select_schema = (question: string, options: Array<string>) => {
+const multi_select_schema = (
+  question: string,
+  options: Array<string>,
+  id: string
+) => {
   const all_options = options.map((option) => ({
     text: {
       type: "plain_text" as const,
@@ -156,6 +204,16 @@ const multi_select_schema = (question: string, options: Array<string>) => {
         text: question,
         emoji: true,
       },
+    },
+    {
+      type: "context",
+      block_id: `survey_nemo-multi-select-context-block-${generate_values()}`,
+      elements: [
+        {
+          type: "mrkdwn",
+          text: id,
+        },
+      ],
     },
   ];
 };
@@ -201,7 +259,7 @@ export const generateBlock = (
     throw new Error("question object cannot be undefined");
   switch (question.type) {
     case "yes_or_no": {
-      return yes_or_no_schema(question.question);
+      return yes_or_no_schema(question.question, question.id);
     }
     case "multiple_choice": {
       if (!question.options)
@@ -209,20 +267,28 @@ export const generateBlock = (
           "Options are to be provided for MCQ, and multiple selection questions "
         );
 
-      return multiple_choice_schema(question.question, question.options);
+      return multiple_choice_schema(
+        question.question,
+        question.options,
+        question.id
+      );
     }
     case "rating": {
-      return rating_schema(question.question);
+      return rating_schema(question.question, question.id);
     }
     case "short_answer": {
-      return short_answer_schema(question.question);
+      return short_answer_schema(question.question, question.id);
     }
     case "multi_select": {
       if (!question.options)
         throw new Error(
           "Options are to be provided for MCQ, and multiple selection questions "
         );
-      return multi_select_schema(question.question, question.options);
+      return multi_select_schema(
+        question.question,
+        question.options,
+        question.id
+      );
     }
     default:
       return [];
