@@ -35,7 +35,7 @@ const choose_option = (obj: ViewStateValue | undefined) => {
 // biome-ignore lint:needed
 const getValue = (options: any) => {
   const value = Array.isArray(options)
-    ? options.map((option) => option.value)
+    ? options.map((option) => option.value).join(" | ")
     : options.value;
   return value;
 };
@@ -109,11 +109,19 @@ export const survey_submit = () => {
       : q1?.element?.action_id;
 
     //biome-ignore lint:needed
-    const q2 = view.blocks[3] as any;
+    const q1_id_block = view.blocks[3] as any;
+    const q1_id = q1_id_block.elements[0].text;
+
+    //biome-ignore lint:needed
+    const q2 = view.blocks[4] as any;
     const q2_block_id = q2?.block_id;
     const q2_action_id = key_is_present(view.blocks[3], "accessory")
       ? q2?.accessory?.action_id
       : q2?.element?.action_id;
+
+    //biome-ignore lint:needed
+    const q2_id_block = view.blocks[5] as any;
+    const q2_id = q2_id_block.elements[0].text;
 
     try {
       const view_values_q1 = view.state.values[q1_block_id];
@@ -137,8 +145,8 @@ export const survey_submit = () => {
       const user_select = {
         user_id: body.user.id,
         quarter,
-        question_1: { q: question_1, a: answer_1 },
-        question_2: { q: question_2, a: answer_2 },
+        question_1: { q: question_1, a: answer_1, question_id: q1_id },
+        question_2: { q: question_2, a: answer_2, question_id: q2_id },
       };
 
       await save_survey_response(user_select);
@@ -149,7 +157,7 @@ export const survey_submit = () => {
         input: {
           type: "msg",
           message:
-            "You're response has been saved and we appreciate you submitting the survey!:blue_heart::techtank:",
+            "You're response has been saved and we appreciate you submitting the survey!:blue_heart::tech_tank:",
         },
       });
 

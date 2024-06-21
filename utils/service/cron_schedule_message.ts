@@ -4,6 +4,7 @@ import {
   CRON_FOR_NEWSLETTER,
   TORONTO_TIME_ZONE_IDENTIFIER,
   SHUFFLE_SETTINGS_ID,
+  CRON_START_OF_QUARTER,
 } from "../constants/consts.ts";
 import { find_shuffle_setting } from "../controllers/shuffle-bot-groups.ts";
 
@@ -14,6 +15,8 @@ import { post_thanks_message } from "../../src/Events/thanks.ts";
 import { send_weekly_welcome_message } from "../../src/Events/weekly_welcome_message.ts";
 
 import { getDate } from "date-fns";
+
+import { survey } from "../../src/Events/survey.ts";
 
 const job_2 = new CronJob(
   CRON_FOR_NEWSLETTER,
@@ -54,8 +57,19 @@ const job_4 = new CronJob(
   TORONTO_TIME_ZONE_IDENTIFIER
 );
 
+const job_5 = new CronJob(
+  CRON_START_OF_QUARTER,
+  () => {
+    void survey();
+  },
+  null,
+  false,
+  TORONTO_TIME_ZONE_IDENTIFIER
+);
+
 job_2.start();
 job_3.start();
 job_4.start();
+job_5.start();
 
-console.log(job_2.running, job_3.running, job_4.running);
+console.log(job_2.running, job_3.running, job_4.running, job_5.running);
