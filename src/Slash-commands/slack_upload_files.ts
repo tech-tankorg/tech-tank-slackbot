@@ -61,13 +61,16 @@ export const download_survey_results = () => {
           (result) =>
             `${sanitize_string(
               international_timezone_formatter(result.created_at)
-            )}, ${result.quarter},"${result.response.question_1.q}","${
+            )},${result.quarter},"${result.response.question_1.q}","${
               result.response.question_1.a
             }","${result.response.question_2.q}","${
-              result.response.question_2.a
+              Array.isArray(result.response.question_2.a)
+                ? result.response.question_2.a.map((item) => `${item},`)
+                : result.response.question_2.a
             }"\n`
         )
-        .join();
+        .join("")
+        .trim();
 
       const file = {
         columns,
