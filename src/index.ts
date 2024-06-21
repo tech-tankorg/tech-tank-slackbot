@@ -40,8 +40,6 @@ import {
 } from "./Events/shuffle_bot.ts";
 import { coffee_chat_config } from "../utils/config/channel-config.ts";
 
-import { survey } from "./Events/survey.ts";
-
 import {
   open_survey_modal,
   survey_submit,
@@ -109,7 +107,7 @@ handle_coffee_chat_bio_submit();
 handle_close_coffee_chat_bio_modal();
 
 // TechTank Survey
-void survey();
+
 open_survey_modal();
 survey_submit();
 
