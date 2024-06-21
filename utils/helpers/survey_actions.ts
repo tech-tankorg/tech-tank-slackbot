@@ -149,7 +149,7 @@ export const survey_submit = () => {
         input: {
           type: "msg",
           message:
-            "You're response has been saved and we appreciate you submitting the survey!:blue_heart::techtank:",
+            "You're response has been saved and we appreciate you submitting the survey!:blue_heart::tech_tank:",
         },
       });
 

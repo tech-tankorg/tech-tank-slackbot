@@ -30,7 +30,7 @@ export const survey_modal_schema = (user_id: string): View => {
     callback_id: "survey-modal",
     title: {
       type: "plain_text" as const,
-      text: "TechTank Survey",
+      text: "How's the TechTank Current?",
       emoji: true,
     },
     submit: {
@@ -48,7 +48,7 @@ export const survey_modal_schema = (user_id: string): View => {
         type: "section",
         text: {
           type: "mrkdwn" as const,
-          text: `Hey <@${user_id}>! Please complete the survey below`,
+          text: `Hey <@${user_id}>! We rely on your support to continue our efforts, and we appreciate your time and insights! The feedback provided will remain anonymous and will only be visible to the admin team.`,
         },
       },
       {

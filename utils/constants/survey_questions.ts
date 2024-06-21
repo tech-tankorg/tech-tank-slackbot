@@ -37,7 +37,7 @@ export const questions: TypeOfQuestion = [
       "f) #random",
       "g) #study-tank",
       "h) #job-postings",
-      "i) Other ________",
+      "i) Other",
     ],
   },
   {
@@ -52,7 +52,7 @@ export const questions: TypeOfQuestion = [
       "d) Access to job postings and career resources",
       "e) Mentorship from experienced industry leaders",
       "f) Access to community events and meetups",
-      "g) Other ___________",
+      "g) Other",
     ],
   },
   {
@@ -72,7 +72,7 @@ export const questions: TypeOfQuestion = [
       "c) Networking Events",
       "d) Memes",
       "e) Job postings/job-related support",
-      "f) Other ________",
+      "f) Other",
     ],
   },
   {
