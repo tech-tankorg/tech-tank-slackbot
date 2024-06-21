@@ -21,7 +21,7 @@ const sanitize_string = (str: string) => {
 };
 
 export const download_survey_results = () => {
-  app.command("/survey-results", async ({ ack, body, client, respond }) => {
+  app.command("/survey-results", async ({ ack, body, respond }) => {
     await ack();
     const user_id = body.user_id;
 
@@ -64,9 +64,7 @@ export const download_survey_results = () => {
             )},${result.quarter},"${result.response.question_1.q}","${
               result.response.question_1.a
             }","${result.response.question_2.q}","${
-              Array.isArray(result.response.question_2.a)
-                ? result.response.question_2.a.map((item) => `${item},`)
-                : result.response.question_2.a
+              result.response.question_2.a
             }"\n`
         )
         .join("")

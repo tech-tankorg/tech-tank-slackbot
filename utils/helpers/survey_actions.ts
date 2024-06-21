@@ -35,7 +35,7 @@ const choose_option = (obj: ViewStateValue | undefined) => {
 // biome-ignore lint:needed
 const getValue = (options: any) => {
   const value = Array.isArray(options)
-    ? options.map((option) => option.value)
+    ? options.map((option) => option.value).join(" | ")
     : options.value;
   return value;
 };
