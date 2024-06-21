@@ -53,19 +53,20 @@ export const download_survey_results = () => {
       const today = new Date();
       const formatted_date = format(today, "MM_dd_yyyy");
 
-      const columns =
-        "created_at, quarter, question_1, answer_1, question_2, answer_2\n";
+      const columns = "created_at, quarter, qID, Question, Answer\n";
 
       const data = results
         .map(
           (result) =>
             `${sanitize_string(
               international_timezone_formatter(result.created_at)
-            )},${result.quarter},"${result.response.question_1.q}","${
-              result.response.question_1.a
-            }","${result.response.question_2.q}","${
-              result.response.question_2.a
-            }"\n`
+            )},${result.quarter},"${result.response.question_1.question_id}","${
+              result.response.question_1.q
+            }","${result.response.question_1.a}"\n${sanitize_string(
+              international_timezone_formatter(result.created_at)
+            )},${result.quarter},"${result.response.question_2.question_id}","${
+              result.response.question_2.q
+            }","${result.response.question_2.a}"\n`
         )
         .join("")
         .trim();
