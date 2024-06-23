@@ -10,6 +10,7 @@ export const CRON_FOR_NEWSLETTER = "0 10 1 * *";
 export const CRON_FOR_MENTOR_CHECKUP = "0 10 15 * *";
 export const CRON_EVERY_MONDAY_AT_10 = "0 10 * * 1";
 export const CRON_START_OF_QUARTER = "0 10 4 1,4,7,10 *";
+export const CRON__TWOWEEKS_AFTERSTART_OF_QUARTER = "0 10 20 1,4,7,10 *";
 
 export const MATCH_GREETING_MESSAGE =
   ":speech_balloon: Here's the question/post of the week:";
