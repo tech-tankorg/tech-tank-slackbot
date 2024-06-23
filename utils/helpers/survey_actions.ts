@@ -18,6 +18,8 @@ import {
 
 import { send_message } from "./send-message.ts";
 
+import { fromUnixTime, compareAsc, addWeeks } from "date-fns";
+
 const choose_option = (obj: ViewStateValue | undefined) => {
   if (key_is_present(obj, "selected_option")) {
     assertFunc(obj, "selected_option");
@@ -47,6 +49,20 @@ export const open_survey_modal = () => {
     const user_id = body.user.id;
     const today = new Date();
     const quarter = getQuarter(today);
+    //biome-ignore lint: needs to be here
+    const pre_body = body as any;
+
+    const message_sent_ts = fromUnixTime(pre_body.message.ts);
+    const two_week_after = addWeeks(message_sent_ts, 2);
+
+    if (compareAsc(today, two_week_after) === 1) {
+      await respond({
+        response_type: "ephemeral",
+        mrkdwn: true,
+        text: "Sorry! The due date for the survey has passed. Please wait for the next one.",
+      });
+      return;
+    }
 
     const user_survey_responses = await get_user_survey_response(user_id);
 
@@ -62,8 +78,6 @@ export const open_survey_modal = () => {
       });
       return;
     }
-    //biome-ignore lint: needs to be here
-    const pre_body = body as any;
 
     try {
       const view = await client.views.open({
