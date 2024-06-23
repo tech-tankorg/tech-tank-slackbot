@@ -9,7 +9,7 @@ import {
 import { find_shuffle_setting } from "../controllers/shuffle-bot-groups.ts";
 
 import { post_newsletter } from "../../src/Events/post_newsletter.ts";
-import { post_networking_calendar } from "src/Events/post_networking_calendar.ts";
+import { post_networking_calendar } from "../../src/Events/post_networking_calendar.ts";
 import { coffee_chat_bot_shuffle } from "../../src/Events/shuffle_bot.ts";
 import { post_thanks_message } from "../../src/Events/thanks.ts";
 import { send_weekly_welcome_message } from "../../src/Events/weekly_welcome_message.ts";
