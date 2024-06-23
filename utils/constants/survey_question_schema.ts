@@ -1,7 +1,12 @@
 import type { Block, KnownBlock } from "@slack/types";
 import type { TypeOfQuestion } from "../types/projectTypes.ts";
+import { international_timezone_formatter } from "../../utils/helpers/custom-date-fns.ts";
+
+import { addWeeks } from "date-fns";
 
 import { randomBytes } from "node:crypto";
+
+import { TORONTO_TIME_ZONE_IDENTIFIER } from "./consts.ts";
 
 const generate_values = (value = 16) => {
   return randomBytes(value).toString("hex");
@@ -219,12 +224,20 @@ const multi_select_schema = (
 };
 
 export const survey_intro_message = (user_id: string) => {
+  const today = new Date();
+  const two_weeks_from_today = addWeeks(today, 2);
+
+  const formatted_date = new Intl.DateTimeFormat("en-CA", {
+    month: "long",
+    day: "2-digit",
+    year: "numeric",
+  }).format(two_weeks_from_today);
   return [
     {
       type: "section",
       text: {
         type: "mrkdwn",
-        text: `Hey <@${user_id}>! Please complete the 2 question survey by clicking the open button!`,
+        text: `Hey <@${user_id}>, we want your input! Please take a moment to complete our 2-question survey by ${formatted_date}. You can get started by clicking the open button to start.`,
       },
     },
     {
@@ -257,6 +270,7 @@ export const generateBlock = (
 ): Array<Block | KnownBlock> => {
   if (question === undefined)
     throw new Error("question object cannot be undefined");
+
   switch (question.type) {
     case "yes_or_no": {
       return yes_or_no_schema(question.question, question.id);
