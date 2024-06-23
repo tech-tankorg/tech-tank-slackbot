@@ -1,12 +1,12 @@
-import { randomize_list } from "./randomize-list.ts";
+import { randomize_list } from "../general/randomize-list.ts";
 
-import { shuffle_user_group_intro_msg } from "../constants/shuffle-bot-bio-modal.ts";
+import { shuffle_user_group_intro_msg } from "../../constants/shuffle-bot-bio-modal.ts";
 
-import { dm_lst_of_people } from "./send-message.ts";
+import { dm_lst_of_people } from "../general/send-message.ts";
 
-import { flatten_array } from "./flatten-object.ts";
+import { flatten_array } from "../general/flatten-object.ts";
 
-import type { shuffle_bot_user_type } from "../types/projectTypes.ts";
+import type { shuffle_bot_user_type } from "../../types/projectTypes.ts";
 
 const generate_master_array_shuffled = (groups: Array<string>) => {
   for (let i = 0; i < 3; i++) {

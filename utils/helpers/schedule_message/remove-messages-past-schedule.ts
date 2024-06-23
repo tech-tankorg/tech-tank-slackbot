@@ -1,5 +1,5 @@
 import { addDays } from "date-fns";
-import type { ScheduleMessage } from "../types/projectTypes.ts";
+import type { ScheduleMessage } from "../../types/projectTypes.ts";
 
 export const remove_messages_schedule_for_past = (
   msg_lst: ScheduleMessage[]

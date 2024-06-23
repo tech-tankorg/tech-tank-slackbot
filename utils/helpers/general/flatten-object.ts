@@ -1,4 +1,4 @@
-import type { ScheduledMessageResponse } from "../types/projectTypes.ts";
+import type { ScheduledMessageResponse } from "../../types/projectTypes.ts";
 
 export const flatten_array = <T>(arr: T[][]) => {
   const new_array: T[] = [];

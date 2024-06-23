@@ -1,8 +1,8 @@
-import type { google_cal_event } from "../types/projectTypes.ts";
+import type { google_cal_event } from "../../types/projectTypes.ts";
 
-import { TECHTANK_EVENT_TAG } from "../constants/consts.ts";
+import { TECHTANK_EVENT_TAG } from "../../constants/consts.ts";
 
-import { international_timezone_formatter } from "../helpers/custom-date-fns.ts";
+import { international_timezone_formatter } from "../date/custom-date-fns.ts";
 
 import { find_web_address } from "./find-web-address.ts";
 

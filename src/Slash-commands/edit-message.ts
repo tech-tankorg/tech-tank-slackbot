@@ -4,7 +4,7 @@ import {
   edit_message_tab,
   show_message_for_user,
 } from "../../utils/constants/edit-message-modal.ts";
-import { is_admin } from "../../utils/helpers/feat-flag.ts";
+import { is_admin } from "../../utils/helpers/general/feat-flag.ts";
 
 import { subDays } from "date-fns";
 

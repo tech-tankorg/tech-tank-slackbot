@@ -1,4 +1,4 @@
-import { getRandomNumber } from "../../utils/helpers/generate-random-number.ts";
+import { getRandomNumber } from "../../utils/helpers/general/generate-random-number.ts";
 
 describe("getRandomNumber function", () => {
   it("should generate random numbers within the specified exclusive range", () => {

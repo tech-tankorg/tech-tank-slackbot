@@ -1,22 +1,22 @@
-import app from "../config/slack-config.ts";
-import { assertFunc } from "../types/type-assersions.ts";
-import { survey_modal_schema } from "../constants/survey_question_modal.ts";
+import app from "../../config/slack-config.ts";
+import { assertFunc } from "../../types/type-assersions.ts";
+import { survey_modal_schema } from "../../constants/survey_question_modal.ts";
 
-import { key_is_present } from "../helpers/obj-has-property.ts";
+import { key_is_present } from "../general/obj-has-property.ts";
 
 import type { ViewStateValue } from "@slack/bolt";
 
-import Axiom from "../config/axiom-config.ts";
-import { AXIOM_DATA_SET } from "../constants/consts.ts";
+import Axiom from "../../config/axiom-config.ts";
+import { AXIOM_DATA_SET } from "../../constants/consts.ts";
 
 import { getQuarter } from "date-fns";
 
 import {
   save_survey_response,
   get_user_survey_response,
-} from "../controllers/survey-controller.ts";
+} from "../../controllers/survey-controller.ts";
 
-import { send_message } from "./send-message.ts";
+import { send_message } from "../general/send-message.ts";
 
 import { fromUnixTime, compareAsc, addWeeks } from "date-fns";
 

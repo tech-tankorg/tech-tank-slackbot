@@ -14,12 +14,12 @@ import {
 import {
   determine_next_execute_date_freq,
   international_timezone_formatter,
-} from "../../utils/helpers/custom-date-fns.ts";
-import { send_message } from "../../utils/helpers/send-message.ts";
+} from "../../utils/helpers/date/custom-date-fns.ts";
+import { send_message } from "../../utils/helpers/general/send-message.ts";
 import {
   create_group_sendMsg,
   shuffle_users,
-} from "../../utils/helpers/shuffle-bot-helpers.ts";
+} from "../../utils/helpers/shuffle_bot/shuffle-bot-helpers.ts";
 
 import {
   coffee_chat_intro_message,

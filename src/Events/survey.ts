@@ -1,4 +1,4 @@
-import { send_message } from "../../utils/helpers/send-message.ts";
+import { send_message } from "../../utils/helpers/general/send-message.ts";
 import { survey_intro_message } from "../../utils/constants/survey_question_schema.ts";
 import { admins } from "../../utils/config/channel-config.ts";
 

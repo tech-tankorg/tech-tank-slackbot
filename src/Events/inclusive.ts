@@ -4,8 +4,8 @@ import {
   AXIOM_DATA_SET,
   NON_INCLUSIVE_WORDS,
 } from "../../utils/constants/consts.ts";
-import { getRandomNumber } from "../../utils/helpers/generate-random-number.ts";
-import { generate_inclusive_message } from "../../utils/helpers/isThread.ts";
+import { getRandomNumber } from "../../utils/helpers/general/generate-random-number.ts";
+import { generate_inclusive_message } from "../../utils/helpers/misc/isThread.ts";
 
 export const check_non_inclusive_words = () => {
   app.message(NON_INCLUSIVE_WORDS, async ({ message, client }) => {
