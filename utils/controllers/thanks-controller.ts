@@ -2,7 +2,7 @@ import { subDays } from "date-fns";
 
 import { create_thanks_usr_name_validation } from "../types/zod-types.ts";
 
-import { format_thanks_reponse } from "../helpers/thanks-helpers.ts";
+import { format_thanks_reponse } from "../helpers/thanks/thanks-helpers.ts";
 
 import { prisma } from "../config/prisma.ts";
 

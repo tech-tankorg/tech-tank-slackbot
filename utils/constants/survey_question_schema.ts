@@ -1,6 +1,6 @@
 import type { Block, KnownBlock } from "@slack/types";
 import type { TypeOfQuestion } from "../types/projectTypes.ts";
-import { international_timezone_formatter } from "../../utils/helpers/custom-date-fns.ts";
+import { international_timezone_formatter } from "../helpers/date/custom-date-fns.ts";
 
 import { addWeeks } from "date-fns";
 

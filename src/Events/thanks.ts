@@ -5,14 +5,14 @@ import {
   THANKS_CHANNEL_REGEX,
 } from "../../utils/constants/consts.ts";
 
-import { key_is_present } from "../../utils/helpers/obj-has-property.ts";
+import { key_is_present } from "../../utils/helpers/general/obj-has-property.ts";
 
 import {
   generate_user_id_receiver_array,
   sanitize_msg_lst,
-} from "../../utils/helpers/thanks-helpers.ts";
+} from "../../utils/helpers/thanks/thanks-helpers.ts";
 
-import { generate_thanks_message } from "../../utils/helpers/generate_message.ts";
+import { generate_thanks_message } from "../../utils/helpers/misc/generate_message.ts";
 
 import {
   create_thanks,

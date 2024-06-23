@@ -1,13 +1,13 @@
-import { getRandomNumber } from "../helpers/generate-random-number.ts";
+import { getRandomNumber } from "../general/generate-random-number.ts";
 import {
   generate_thoughtful_thursdays_post,
   generate_wonder_wednesday_post,
-} from "../helpers/generate_message.ts";
-import type { day } from "../types/projectTypes.ts";
+} from "../misc/generate_message.ts";
+import type { day } from "../../types/projectTypes.ts";
 import {
   determine_next_day_function,
   determine_next_execute_date_freq,
-} from "./custom-date-fns.ts";
+} from "../date/custom-date-fns.ts";
 
 const convert_epoch_date_to_iso_date = (epoch_date: number) => {
   const string_date = new Date(epoch_date * 1000).toISOString();

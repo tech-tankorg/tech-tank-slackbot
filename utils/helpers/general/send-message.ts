@@ -1,6 +1,6 @@
 import type { Block, KnownBlock } from "@slack/types";
-import app from "../config/slack-config.ts";
-import type { chat_response } from "../types/projectTypes.ts";
+import app from "../../config/slack-config.ts";
+import type { chat_response } from "../../types/projectTypes.ts";
 
 interface MSG {
   type: "msg";

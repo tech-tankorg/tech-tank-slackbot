@@ -1,7 +1,7 @@
 import type {
   ScheduledMessageResponse,
   google_cal_event,
-} from "../types/projectTypes.d.ts";
+} from "../../types/projectTypes.ts";
 
 export const sortArray = (msgRes: ScheduledMessageResponse[]) => {
   msgRes.sort((a, b) => {

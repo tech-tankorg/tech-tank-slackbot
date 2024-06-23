@@ -1,5 +1,5 @@
 import app from "../../utils/config/slack-config.ts";
-import { generate_network_calender } from "../../utils/helpers/generate_networking_calendar.ts";
+import { generate_network_calender } from "../../utils/helpers/calendar/generate_networking_calendar.ts";
 
 import Axiom from "../../utils/config/axiom-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";

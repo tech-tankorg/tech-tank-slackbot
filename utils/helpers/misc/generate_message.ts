@@ -1,5 +1,5 @@
-import { admins, channels } from "../config/channel-config.ts";
-import type { db_thanks_no_reciever } from "../types/projectTypes.ts";
+import { admins, channels } from "../../config/channel-config.ts";
+import type { db_thanks_no_reciever } from "../../types/projectTypes.ts";
 
 export const generate_welcome_message = () => {
   const greeting = `

@@ -1,4 +1,4 @@
-import { admins } from "../../utils/config/channel-config.ts";
+import { admins } from "../../config/channel-config.ts";
 
 export const is_admin = (user_id: string) => {
   const admins_id = Object.values(admins) as string[];

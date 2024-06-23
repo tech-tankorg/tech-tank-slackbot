@@ -4,11 +4,11 @@ import app from "../../utils/config/slack-config.ts";
 import {
   generate_mentee_message,
   generate_mentor_message,
-} from "../../utils/helpers/generate_message.ts";
+} from "../../utils/helpers/misc/generate_message.ts";
 
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
-import { dm_lst_of_people } from "../../utils/helpers/send-message.ts";
+import { dm_lst_of_people } from "../../utils/helpers/general/send-message.ts";
 
 export const mentor_checkup = async () => {
   // if 15th of month, check two channels, send a a message checking in from admin.sammy,
