@@ -1,8 +1,8 @@
 import { check_if_message_is_scheduled } from "./check-if-message-scheduled.ts";
-import { flatten_all_scheduled_messages_reponse } from "./flatten-object.ts";
+import { flatten_all_scheduled_messages_reponse } from "../general/flatten-object.ts";
 import { remove_messages_schedule_for_past } from "./remove-messages-past-schedule.ts";
 
-import type { ChatScheduledMessagesListResponse } from "../types/projectTypes.d.ts";
+import type { ChatScheduledMessagesListResponse } from "../../types/projectTypes.ts";
 
 export const prep_final_scheduled_message = (
   msg_lst: ChatScheduledMessagesListResponse,

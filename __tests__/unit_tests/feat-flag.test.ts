@@ -1,5 +1,5 @@
 import { admins } from "../../utils/config/channel-config.ts";
-import { is_admin } from "../../utils/helpers/feat-flag.ts";
+import { is_admin } from "../../utils/helpers/general/feat-flag.ts";
 
 describe("feature flags", () => {
   it("should return true is an admin user is passed into the function", () => {

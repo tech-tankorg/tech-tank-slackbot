@@ -1,13 +1,10 @@
-import { send_message } from "../../utils/helpers/send-message.ts";
+import { send_message } from "../../utils/helpers/general/send-message.ts";
 import { survey_intro_message } from "../../utils/constants/survey_question_schema.ts";
-import { admins } from "../../utils/config/channel-config.ts";
+import app from "../../utils/config/slack-config.ts";
 
 export const survey = async () => {
-  // const users = await app.client.users.list({});
-  // const members = users.members?.map((member) => member.id ?? "") ?? [];
-
-  // remove after testing
-  const user_ids = Object.values(admins);
+  const users = await app.client.users.list({});
+  const user_ids = users.members?.map((member) => member.id ?? "") ?? [];
 
   await Promise.all(
     user_ids.map((user) =>

@@ -1,5 +1,5 @@
-import { GOOGLE_API_KEY, GOOGLE_CALENDAR_ID } from "../constants/consts.ts";
-import { get_upcoming_events_upper_ranges } from "../service/google-calendar.ts";
+import { GOOGLE_API_KEY, GOOGLE_CALENDAR_ID } from "../../constants/consts.ts";
+import { get_upcoming_events_upper_ranges } from "../../service/google-calendar.ts";
 import { transform_to_block_upcoming_events } from "./transform-messages.ts";
 
 import { addMonths, format, getMonth } from "date-fns";

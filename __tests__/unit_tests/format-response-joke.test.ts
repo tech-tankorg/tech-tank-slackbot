@@ -3,7 +3,7 @@ import type {
   twoPartJoke,
 } from "../../utils/types/projectTypes.ts";
 
-import { format_response_jokes } from "../../utils/helpers/format-response-jokes.ts";
+import { format_response_jokes } from "../../utils/helpers/misc/format-response-jokes.ts";
 
 let joke: singleJoke | twoPartJoke;
 

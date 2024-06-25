@@ -4,7 +4,7 @@ import app from "../../utils/config/slack-config.ts";
 import { AXIOM_DATA_SET } from "../../utils/constants/consts.ts";
 
 import { create_suggestion } from "../../utils/controllers/create-suggestion.ts";
-import { generate_suggestion_notification_message } from "../../utils/helpers/generate_message.ts";
+import { generate_suggestion_notification_message } from "../../utils/helpers/misc/generate_message.ts";
 
 import { channels } from "../../utils/config/channel-config.ts";
 

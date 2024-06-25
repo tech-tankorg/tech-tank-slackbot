@@ -1,6 +1,6 @@
-import app from "../config/slack-config.ts";
+import app from "../../config/slack-config.ts";
 
-import { sortArray } from "./sort-array.ts";
+import { sortArray } from "../general/sort-array.ts";
 
 await (async () => {
   try {

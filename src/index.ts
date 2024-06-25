@@ -43,7 +43,7 @@ import { coffee_chat_config } from "../utils/config/channel-config.ts";
 import {
   open_survey_modal,
   survey_submit,
-} from "../utils/helpers/survey_actions.ts";
+} from "../utils/helpers/survey/survey_actions.ts";
 import { download_survey_results } from "./Slash-commands/slack_upload_files.ts";
 
 // const PREPPED_QUESTIONS = flatten_object(questions);

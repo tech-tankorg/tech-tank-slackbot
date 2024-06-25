@@ -1,6 +1,6 @@
 import axios from "axios";
 import app from "../../utils/config/slack-config.ts";
-import { format_response_jokes } from "../../utils/helpers/format-response-jokes.ts";
+import { format_response_jokes } from "../../utils/helpers/misc/format-response-jokes.ts";
 import { joke_category } from "../../utils/types/zod-types.ts";
 
 import Axiom from "../../utils/config/axiom-config.ts";

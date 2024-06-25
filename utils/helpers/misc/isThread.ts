@@ -1,4 +1,4 @@
-import { key_is_present } from "./obj-has-property.ts";
+import { key_is_present } from "../general/obj-has-property.ts";
 export const generate_inclusive_message = (
   // biome-ignore lint: msg type not properly defined by author thus the any type is used here
   msg: any,

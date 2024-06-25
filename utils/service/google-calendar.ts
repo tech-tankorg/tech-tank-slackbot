@@ -1,6 +1,6 @@
 import { addDays, endOfMonth, isAfter, startOfMonth } from "date-fns";
-import { filter_dates_range } from "../helpers/custom-date-fns.ts";
-import { generic_sort_array } from "../helpers/sort-array.ts";
+import { filter_dates_range } from "../helpers/date/custom-date-fns.ts";
+import { generic_sort_array } from "../helpers/general/sort-array.ts";
 
 import { gcal_event } from "../types/zod-types.ts";
 

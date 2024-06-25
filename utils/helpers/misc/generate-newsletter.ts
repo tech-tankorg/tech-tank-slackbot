@@ -1,25 +1,25 @@
 import { format, startOfMonth } from "date-fns";
-import { get_upcoming_events_for_the_month } from "../service/google-calendar.ts";
-import { generate_sanity_newsletter } from "../service/sanity-client.ts";
+import { get_upcoming_events_for_the_month } from "../../service/google-calendar.ts";
+import { generate_sanity_newsletter } from "../../service/sanity-client.ts";
 import type {
   google_cal_event,
   sanity_fyi_block,
   sanity_letter_info,
   transform_Block_img_type,
   transform_block_type,
-} from "../types/projectTypes.ts";
+} from "../../types/projectTypes.ts";
 
 import {
   GOOGLE_API_KEY,
   GOOGLE_CALENDAR_ID,
   TECHTANK_EVENT_TAG,
-} from "../constants/consts.ts";
+} from "../../constants/consts.ts";
 
-import { international_timezone_formatter } from "../helpers/custom-date-fns.ts";
+import { international_timezone_formatter } from "../date/custom-date-fns.ts";
 
-import { generate_sanity_img_url } from "../config/sanity-config.ts";
+import { generate_sanity_img_url } from "../../config/sanity-config.ts";
 
-import { find_web_address } from "./find-web-address.ts";
+import { find_web_address } from "../calendar/find-web-address.ts";
 
 const transform_to_block = (section: sanity_letter_info) => {
   const temp_array: Array<transform_block_type | transform_Block_img_type> = [];

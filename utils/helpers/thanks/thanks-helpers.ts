@@ -1,12 +1,12 @@
 import {
   THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX,
   THANKS_CHANNEL_REGEX,
-} from "../constants/consts.ts";
+} from "../../constants/consts.ts";
 
 import type {
   db_thanks,
   db_thanks_no_reciever,
-} from "../types/projectTypes.ts";
+} from "../../types/projectTypes.ts";
 export const get_recipients = (message: string) => {
   const mentions = message.match(THANKS_CHANNEL_MESSAGE_SEPARATOR_REGEX);
 

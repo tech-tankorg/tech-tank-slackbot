@@ -3,7 +3,7 @@ import type {
   response_type,
   singleJoke,
   twoPartJoke,
-} from "../types/projectTypes.d.ts";
+} from "../../types/projectTypes.ts";
 
 const isTwoPartJoke = (
   type: JokeType,

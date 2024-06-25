@@ -1,5 +1,5 @@
-import app from "../config/slack-config.ts";
-import { flatten_all_scheduled_messages_reponse_for_delete } from "./flatten-object.ts";
+import app from "../../config/slack-config.ts";
+import { flatten_all_scheduled_messages_reponse_for_delete } from "../general/flatten-object.ts";
 
 await (async () => {
   try {
