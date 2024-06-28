@@ -33,6 +33,8 @@ export const channels = {
 
 export const bots = {
   nemo: "U054MF49HGU",
+  nemo_test: "U05C6TDVB8W",
+  slack_bot_test: "USLACKBOT",
 };
 
 export const coffee_chat_config = {
