@@ -37,10 +37,14 @@ export const guppymail = () => {
         ...message,
       });
 
+      const respond_message = is_anonymous
+        ? "Your message has been sent anonymously"
+        : "Your message has been sent";
+
       await respond({
         response_type: "ephemeral",
         mrkdwn: true,
-        text: "Your message has successfully been submitted!",
+        text: respond_message,
       });
 
       await Axiom.ingestEvents(AXIOM_DATA_SET, [
