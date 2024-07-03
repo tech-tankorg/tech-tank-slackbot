@@ -87,6 +87,14 @@ model survey {
   @@index([user_id])
 }
 
+model guppymail {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  message      String
+  user_id      String
+  is_anonymous Boolean
+  createdAt    DateTime @default(now())
+}
+
 enum coc_ack {
   accepted
   denied
