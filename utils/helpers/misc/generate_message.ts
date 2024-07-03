@@ -200,3 +200,40 @@ export const generate_thanks_message = (
     "\n"
   )}`;
 };
+
+export const generate_guppymail_message = (
+  user_id: string,
+  message: string,
+  is_anonymous: boolean
+) => {
+  return {
+    mrkdwn: true,
+    text: `:mailbox_with_mail: You've got mail! Submitted by <@${user_id}>. *Mail*: ${message}`,
+    blocks: [
+      {
+        type: "header",
+        text: {
+          type: "plain_text",
+          text: ":mailbox_with_mail: You've got mail!",
+          emoji: true,
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `*Community member*: ${
+            is_anonymous ? "Anonymous" : `<@${user_id}>`
+          }`,
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `*Mail*: ${message}`,
+        },
+      },
+    ],
+  };
+};
