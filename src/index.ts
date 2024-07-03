@@ -45,6 +45,7 @@ import {
   survey_submit,
 } from "../utils/helpers/survey/survey_actions.ts";
 import { download_survey_results } from "./Slash-commands/slack_upload_files.ts";
+import { guppymail } from "./Slash-commands/guppymail.ts";
 
 // const PREPPED_QUESTIONS = flatten_object(questions);
 // const test_channel = "C05BYP98MTR";
@@ -112,6 +113,9 @@ open_survey_modal();
 survey_submit();
 
 download_survey_results();
+
+// guppyMail
+guppymail();
 
 await (async () => {
   // Start your app
