@@ -85,7 +85,6 @@
         "mpim:history",
         "mpim:read",
         "mpim:write",
-        "mpim:write.invites",
         "users.profile:read",
         "users:read",
         "files:read",
