@@ -9,7 +9,7 @@
     "app_home": {
       "home_tab_enabled": true,
       "messages_tab_enabled": true,
-      "messages_tab_read_only_enabled": true
+      "messages_tab_read_only_enabled": false
     },
     "bot_user": {
       "display_name": "Nemo",
@@ -31,6 +31,36 @@
         "command": "/notify-admins",
         "description": "Message to admins",
         "should_escape": false
+      },
+      {
+        "command": "/edit-message",
+        "description": "Edit a message",
+        "should_escape": false
+      },
+      {
+        "command": "/coffee-bio",
+        "description": "Create a coffee chat bio",
+        "should_escape": false
+      },
+      {
+        "command": "/coffee-activate",
+        "description": "Activate my coffee chats",
+        "should_escape": false
+      },
+      {
+        "command": "/coffee-deactivate",
+        "description": "Deactivate my coffee chats",
+        "should_escape": false
+      },
+      {
+        "command": "/survey-results",
+        "description": "Get survey results",
+        "should_escape": false
+      },
+      {
+        "command": "/guppymail",
+        "description": "Send mail to the Guppy Pod",
+        "should_escape": false
       }
     ]
   },
@@ -40,22 +70,26 @@
       "bot": [
         "app_mentions:read",
         "channels:history",
+        "channels:manage",
         "channels:read",
+        "channels:write.invites",
         "chat:write",
         "commands",
         "groups:history",
         "groups:read",
+        "groups:write",
+        "groups:write.invites",
         "im:history",
         "im:write",
         "incoming-webhook",
+        "mpim:history",
+        "mpim:read",
         "mpim:write",
+        "mpim:write.invites",
         "users.profile:read",
         "users:read",
-        "channels:write.invites",
-        "groups:write.invites",
-        "mpim:write.invites",
-        "channels:manage",
-        "groups:write"
+        "files:read",
+        "files:write"
       ]
     }
   },
@@ -63,10 +97,12 @@
     "event_subscriptions": {
       "bot_events": [
         "app_home_opened",
-        "team_join",
+        "member_joined_channel",
+        "member_left_channel",
         "message.channels",
+        "message.groups",
         "message.im",
-        "message.groups"
+        "team_join"
       ]
     },
     "interactivity": {
