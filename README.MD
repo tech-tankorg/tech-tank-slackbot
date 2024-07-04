@@ -24,6 +24,8 @@ Start the local server on the port specified in the `.env`:
 npm run dev
 ```
 
+### Optional
+
 We've added a docker file to this project so that you can spin up a development ready instance on your local machine. With a docker engine and [docker](https://www.docker.com/products/docker-desktop/) installed, run the following command to start the container for the bot and the database:
 
 ```bash
@@ -33,21 +35,6 @@ docker-compose up
 ## Access test environment workspace
 
 Contact admins to receive the `env` variables and to be added to the test environment workspace.
-
-## Setup a your own test slack app/bot (optional)
-
-1. Create a test slack workspace
-2. Navigate over to [slack's api](https://api.slack.com/apps)
-3. Create a new App
-4. Choose create from an app manifest
-5. Select the workspace you want to install the new app
-6. Copy the App manifest from the `manifest.json` into the JSON editor
-7. Create the App
-8. Install the bot to the workspace
-9. Copy the following keys:
-   - Client Secret
-   - Signing Secret
-   - App token (only copy this if you are using socket mode)
 
 ## Usage/Examples
 
