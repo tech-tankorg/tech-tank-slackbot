@@ -14,6 +14,7 @@ interface BLOCKS {
 
 interface Args {
   id: string;
+  text: string;
   input: MSG | BLOCKS;
   group: "user" | "channel";
 }
