@@ -18,6 +18,7 @@ export const search_user = () => {
     if (!is_admin(user_id_sender)) {
       await send_message({
         group: "user",
+        text: "Only admins can use the command",
         id: user_id_sender,
         input: { type: "msg", message: "Only admins can use the command" },
       });
@@ -49,6 +50,7 @@ export const search_user = () => {
 
           return send_message({
             group: "user",
+            text: msg_to_send,
             id: user_id_sender,
             input: { type: "msg", message: msg_to_send },
           });

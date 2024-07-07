@@ -113,6 +113,7 @@ export const coffee_chat_bot_joined_channel = (allow_channels: Set<string>) => {
 
       const sent_message = await send_message({
         id: event.user,
+        text: "Nemo coffee chat onboarding is incomplete",
         input: {
           type: "blocks",
           blocks: coffee_chat_intro_message(user_name),
@@ -156,6 +157,7 @@ export const coffee_chat_bot_left_channel = (allow_channels: Set<string>) => {
       await delete_shuffle_bot_user(event.user);
       const sent_message = await send_message({
         id: event.user,
+        text: `You've been removed from the following coffee chat channel: <#${event.channel}>`,
         input: {
           type: "msg",
           message: `You've been removed from the following coffee chat channel: <#${event.channel}>`,
