@@ -16,8 +16,7 @@ export const guppymail = () => {
       if (user_message === "")
         throw new Error("message cannot be empty. Try again!");
 
-      // biome-ignore lint: the explicit ternary operator is needed for logging purposes
-      const is_anonymous = user_message.match(/!private/s) ? true : false;
+      const is_anonymous = !!user_message.match(/!private/s);
       const user_id = is_anonymous ? "XXXXXXXXX" : body.user_id;
 
       const sanitized_mail = is_anonymous

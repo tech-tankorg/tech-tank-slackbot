@@ -22,6 +22,7 @@ export const survey = async () => {
       user_ids.map((user) =>
         send_message({
           group: "user",
+          text: "Please take a moment to complete the survey",
           id: user ?? "",
           input: { type: "blocks", blocks: survey_intro_message(user) },
         })
