@@ -168,6 +168,7 @@ export const survey_submit = () => {
       await send_message({
         group: "user",
         id: user_select.user_id,
+        text: "You're response has been saved and we appreciate you submitting the survey!",
         input: {
           type: "msg",
           message:
@@ -188,6 +189,7 @@ export const survey_submit = () => {
       await send_message({
         group: "user",
         id: body.user.id,
+        text: "Oh no! Something went wrong when saving your response. Try again later!",
         input: {
           type: "msg",
           message:

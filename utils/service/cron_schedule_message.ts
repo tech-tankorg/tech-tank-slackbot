@@ -39,7 +39,6 @@ const job_4 = new CronJob(
   () => {
     void send_weekly_welcome_message();
     void post_thanks_message();
-    void post_networking_calendar();
   },
   null,
   false,
