@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: prod.dockerfile
-    container_name: nemo_bot
+    container_name: nemo_bot_prod
     ports:
       - ${DB_PORT}:5001
 
