@@ -1,5 +1,5 @@
+import type { Block, KnownBlock, View } from "@slack/types";
 import type { shuffle_bot_user_type } from "../types/projectTypes.ts";
-import type { View, Block, KnownBlock } from "@slack/types";
 
 interface Initials {
   pronouns: string;
