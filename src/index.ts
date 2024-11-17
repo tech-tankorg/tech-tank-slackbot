@@ -1,5 +1,4 @@
 import client from "../utils/config/axiom-config.ts";
-// import app from "@utils/config/slack-config.ts";
 import app from "../utils/config/slack-config.ts";
 
 import { greet_new_team_member } from "./Events/greetings.ts";
@@ -47,30 +46,9 @@ import {
 import { guppymail } from "./Slash-commands/guppymail.ts";
 import { download_survey_results } from "./Slash-commands/slack_upload_files.ts";
 
-// const PREPPED_QUESTIONS = flatten_object(questions);
-// const test_channel = "C05BYP98MTR";
-// const test_channel_two = "C05C6KVHWAJ";
-
 // Events
 sayHello();
 greet_new_team_member();
-
-// Temporally disables the questions
-// void thoughtful_thursday_send_scheduled_message(
-//   PREPPED_QUESTIONS,
-//   channels.general,
-//   GENERAL_QUESTIONS_START_DATE,
-//   "thursday",
-//   1
-// );
-
-// void wonder_wednesday_send_schedule_message(
-//   wonder_wednesday_questions,
-//   channels.study,
-//   WONDER_WEDNESDAY_QUESTIONS_START_DATE,
-//   "wednesday",
-//   2
-// );
 
 app_home_opened();
 check_non_inclusive_words();
