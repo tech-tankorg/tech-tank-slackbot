@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  slackbot:
+    build:
+      context: .
+      dockerfile: prod.dockerfile
+    container_name: nemo_bot
+    ports:
+      - ${DB_PORT}:5001
+
+    environment:
+      SLACK_SIGNING_SECRET: ${SLACK_SIGNING_SECRET}
+      SLACK_BOT_TOKEN: ${SLACK_BOT_TOKEN}
+      SLACK_APP_TOKEN: ${SLACK_APP_TOKEN}
+      SLACK_NOTIFICATION_CHANNEL: ${SLACK_NOTIFICATION_CHANNEL}
+      PORT: ${DB_PORT}
+      GOOGLE_CALENDAR_API_KEY: ${GOOGLE_CALENDAR_API_KEY}
+      GOOGLE_CALENDAR_ID: ${GOOGLE_CALENDAR_ID}
+      SANITY_PROJECT_ID: ${SANITY_PROJECT_ID}
+      SANITY_DATA_SET: ${SANITY_DATA_SET}
+      AXIOM_API_TOKEN: ${AXIOM_API_TOKEN}
+      DEV_MONGO_URL: ${DEV_MONGO_URL}

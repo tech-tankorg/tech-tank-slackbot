@@ -2,7 +2,9 @@ version: "3.9"
 
 services:
   slackbot:
-    build: .
+    build:
+      context: .
+      dockerfile: dev.dockerfile
     container_name: nemo_bot
     ports:
       - ${DB_PORT}:5001
