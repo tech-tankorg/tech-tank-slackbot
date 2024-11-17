@@ -1,6 +1,3 @@
-// import app from "@utils/config/slack-config";
-// import { generate_welcome_message } from "@utils/helpers/generate_message";
-
 import Axiom from "../../utils/config/axiom-config.ts";
 import app from "../../utils/config/slack-config.ts";
 import { generate_welcome_message } from "../../utils/helpers/misc/generate_message.ts";

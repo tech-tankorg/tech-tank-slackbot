@@ -1,5 +1,5 @@
-import { shuffle_bot_user } from "../types/zod-types.ts";
 import { prisma } from "../config/prisma.ts";
+import { shuffle_bot_user } from "../types/zod-types.ts";
 
 export const create_shuffle_bot_user = async (
   user_id: string,

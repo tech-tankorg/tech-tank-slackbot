@@ -15,9 +15,10 @@
     "biome:lint": "npx @biomejs/biome lint ./",
     "biome:fix": "npx @biomejs/biome check --apply ./",
     "biome:ci": "npx @biomejs/biome ci ./",
-    "randomize-questions": "ts-node --esm ./utils/helpers/randomize-list.ts",
-    "scheduled-messages": "ts-node --esm ./utils/helpers/list-all-scheduled-messages.ts",
-    "delete-scheduled-messages": "ts-node --esm ./utils/helpers/delete-all-scheduled-messages.ts"
+    "dc-run-dev": "docker compose -f ./compose.dev.yml up",
+    "dc-build-dev": "docker compose -f ./compose.dev.yml build",
+    "dc-run-prod": "docker compose -f ./compose.prod.yml up",
+    "dc-build-prod": "docker compose -f ./compose.prod.yml build"
   },
   "keywords": [
     "slack bots",

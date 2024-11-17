@@ -16,7 +16,7 @@ cd tech-tank-slackbot && npm install
 
 Add your `SLACK CREDENTIALS` to a `.env` file -- use the `.env.example` to reference which environment variables you need to add.
 
-Start a local instance of the database using `docker-compose up mongo` and then sync the prisma schema with the databases schema using `npx prisma db push`. Seed the Database with mock data using `npm run seed:db`.
+Start a local instance of the database using `docker compose -f ./compose.dev.yml up mongo` and then sync the prisma schema with the databases schema using `npx prisma db push`. Seed the Database with mock data using `npm run seed:db`.
 
 Start the local server on the port specified in the `.env`:
 
@@ -29,7 +29,13 @@ npm run dev
 We've added a docker file to this project so that you can spin up a development ready instance on your local machine. With a docker engine and [docker](https://www.docker.com/products/docker-desktop/) installed, run the following command to start the container for the bot and the database:
 
 ```bash
-docker-compose up
+docker compose -f ./compose.dev.yml up
+```
+
+or use the following command:
+
+```bash
+npm run dc-run-dev
 ```
 
 ## Access test environment workspace
