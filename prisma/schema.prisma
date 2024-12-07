@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = env("DEV_MONGO_URL")
+  url      = env("DB_URL")
 }
 
 model admin_notifications {
