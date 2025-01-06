@@ -1,16 +1,13 @@
 import { CronJob } from "cron";
 import {
   CRON_EVERY_MONDAY_AT_10,
-  CRON_START_OF_QUARTER,
   CRON__TWOWEEKS_AFTERSTART_OF_QUARTER,
   SHUFFLE_SETTINGS_ID,
   TORONTO_TIME_ZONE_IDENTIFIER,
 } from "../constants/consts.ts";
 import { find_shuffle_setting } from "../controllers/shuffle-bot-groups.ts";
 
-import { post_networking_calendar } from "../../src/Events/post_networking_calendar.ts";
 import { coffee_chat_bot_shuffle } from "../../src/Events/shuffle_bot.ts";
-import { survey } from "../../src/Events/survey.ts";
 import { post_thanks_message } from "../../src/Events/thanks.ts";
 import { send_weekly_welcome_message } from "../../src/Events/weekly_welcome_message.ts";
 import { download_survey_results_bot } from "../../src/Slash-commands/slack_upload_files.ts";
@@ -45,16 +42,6 @@ const job_4 = new CronJob(
   TORONTO_TIME_ZONE_IDENTIFIER
 );
 
-const job_5 = new CronJob(
-  CRON_START_OF_QUARTER,
-  () => {
-    void survey();
-  },
-  null,
-  false,
-  TORONTO_TIME_ZONE_IDENTIFIER
-);
-
 const job_6 = new CronJob(
   CRON__TWOWEEKS_AFTERSTART_OF_QUARTER,
   () => {
@@ -67,7 +54,6 @@ const job_6 = new CronJob(
 
 job_3.start();
 job_4.start();
-job_5.start();
 job_6.start();
 
-console.log(job_3.running, job_4.running, job_5.running, job_6.running);
+console.log(job_3.running, job_4.running, job_6.running);
